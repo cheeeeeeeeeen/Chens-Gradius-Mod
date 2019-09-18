@@ -4,8 +4,6 @@ namespace ChensGradiusMod
 {
 	public class ChensGradiusMod : Mod
 	{
-		public ChensGradiusMod()
-		{
-		}
+    public ChensGradiusMod() { }
 	}
 }
