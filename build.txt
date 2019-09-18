@@ -1,0 +1,3 @@
+displayName = Chen's Gradius Mod
+author = blancfaye7
+version = 0.0.1
