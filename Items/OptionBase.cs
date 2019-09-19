@@ -1,27 +1,29 @@
 ﻿using Terraria;
+using Terraria.DataStructures;
 
 namespace ChensGradiusMod.Items
 {
   public abstract class OptionBase : ParentGradiusAccessory
   {
-    // private readonly string optionTexture = "ChensGradiusMod/Items/OptionBase";
+    private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
 
     public int spawnedProjectileIndex;
 
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault("Deploys an Option.");
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 9));
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      // item.width = ;
-      // item.height = ;
+      item.width = 28;
+      item.height = 20;
     }
 
-    // public override string Texture => optionTexture;
+    public override string Texture => optionTexture;
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

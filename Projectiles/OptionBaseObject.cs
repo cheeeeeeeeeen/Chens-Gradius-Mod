@@ -6,27 +6,35 @@ namespace ChensGradiusMod.Projectiles
 {
   public abstract class OptionBaseObject : ModProjectile
   {
-    private readonly string optionTexture = "ChensGradiusMod/Projectiles/OptionBaseObject";
+    private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
 
     public override void SetStaticDefaults()
     {
-      Main.projFrames[projectile.type] = 1;
+      Main.projFrames[projectile.type] = 9;
       Main.projPet[projectile.type] = true;
     }
 
     public override void SetDefaults()
     {
       projectile.netImportant = true;
-      projectile.width = 24;
-      projectile.height = 12;
+      projectile.width = 28;
+      projectile.height = 20;
       projectile.friendly = true;
-      projectile.penetrate = -1;
+      projectile.light = .25f;
     }
 
     public override void AI()
     {
       int listSize = ModOwner.optionFlightPath.Count;
-      if (ModOwner.optionOne && listSize > 0) projectile.position = ModOwner.optionFlightPath[Math.Min(listSize - 1, FrameDistance)];
+      if (ModOwner.optionOne && listSize > 0)
+      {
+        if (++projectile.frameCounter >= 5)
+        {
+          projectile.frameCounter = 0;
+          if (++projectile.frame >= 9) projectile.frame = 0;
+        }
+        projectile.position = ModOwner.optionFlightPath[Math.Min(listSize - 1, FrameDistance)];
+      }
       else projectile.Kill();
     }
 
