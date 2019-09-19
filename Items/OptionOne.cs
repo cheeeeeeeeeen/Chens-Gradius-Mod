@@ -18,7 +18,7 @@ namespace ChensGradiusMod.Items
 
       base.UpdateAccessory(player, hideVisual);
 
-      modPlayer.optionOneIndex = spawnedProjectileIndex;
+      // if (IsOptionDeployed(player)) modPlayer.optionOneIndex = spawnedProjectileIndex;
     }
   }
 }
