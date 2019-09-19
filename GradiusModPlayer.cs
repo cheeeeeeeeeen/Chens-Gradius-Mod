@@ -10,8 +10,8 @@ namespace ChensGradiusMod
     private const int MaxFlightPathCount = 30;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
-    public int optionOneUUID;
-    public int optionTwoUUID;
+    public int optionOneIndex;
+    public int optionTwoIndex;
     public bool optionOne;
     public bool optionTwo;
 
@@ -19,8 +19,8 @@ namespace ChensGradiusMod
 
     public override void ResetEffects()
     {
-      optionOneUUID = -1;
-      optionTwoUUID = -1;
+      optionOneIndex = -1;
+      optionTwoIndex = -1;
       optionOne = false;
       optionTwo = false;
     }
@@ -28,7 +28,7 @@ namespace ChensGradiusMod
     public override void UpdateDead()
     {
       ResetEffects();
-      ResetOptionFlightPath();
+      ResetOptionVariables();
     }
 
     public override void PreUpdate()
@@ -45,18 +45,18 @@ namespace ChensGradiusMod
         }
         else optionFlightPath.Insert(0, player.position);
       }
-      else ResetOptionFlightPath();
+      else ResetOptionVariables();
     }
 
     public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
     {
-      Projectile optionOne = Main.projectile[optionOneUUID];
-      Projectile optionTwo = Main.projectile[optionTwoUUID];
+      Projectile optionOne = Main.projectile[optionOneIndex];
+      Projectile optionTwo = Main.projectile[optionTwoIndex];
       Projectile.NewProjectile(optionOne.Center.X, optionOne.Center.Y, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
       Projectile.NewProjectile(optionTwo.Center.X, optionTwo.Center.Y, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
       return base.Shoot(item, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
     }
 
-    private void ResetOptionFlightPath() => optionFlightPath.Clear();
+    private void ResetOptionVariables() => optionFlightPath.Clear();
   }
 }

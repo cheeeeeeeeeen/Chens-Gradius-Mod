@@ -18,7 +18,7 @@ namespace ChensGradiusMod.Items
 
       base.UpdateAccessory(player, hideVisual);
 
-      modPlayer.optionTwoUUID = spawnedProjectileIndex;
+      modPlayer.optionTwoIndex = spawnedProjectileIndex;
     }
 
     public override bool CanEquipAccessory(Player player, int slot) => player.GetModPlayer<GradiusModPlayer>().optionOne;
