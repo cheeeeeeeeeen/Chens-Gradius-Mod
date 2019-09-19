@@ -1,1 +1,9 @@
-Chen's Gradius Mod is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+My Gradius Mod is really just a fun mod in implementing Gradius features into Terraria.
+
+Current features:
+1. Options/Multiples
+  - These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
+  - Deploy one, and the Option drone will copy any of your projectiles.
+  - It is an accessory. No recipes yet.
+
+The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions.
