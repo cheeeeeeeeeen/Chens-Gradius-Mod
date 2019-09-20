@@ -7,3 +7,10 @@ Current features:
   - It is an accessory. No recipes yet. Only accessible through Hero's Mod or Cheat Sheet.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions.
+
+----------
+
+Changelogs:
+
+0.0.2
+  - Initial release
