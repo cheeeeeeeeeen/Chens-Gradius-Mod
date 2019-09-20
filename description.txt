@@ -3,10 +3,10 @@ My Gradius Mod is really just a fun mod in implementing Gradius features into Te
 Current features:
 1. Options/Multiples
   - These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
-  - Deploy one, and the Option drone will copy any of your projectiles.
-  - It is an accessory. No recipes yet. Only accessible through Hero's Mod or Cheat Sheet.
+  - Deploy one, and the Option drone will copy some of your projectiles.
+  - It is an accessory. No ingredients required to craft.
 
-The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions.
+The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 

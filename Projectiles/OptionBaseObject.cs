@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Projectiles
@@ -54,8 +55,8 @@ namespace ChensGradiusMod.Projectiles
       for (int i = 0; i < Main.maxProjectiles; i++)
       {
         Projectile p = Main.projectile[i];
-        if (p.active && IsNotProducedYet(i) && !p.hostile && p.friendly && !p.npcProj &&
-            CanDamage(p) && IsAbleToCrit(p) && !p.melee && !p.minion && !p.trap && IsSameOwner(p))
+        if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
+            !p.npcProj && CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
         {
           projectilesToProduce.Add(i);
         }
@@ -114,7 +115,7 @@ namespace ChensGradiusMod.Projectiles
 
     private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
 
-    private bool IsAbleToCrit(Projectile p) => p.ranged || p.thrown || p.magic;
+    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
@@ -137,5 +138,57 @@ namespace ChensGradiusMod.Projectiles
     }
 
     private bool CanDamage(Projectile p) => p.damage > 0;
+
+    private bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
+
+    private bool FollowsRules(Projectile p) => VanillaRules(p) && ModRules(p);
+
+    private bool VanillaRules(Projectile p)
+    {
+      return // p.type != ProjectileID.Bee &&
+             p.type != ProjectileID.GiantBee &&
+             p.type != ProjectileID.RainbowBack &&
+             p.type != ProjectileID.CrystalPulse2 &&
+             p.type != ProjectileID.ToxicCloud &&
+             p.type != ProjectileID.ToxicCloud2 &&
+             p.type != ProjectileID.ToxicCloud3 &&
+             p.type != ProjectileID.IceBlock &&
+             p.type != ProjectileID.CrystalShard &&
+             p.type != ProjectileID.HallowStar &&
+             p.type != ProjectileID.RainFriendly &&
+             p.type != ProjectileID.BloodRain &&
+             p.type != ProjectileID.FlowerPowPetal &&
+             p.type != ProjectileID.TinyEater &&
+             p.type != ProjectileID.NorthPoleSnowflake &&
+             p.type != ProjectileID.FlaironBubble &&
+             p.type != ProjectileID.TerrarianBeam &&
+             p.type != ProjectileID.VortexBeater && // This is not really a ban, but a fix.
+             p.type != ProjectileID.NebulaArcanumSubshot &&
+             p.type != ProjectileID.NebulaArcanumExplosionShot &&
+             p.type != ProjectileID.NebulaArcanumExplosionShotShard &&
+             p.type != ProjectileID.MoonlordArrowTrail &&
+             p.type != ProjectileID.DD2PhoenixBow && // This is not really a ban, but a fix.
+             p.type != ProjectileID.MonkStaffT3_AltShot &&
+             p.type != ProjectileID.MonkStaffT3 &&
+             p.type != ProjectileID.MonkStaffT3_Alt &&
+             p.type != ProjectileID.Electrosphere &&
+             p.type != ProjectileID.Xenopopper &&
+             p.type != ProjectileID.Phantasm;
+    }
+
+    public bool ModRules(Projectile p)
+    {
+      bool result = true;
+
+      Mod crystilium = ModLoader.GetMod("CrystiliumMod");
+      if (crystilium != null)
+      {
+        result = result && p.type != crystilium.ProjectileType("Shatter1")
+                        && p.type != crystilium.ProjectileType("Shatter2")
+                        && p.type != crystilium.ProjectileType("Shatter3");
+      }
+
+      return result;
+    }
   }
 }
