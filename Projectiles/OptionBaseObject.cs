@@ -52,8 +52,8 @@ namespace ChensGradiusMod.Projectiles
       for (int i = 0; i < Main.maxProjectiles; i++)
       {
         Projectile p = Main.projectile[i];
-        if (p.active && IsNotProducedYet(i) && !p.hostile && p.friendly &&
-            !p.npcProj && !p.melee && !p.minion && !p.trap && IsSameOwner(p))
+        if (p.active && IsNotProducedYet(i) && !p.hostile && p.friendly && !p.npcProj &&
+            CanDamage(p) && IsAbleToCrit(p) && !p.melee && !p.minion && !p.trap && IsSameOwner(p))
         {
           projectilesToProduce.Add(i);
         }
@@ -75,6 +75,8 @@ namespace ChensGradiusMod.Projectiles
         int new_p_ind = Projectile.NewProjectile(projectile.Center, p.velocity, p.type, p.damage, p.knockBack, projectile.owner, 0f, 0f);
         OptionAlreadyProducedProjectiles.Add(new_p_ind);
         Main.projectile[new_p_ind].noDropItem = true;
+        // Main.projectile[new_p_ind].usesIDStaticNPCImmunity = true;
+        // Main.projectile[new_p_ind].idStaticNPCHitCooldown = 0;
       }
     }
 
@@ -95,6 +97,8 @@ namespace ChensGradiusMod.Projectiles
 
     private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
 
+    private bool IsAbleToCrit(Projectile p) => p.ranged || p.thrown || p.magic;
+
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
     private bool IsNotProducedYet(int ind)
@@ -114,5 +118,7 @@ namespace ChensGradiusMod.Projectiles
 
       return false;
     }
+
+    private bool CanDamage(Projectile p) => p.damage > 0;
   }
 }
