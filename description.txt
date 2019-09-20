@@ -14,3 +14,8 @@ Changelogs:
 
 0.0.2
   - Initial release
+
+0.0.3
+  - Bug fixes
+  - Options no longer generate friendly NPC projectiles
+  - Option projectiles no longer generate ammo drops

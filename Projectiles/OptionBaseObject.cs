@@ -26,8 +26,7 @@ namespace ChensGradiusMod.Projectiles
       projectile.netImportant = true;
       projectile.width = 28;
       projectile.height = 20;
-      projectile.friendly = true;
-      projectile.light = .25f;
+      projectile.light = .5f;
     }
 
     public override bool PreAI()
@@ -53,7 +52,8 @@ namespace ChensGradiusMod.Projectiles
       for (int i = 0; i < Main.maxProjectiles; i++)
       {
         Projectile p = Main.projectile[i];
-        if (p.active && IsNotProducedYet(i) && IsAbleToCrit(p) && !p.melee && IsSameOwner(p))
+        if (p.active && IsNotProducedYet(i) && !p.hostile && p.friendly &&
+            !p.npcProj && !p.melee && !p.minion && !p.trap && IsSameOwner(p))
         {
           projectilesToProduce.Add(i);
         }
@@ -74,6 +74,7 @@ namespace ChensGradiusMod.Projectiles
 
         int new_p_ind = Projectile.NewProjectile(projectile.Center, p.velocity, p.type, p.damage, p.knockBack, projectile.owner, 0f, 0f);
         OptionAlreadyProducedProjectiles.Add(new_p_ind);
+        Main.projectile[new_p_ind].noDropItem = true;
       }
     }
 
@@ -93,8 +94,6 @@ namespace ChensGradiusMod.Projectiles
     private int ListSize => ModOwner.optionFlightPath.Count;
 
     private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
-
-    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
