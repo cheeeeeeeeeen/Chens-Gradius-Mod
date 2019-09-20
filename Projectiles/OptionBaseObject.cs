@@ -13,6 +13,7 @@ namespace ChensGradiusMod.Projectiles
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
+    private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f};
 
     public GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
 
@@ -27,7 +28,7 @@ namespace ChensGradiusMod.Projectiles
       projectile.netImportant = true;
       projectile.width = 28;
       projectile.height = 20;
-      projectile.light = .5f;
+      projectile.light = .1f;
     }
 
     public override bool PreAI()
@@ -64,6 +65,7 @@ namespace ChensGradiusMod.Projectiles
       {
         projectile.frameCounter = 0;
         if (++projectile.frame >= 9) projectile.frame = 0;
+        projectile.light = lightValues[projectile.frame];
       }
 
       projectile.position = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
@@ -91,6 +93,8 @@ namespace ChensGradiusMod.Projectiles
     }
 
     public override string Texture => optionTexture;
+
+    public override Color? GetAlpha(Color lightColor) => Color.White;
 
     public virtual int FrameDistance => 14;
 
