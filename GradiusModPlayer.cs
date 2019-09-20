@@ -7,13 +7,15 @@ namespace ChensGradiusMod
 {
   public class GradiusModPlayer : ModPlayer
   {
-    private const int MaxFlightPathCount = 30;
+    private const int MaxFlightPathCount = 60;
     private const int MaxProducedProjectileBuffer = 300;
 
     public readonly List<Vector2> optionFlightPath = new List<Vector2>();
     public readonly List<int> optionAlreadyProducedProjectiles = new List<int>();
     public bool optionOne;
     public bool optionTwo;
+    public bool optionThree;
+    public bool optionFour;
 
     public GradiusModPlayer() => UpdateDead();
 
@@ -21,6 +23,8 @@ namespace ChensGradiusMod
     {
       optionOne = false;
       optionTwo = false;
+      optionThree = false;
+      optionFour = false;
     }
 
     public override void UpdateDead()

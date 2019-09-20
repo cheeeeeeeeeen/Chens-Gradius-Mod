@@ -11,7 +11,7 @@ namespace ChensGradiusMod.Projectiles
 
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
-    private readonly List<int> projectilesToProduce = new List<int>();
+    private List<int> projectilesToProduce = new List<int>();
 
     public override void SetStaticDefaults()
     {
@@ -76,6 +76,7 @@ namespace ChensGradiusMod.Projectiles
     public override void PostAI()
     {
       projectilesToProduce.Clear();
+      projectilesToProduce = new List<int>();
       GradiusHelper.FreeListData(playerAlreadyProducedProjectiles, MaxBuffer);
     }
 
