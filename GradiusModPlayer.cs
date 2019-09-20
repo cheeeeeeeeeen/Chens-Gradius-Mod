@@ -8,10 +8,10 @@ namespace ChensGradiusMod
   public class GradiusModPlayer : ModPlayer
   {
     private const int MaxFlightPathCount = 30;
+    private const int MaxProducedProjectileBuffer = 300;
 
-    public List<Vector2> optionFlightPath = new List<Vector2>();
-    // public int optionOneIndex;
-    // public int optionTwoIndex;
+    public readonly List<Vector2> optionFlightPath = new List<Vector2>();
+    public readonly List<int> optionAlreadyProducedProjectiles = new List<int>();
     public bool optionOne;
     public bool optionTwo;
 
@@ -35,6 +35,12 @@ namespace ChensGradiusMod
       {
         if (optionFlightPath.Count > 0)
         {
+          for (int h = 0; h < optionAlreadyProducedProjectiles.Count; h++)
+          {
+            Projectile p = Main.projectile[optionAlreadyProducedProjectiles[h]];
+            if (!p.active) optionAlreadyProducedProjectiles.RemoveAt(h--);
+          }
+
           if (!(optionFlightPath[0].X == player.position.X && optionFlightPath[0].Y == player.position.Y))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
@@ -46,20 +52,15 @@ namespace ChensGradiusMod
       else ResetOptionVariables();
     }
 
-    /* public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+    public override void PostUpdate()
     {
-      Projectile optionOne = Main.projectile[optionOneIndex];
-      Projectile optionTwo = Main.projectile[optionTwoIndex];
-      Projectile.NewProjectile(optionOne.Center.X, optionOne.Center.Y, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
-      Projectile.NewProjectile(optionTwo.Center.X, optionTwo.Center.Y, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
-      return base.Shoot(item, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
-    } */
+      if (optionOne) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
+    }
 
     private void ResetOptionVariables()
     {
       optionFlightPath.Clear();
-      // optionOneIndex = -1;
-      // optionTwoIndex = -1;
+      optionAlreadyProducedProjectiles.Clear();
     }
   }
 }

@@ -7,8 +7,6 @@ namespace ChensGradiusMod.Items
   {
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
 
-    public int spawnedProjectileIndex;
-
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault("Deploys an Option.");
@@ -29,7 +27,7 @@ namespace ChensGradiusMod.Items
     {
       if (IsOptionDeployed(player))
       {
-        spawnedProjectileIndex = Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
+        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(ProjectileName), 0, 0f,
                                  player.whoAmI, 0f, 0f);
       }

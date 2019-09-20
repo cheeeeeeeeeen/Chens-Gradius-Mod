@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -6,7 +7,11 @@ namespace ChensGradiusMod.Projectiles
 {
   public abstract class OptionBaseObject : ModProjectile
   {
+    private const int MaxBuffer = 300;
+
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
+    private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
+    private readonly List<int> projectilesToProduce = new List<int>();
 
     public override void SetStaticDefaults()
     {
@@ -23,19 +28,55 @@ namespace ChensGradiusMod.Projectiles
       projectile.light = .25f;
     }
 
+    public override bool PreAI()
+    {
+      if (ModOwner.optionOne && ListSize > 0) return true;
+      else
+      {
+        projectile.Kill();
+        return false;
+      }
+    }
+
     public override void AI()
     {
-      int listSize = ModOwner.optionFlightPath.Count;
-      if (ModOwner.optionOne && listSize > 0)
+      for (int h = 0; h < playerAlreadyProducedProjectiles.Count; h++)
       {
-        if (++projectile.frameCounter >= 5)
-        {
-          projectile.frameCounter = 0;
-          if (++projectile.frame >= 9) projectile.frame = 0;
-        }
-        projectile.position = ModOwner.optionFlightPath[Math.Min(listSize - 1, FrameDistance)];
+        Projectile p = Main.projectile[playerAlreadyProducedProjectiles[h]];
+        if (!p.active) playerAlreadyProducedProjectiles.RemoveAt(h--);
       }
-      else projectile.Kill();
+
+      for (int i = 0; i < Main.maxProjectiles; i++)
+      {
+        Projectile p = Main.projectile[i];
+        if (p.active && IsNotProducedYet(i) && IsAbleToCrit(p) && !p.melee && IsSameOwner(p))
+        {
+          projectilesToProduce.Add(i);
+        }
+      }
+
+      if (++projectile.frameCounter >= 5)
+      {
+        projectile.frameCounter = 0;
+        if (++projectile.frame >= 9) projectile.frame = 0;
+      }
+
+      projectile.position = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
+
+      foreach (int prog_ind in projectilesToProduce)
+      {
+        Projectile p = Main.projectile[prog_ind];
+        playerAlreadyProducedProjectiles.Add(prog_ind);
+
+        int new_p_ind = Projectile.NewProjectile(projectile.Center, p.velocity, p.type, p.damage, p.knockBack, projectile.owner, 0f, 0f);
+        OptionAlreadyProducedProjectiles.Add(new_p_ind);
+      }
+    }
+
+    public override void PostAI()
+    {
+      projectilesToProduce.Clear();
+      GradiusHelper.FreeListData(playerAlreadyProducedProjectiles, MaxBuffer);
     }
 
     public override string Texture => optionTexture;
@@ -43,5 +84,31 @@ namespace ChensGradiusMod.Projectiles
     public virtual int FrameDistance => 14;
 
     private GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
+
+    private int ListSize => ModOwner.optionFlightPath.Count;
+
+    private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
+
+    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic;
+
+    private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
+
+    private bool IsNotProducedYet(int ind)
+    {
+      if (HasProduced(OptionAlreadyProducedProjectiles, ind)) return false;
+      if (HasProduced(playerAlreadyProducedProjectiles, ind)) return false;
+
+      return true;
+    }
+
+    private bool HasProduced(List<int> list, int ind)
+    {
+      foreach (int alreadyProducedInd in list)
+      {
+        if (alreadyProducedInd == ind) return true;
+      }
+
+      return false;
+    }
   }
 }

@@ -13,12 +13,9 @@ namespace ChensGradiusMod.Items
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      GradiusModPlayer modPlayer = player.GetModPlayer<GradiusModPlayer>();
-      modPlayer.optionTwo = true;
+      player.GetModPlayer<GradiusModPlayer>().optionTwo = true;
 
       base.UpdateAccessory(player, hideVisual);
-
-      // if (IsOptionDeployed(player)) modPlayer.optionTwoIndex = spawnedProjectileIndex;
     }
 
     public override bool CanEquipAccessory(Player player, int slot) => player.GetModPlayer<GradiusModPlayer>().optionOne;
