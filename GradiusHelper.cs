@@ -17,5 +17,14 @@ namespace ChensGradiusMod
         }
       }
     }
+
+    public static bool OptionsPredecessorRequirement(GradiusModPlayer gp, int pos)
+    {
+      if (pos == 1)      return true;
+      else if (pos == 2) return gp.optionOne;
+      else if (pos == 3) return gp.optionOne && gp.optionTwo;
+      else if (pos == 4) return gp.optionOne && gp.optionTwo && gp.optionThree;
+      else               return false;
+    }
   }
 }

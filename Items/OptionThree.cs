@@ -13,7 +13,7 @@ namespace ChensGradiusMod.Items
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      player.GetModPlayer<GradiusModPlayer>().optionThree = true;
+      ModPlayer(player).optionThree = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

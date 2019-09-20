@@ -7,6 +7,8 @@ namespace ChensGradiusMod.Items
   {
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
 
+    public GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
+
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault("Deploys an Option.");
@@ -25,7 +27,8 @@ namespace ChensGradiusMod.Items
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      if (IsOptionDeployed(player))
+      if (GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player), OptionPosition) &&
+          IsOptionNotDeployed(player))
       {
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(ProjectileName), 0, 0f,
@@ -33,12 +36,14 @@ namespace ChensGradiusMod.Items
       }
     }
 
-    public bool IsOptionDeployed(Player player)
+    public virtual string ProjectileName => "OptionOneObject";
+
+    public virtual int OptionPosition => 1;
+
+    private bool IsOptionNotDeployed(Player player)
     {
       return player.ownedProjectileCounts[mod.ProjectileType(ProjectileName)] <= 0 &&
              player.whoAmI == Main.myPlayer;
     }
-
-    public virtual string ProjectileName => "OptionOneObject";
   }
 }

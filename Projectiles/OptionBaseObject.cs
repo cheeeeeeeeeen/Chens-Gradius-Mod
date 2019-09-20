@@ -13,6 +13,8 @@ namespace ChensGradiusMod.Projectiles
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
 
+    public GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
+
     public override void SetStaticDefaults()
     {
       Main.projFrames[projectile.type] = 9;
@@ -30,7 +32,9 @@ namespace ChensGradiusMod.Projectiles
 
     public override bool PreAI()
     {
-      if (ModOwner.optionOne && ListSize > 0) return true;
+      if (ModOwner.optionOne &&
+          GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position) &&
+          ListSize > 0) return true;
       else
       {
         projectile.Kill();
@@ -84,7 +88,7 @@ namespace ChensGradiusMod.Projectiles
 
     public virtual int FrameDistance => 14;
 
-    private GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
+    public virtual int Position => 1;
 
     private int ListSize => ModOwner.optionFlightPath.Count;
 
