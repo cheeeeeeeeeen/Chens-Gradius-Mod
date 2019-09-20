@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -72,7 +73,9 @@ namespace ChensGradiusMod.Projectiles
         Projectile p = Main.projectile[prog_ind];
         playerAlreadyProducedProjectiles.Add(prog_ind);
 
-        int new_p_ind = Projectile.NewProjectile(projectile.Center, p.velocity, p.type, p.damage, p.knockBack, projectile.owner, 0f, 0f);
+        int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
+                                                 p.velocity, p.type, p.damage, p.knockBack,
+                                                 projectile.owner, 0f, 0f);
         OptionAlreadyProducedProjectiles.Add(new_p_ind);
         Main.projectile[new_p_ind].noDropItem = true;
         // Main.projectile[new_p_ind].usesIDStaticNPCImmunity = true;
@@ -94,6 +97,16 @@ namespace ChensGradiusMod.Projectiles
     public virtual int Position => 1;
 
     private int ListSize => ModOwner.optionFlightPath.Count;
+
+    private Vector2 ComputeOffset(Vector2 playPos, Vector2 projPos)
+    {
+      Vector2 projectileSpawn = new Vector2(projectile.Center.X, projectile.Center.Y);
+
+      projectileSpawn.X += projPos.X - playPos.X;
+      projectileSpawn.Y += projPos.Y - playPos.Y;
+
+      return projectileSpawn;
+    }
 
     private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
 
