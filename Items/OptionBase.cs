@@ -36,9 +36,9 @@ namespace ChensGradiusMod.Items
       }
     }
 
-    public virtual string ProjectileName => "OptionOneObject";
+    public virtual string ProjectileName => "OptionObject";
 
-    public virtual int OptionPosition => 1;
+    public virtual int OptionPosition => 0;
 
     private bool IsOptionNotDeployed(Player player)
     {

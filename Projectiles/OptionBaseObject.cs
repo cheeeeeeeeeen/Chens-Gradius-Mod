@@ -34,7 +34,7 @@ namespace ChensGradiusMod.Projectiles
 
     public override bool PreAI()
     {
-      if (ModOwner.optionOne &&
+      if (PlayerHasAccessory() &&
           GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position) &&
           ListSize > 0) return true;
       else
@@ -97,9 +97,11 @@ namespace ChensGradiusMod.Projectiles
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
 
-    public virtual int FrameDistance => 14;
+    public virtual int FrameDistance => 0;
 
-    public virtual int Position => 1;
+    public virtual int Position => 0;
+
+    public virtual bool PlayerHasAccessory() => false;
 
     private int ListSize => ModOwner.optionFlightPath.Count;
 
@@ -145,7 +147,7 @@ namespace ChensGradiusMod.Projectiles
 
     private bool VanillaRules(Projectile p)
     {
-      return // p.type != ProjectileID.Bee &&
+      return p.type != ProjectileID.Bee &&
              p.type != ProjectileID.GiantBee &&
              p.type != ProjectileID.RainbowBack &&
              p.type != ProjectileID.CrystalPulse2 &&

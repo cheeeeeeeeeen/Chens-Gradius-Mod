@@ -35,7 +35,7 @@ namespace ChensGradiusMod
 
     public override void PreUpdate()
     {
-      if (optionOne)
+      if (HasAnyOptions())
       {
         if (optionFlightPath.Count > 0)
         {
@@ -58,7 +58,7 @@ namespace ChensGradiusMod
 
     public override void PostUpdate()
     {
-      if (optionOne) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
+      if (HasAnyOptions()) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
     }
 
     private void ResetOptionVariables()
@@ -66,5 +66,7 @@ namespace ChensGradiusMod
       optionFlightPath.Clear();
       optionAlreadyProducedProjectiles.Clear();
     }
+
+    private bool HasAnyOptions() => optionOne || optionTwo || optionThree || optionFour;
   }
 }

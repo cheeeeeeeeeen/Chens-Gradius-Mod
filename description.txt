@@ -12,10 +12,15 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.0.4
+  - Unequipping options now properly unloads them
+
 0.0.3
   - Bug fixes
   - Options no longer generate friendly NPC projectiles
   - Option projectiles no longer generate ammo drops
+  - Options are now limited to not work on some weapons
+  - Allow options to work on some melee projectiles
 
 0.0.2
   - Initial release

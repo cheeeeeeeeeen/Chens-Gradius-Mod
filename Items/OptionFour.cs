@@ -11,6 +11,13 @@ namespace ChensGradiusMod.Items
       DisplayName.SetDefault("Option (Fourth)");
     }
 
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.rare = 5;
+    }
+
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionFour = true;
@@ -21,5 +28,7 @@ namespace ChensGradiusMod.Items
     public override bool CanEquipAccessory(Player player, int slot) => player.GetModPlayer<GradiusModPlayer>().optionThree;
 
     public override string ProjectileName => "OptionFourObject";
+
+    public override int OptionPosition => 4;
   }
 }
