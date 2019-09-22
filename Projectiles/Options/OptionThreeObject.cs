@@ -1,4 +1,4 @@
-﻿namespace ChensGradiusMod.Projectiles
+﻿namespace ChensGradiusMod.Projectiles.Options
 {
   public class OptionThreeObject : OptionBaseObject
   {

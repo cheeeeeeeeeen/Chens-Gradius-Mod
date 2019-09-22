@@ -5,10 +5,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Projectiles
+namespace ChensGradiusMod.Projectiles.Options
 {
   public abstract class OptionBaseObject : ModProjectile
   {
+    private const int KeepAlive = 5;
     private const int MaxBuffer = 300;
 
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
@@ -36,7 +37,11 @@ namespace ChensGradiusMod.Projectiles
     {
       if (PlayerHasAccessory() &&
           GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position) &&
-          ListSize > 0) return true;
+          ListSize > 0)
+      {
+        projectile.timeLeft = KeepAlive;
+        return true;
+      }
       else
       {
         projectile.Kill();
@@ -65,7 +70,7 @@ namespace ChensGradiusMod.Projectiles
       if (++projectile.frameCounter >= 5)
       {
         projectile.frameCounter = 0;
-        if (++projectile.frame >= 9) projectile.frame = 0;
+        if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
         projectile.light = lightValues[projectile.frame];
       }
 
