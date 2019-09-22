@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod
@@ -12,6 +13,7 @@ namespace ChensGradiusMod
     private const int MaxProducedProjectileBuffer = 300;
 
     public bool forceBase;
+    public Projectile forceProjectile;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -39,7 +41,29 @@ namespace ChensGradiusMod
 
     public override void OnEnterWorld(Player player)
     {
-      Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 0, 0f, player.whoAmI);
+      int pInd = Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 0, 0f, player.whoAmI);
+      forceProjectile = Main.projectile[pInd];
+    }
+
+    public override void ProcessTriggers(TriggersSet triggersSet)
+    {
+      if (forceBase && ChensGradiusMod.forceActionKey.JustReleased &&
+          forceProjectile.modProjectile is ForceBase fbProj)
+      {
+        switch (fbProj.mode)
+        {
+          case (int)ForceBase.States.Attached:
+            fbProj.mode = (int)ForceBase.States.Launched;
+            break;
+          case (int)ForceBase.States.Detached:
+            //fbProj.mode = (int)ForceBase.States.Pulled;
+            break;
+          case (int)ForceBase.States.Launched:
+          case (int)ForceBase.States.Pulled:
+          default:
+            break;
+        }
+      }
     }
 
     public override void PreUpdate()
