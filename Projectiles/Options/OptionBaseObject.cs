@@ -74,7 +74,7 @@ namespace ChensGradiusMod.Projectiles.Options
         projectile.light = lightValues[projectile.frame];
       }
 
-      projectile.position = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
+      projectile.Center = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
 
       foreach (int prog_ind in projectilesToProduce)
       {

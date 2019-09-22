@@ -54,13 +54,13 @@ namespace ChensGradiusMod
             if (!p.active) optionAlreadyProducedProjectiles.RemoveAt(h--);
           }
 
-          if (!(optionFlightPath[0].X == player.position.X && optionFlightPath[0].Y == player.position.Y))
+          if (!(optionFlightPath[0].X == player.Center.X && optionFlightPath[0].Y == player.Center.Y))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
-            optionFlightPath.Insert(0, player.position);
+            optionFlightPath.Insert(0, player.Center);
           }
         }
-        else optionFlightPath.Insert(0, player.position);
+        else optionFlightPath.Insert(0, player.Center);
       }
       else ResetOptionVariables();
     }
