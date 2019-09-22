@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChensGradiusMod.Projectiles.Forces;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -10,8 +11,10 @@ namespace ChensGradiusMod
     private const int MaxFlightPathCount = 60;
     private const int MaxProducedProjectileBuffer = 300;
 
-    public readonly List<Vector2> optionFlightPath = new List<Vector2>();
-    public readonly List<int> optionAlreadyProducedProjectiles = new List<int>();
+    public bool forceBase;
+
+    public List<Vector2> optionFlightPath = new List<Vector2>();
+    public List<int> optionAlreadyProducedProjectiles = new List<int>();
     public bool optionOne;
     public bool optionTwo;
     public bool optionThree;
@@ -21,6 +24,7 @@ namespace ChensGradiusMod
 
     public override void ResetEffects()
     {
+      forceBase = true;
       optionOne = false;
       optionTwo = false;
       optionThree = false;
@@ -31,6 +35,11 @@ namespace ChensGradiusMod
     {
       ResetEffects();
       ResetOptionVariables();
+    }
+
+    public override void OnEnterWorld(Player player)
+    {
+      Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 0, 0f, player.whoAmI);
     }
 
     public override void PreUpdate()
@@ -64,7 +73,9 @@ namespace ChensGradiusMod
     private void ResetOptionVariables()
     {
       optionFlightPath.Clear();
+      optionFlightPath = new List<Vector2>();
       optionAlreadyProducedProjectiles.Clear();
+      optionAlreadyProducedProjectiles = new List<int>();
     }
 
     private bool HasAnyOptions() => optionOne || optionTwo || optionThree || optionFour;
