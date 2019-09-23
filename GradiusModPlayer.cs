@@ -41,7 +41,7 @@ namespace ChensGradiusMod
 
     public override void OnEnterWorld(Player player)
     {
-      int pInd = Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 0, 0f, player.whoAmI);
+      int pInd = Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 30, 1.5f, player.whoAmI);
       forceProjectile = Main.projectile[pInd];
     }
 

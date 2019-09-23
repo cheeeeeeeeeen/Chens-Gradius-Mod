@@ -37,6 +37,10 @@ namespace ChensGradiusMod.Projectiles.Forces
       projectile.friendly = true;
       projectile.hostile = false;
       projectile.tileCollide = false;
+      projectile.penetrate = -1;
+      projectile.minion = true;
+      projectile.usesLocalNPCImmunity = true;
+      projectile.localNPCHitCooldown = 3;
     }
 
     public override bool PreAI()
@@ -82,6 +86,8 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
     }
+
+    public override bool MinionContactDamage() => true;
 
     public override string Texture => "ChensGradiusMod/Sprites/ForceSheet";
 
