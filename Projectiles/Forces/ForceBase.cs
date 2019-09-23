@@ -10,6 +10,7 @@ namespace ChensGradiusMod.Projectiles.Forces
     private const int KeepAlive = 5;
     private readonly float travelSpeed = 3f;
     private readonly float launchSpeed = 20f;
+    private readonly float pullSpeed = 1.5f;
     private readonly float xDetachDistance = 250f;
     private readonly float xAttachDistance = 42f;
     private readonly int launchTickMax = 60;
@@ -69,6 +70,8 @@ namespace ChensGradiusMod.Projectiles.Forces
           break;
 
         case (int)States.Pulled:
+          PulledMovement();
+          break;
 
         default:
           break;
@@ -91,7 +94,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     private void AttachedMovement()
     {
-      projectile.velocity = new Vector2();
+      if (projectile.velocity.X != 0f || projectile.velocity.Y != 0f) projectile.velocity = new Vector2();
       projectile.Center = new Vector2(Owner.Center.X + (attachSide * xAttachDistance),
                                       Owner.Center.Y);
     }
@@ -131,6 +134,16 @@ namespace ChensGradiusMod.Projectiles.Forces
         projectile.velocity.X = attachSide * launchSpeed;
         projectile.velocity.Y = 0f;
       }
+    }
+
+    private void PulledMovement()
+    {
+      if (projectile.tileCollide)
+      {
+        projectile.tileCollide = false;
+        projectile.velocity = new Vector2();
+      }
+      projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, pullSpeed);
     }
   }
 }

@@ -56,7 +56,7 @@ namespace ChensGradiusMod
             fbProj.mode = (int)ForceBase.States.Launched;
             break;
           case (int)ForceBase.States.Detached:
-            //fbProj.mode = (int)ForceBase.States.Pulled;
+            fbProj.mode = (int)ForceBase.States.Pulled;
             break;
           case (int)ForceBase.States.Launched:
           case (int)ForceBase.States.Pulled:
