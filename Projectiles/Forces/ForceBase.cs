@@ -91,9 +91,17 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     private GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
 
+    private int UpdateDirection(ref int variable, int fallbackNumber)
+    {
+      if (Owner.Center.X > projectile.Center.X) variable = -1;
+      else if (Owner.Center.X < projectile.Center.X) variable = 1;
+      else variable = fallbackNumber;
+
+      return variable;
+    }
+
     private void AttachedMovement()
     {
-      if (projectile.velocity.X != 0f || projectile.velocity.Y != 0f) projectile.velocity = new Vector2();
       projectile.Center = new Vector2(Owner.Center.X + (attachSide * xAttachDistance),
                                       Owner.Center.Y);
     }
@@ -103,9 +111,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       float distance = Owner.Center.X + (xDetachDistance * Owner.direction) - projectile.Center.X;
       projectile.velocity.X = Math.Sign(distance) * Math.Min(travelSpeed, Math.Abs(distance));
 
-      if (Owner.Center.X > projectile.Center.X) projectile.direction = -1; 
-      else if (Owner.Center.X < projectile.Center.X) projectile.direction = 1;
-      projectile.spriteDirection = projectile.direction;
+      projectile.spriteDirection = UpdateDirection(ref projectile.direction, projectile.direction);
 
       return Math.Abs(distance) <= Math.Min(AcceptedVerticalThreshold, travelSpeed);
     }
@@ -126,6 +132,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       {
         launchTick = 0;
         mode = (int)States.Detached;
+        DetachedMovementY(DetachedMovementX());
       }
       else if (launchTick <= 1)
       {
@@ -137,16 +144,9 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     private void PulledMovement()
     {
-      if (projectile.tileCollide)
-      {
-        projectile.tileCollide = false;
-        projectile.velocity = new Vector2();
-      }
       projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, pullSpeed);
 
-      if (Owner.Center.X > projectile.Center.X) projectile.direction = -1;
-      else if (Owner.Center.X < projectile.Center.X) projectile.direction = 1;
-      projectile.spriteDirection = projectile.direction;
+      projectile.spriteDirection = UpdateDirection(ref projectile.direction, projectile.direction);
     }
 
     private void Reattach()
@@ -158,10 +158,11 @@ namespace ChensGradiusMod.Projectiles.Forces
           if (projectile.Hitbox.Intersects(Owner.Hitbox))
           {
             projectile.tileCollide = false;
-            if (Owner.Center.X < projectile.Center.X) attachSide = 1;
-            else if (Owner.Center.X > projectile.Center.X) attachSide = -1;
-            else attachSide = projectile.spriteDirection;
-            projectile.direction = projectile.spriteDirection = attachSide;
+            projectile.velocity = new Vector2();
+
+            projectile.spriteDirection = UpdateDirection(ref attachSide, projectile.spriteDirection);
+            projectile.direction = projectile.spriteDirection;
+
             mode = (int)States.Attached;
           }
           break;

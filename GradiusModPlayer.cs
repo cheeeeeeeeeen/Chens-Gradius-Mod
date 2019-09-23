@@ -56,6 +56,8 @@ namespace ChensGradiusMod
             fbProj.mode = (int)ForceBase.States.Launched;
             break;
           case (int)ForceBase.States.Detached:
+            forceProjectile.tileCollide = false;
+            forceProjectile.velocity = new Vector2();
             fbProj.mode = (int)ForceBase.States.Pulled;
             break;
           case (int)ForceBase.States.Launched:
