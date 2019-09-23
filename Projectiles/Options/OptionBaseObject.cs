@@ -17,7 +17,7 @@ namespace ChensGradiusMod.Projectiles.Options
     private List<int> projectilesToProduce = new List<int>();
     private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f};
 
-    public GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
+    protected GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
 
     public override void SetStaticDefaults()
     {

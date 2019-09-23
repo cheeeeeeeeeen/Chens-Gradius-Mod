@@ -7,7 +7,7 @@ namespace ChensGradiusMod.Items
   {
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
 
-    public GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
+    protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
 
     public override void SetStaticDefaults()
     {

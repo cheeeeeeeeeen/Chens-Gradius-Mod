@@ -6,7 +6,7 @@ namespace ChensGradiusMod.Items
   {
     private readonly string placeHolderTexture = "ChensGradiusMod/Items/placeholder";
 
-    public string RealItemTexture => base.Texture;
+    protected string RealItemTexture => base.Texture;
 
     public override void SetDefaults()
     {

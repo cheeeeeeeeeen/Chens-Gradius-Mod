@@ -12,10 +12,10 @@ namespace ChensGradiusMod.Projectiles.Forces
     private readonly float travelSpeed = 3f;
     private readonly float launchSpeed = 20f;
     private readonly float pullSpeed = 2f;
-    private readonly float xDetachDistance = 250f;
+    private readonly float xDetachDistance = 300f;
     private readonly float xAttachDistance = 42f;
     private readonly int launchTickMax = 60;
-    private int attachSide = -1;
+    private int attachSide = 1;
     private int launchTick = 0;
 
     public int mode = 0;
