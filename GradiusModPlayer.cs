@@ -54,6 +54,8 @@ namespace ChensGradiusMod
         {
           case (int)ForceBase.States.Attached:
             fbProj.mode = (int)ForceBase.States.Launched;
+            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceOut"),
+                           forceProjectile.Center);
             break;
           case (int)ForceBase.States.Detached:
             forceProjectile.tileCollide = false;

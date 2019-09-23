@@ -170,6 +170,8 @@ namespace ChensGradiusMod.Projectiles.Forces
             projectile.direction = projectile.spriteDirection;
 
             mode = (int)States.Attached;
+            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
+                           projectile.Center);
           }
           break;
       }
