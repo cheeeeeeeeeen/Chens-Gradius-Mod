@@ -8,13 +8,14 @@ namespace ChensGradiusMod.Projectiles.Forces
   public class ForceBase : ModProjectile
   {
     private const int KeepAlive = 5;
+    private const float AcceptedVerticalThreshold = .24f;
     private readonly float travelSpeed = 3f;
     private readonly float launchSpeed = 20f;
-    private readonly float pullSpeed = 1.5f;
+    private readonly float pullSpeed = 2f;
     private readonly float xDetachDistance = 250f;
     private readonly float xAttachDistance = 42f;
     private readonly int launchTickMax = 60;
-    private int attachSide = 1;
+    private int attachSide = -1;
     private int launchTick = 0;
 
     public int mode = 0;
@@ -54,6 +55,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     public override void AI()
     {
+      Reattach();
       switch (mode)
       {
         case (int)States.Attached:
@@ -71,9 +73,6 @@ namespace ChensGradiusMod.Projectiles.Forces
 
         case (int)States.Pulled:
           PulledMovement();
-          break;
-
-        default:
           break;
       }
 
@@ -108,7 +107,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       else if (Owner.Center.X < projectile.Center.X) projectile.direction = 1;
       projectile.spriteDirection = projectile.direction;
 
-      return Math.Abs(distance) <= travelSpeed;
+      return Math.Abs(distance) <= Math.Min(AcceptedVerticalThreshold, travelSpeed);
     }
 
     private void DetachedMovementY(bool readyForVertical)
@@ -144,6 +143,29 @@ namespace ChensGradiusMod.Projectiles.Forces
         projectile.velocity = new Vector2();
       }
       projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, pullSpeed);
+
+      if (Owner.Center.X > projectile.Center.X) projectile.direction = -1;
+      else if (Owner.Center.X < projectile.Center.X) projectile.direction = 1;
+      projectile.spriteDirection = projectile.direction;
+    }
+
+    private void Reattach()
+    {
+      switch (mode)
+      {
+        case (int)States.Detached:
+        case (int)States.Pulled:
+          if (projectile.Hitbox.Intersects(Owner.Hitbox))
+          {
+            projectile.tileCollide = false;
+            if (Owner.Center.X < projectile.Center.X) attachSide = 1;
+            else if (Owner.Center.X > projectile.Center.X) attachSide = -1;
+            else attachSide = projectile.spriteDirection;
+            projectile.direction = projectile.spriteDirection = attachSide;
+            mode = (int)States.Attached;
+          }
+          break;
+      }
     }
   }
 }

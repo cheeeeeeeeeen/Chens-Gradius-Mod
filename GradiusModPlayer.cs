@@ -60,7 +60,6 @@ namespace ChensGradiusMod
             break;
           case (int)ForceBase.States.Launched:
           case (int)ForceBase.States.Pulled:
-          default:
             break;
         }
       }
