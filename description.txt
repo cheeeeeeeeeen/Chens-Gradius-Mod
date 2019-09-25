@@ -5,12 +5,22 @@ Current features:
   - These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
   - Deploy one, and the Option drone will copy some of your projectiles.
   - It is an accessory. No ingredients required to craft.
+2. Force
+  - This is yet another drone from the R-Type series.
+  - It has its own set of attacks, and you can control it like in the original game.
+  - Its power is based from the held weapon's stats.
+  - Set a keybind in Force Action to control it.
+  - For now, an accessory to make it accessible. No ingredients required to craft.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.1.0
+  - Implement the Force from R-Type series
+  - Implement the exact behavior of it shown from the original games
 
 0.0.4
   - Unequipping options now properly unloads them
