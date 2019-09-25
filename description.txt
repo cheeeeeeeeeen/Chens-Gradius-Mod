@@ -18,6 +18,10 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.1.1
+  - Add recipes for Options and the Force
+  - Fixed a fatal bug: a crash when hovering over the Bydo Embryo in the crafting menu
+
 0.1.0
   - Implement the Force from R-Type series
   - Implement the exact behavior of it shown from the original games
