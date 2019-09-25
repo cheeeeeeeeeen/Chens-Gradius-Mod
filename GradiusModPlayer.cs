@@ -26,7 +26,7 @@ namespace ChensGradiusMod
 
     public override void ResetEffects()
     {
-      forceBase = true;
+      forceBase = false;
       optionOne = false;
       optionTwo = false;
       optionThree = false;
@@ -37,12 +37,6 @@ namespace ChensGradiusMod
     {
       ResetEffects();
       ResetOptionVariables();
-    }
-
-    public override void OnEnterWorld(Player player)
-    {
-      int pInd = Projectile.NewProjectile(player.Center, player.velocity, mod.ProjectileType<ForceBase>(), 30, 1.5f, player.whoAmI);
-      forceProjectile = Main.projectile[pInd];
     }
 
     public override void ProcessTriggers(TriggersSet triggersSet)

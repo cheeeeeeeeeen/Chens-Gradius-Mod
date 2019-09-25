@@ -19,14 +19,14 @@ namespace ChensGradiusMod.Projectiles.Forces
     private readonly int launchTickMax = 60;
     private readonly int inBattleExpire = 385;
 
-    private int attachSide = 1;
     private int launchTick = 0;
     private int attackTick = 0;
     private int attackIndex = 0;
     private bool inBattle = false;
     private int inBattleTick = 0;
 
-    public int mode = 0;
+    public int mode = (int)States.Detached;
+    public int attachSide = 1;
 
     public static int dmg = 30;
     public static float kb = 1.5f;
@@ -47,7 +47,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       projectile.light = .75f;
       projectile.friendly = true;
       projectile.hostile = false;
-      projectile.tileCollide = false;
+      projectile.tileCollide = true;
       projectile.penetrate = -1;
       projectile.minion = true;
       projectile.usesLocalNPCImmunity = true;
@@ -267,10 +267,7 @@ namespace ChensGradiusMod.Projectiles.Forces
           {
             PerformAttack();
             attackTick = 0;
-            if (++attackIndex >= attackCooldowns.Length)
-            {
-              attackIndex = 0;
-            }
+            if (++attackIndex >= attackCooldowns.Length) attackIndex = 0;
           }
         }
         else inBattle = false;

@@ -5,10 +5,6 @@ namespace ChensGradiusMod.Items
 {
   public abstract class OptionBase : ParentGradiusAccessory
   {
-    private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
-
-    protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
-
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault("Deploys an Option.");
@@ -23,7 +19,7 @@ namespace ChensGradiusMod.Items
       item.height = 20;
     }
 
-    public override string Texture => optionTexture;
+    public override string Texture => "ChensGradiusMod/Sprites/OptionSheet";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

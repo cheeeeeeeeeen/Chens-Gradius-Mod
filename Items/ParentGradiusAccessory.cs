@@ -1,4 +1,5 @@
-﻿using Terraria.ModLoader;
+﻿using Terraria;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items
 {
@@ -7,6 +8,8 @@ namespace ChensGradiusMod.Items
     private readonly string placeHolderTexture = "ChensGradiusMod/Items/placeholder";
 
     protected string RealItemTexture => base.Texture;
+
+    protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
 
     public override void SetDefaults()
     {
