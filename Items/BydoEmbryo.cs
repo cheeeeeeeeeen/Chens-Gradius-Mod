@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ChensGradiusMod.Projectiles.Forces;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items
@@ -50,20 +51,36 @@ namespace ChensGradiusMod.Items
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
       Player clientPlayer = Main.player[Main.myPlayer];
+      if (ModPlayer(clientPlayer).forceBase)
+      {
+        string tooltipText = $"{ModPlayer(clientPlayer).forceProjectile.damage} damage";
+        TooltipLine newtip = new TooltipLine(mod, "ForceDamage", tooltipText);
+        tooltips.Insert(1, newtip);
 
-      string tooltipText = $"{ModPlayer(clientPlayer).forceProjectile.damage} damage";
-      TooltipLine newtip = new TooltipLine(mod, "ForceDamage", tooltipText);
-      tooltips.Insert(1, newtip);
-
-      tooltipText = GradiusHelper.KnockbackTooltip(ModPlayer(clientPlayer).forceProjectile.knockBack);
-      newtip = new TooltipLine(mod, "ForceKnockback", tooltipText);
-      tooltips.Insert(2, newtip);
+        tooltipText = GradiusHelper.KnockbackTooltip(ModPlayer(clientPlayer).forceProjectile.knockBack);
+        newtip = new TooltipLine(mod, "ForceKnockback", tooltipText);
+        tooltips.Insert(2, newtip);
+      }
     }
 
     private bool IsForceNotDeployed(Player player)
     {
       return player.ownedProjectileCounts[mod.ProjectileType<ForceBase>()] <= 0 &&
              player.whoAmI == Main.myPlayer;
+    }
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(ItemID.Gel, 200);
+      recipe.AddRecipeGroup("Wood", 400);
+      recipe.AddRecipeGroup("IronBar", 70);
+      recipe.AddRecipeGroup("ChensGradiusMod:EvilStones", 100);
+      recipe.AddRecipeGroup("ChensGradiusMod:EvilDrops", 40);
+      recipe.AddIngredient(ItemID.Bunny);
+      recipe.AddTile(TileID.DemonAltar);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }

@@ -1,4 +1,6 @@
 ﻿using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items
 {
@@ -30,5 +32,23 @@ namespace ChensGradiusMod.Items
     public override string ProjectileName => "OptionFourObject";
 
     public override int OptionPosition => 4;
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(ItemID.SoulofLight, 20);
+      recipe.AddIngredient(ItemID.SoulofNight, 20);
+      recipe.AddIngredient(ItemID.SoulofMight, 5);
+      recipe.AddIngredient(ItemID.SoulofFright, 5);
+      recipe.AddIngredient(ItemID.SoulofSight, 5);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 40);
+      recipe.AddIngredient(ItemID.ChlorophyteBar, 40);
+      recipe.AddIngredient(ItemID.Wire, 600);
+      recipe.AddIngredient(ItemID.Ruby, 24);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+    }
   }
 }

@@ -1,4 +1,6 @@
 ﻿using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items
 {
@@ -30,5 +32,19 @@ namespace ChensGradiusMod.Items
     public override string ProjectileName => "OptionThreeObject";
 
     public override int OptionPosition => 3;
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 15);
+      recipe.AddIngredient(ItemID.HallowedBar, 25);
+      recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 100);
+      recipe.AddIngredient(ItemID.Wire, 500);
+      recipe.AddIngredient(ItemID.Emerald, 18);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+    }
   }
 }
