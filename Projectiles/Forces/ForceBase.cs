@@ -153,6 +153,7 @@ namespace ChensGradiusMod.Projectiles.Forces
           Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.spd,
                                    mod.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
+          
         }
       }
       else
@@ -174,6 +175,9 @@ namespace ChensGradiusMod.Projectiles.Forces
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
       }
+
+      Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/LightBulletShoot"),
+                         projectile.Center);
     }
 
     private Player Owner => Main.player[projectile.owner];
@@ -296,7 +300,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
       else if (!Owner.HeldItem.IsAir) basis = Owner.HeldItem;
 
-      if (basis == null || (basis.modItem is BydoEmbryo))
+      if (basis == null || !GradiusHelper.CanDamage(basis) || (basis.modItem is BydoEmbryo))
       {
         projectile.damage = dmg;
         projectile.knockBack = kb;

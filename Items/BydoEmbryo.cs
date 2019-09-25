@@ -50,9 +50,14 @@ namespace ChensGradiusMod.Items
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
       Player clientPlayer = Main.player[Main.myPlayer];
-      string tooltipText = $"\n{ModPlayer(clientPlayer).forceProjectile.damage} damage";
-      TooltipLine newtip = new TooltipLine(mod, "ForceStats", tooltipText);
-      tooltips.Add(newtip);
+
+      string tooltipText = $"{ModPlayer(clientPlayer).forceProjectile.damage} damage";
+      TooltipLine newtip = new TooltipLine(mod, "ForceDamage", tooltipText);
+      tooltips.Insert(1, newtip);
+
+      tooltipText = GradiusHelper.KnockbackTooltip(ModPlayer(clientPlayer).forceProjectile.knockBack);
+      newtip = new TooltipLine(mod, "ForceKnockback", tooltipText);
+      tooltips.Insert(2, newtip);
     }
 
     private bool IsForceNotDeployed(Player player)

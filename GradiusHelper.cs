@@ -45,6 +45,20 @@ namespace ChensGradiusMod
       return new Vector2(newX, newY);
     }
 
-    public static bool CanDamage(Projectile p) => p.damage > 0;
+    public static bool CanDamage(Projectile proj) => proj.damage > 0;
+
+    public static bool CanDamage(Item item) => item.damage > 0;
+
+    public static string KnockbackTooltip(float knockback)
+    {
+      if (knockback <= 0f) return "No knockback";
+      else if (knockback <= 1.5f) return "Extremely weak knockback";
+      else if (knockback <= 3f) return "Very weak knockback";
+      else if (knockback <= 4f) return "Weak knockback";
+      else if (knockback <= 6f) return "Average knockback";
+      else if (knockback <= 7f) return "Strong knockback";
+      else if (knockback <= 11f) return "Extremely strong knockback";
+      else return "Insane knockback";
+    }
   }
 }
