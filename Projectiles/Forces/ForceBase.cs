@@ -42,8 +42,8 @@ namespace ChensGradiusMod.Projectiles.Forces
     public override void SetDefaults()
     {
       projectile.netImportant = true;
-      projectile.width = 42;
-      projectile.height = 44;
+      projectile.width = 36;
+      projectile.height = 36;
       projectile.light = .75f;
       projectile.friendly = true;
       projectile.hostile = false;
