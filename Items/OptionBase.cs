@@ -7,7 +7,11 @@ namespace ChensGradiusMod.Items
   {
     public override void SetStaticDefaults()
     {
-      Tooltip.SetDefault("Deploys an Option.");
+      Tooltip.SetDefault("Deploys an Option.\n" +
+                         "Some projectiles you create are copied by the drone.\n" +
+                         "The drone will follow your flight path.\n" +
+                         "This advanced drone uses Wreek technology,\n" +
+                         "infusing both technology and psychic elements together.");
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 9));
     }
 

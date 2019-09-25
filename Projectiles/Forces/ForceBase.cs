@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChensGradiusMod.Items;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -28,8 +29,8 @@ namespace ChensGradiusMod.Projectiles.Forces
     public int mode = (int)States.Detached;
     public int attachSide = 1;
 
-    public static int dmg = 30;
-    public static float kb = 1.5f;
+    public static int dmg = 1;
+    public static float kb = 0.01f;
 
     public enum States : int { Attached, Launched, Detached, Pulled };
 
@@ -70,6 +71,8 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     public override void AI()
     {
+      UpdateDamage();
+
       Reattach();
       switch (mode)
       {
@@ -149,7 +152,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
           Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.spd,
                                    mod.ProjectileType<ForceLightBullet>(),
-                                   ForceLightBullet.dmg, ForceLightBullet.kb, Owner.whoAmI);
+                                   projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
       }
       else
@@ -168,7 +171,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
           Projectile.NewProjectile(projectile.Center + new Vector2(vX, vY), new Vector2(1f, 0f) * ForceLightBullet.spd * projectile.spriteDirection,
                                    mod.ProjectileType<ForceLightBullet>(),
-                                   ForceLightBullet.dmg, ForceLightBullet.kb, Owner.whoAmI);
+                                   projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
       }
     }
@@ -284,6 +287,24 @@ namespace ChensGradiusMod.Projectiles.Forces
         {
           selectProj.Kill();
         }
+      }
+    }
+
+    private void UpdateDamage()
+    {
+      Item basis = null;
+      if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
+      else if (!Owner.HeldItem.IsAir) basis = Owner.HeldItem;
+
+      if (basis == null || (basis.modItem is BydoEmbryo))
+      {
+        projectile.damage = dmg;
+        projectile.knockBack = kb;
+      }
+      else
+      {
+        projectile.damage = basis.damage;
+        projectile.knockBack = basis.knockBack;
       }
     }
   }

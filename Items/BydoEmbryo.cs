@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Forces;
+﻿using System.Collections.Generic;
+using ChensGradiusMod.Projectiles.Forces;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -8,8 +9,11 @@ namespace ChensGradiusMod.Items
   {
     public override void SetStaticDefaults()
     {
-      Tooltip.SetDefault("Slightly increases life regeneration" +
+      Tooltip.SetDefault("Slightly increases life regeneration.\n" +
                          "Deploys the Force.\n" +
+                         "Damage and Knockback are based on the held weapon.\n" +
+                         "Any enemy projectile that comes in contact are destroyed.\n" +
+                         "Press the Force Action hotkey to launch or pull it!\n" +
                          "You feel as if it is ominously loyal to you.");
     }
 
@@ -41,6 +45,14 @@ namespace ChensGradiusMod.Items
         Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
                        Main.projectile[pInd].Center);
       }
+    }
+
+    public override void ModifyTooltips(List<TooltipLine> tooltips)
+    {
+      Player clientPlayer = Main.player[Main.myPlayer];
+      string tooltipText = $"\n{ModPlayer(clientPlayer).forceProjectile.damage} damage";
+      TooltipLine newtip = new TooltipLine(mod, "ForceStats", tooltipText);
+      tooltips.Add(newtip);
     }
 
     private bool IsForceNotDeployed(Player player)
