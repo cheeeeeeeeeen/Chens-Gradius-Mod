@@ -9,16 +9,27 @@ namespace ChensGradiusMod.Projectiles.Forces
   {
     private const int KeepAlive = 5;
     private const float AcceptedVerticalThreshold = .24f;
+
     private readonly float travelSpeed = 3f;
     private readonly float launchSpeed = 20f;
     private readonly float pullSpeed = 2f;
     private readonly float xDetachDistance = 300f;
     private readonly float xAttachDistance = 42f;
+    private readonly int[] attackCooldowns = { 5, 5, 25 };
     private readonly int launchTickMax = 60;
+    private readonly int inBattleExpire = 385;
+
     private int attachSide = 1;
     private int launchTick = 0;
+    private int attackTick = 0;
+    private int attackIndex = 0;
+    private bool inBattle = false;
+    private int inBattleTick = 0;
 
     public int mode = 0;
+
+    public static int dmg = 30;
+    public static float kb = 1.5f;
 
     public enum States : int { Attached, Launched, Detached, Pulled };
 
@@ -85,6 +96,23 @@ namespace ChensGradiusMod.Projectiles.Forces
         projectile.frameCounter = 0;
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
+
+      if (inBattle)
+      {
+        if (++inBattleTick < inBattleExpire)
+        {
+          if (++attackTick >= attackCooldowns[attackIndex])
+          {
+            PerformAttack();
+            attackTick = 0;
+            if (++attackIndex >= attackCooldowns.Length)
+            {
+              attackIndex = 0;
+            }
+          }
+        }
+        else inBattle = false;
+      }
     }
 
     public override bool MinionContactDamage() => true;
@@ -92,6 +120,72 @@ namespace ChensGradiusMod.Projectiles.Forces
     public override string Texture => "ChensGradiusMod/Sprites/ForceSheet";
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
+
+    public void BattleMode()
+    {
+      if (!inBattle)
+      {
+        PerformAttack();
+        attackTick = 0;
+        attackIndex = 0;
+      }
+      inBattleTick = 0;
+      inBattle = true;
+    }
+
+    public void PerformAttack()
+    {
+      float vX = 0f, vY = 0f;
+
+      if (mode != (int)States.Attached)
+      {
+        for (int i = 0; i < 4; i++)
+        {
+          switch (i)
+          {
+            case 0:
+              vX = 0f;
+              vY = 1f;
+              break;
+            case 1:
+              vX = 0f;
+              vY = -1f;
+              break;
+            case 2:
+              vX = (float)Math.Cos(MathHelper.ToRadians(15f)) * projectile.spriteDirection;
+              vY = (float)-Math.Sin(MathHelper.ToRadians(15f));
+              break;
+            case 3:
+              vX = (float)Math.Cos(MathHelper.ToRadians(15f)) * projectile.spriteDirection;
+              vY = (float)Math.Sin(MathHelper.ToRadians(15f));
+              break;
+          }
+
+          Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.spd,
+                                   mod.ProjectileType<ForceLightBullet>(),
+                                   ForceLightBullet.dmg, ForceLightBullet.kb, Owner.whoAmI);
+        }
+      }
+      else
+      {
+        for (int j = 0; j < 2; j++)
+        {
+          switch (j)
+          {
+            case 0:
+              vY = 5f;
+              break;
+            case 1:
+              vY = -5f;
+              break;
+          }
+
+          Projectile.NewProjectile(projectile.Center + new Vector2(vX, vY), new Vector2(1f, 0f) * ForceLightBullet.spd * projectile.spriteDirection,
+                                   mod.ProjectileType<ForceLightBullet>(),
+                                   ForceLightBullet.dmg, ForceLightBullet.kb, Owner.whoAmI);
+        }
+      }
+    }
 
     private Player Owner => Main.player[projectile.owner];
 

@@ -97,6 +97,16 @@ namespace ChensGradiusMod
       if (HasAnyOptions()) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
     }
 
+    public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+    {
+      MakeForceBattle();
+    }
+
+    public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+    {
+      MakeForceBattle();
+    }
+
     private void ResetOptionVariables()
     {
       optionFlightPath.Clear();
@@ -106,5 +116,13 @@ namespace ChensGradiusMod
     }
 
     private bool HasAnyOptions() => optionOne || optionTwo || optionThree || optionFour;
+
+    private void MakeForceBattle()
+    {
+      if (forceProjectile.modProjectile is ForceBase fbProj)
+      {
+        fbProj.BattleMode();
+      }
+    }
   }
 }
