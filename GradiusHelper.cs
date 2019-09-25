@@ -44,5 +44,7 @@ namespace ChensGradiusMod
 
       return new Vector2(newX, newY);
     }
+
+    public static bool CanDamage(Projectile p) => p.damage > 0;
   }
 }

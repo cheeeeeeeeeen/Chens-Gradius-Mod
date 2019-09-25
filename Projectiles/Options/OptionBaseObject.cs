@@ -61,7 +61,7 @@ namespace ChensGradiusMod.Projectiles.Options
       {
         Projectile p = Main.projectile[i];
         if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
-            !p.npcProj && CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+            !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
         {
           projectilesToProduce.Add(i);
         }
@@ -143,8 +143,6 @@ namespace ChensGradiusMod.Projectiles.Options
 
       return false;
     }
-
-    private bool CanDamage(Projectile p) => p.damage > 0;
 
     private bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
 

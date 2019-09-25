@@ -97,22 +97,8 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
 
-      if (inBattle)
-      {
-        if (++inBattleTick < inBattleExpire)
-        {
-          if (++attackTick >= attackCooldowns[attackIndex])
-          {
-            PerformAttack();
-            attackTick = 0;
-            if (++attackIndex >= attackCooldowns.Length)
-            {
-              attackIndex = 0;
-            }
-          }
-        }
-        else inBattle = false;
-      }
+      Engage();
+      OverpowerProjectiles();
     }
 
     public override bool MinionContactDamage() => true;
@@ -268,6 +254,39 @@ namespace ChensGradiusMod.Projectiles.Forces
                            projectile.Center);
           }
           break;
+      }
+    }
+
+    private void Engage()
+    {
+      if (inBattle)
+      {
+        if (++inBattleTick < inBattleExpire)
+        {
+          if (++attackTick >= attackCooldowns[attackIndex])
+          {
+            PerformAttack();
+            attackTick = 0;
+            if (++attackIndex >= attackCooldowns.Length)
+            {
+              attackIndex = 0;
+            }
+          }
+        }
+        else inBattle = false;
+      }
+    }
+
+    private void OverpowerProjectiles()
+    {
+      for (int i = 0; i < Main.maxProjectiles; i++)
+      {
+        Projectile selectProj = Main.projectile[i];
+        if (selectProj.active && selectProj.hostile && GradiusHelper.CanDamage(selectProj) &&
+            projectile.Hitbox.Intersects(selectProj.Hitbox))
+        {
+          selectProj.Kill();
+        }
       }
     }
   }
