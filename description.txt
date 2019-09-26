@@ -25,6 +25,9 @@ Changelogs:
 
 0.2.0
   - Implement the Freeze options from Gradius V
+  - Fix a bug of catching an exception when the Force does not exist
+  - Add Option equip sound effect
+  - Adjust the rarities of the accessories to match Terraria's progression
 
 0.1.1
   - Add recipes for Options and the Force
