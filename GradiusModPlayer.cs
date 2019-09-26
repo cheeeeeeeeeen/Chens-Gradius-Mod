@@ -113,7 +113,7 @@ namespace ChensGradiusMod
 
     private void MakeForceBattle()
     {
-      if (forceProjectile.modProjectile is ForceBase fbProj)
+      if (forceBase && forceProjectile.modProjectile is ForceBase fbProj)
       {
         fbProj.BattleMode();
       }
