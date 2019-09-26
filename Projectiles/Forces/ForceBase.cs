@@ -1,4 +1,4 @@
-﻿using ChensGradiusMod.Items;
+﻿using ChensGradiusMod.Items.Accessories.Forces;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

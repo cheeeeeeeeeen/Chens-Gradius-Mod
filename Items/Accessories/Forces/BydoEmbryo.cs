@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items
+namespace ChensGradiusMod.Items.Accessories.Forces
 {
   public class BydoEmbryo : ParentGradiusAccessory
   {

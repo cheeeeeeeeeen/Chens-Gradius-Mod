@@ -1,12 +1,10 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items
+namespace ChensGradiusMod.Items.Accessories
 {
   public abstract class ParentGradiusAccessory : ModItem
   {
-    private readonly string placeHolderTexture = "ChensGradiusMod/Items/placeholder";
-
     protected string RealItemTexture => base.Texture;
 
     protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
@@ -19,7 +17,7 @@ namespace ChensGradiusMod.Items
       item.rare = 0;
     }
 
-    public override string Texture => placeHolderTexture;
+    public override string Texture => "ChensGradiusMod/Items/placeholder";
 
     public override void AddRecipes()
     {
