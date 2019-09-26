@@ -7,11 +7,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
   {
     public override void SetStaticDefaults()
     {
-      Tooltip.SetDefault("Deploys an Option.\n" +
-                         "Some projectiles you create are copied by the drone.\n" +
-                         "The drone will follow your flight path.\n" +
-                         "This advanced drone uses Wreek technology,\n" +
-                         "infusing both technology and psychic elements together.");
+      Tooltip.SetDefault(OptionTooltip);
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 9));
     }
 
@@ -28,7 +24,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       if (GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player), OptionPosition) &&
-          IsOptionNotDeployed(player))
+          ModeChecks(player, hideVisual) && IsOptionNotDeployed(player))
       {
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(ProjectileName), 0, 0f,
@@ -47,7 +43,10 @@ namespace ChensGradiusMod.Items.Accessories.Options
       "This advanced drone uses Wreek technology,\n" +
       "infusing both technology and psychic elements together.";
 
-    protected virtual bool ModeChecks(Player player, bool hideVisual) => true;
+    protected virtual bool ModeChecks(Player player, bool hideVisual)
+    {
+      return !ModPlayer(player).freezeOption;
+    }
 
     private bool IsOptionNotDeployed(Player player)
     {

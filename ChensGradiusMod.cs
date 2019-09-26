@@ -8,17 +8,20 @@ namespace ChensGradiusMod
 	public class ChensGradiusMod : Mod
 	{
     public static ModHotKey forceActionKey;
+    public static ModHotKey optionActionKey;
 
     public ChensGradiusMod() { }
 
     public override void Load()
     {
-      forceActionKey = RegisterHotKey("Force Action Toggle", "Mouse2");
+      forceActionKey = RegisterHotKey("Force Action Toggle", "Mouse3");
+      optionActionKey = RegisterHotKey("Option Action Key", "Mouse2");
     }
 
     public override void Unload()
     {
       forceActionKey = null;
+      optionActionKey = null;
     }
 
     public override void AddRecipeGroups()

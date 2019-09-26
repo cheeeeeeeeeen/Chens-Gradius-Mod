@@ -15,12 +15,14 @@ namespace ChensGradiusMod
     public bool forceBase;
     public Projectile forceProjectile;
 
+    private bool isFreezing;
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
     public bool optionOne;
     public bool optionTwo;
     public bool optionThree;
     public bool optionFour;
+    public bool freezeOption;
 
     public GradiusModPlayer() => UpdateDead();
 
@@ -31,12 +33,14 @@ namespace ChensGradiusMod
       optionTwo = false;
       optionThree = false;
       optionFour = false;
+      freezeOption = false;
     }
 
     public override void UpdateDead()
     {
       ResetEffects();
       ResetOptionVariables();
+      isFreezing = false;
     }
 
     public override void ProcessTriggers(TriggersSet triggersSet)
@@ -61,6 +65,12 @@ namespace ChensGradiusMod
             break;
         }
       }
+
+      if (freezeOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) isFreezing = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased) isFreezing = false;
+      }
     }
 
     public override void PreUpdate()
@@ -78,7 +88,15 @@ namespace ChensGradiusMod
           if (!(optionFlightPath[0].X == player.Center.X && optionFlightPath[0].Y == player.Center.Y))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
-            optionFlightPath.Insert(0, player.Center);
+
+            if (freezeOption && isFreezing)
+            {
+              for (int p = 0; p < optionFlightPath.Count; p++)
+              {
+                optionFlightPath[p] += player.position - player.oldPosition;
+              }
+            }
+            else optionFlightPath.Insert(0, player.Center);
           }
         }
         else optionFlightPath.Insert(0, player.Center);

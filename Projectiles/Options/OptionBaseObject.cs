@@ -32,6 +32,9 @@ namespace ChensGradiusMod.Projectiles.Options
       projectile.width = 28;
       projectile.height = 20;
       projectile.light = .1f;
+      projectile.tileCollide = false;
+      projectile.penetrate = -1;
+      projectile.minion = true;
     }
 
     public override bool PreAI()
