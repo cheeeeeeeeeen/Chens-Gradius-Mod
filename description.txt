@@ -4,19 +4,27 @@ Current features:
 1. Options/Multiples
   - These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
   - Deploy one, and the Option drone will copy some of your projectiles.
-  - It is an accessory. No ingredients required to craft.
+  - It is an accessory in the game, for now.
 2. Force
   - This is yet another drone from the R-Type series.
   - It has its own set of attacks, and you can control it like in the original game.
   - Its power is based from the held weapon's stats.
   - Set a keybind in Force Action to control it.
-  - For now, an accessory to make it accessible. No ingredients required to craft.
+  - For now, it is an accessory to make it accessible.
+3. Freeze Options
+  - An upgrade from the normal Options, and it is a new feature that came with Gradius V.
+  - Functions the same as the normal one, except it has an added action.
+  - Hold The Option Action hotkey, and these options will behave differently.
+  - Allow your options to be more controllable.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.2.0
+  - Implement the Freeze options from Gradius V
 
 0.1.1
   - Add recipes for Options and the Force

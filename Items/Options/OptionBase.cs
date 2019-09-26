@@ -1,7 +1,8 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items
+namespace ChensGradiusMod.Items.Options
 {
   public abstract class OptionBase : ParentGradiusAccessory
   {

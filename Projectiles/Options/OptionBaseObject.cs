@@ -16,6 +16,7 @@ namespace ChensGradiusMod.Projectiles.Options
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
     private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f};
+    private bool isSpawning = true;
 
     protected GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
 
@@ -75,6 +76,12 @@ namespace ChensGradiusMod.Projectiles.Options
       }
 
       projectile.Center = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
+      if (isSpawning)
+      {
+        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionSpawn"),
+                       projectile.Center);
+        isSpawning = false;
+      }
 
       foreach (int prog_ind in projectilesToProduce)
       {

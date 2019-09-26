@@ -1,4 +1,7 @@
 ﻿namespace ChensGradiusMod.Sounds.Forces
 {
-  public class ForceGet : ForceSoundBase { }
+  public class ForceGet : GradiusSoundBase
+  {
+    protected override float VolumePercent => .4f;
+  }
 }

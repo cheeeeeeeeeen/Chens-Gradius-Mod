@@ -1,14 +1,16 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Sounds.Forces
+namespace ChensGradiusMod.Sounds
 {
-  public abstract class ForceSoundBase : ModSound
+  public abstract class GradiusSoundBase : ModSound
   {
+    protected virtual float VolumePercent => 1f;
+
     public override SoundEffectInstance PlaySound(ref SoundEffectInstance soundInstance, float volume, float pan, SoundType type)
     {
       soundInstance = sound.CreateInstance();
-      soundInstance.Volume = volume * .4f;
+      soundInstance.Volume = volume * VolumePercent;
       soundInstance.Pan = pan;
       return soundInstance;
     }

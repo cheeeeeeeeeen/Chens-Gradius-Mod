@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items
+namespace ChensGradiusMod.Items.Options
 {
   public class OptionTwo : OptionBase
   {
