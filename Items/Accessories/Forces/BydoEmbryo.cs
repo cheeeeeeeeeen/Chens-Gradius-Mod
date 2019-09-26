@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
       item.width = 28;
       item.height = 28;
-      item.rare = 6;
+      item.rare = -12;
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/ForceBaseAccessory";
