@@ -29,9 +29,9 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot) => player.GetModPlayer<GradiusModPlayer>().optionOne;
 
-    public override string ProjectileName => "OptionTwoObject";
+    protected override string ProjectileName => "OptionTwoObject";
 
-    public override int OptionPosition => 2;
+    protected override int OptionPosition => 2;
 
     public override void AddRecipes()
     {

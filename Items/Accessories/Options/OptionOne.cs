@@ -27,9 +27,9 @@ namespace ChensGradiusMod.Items.Accessories.Options
       base.UpdateAccessory(player, hideVisual);
     }
 
-    public override string ProjectileName => "OptionOneObject";
+    protected override string ProjectileName => "OptionOneObject";
 
-    public override int OptionPosition => 1;
+    protected override int OptionPosition => 1;
 
     public override void AddRecipes()
     {

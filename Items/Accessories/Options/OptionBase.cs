@@ -36,9 +36,18 @@ namespace ChensGradiusMod.Items.Accessories.Options
       }
     }
 
-    public virtual string ProjectileName => "OptionObject";
+    protected virtual string ProjectileName => "OptionObject";
 
-    public virtual int OptionPosition => 0;
+    protected virtual int OptionPosition => 0;
+
+    protected virtual string OptionTooltip =>
+      "Deploys an Option.\n" +
+      "Some projectiles you create are copied by the drone.\n" +
+      "The drone will follow your flight path.\n" +
+      "This advanced drone uses Wreek technology,\n" +
+      "infusing both technology and psychic elements together.";
+
+    protected virtual bool ModeChecks(Player player, bool hideVisual) => true;
 
     private bool IsOptionNotDeployed(Player player)
     {
