@@ -18,6 +18,8 @@ namespace ChensGradiusMod.Projectiles.Options
     private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f};
     private bool isSpawning = true;
 
+    public static int distanceInterval = 15;
+
     protected GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
 
     public override void SetStaticDefaults()
@@ -112,11 +114,11 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
 
-    public virtual int FrameDistance => 0;
-
     public virtual int Position => 0;
 
     public virtual bool PlayerHasAccessory() => false;
+
+    private int FrameDistance => (distanceInterval * Position) - 1;
 
     private int ListSize => ModOwner.optionFlightPath.Count;
 

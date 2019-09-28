@@ -7,6 +7,8 @@ namespace ChensGradiusMod
 {
   public static class GradiusHelper
   {
+    public const float FullAngle = 360f;
+
     public static void FreeListData(List<int> list, int buffer)
     {
       if (list.Count > buffer)
@@ -59,6 +61,20 @@ namespace ChensGradiusMod
       else if (knockback <= 7f) return "Strong knockback";
       else if (knockback <= 11f) return "Extremely strong knockback";
       else return "Insane knockback";
+    }
+
+    public static bool IsEqualWithThreshold(Vector2 questionedPoint, Vector2 referencePoint, float threshold)
+    {
+      return questionedPoint.X <= (referencePoint.X + threshold) &&
+             questionedPoint.Y <= (referencePoint.Y + threshold) &&
+             questionedPoint.X >= (referencePoint.X - threshold) &&
+             questionedPoint.Y >= (referencePoint.Y - threshold);
+    }
+
+    public static void NormalizeAngleDegrees(ref float angleDegrees)
+    {
+      if (angleDegrees >= FullAngle) angleDegrees -= GradiusHelper.FullAngle;
+      else if (angleDegrees < 0) angleDegrees += GradiusHelper.FullAngle;
     }
   }
 }
