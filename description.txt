@@ -16,12 +16,22 @@ Current features:
   - Functions the same as the normal one, except it has an added action.
   - Hold The Option Action hotkey, and these options will behave differently.
   - Allow your options to be more controllable.
+4. Rotate Options
+  - Also an upgrade from normal Options, and it is a feature in Gradius III.
+  - Implementation is inspired from Gradius V.
+  - Hold The Option Action hotkey, and these options will revolve around the owner.
+  - Switchable rotation directions by toggling the hotkey again.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.3.0
+  - Implement Rotate options
+  - Fix bugs related with Freeze options that causes crashes
+  - Fix incomplete and wrong recipes of the Freeze options
 
 0.2.0
   - Implement the Freeze options from Gradius V
