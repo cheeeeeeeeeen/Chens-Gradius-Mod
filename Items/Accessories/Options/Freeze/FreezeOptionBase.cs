@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace ChensGradiusMod.Items.Accessories.Options
+namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
   public abstract class FreezeOptionBase : OptionBase
   {
