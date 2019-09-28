@@ -35,6 +35,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionTwo");
       recipe.AddIngredient(ItemID.IceBlock, 180);
       recipe.AddIngredient(ItemID.SnowBlock, 20);
       recipe.AddIngredient(ItemID.SoulofLight, 5);
