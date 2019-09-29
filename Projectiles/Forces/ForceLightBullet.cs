@@ -6,7 +6,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 {
   public class ForceLightBullet : ModProjectile
   {
-    public static float spd = 20f;
+    public const float Spd = 20f;
 
     public override void SetDefaults()
     {

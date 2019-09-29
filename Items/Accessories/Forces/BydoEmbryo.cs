@@ -41,7 +41,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
         int pInd = Projectile.NewProjectile(xSpawn, player.Center.Y, 0f, 0f,
                                             mod.ProjectileType<ForceBase>(),
-                                            ForceBase.dmg, ForceBase.kb, player.whoAmI);
+                                            ForceBase.Dmg, ForceBase.Kb, player.whoAmI);
         ModPlayer(player).forceProjectile = Main.projectile[pInd];
         Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
                        Main.projectile[pInd].Center);

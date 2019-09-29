@@ -191,8 +191,8 @@ namespace ChensGradiusMod
       FreezeBehavior(rotateActually: true);
 
       Vector2 basisPoint = new Vector2(1, 0);
-      Vector2 newPosition = basisPoint * baitDirection * RotateOptionBase.speed;
-      Vector2 limitPosition = basisPoint * baitDirection * RotateOptionBase.radius;
+      Vector2 newPosition = basisPoint * baitDirection * RotateOptionBase.Speed;
+      Vector2 limitPosition = basisPoint * baitDirection * RotateOptionBase.Radius;
 
       if (Vector2.Distance(player.Center, baitPoint + newPosition) <=
           Vector2.Distance(player.Center, player.Center + limitPosition))
@@ -216,19 +216,19 @@ namespace ChensGradiusMod
       GradiusHelper.NormalizeAngleDegrees(ref baitAngle);
       baitAngle += EquiAngle * revolveDirection;
 
-      baitPoint.X = player.Center.X + ((float)Math.Cos(MathHelper.ToRadians(baitAngle)) * RotateOptionBase.radius);
-      baitPoint.Y = player.Center.Y - ((float)Math.Sin(MathHelper.ToRadians(baitAngle)) * RotateOptionBase.radius);
+      baitPoint.X = player.Center.X + ((float)Math.Cos(MathHelper.ToRadians(baitAngle)) * RotateOptionBase.Radius);
+      baitPoint.Y = player.Center.Y - ((float)Math.Sin(MathHelper.ToRadians(baitAngle)) * RotateOptionBase.Radius);
 
       optionFlightPath.Insert(0, baitPoint);
     }
 
     private void RotateBehaviorRecovering()
     {
-      float recoverSpeed = Math.Min(RotateOptionBase.speed, Vector2.Distance(player.Center, baitPoint));
+      float recoverSpeed = Math.Min(RotateOptionBase.Speed, Vector2.Distance(player.Center, baitPoint));
       baitPoint += GradiusHelper.MoveToward(baitPoint, player.Center, recoverSpeed);
       optionFlightPath.Insert(0, baitPoint);
 
-      if (GradiusHelper.IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.acceptedThreshold))
+      if (GradiusHelper.IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.AcceptedThreshold))
       {
         rotateMode = (int)RotateOptionBase.States.Following;
       }

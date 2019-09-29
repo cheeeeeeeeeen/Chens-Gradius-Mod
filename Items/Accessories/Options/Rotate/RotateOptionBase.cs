@@ -6,9 +6,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
   {
     public enum States : int { Following, Grouping, Rotating, Recovering };
 
-    public static float radius = 100f;
-    public static float speed = 10f;
-    public static float acceptedThreshold = .01f;
+    public const float Radius = 100f;
+    public const float Speed = 10f;
+    public const float AcceptedThreshold = .01f;
 
     protected override string OptionTooltip =>
       "Deploys an Option type Rotate.\n" +

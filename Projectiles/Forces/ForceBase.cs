@@ -29,8 +29,8 @@ namespace ChensGradiusMod.Projectiles.Forces
     public int mode = (int)States.Detached;
     public int attachSide = 1;
 
-    public static int dmg = 1;
-    public static float kb = 0.01f;
+    public const int Dmg = 1;
+    public const float Kb = 0.01f;
 
     public enum States : int { Attached, Launched, Detached, Pulled };
 
@@ -150,7 +150,7 @@ namespace ChensGradiusMod.Projectiles.Forces
               break;
           }
 
-          Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.spd,
+          Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.Spd,
                                    mod.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
           
@@ -170,7 +170,7 @@ namespace ChensGradiusMod.Projectiles.Forces
               break;
           }
 
-          Projectile.NewProjectile(projectile.Center + new Vector2(vX, vY), new Vector2(1f, 0f) * ForceLightBullet.spd * projectile.spriteDirection,
+          Projectile.NewProjectile(projectile.Center + new Vector2(vX, vY), new Vector2(1f, 0f) * ForceLightBullet.Spd * projectile.spriteDirection,
                                    mod.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
@@ -302,8 +302,8 @@ namespace ChensGradiusMod.Projectiles.Forces
 
       if (basis == null || !GradiusHelper.CanDamage(basis) || (basis.modItem is BydoEmbryo))
       {
-        projectile.damage = dmg;
-        projectile.knockBack = kb;
+        projectile.damage = Dmg;
+        projectile.knockBack = Kb;
       }
       else
       {
