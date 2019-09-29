@@ -28,6 +28,10 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.3.1
+  - Properly sync Force in multiplayer
+  - Optimize code
+
 0.3.0
   - Implement Rotate options
   - Fix bugs related with Freeze options that causes crashes

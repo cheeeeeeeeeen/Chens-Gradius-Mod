@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Items.Accessories.Forces;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -102,6 +103,16 @@ namespace ChensGradiusMod.Projectiles.Forces
 
       Engage();
       OverpowerProjectiles();
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(mode);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      mode = reader.ReadInt32();
     }
 
     public override bool MinionContactDamage() => true;
