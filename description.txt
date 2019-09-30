@@ -28,6 +28,13 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.4.0
+  - Fix all desync issues in Options and Force
+  - Mod is now multiplayer compatible
+  - Fix a bug where options do not appear even when accessories are equipped
+  - Optimize code related to projectile spawning
+  - Fix bug where Options have their own invisible options
+
 0.3.1
   - Properly sync Force in multiplayer
   - Optimize code
