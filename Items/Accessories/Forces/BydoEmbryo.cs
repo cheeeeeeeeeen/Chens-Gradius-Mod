@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ChensGradiusMod.Projectiles.Forces;
+﻿using ChensGradiusMod.Projectiles.Forces;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
