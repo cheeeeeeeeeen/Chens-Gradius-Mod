@@ -23,13 +23,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      if (GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player), OptionPosition) &&
-          ModeChecks(player, hideVisual) && IsOptionNotDeployed(player))
-      {
-        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
-                                 mod.ProjectileType(ProjectileName), 0, 0f,
-                                 player.whoAmI, 0f, 0f);
-      }
+      CreateOption(player, hideVisual, OptionPosition, ProjectileName);
+      CreationOrderingBypass(player, hideVisual);
     }
 
     protected virtual string ProjectileName => "OptionObject";
@@ -45,13 +40,43 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     protected virtual bool ModeChecks(Player player, bool hideVisual)
     {
-      return !ModPlayer(player).freezeOption;
+      return !ModPlayer(player).freezeOption &&
+             !ModPlayer(player).rotateOption;
     }
 
-    private bool IsOptionNotDeployed(Player player)
+    private bool IsOptionNotDeployed(Player player, string projectileName)
     {
-      return player.ownedProjectileCounts[mod.ProjectileType(ProjectileName)] <= 0 &&
-             player.whoAmI == Main.myPlayer;
+      return player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0 &&
+             GradiusHelper.IsSameClientOwner(player);
+    }
+
+    private void CreationOrderingBypass(Player player, bool hideVisual)
+    {
+      switch (OptionPosition)
+      {
+        case 1:
+          CreateOption(player, hideVisual, 2, "OptionTwoObject");
+          goto case 2;
+        case 2:
+          CreateOption(player, hideVisual, 3, "OptionThreeObject");
+          goto case 3;
+        case 3:
+          CreateOption(player, hideVisual, 4, "OptionFourObject");
+          goto case 4;
+        case 4:
+          break;
+      }
+    }
+
+    private void CreateOption(Player player, bool hideVisual, int optionPosition, string projectileName)
+    {
+      if (GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player), optionPosition) &&
+          ModeChecks(player, hideVisual) && IsOptionNotDeployed(player, projectileName))
+      {
+        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
+                                 mod.ProjectileType(projectileName), 0, 0f,
+                                 player.whoAmI, 0f, 0f);
+      }
     }
   }
 }

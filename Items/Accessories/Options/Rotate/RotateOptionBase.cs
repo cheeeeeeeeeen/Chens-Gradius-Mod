@@ -18,7 +18,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {
-      return ModPlayer(player).rotateOption;
+      return ModPlayer(player).rotateOption && !ModPlayer(player).freezeOption;
     }
   }
 }

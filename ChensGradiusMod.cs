@@ -1,3 +1,4 @@
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -5,8 +6,8 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod
 {
-	public class ChensGradiusMod : Mod
-	{
+  public class ChensGradiusMod : Mod
+  {
     public static ModHotKey forceActionKey;
     public static ModHotKey optionActionKey;
 
@@ -75,6 +76,65 @@ namespace ChensGradiusMod
         ItemID.SilverBar
       });
       RecipeGroup.RegisterGroup("ChensGradiusMod:SilverTierBar", group);
+    }
+
+    public override void HandlePacket(BinaryReader reader, int whoAmI)
+    {
+      byte playerNumber;
+      GradiusModPlayer modPlayer;
+      PacketMessageType msgType = (PacketMessageType)reader.ReadByte();
+
+      switch (msgType)
+      {
+        case PacketMessageType.GradiusModSyncPlayer:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+          modPlayer.isFreezing = reader.ReadBoolean();
+          modPlayer.rotateMode = reader.ReadInt32();
+          modPlayer.revolveDirection = reader.ReadInt32();
+          break;
+
+        case PacketMessageType.ClientChangesFreezeOption:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+
+          modPlayer.isFreezing = reader.ReadBoolean();
+
+          if (Main.netMode == NetmodeID.Server)
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
+            packet.Write(playerNumber);
+            packet.Write(modPlayer.isFreezing);
+            packet.Send(-1, playerNumber);
+          }
+          break;
+
+        case PacketMessageType.ClientChangesRotateOption:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+
+          modPlayer.rotateMode = reader.ReadInt32();
+          modPlayer.revolveDirection = reader.ReadInt32();
+
+          if (Main.netMode == NetmodeID.Server)
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.ClientChangesRotateOption);
+            packet.Write(playerNumber);
+            packet.Write(modPlayer.rotateMode);
+            packet.Write(modPlayer.revolveDirection);
+            packet.Send(-1, playerNumber);
+          }
+          break;
+      }
+    }
+
+    internal enum PacketMessageType : byte
+    {
+      GradiusModSyncPlayer,
+      ClientChangesFreezeOption,
+      ClientChangesRotateOption
     }
   }
 }

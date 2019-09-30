@@ -66,7 +66,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     private bool IsForceNotDeployed(Player player)
     {
       return player.ownedProjectileCounts[mod.ProjectileType<ForceBase>()] <= 0 &&
-             player.whoAmI == Main.myPlayer;
+             GradiusHelper.IsSameClientOwner(player);
     }
 
     public override void AddRecipes()

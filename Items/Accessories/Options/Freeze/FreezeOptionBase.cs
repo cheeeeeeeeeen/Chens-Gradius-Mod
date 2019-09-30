@@ -12,7 +12,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {
-      return ModPlayer(player).freezeOption;
+      return ModPlayer(player).freezeOption && !ModPlayer(player).rotateOption;
     }
   }
 }

@@ -9,7 +9,7 @@ namespace ChensGradiusMod.Projectiles.Options
 {
   public abstract class OptionBaseObject : ModProjectile
   {
-    private const int KeepAlive = 5;
+    private const int KeepAlive = 2;
     private const int MaxBuffer = 300;
 
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
@@ -20,7 +20,9 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public static int distanceInterval = 15;
 
-    protected GradiusModPlayer ModOwner => Main.player[projectile.owner].GetModPlayer<GradiusModPlayer>();
+    protected Player Owner => Main.player[projectile.owner];
+
+    protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
 
     public override void SetStaticDefaults()
     {
@@ -42,9 +44,9 @@ namespace ChensGradiusMod.Projectiles.Options
     public override bool PreAI()
     {
       if (PlayerHasAccessory() &&
-          GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position) &&
-          ListSize > 0)
+          GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position))
       {
+        if (PathListSize <= 0) ModOwner.optionFlightPath.Add(Owner.Center);
         projectile.timeLeft = KeepAlive;
         return true;
       }
@@ -57,19 +59,34 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public override void AI()
     {
-      for (int h = 0; h < playerAlreadyProducedProjectiles.Count; h++)
+      if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        Projectile p = Main.projectile[playerAlreadyProducedProjectiles[h]];
-        if (!p.active) playerAlreadyProducedProjectiles.RemoveAt(h--);
-      }
-
-      for (int i = 0; i < Main.maxProjectiles; i++)
-      {
-        Projectile p = Main.projectile[i];
-        if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
-            !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+        for (int h = 0; h < playerAlreadyProducedProjectiles.Count; h++)
         {
-          projectilesToProduce.Add(i);
+          Projectile p = Main.projectile[playerAlreadyProducedProjectiles[h]];
+          if (!p.active) playerAlreadyProducedProjectiles.RemoveAt(h--);
+        }
+
+        for (int i = 0; i < Main.maxProjectiles; i++)
+        {
+          Projectile p = Main.projectile[i];
+          if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
+              !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+          {
+            projectilesToProduce.Add(i);
+          }
+        }
+
+        foreach (int prog_ind in projectilesToProduce)
+        {
+          Projectile p = Main.projectile[prog_ind];
+          playerAlreadyProducedProjectiles.Add(prog_ind);
+
+          int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
+                                                   p.velocity, p.type, p.damage, p.knockBack,
+                                                   projectile.owner, 0f, 0f);
+          OptionAlreadyProducedProjectiles.Add(new_p_ind);
+          Main.projectile[new_p_ind].noDropItem = true;
         }
       }
 
@@ -80,34 +97,23 @@ namespace ChensGradiusMod.Projectiles.Options
         projectile.light = lightValues[projectile.frame];
       }
 
-      projectile.Center = ModOwner.optionFlightPath[Math.Min(ListSize - 1, FrameDistance)];
+      projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
       if (isSpawning)
       {
         Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionSpawn"),
                        projectile.Center);
         isSpawning = false;
       }
-
-      foreach (int prog_ind in projectilesToProduce)
-      {
-        Projectile p = Main.projectile[prog_ind];
-        playerAlreadyProducedProjectiles.Add(prog_ind);
-
-        int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
-                                                 p.velocity, p.type, p.damage, p.knockBack,
-                                                 projectile.owner, 0f, 0f);
-        OptionAlreadyProducedProjectiles.Add(new_p_ind);
-        Main.projectile[new_p_ind].noDropItem = true;
-        // Main.projectile[new_p_ind].usesIDStaticNPCImmunity = true;
-        // Main.projectile[new_p_ind].idStaticNPCHitCooldown = 0;
-      }
     }
 
     public override void PostAI()
     {
-      projectilesToProduce.Clear();
-      projectilesToProduce = new List<int>();
-      GradiusHelper.FreeListData(playerAlreadyProducedProjectiles, MaxBuffer);
+      if (GradiusHelper.IsSameClientOwner(projectile))
+      {
+        projectilesToProduce.Clear();
+        projectilesToProduce = new List<int>();
+        GradiusHelper.FreeListData(playerAlreadyProducedProjectiles, MaxBuffer);
+      }
     }
 
     public override string Texture => optionTexture;
@@ -120,7 +126,7 @@ namespace ChensGradiusMod.Projectiles.Options
 
     private int FrameDistance => (distanceInterval * Position) - 1;
 
-    private int ListSize => ModOwner.optionFlightPath.Count;
+    private int PathListSize => ModOwner.optionFlightPath.Count;
 
     private Vector2 ComputeOffset(Vector2 playPos, Vector2 projPos)
     {

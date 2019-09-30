@@ -76,5 +76,9 @@ namespace ChensGradiusMod
       if (angleDegrees >= FullAngle) angleDegrees -= GradiusHelper.FullAngle;
       else if (angleDegrees < 0) angleDegrees += GradiusHelper.FullAngle;
     }
+
+    public static bool IsSameClientOwner(Projectile proj) => Main.myPlayer == proj.owner;
+
+    public static bool IsSameClientOwner(Player player) => Main.myPlayer == player.whoAmI;
   }
 }

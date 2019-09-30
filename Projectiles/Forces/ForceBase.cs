@@ -105,7 +105,7 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
 
-      Engage();
+      if(Main.myPlayer == projectile.owner) Engage();
       OverpowerProjectiles();
     }
 
@@ -184,7 +184,6 @@ namespace ChensGradiusMod.Projectiles.Forces
           Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.Spd,
                                    mod.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
-          
         }
       }
       else

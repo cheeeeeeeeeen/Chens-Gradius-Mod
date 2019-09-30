@@ -15,13 +15,13 @@ namespace ChensGradiusMod
     private const int MaxProducedProjectileBuffer = 300;
     private const float EquiAngle = GradiusHelper.FullAngle / MaxFlightPathCount;
 
-    private bool isFreezing;
-    private int rotateMode;
     private Vector2 baitPoint;
     private int baitDirection;
     private float baitAngle;
-    private int revolveDirection;
 
+    public int rotateMode;
+    public int revolveDirection;
+    public bool isFreezing;
     public bool forceBase;
     public Projectile forceProjectile;
     public bool optionOne;
@@ -51,6 +51,55 @@ namespace ChensGradiusMod
     {
       ResetEffects();
       ResetOptionVariables();
+    }
+
+    public override void clientClone(ModPlayer clientClone)
+    {
+      GradiusModPlayer clone = clientClone as GradiusModPlayer;
+      clone.isFreezing = isFreezing;
+      clone.rotateMode = rotateMode;
+      clone.optionFlightPath = optionFlightPath;
+    }
+
+    public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
+    {
+      ModPacket packet = mod.GetPacket();
+      packet.Write((byte)ChensGradiusMod.PacketMessageType.GradiusModSyncPlayer);
+      packet.Write((byte)player.whoAmI);
+      packet.Write(isFreezing);
+      packet.Write(rotateMode);
+      packet.Write(revolveDirection);
+      packet.Write(optionFlightPath.Count);
+      for(int i = 0; i < optionFlightPath.Count; i++)
+      {
+        packet.WriteVector2(optionFlightPath[i]);
+      }
+      packet.Send(toWho, fromWho);
+    }
+
+    public override void SendClientChanges(ModPlayer clientPlayer)
+    {
+      if (clientPlayer is GradiusModPlayer clone)
+      {
+        ModPacket packet = mod.GetPacket();
+
+        if (clone.isFreezing != isFreezing)
+        {
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesFreezeOption);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(isFreezing);
+          packet.Send();
+        }
+
+        if (clone.rotateMode != rotateMode)
+        {
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesRotateOption);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(rotateMode);
+          packet.Write(revolveDirection);
+          packet.Send();
+        }
+      }
     }
 
     public override void ProcessTriggers(TriggersSet triggersSet)
@@ -171,7 +220,8 @@ namespace ChensGradiusMod
 
     private void MakeForceBattle()
     {
-      if (forceBase && forceProjectile.modProjectile is ForceBase fbProj)
+      if (forceBase && GradiusHelper.IsSameClientOwner(forceProjectile) &&
+          forceProjectile.modProjectile is ForceBase fbProj)
       {
         fbProj.BattleMode();
       }
