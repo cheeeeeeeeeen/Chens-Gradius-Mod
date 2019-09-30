@@ -28,6 +28,7 @@ namespace ChensGradiusMod.Projectiles.Forces
     private int inBattleTick = 0;
 
     public int mode = (int)States.Detached;
+    public int oldMode = (int)States.Detached;
     public int attachSide = 1;
 
     public const int Dmg = 1;
@@ -51,7 +52,6 @@ namespace ChensGradiusMod.Projectiles.Forces
       projectile.hostile = false;
       projectile.tileCollide = true;
       projectile.penetrate = -1;
-      projectile.minion = true;
       projectile.usesLocalNPCImmunity = true;
       projectile.localNPCHitCooldown = 3;
     }
@@ -60,6 +60,12 @@ namespace ChensGradiusMod.Projectiles.Forces
     {
       if (ModOwner.forceBase)
       {
+        if (oldMode != mode)
+        {
+          oldMode = mode;
+          projectile.netUpdate = true;
+        }
+
         projectile.timeLeft = KeepAlive;
         return true;
       }
@@ -74,7 +80,6 @@ namespace ChensGradiusMod.Projectiles.Forces
     {
       UpdateDamage();
 
-      Reattach();
       switch (mode)
       {
         case (int)States.Attached:
@@ -86,12 +91,11 @@ namespace ChensGradiusMod.Projectiles.Forces
           break;
 
         case (int)States.Detached:
-          bool verticalReady = DetachedMovementX();
-          DetachedMovementY(verticalReady);
+          if (!Reattach()) DetachedMovementY(DetachedMovementX());
           break;
 
         case (int)States.Pulled:
-          PulledMovement();
+          if (!Reattach()) PulledMovement();
           break;
       }
 
@@ -108,11 +112,27 @@ namespace ChensGradiusMod.Projectiles.Forces
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(mode);
+      switch (mode)
+      {
+        case (int)States.Attached:
+          writer.Write(attachSide);
+          writer.Write(projectile.spriteDirection);
+          writer.Write(projectile.direction);
+          break;
+      }
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
       mode = reader.ReadInt32();
+      switch (mode)
+      {
+        case (int)States.Attached:
+          attachSide = reader.ReadInt32();
+          projectile.spriteDirection = reader.ReadInt32();
+          projectile.direction = reader.ReadInt32();
+          break;
+      }
     }
 
     public override bool MinionContactDamage() => true;
@@ -253,26 +273,24 @@ namespace ChensGradiusMod.Projectiles.Forces
       projectile.spriteDirection = UpdateDirection(ref projectile.direction, projectile.direction);
     }
 
-    private void Reattach()
+    private bool Reattach()
     {
-      switch (mode)
+      if (projectile.Hitbox.Intersects(Owner.Hitbox))
       {
-        case (int)States.Detached:
-        case (int)States.Pulled:
-          if (projectile.Hitbox.Intersects(Owner.Hitbox))
-          {
-            projectile.tileCollide = false;
-            projectile.velocity = new Vector2();
+        projectile.tileCollide = false;
+        projectile.velocity = new Vector2();
 
-            projectile.spriteDirection = UpdateDirection(ref attachSide, projectile.spriteDirection);
-            projectile.direction = projectile.spriteDirection;
+        projectile.spriteDirection = UpdateDirection(ref attachSide, projectile.spriteDirection);
+        projectile.direction = projectile.spriteDirection;
 
-            mode = (int)States.Attached;
-            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
-                           projectile.Center);
-          }
-          break;
+        mode = (int)States.Attached;
+        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
+                        projectile.Center);
+
+        return true;
       }
+
+      return false;
     }
 
     private void Engage()
