@@ -9,32 +9,15 @@ namespace ChensGradiusMod.Projectiles.Forces
 {
   public class ForceBase : ModProjectile
   {
-    private const int KeepAlive = 5;
-    private const float AcceptedVerticalThreshold = .24f;
+    public const int Dmg = 1;
+    public const float Kb = 0.01f;
+    protected const int KeepAlive = 5;
+    protected const float AcceptedVerticalThreshold = .24f;
 
-    private readonly float travelSpeed = 3f;
-    private readonly float launchSpeed = 20f;
-    private readonly float pullSpeed = 2f;
-    private readonly float xDetachDistance = 300f;
-    private readonly float xAttachDistance = 42f;
-    private readonly int[] attackCooldowns = { 5, 5, 25 };
-    private readonly int launchTickMax = 60;
-    private readonly int inBattleExpire = 385;
-
-    private int launchTick = 0;
-    private int attackTick = 0;
-    private int attackIndex = 0;
-    private bool inBattle = false;
-    private int inBattleTick = 0;
+    public enum States : int { Attached, Launched, Detached, Pulled };
 
     public int mode = (int)States.Detached;
     public int oldMode = (int)States.Detached;
-    public int attachSide = 1;
-
-    public const int Dmg = 1;
-    public const float Kb = 0.01f;
-
-    public enum States : int { Attached, Launched, Detached, Pulled };
 
     public override void SetStaticDefaults()
     {
@@ -115,7 +98,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       switch (mode)
       {
         case (int)States.Attached:
-          writer.Write(attachSide);
+          writer.Write(AttachSide);
           writer.Write(projectile.spriteDirection);
           writer.Write(projectile.direction);
           break;
@@ -128,7 +111,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       switch (mode)
       {
         case (int)States.Attached:
-          attachSide = reader.ReadInt32();
+          AttachSide = reader.ReadInt32();
           projectile.spriteDirection = reader.ReadInt32();
           projectile.direction = reader.ReadInt32();
           break;
@@ -141,19 +124,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
 
-    public void BattleMode()
-    {
-      if (!inBattle)
-      {
-        PerformAttack();
-        attackTick = 0;
-        attackIndex = 0;
-      }
-      inBattleTick = 0;
-      inBattle = true;
-    }
-
-    public void PerformAttack()
+    public virtual void PerformAttack()
     {
       float vX = 0f, vY = 0f;
 
@@ -210,81 +181,113 @@ namespace ChensGradiusMod.Projectiles.Forces
                          projectile.Center);
     }
 
-    private Player Owner => Main.player[projectile.owner];
-
-    private GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
-
-    private int UpdateDirection(ref int variable, int fallbackNumber)
+    public void BattleMode()
     {
-      if (Owner.Center.X > projectile.Center.X) variable = -1;
-      else if (Owner.Center.X < projectile.Center.X) variable = 1;
-      else variable = fallbackNumber;
-
-      return variable;
+      if (!InBattle)
+      {
+        PerformAttack();
+        AttackTick = 0;
+        AttackIndex = 0;
+      }
+      InBattleTick = 0;
+      InBattle = true;
     }
 
-    private void AttachedMovement()
+    protected virtual float TravelSpeed { get; } = 3f;
+
+    protected virtual float LaunchSpeed { get; } = 20f;
+
+    protected virtual float PullSpeed { get; } = 2f;
+
+    protected virtual float XDetachDistance { get; } = 300f;
+
+    protected virtual float XAttachDistance { get; } = 42f;
+
+    protected virtual int[] AttackCooldowns { get; } = { 5, 5, 25 };
+
+    protected virtual int LaunchTickMax { get; } = 60;
+
+    protected virtual int InBattleExpire { get; } = 385;
+
+    protected virtual int LaunchTick { get; set; } = 0;
+
+    protected virtual int AttackTick { get; set; } = 0;
+
+    protected virtual int AttackIndex { get; set; } = 0;
+
+    protected virtual bool InBattle { get; set; } = false;
+
+    protected virtual int InBattleTick { get; set; } = 0;
+
+    protected virtual int AttachSide { get; set; } = 1;
+
+    protected int UpdateDirection(int fallbackNumber)
     {
-      projectile.Center = new Vector2(Owner.Center.X + (attachSide * xAttachDistance),
+      if (Owner.Center.X > projectile.Center.X) return -1;
+      else if (Owner.Center.X < projectile.Center.X) return 1;
+      else return fallbackNumber;
+    }
+
+    protected void AttachedMovement()
+    {
+      projectile.Center = new Vector2(Owner.Center.X + (AttachSide * XAttachDistance),
                                       Owner.Center.Y);
     }
 
-    private bool DetachedMovementX()
+    protected bool DetachedMovementX()
     {
-      float distance = Owner.Center.X + (xDetachDistance * Owner.direction) - projectile.Center.X;
-      projectile.velocity.X = Math.Sign(distance) * Math.Min(travelSpeed, Math.Abs(distance));
+      float distance = Owner.Center.X + (XDetachDistance * Owner.direction) - projectile.Center.X;
+      projectile.velocity.X = Math.Sign(distance) * Math.Min(TravelSpeed, Math.Abs(distance));
+      projectile.spriteDirection = projectile.direction = UpdateDirection(projectile.direction);
 
-      projectile.spriteDirection = UpdateDirection(ref projectile.direction, projectile.direction);
-
-      return Math.Abs(distance) <= Math.Min(AcceptedVerticalThreshold, travelSpeed);
+      return Math.Abs(distance) <= Math.Min(AcceptedVerticalThreshold, TravelSpeed);
     }
 
-    private void DetachedMovementY(bool readyForVertical)
+    protected void DetachedMovementY(bool readyForVertical)
     {
       if (readyForVertical || Collision.TileCollision(projectile.position, projectile.velocity, projectile.width, projectile.height).X == 0)
       {
         float distance = Owner.Center.Y - projectile.Center.Y;
-        projectile.velocity.Y = Math.Sign(distance) * Math.Min(travelSpeed, Math.Abs(distance));
+        projectile.velocity.Y = Math.Sign(distance) * Math.Min(TravelSpeed, Math.Abs(distance));
       }
       else projectile.velocity.Y = 0f;
     }
 
-    private void LaunchedMovement()
+    protected void LaunchedMovement()
     {
-      if (launchTick++ > launchTickMax || (launchTick > 1 && projectile.velocity.X == 0f))
+      if (LaunchTick++ > LaunchTickMax || (LaunchTick > 1 && projectile.velocity.X == 0f))
       {
-        launchTick = 0;
+        LaunchTick = 0;
         mode = (int)States.Detached;
         DetachedMovementY(DetachedMovementX());
       }
-      else if (launchTick <= 1)
+      else if (LaunchTick <= 1)
       {
         projectile.tileCollide = true;
-        projectile.velocity.X = attachSide * launchSpeed;
+        projectile.velocity.X = AttachSide * LaunchSpeed;
         projectile.velocity.Y = 0f;
       }
     }
 
-    private void PulledMovement()
+    protected void PulledMovement()
     {
-      projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, pullSpeed);
-
-      projectile.spriteDirection = UpdateDirection(ref projectile.direction, projectile.direction);
+      projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, PullSpeed);
+      projectile.spriteDirection = projectile.direction = UpdateDirection(projectile.direction);
     }
 
-    private bool Reattach()
+    protected bool Reattach()
     {
       if (projectile.Hitbox.Intersects(Owner.Hitbox))
       {
         projectile.tileCollide = false;
         projectile.velocity = new Vector2();
 
-        projectile.spriteDirection = UpdateDirection(ref attachSide, projectile.spriteDirection);
-        projectile.direction = projectile.spriteDirection;
+        projectile.spriteDirection = UpdateDirection(projectile.spriteDirection);
+        projectile.direction = AttachSide = projectile.spriteDirection;
 
         mode = (int)States.Attached;
         Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
-                        projectile.Center);
+                       projectile.Center);
 
         return true;
       }
@@ -292,24 +295,24 @@ namespace ChensGradiusMod.Projectiles.Forces
       return false;
     }
 
-    private void Engage()
+    protected void Engage()
     {
-      if (inBattle)
+      if (InBattle)
       {
-        if (++inBattleTick < inBattleExpire)
+        if (++InBattleTick < InBattleExpire)
         {
-          if (++attackTick >= attackCooldowns[attackIndex])
+          if (++AttackTick >= AttackCooldowns[AttackIndex])
           {
             PerformAttack();
-            attackTick = 0;
-            if (++attackIndex >= attackCooldowns.Length) attackIndex = 0;
+            AttackTick = 0;
+            if (++AttackIndex >= AttackCooldowns.Length) AttackIndex = 0;
           }
         }
-        else inBattle = false;
+        else InBattle = false;
       }
     }
 
-    private void OverpowerProjectiles()
+    protected void OverpowerProjectiles()
     {
       for (int i = 0; i < Main.maxProjectiles; i++)
       {
@@ -322,7 +325,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       }
     }
 
-    private void UpdateDamage()
+    protected void UpdateDamage()
     {
       Item basis = null;
       if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
@@ -339,5 +342,9 @@ namespace ChensGradiusMod.Projectiles.Forces
         projectile.knockBack = basis.knockBack;
       }
     }
+
+    private Player Owner => Main.player[projectile.owner];
+
+    private GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
   }
 }
