@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChensGradiusMod.Items.Accessories.Forces;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod
 {
@@ -80,5 +82,27 @@ namespace ChensGradiusMod
     public static bool IsSameClientOwner(Projectile proj) => Main.myPlayer == proj.owner;
 
     public static bool IsSameClientOwner(Player player) => Main.myPlayer == player.whoAmI;
+
+    public static bool IsBydoAccessory(ModItem modItem)
+    {
+      return modItem is BydoEmbryo ||
+             modItem is NeedleBydo;
+    }
+
+    public static int RoundOffToWhole(float num)
+    {
+      string numStr = num.ToString();
+      int decimalLength = numStr.Substring(numStr.IndexOf(".") + 1).Length;
+      return (int)Math.Round(num, decimalLength, MidpointRounding.AwayFromZero);
+    }
+
+    public static void FlipAngleDirection(ref float angleDegrees, int direction)
+    {
+      if (direction < 0)
+      {
+        angleDegrees += 180f;
+        NormalizeAngleDegrees(ref angleDegrees);
+      }
+    }
   }
 }

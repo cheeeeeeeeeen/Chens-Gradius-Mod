@@ -11,10 +11,13 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     {
       Tooltip.SetDefault("Deploys the Needle Force.\n" +
                          "Damage and Knockback are based on the held weapon.\n" +
+                         "Inherited Damage and Knockback are only 3/4 of the actual values.\n" +
                          "Any enemy projectile that comes in contact are destroyed.\n" +
                          "Press the Force Action hotkey to launch or pull it!\n" +
                          "Modified Force to enhance offensive capabilties.");
     }
+
+    public override string Texture => "ChensGradiusMod/Sprites/NeedleForceAccessory";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

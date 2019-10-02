@@ -41,7 +41,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     public override bool PreAI()
     {
-      if (ModOwner.forceBase)
+      if (ForceCheck())
       {
         if (oldMode != mode)
         {
@@ -88,7 +88,7 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
 
-      if(Main.myPlayer == projectile.owner) Engage();
+      if (Main.myPlayer == projectile.owner) Engage();
       OverpowerProjectiles();
     }
 
@@ -181,6 +181,8 @@ namespace ChensGradiusMod.Projectiles.Forces
                          projectile.Center);
     }
 
+    public virtual void SpecialDetachActions() { }
+
     public void BattleMode()
     {
       if (!InBattle)
@@ -192,6 +194,8 @@ namespace ChensGradiusMod.Projectiles.Forces
       InBattleTick = 0;
       InBattle = true;
     }
+
+    protected virtual bool ForceCheck() => ModOwner.forceBase;
 
     protected virtual float TravelSpeed { get; } = 3f;
 
@@ -220,6 +224,61 @@ namespace ChensGradiusMod.Projectiles.Forces
     protected virtual int InBattleTick { get; set; } = 0;
 
     protected virtual int AttachSide { get; set; } = 1;
+
+    protected virtual void Engage()
+    {
+      if (InBattle)
+      {
+        if (++InBattleTick < InBattleExpire)
+        {
+          if (++AttackTick >= AttackCooldowns[AttackIndex])
+          {
+            PerformAttack();
+            AttackTick = 0;
+            if (++AttackIndex >= AttackCooldowns.Length) AttackIndex = 0;
+          }
+        }
+        else InBattle = false;
+      }
+    }
+
+    protected virtual void UpdateDamage()
+    {
+      Item basis = null;
+      if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
+      else if (!Owner.HeldItem.IsAir) basis = Owner.HeldItem;
+
+      if (basis == null || !GradiusHelper.CanDamage(basis) || GradiusHelper.IsBydoAccessory(basis.modItem))
+      {
+        projectile.damage = Dmg;
+        projectile.knockBack = Kb;
+      }
+      else
+      {
+        projectile.damage = basis.damage;
+        projectile.knockBack = basis.knockBack;
+      }
+    }
+
+    protected virtual bool Reattach()
+    {
+      if (projectile.Hitbox.Intersects(Owner.Hitbox))
+      {
+        projectile.tileCollide = false;
+        projectile.velocity = new Vector2();
+
+        projectile.spriteDirection = UpdateDirection(projectile.spriteDirection);
+        projectile.direction = AttachSide = projectile.spriteDirection;
+
+        mode = (int)States.Attached;
+        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
+                       projectile.Center);
+
+        return true;
+      }
+
+      return false;
+    }
 
     protected int UpdateDirection(int fallbackNumber)
     {
@@ -275,43 +334,6 @@ namespace ChensGradiusMod.Projectiles.Forces
       projectile.spriteDirection = projectile.direction = UpdateDirection(projectile.direction);
     }
 
-    protected bool Reattach()
-    {
-      if (projectile.Hitbox.Intersects(Owner.Hitbox))
-      {
-        projectile.tileCollide = false;
-        projectile.velocity = new Vector2();
-
-        projectile.spriteDirection = UpdateDirection(projectile.spriteDirection);
-        projectile.direction = AttachSide = projectile.spriteDirection;
-
-        mode = (int)States.Attached;
-        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceGet"),
-                       projectile.Center);
-
-        return true;
-      }
-
-      return false;
-    }
-
-    protected void Engage()
-    {
-      if (InBattle)
-      {
-        if (++InBattleTick < InBattleExpire)
-        {
-          if (++AttackTick >= AttackCooldowns[AttackIndex])
-          {
-            PerformAttack();
-            AttackTick = 0;
-            if (++AttackIndex >= AttackCooldowns.Length) AttackIndex = 0;
-          }
-        }
-        else InBattle = false;
-      }
-    }
-
     protected void OverpowerProjectiles()
     {
       for (int i = 0; i < Main.maxProjectiles; i++)
@@ -325,26 +347,8 @@ namespace ChensGradiusMod.Projectiles.Forces
       }
     }
 
-    protected void UpdateDamage()
-    {
-      Item basis = null;
-      if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
-      else if (!Owner.HeldItem.IsAir) basis = Owner.HeldItem;
+    protected Player Owner => Main.player[projectile.owner];
 
-      if (basis == null || !GradiusHelper.CanDamage(basis) || (basis.modItem is BydoEmbryo))
-      {
-        projectile.damage = Dmg;
-        projectile.knockBack = Kb;
-      }
-      else
-      {
-        projectile.damage = basis.damage;
-        projectile.knockBack = basis.knockBack;
-      }
-    }
-
-    private Player Owner => Main.player[projectile.owner];
-
-    private GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
+    protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
   }
 }

@@ -39,7 +39,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
       Player clientPlayer = Main.player[Main.myPlayer];
-      if (ModPlayer(clientPlayer).forceBase)
+      if (!IsForceNotDeployed(clientPlayer))
       {
         string tooltipText = $"{ModPlayer(clientPlayer).forceProjectile.damage} damage";
         TooltipLine newtip = new TooltipLine(mod, "ForceDamage", tooltipText);
@@ -86,7 +86,8 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     private bool IsForceNotDeployed(Player player)
     {
-      return player.ownedProjectileCounts[ThisProjectileType()] <= 0 &&
+      return (ModPlayer(player).forceProjectile == null || !ModPlayer(player).forceProjectile.active) &&
+             player.ownedProjectileCounts[ThisProjectileType()] <= 0 &&
              GradiusHelper.IsSameClientOwner(player);
     }
   }

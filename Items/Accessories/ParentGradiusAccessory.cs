@@ -12,12 +12,12 @@ namespace ChensGradiusMod.Items.Accessories
     public override void SetDefaults()
     {
       item.accessory = true;
-      item.width = 128;
-      item.height = 128;
+      item.width = 64;
+      item.height = 64;
       item.rare = 0;
     }
 
-    public override string Texture => "ChensGradiusMod/Items/placeholder";
+    public override string Texture => "ChensGradiusMod/Sprites/placeholder";
 
     public override void AddRecipes()
     {

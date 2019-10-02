@@ -106,13 +106,14 @@ namespace ChensGradiusMod
 
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
-      if (forceBase && ChensGradiusMod.forceActionKey.JustReleased &&
+      if (HasAForce() && ChensGradiusMod.forceActionKey.JustReleased &&
           forceProjectile.modProjectile is ForceBase fbProj)
       {
         switch (fbProj.mode)
         {
           case (int)ForceBase.States.Attached:
             fbProj.mode = (int)ForceBase.States.Launched;
+            fbProj.SpecialDetachActions();
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceOut"),
                            forceProjectile.Center);
             break;
@@ -222,12 +223,14 @@ namespace ChensGradiusMod
 
     private void MakeForceBattle()
     {
-      if (forceBase && GradiusHelper.IsSameClientOwner(forceProjectile) &&
+      if (HasAForce() && GradiusHelper.IsSameClientOwner(forceProjectile) &&
           forceProjectile.modProjectile is ForceBase fbProj)
       {
         fbProj.BattleMode();
       }
     }
+
+    private bool HasAForce() => forceBase || needleForce;
 
     private void FreezeBehavior(bool rotateActually = false)
     {
