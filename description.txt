@@ -32,6 +32,10 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.5.1
+  - Fix a bug where there can only be one force in the field regardless of owner
+  - Improve conditions to allow first equipped force to be retained
+
 0.5.0
   - Implement the Needle Force from R-Type Delta
   - Improve a lot of code to enable easier implementation of future Forces

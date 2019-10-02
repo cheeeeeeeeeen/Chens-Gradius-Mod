@@ -86,9 +86,14 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     private bool IsForceNotDeployed(Player player)
     {
-      return (ModPlayer(player).forceProjectile == null || !ModPlayer(player).forceProjectile.active) &&
-             player.ownedProjectileCounts[ThisProjectileType()] <= 0 &&
+      return ForceCount(player) <= 0 &&
              GradiusHelper.IsSameClientOwner(player);
+    }
+
+    private int ForceCount(Player owner)
+    {
+      return owner.ownedProjectileCounts[mod.ProjectileType<ForceBase>()] +
+             owner.ownedProjectileCounts[mod.ProjectileType<NeedleForce>()];
     }
   }
 }

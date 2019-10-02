@@ -1,6 +1,6 @@
 displayName = Chen's Gradius Mod
 author = blancfaye7
-version = 0.5.0
+version = 0.5.1
 homepage = https://discord.gg/z7ZMtYv
 hideCode = true
 hideResources = true
