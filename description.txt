@@ -21,12 +21,20 @@ Current features:
   - Implementation is inspired from Gradius V.
   - Hold The Option Action hotkey, and these options will revolve around the owner.
   - Switchable rotation directions by toggling the hotkey again.
+5. Needle Force
+  - Functions the same as the Standard Force, except with different attack pattern.
+  - Attach and detach just like the Standard Force,
+  - This Force sprays a lot of bullets when detached.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.5.0
+  - Implement the Needle Force from R-Type Delta
+  - Improve a lot of code to enable easier implementation of future Forces
 
 0.4.0
   - Fix all desync issues in Options and Force
