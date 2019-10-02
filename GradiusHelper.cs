@@ -73,8 +73,8 @@ namespace ChensGradiusMod
 
     public static void NormalizeAngleDegrees(ref float angleDegrees)
     {
-      if (angleDegrees >= FullAngle) angleDegrees -= GradiusHelper.FullAngle;
-      else if (angleDegrees < 0) angleDegrees += GradiusHelper.FullAngle;
+      if (angleDegrees >= FullAngle) angleDegrees -= FullAngle;
+      else if (angleDegrees < 0) angleDegrees += FullAngle;
     }
 
     public static bool IsSameClientOwner(Projectile proj) => Main.myPlayer == proj.owner;
