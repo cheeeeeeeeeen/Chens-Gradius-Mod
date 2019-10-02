@@ -33,19 +33,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     {
       player.lifeRegen += 1;
       ModPlayer(player).forceBase = true;
-      if (IsForceNotDeployed(player))
-      {
-        float xSpawn;
-        if (player.direction == 1) xSpawn = Main.screenPosition.X - 36;
-        else xSpawn = Main.screenPosition.X + Main.screenWidth + 36;
-
-        int pInd = Projectile.NewProjectile(xSpawn, player.Center.Y, 0f, 0f,
-                                            mod.ProjectileType<ForceBase>(),
-                                            ForceBase.Dmg, ForceBase.Kb, player.whoAmI);
-        ModPlayer(player).forceProjectile = Main.projectile[pInd];
-        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
-                       Main.projectile[pInd].Center);
-      }
+      DeployForce(player);
     }
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -63,12 +51,6 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       }
     }
 
-    private bool IsForceNotDeployed(Player player)
-    {
-      return player.ownedProjectileCounts[mod.ProjectileType<ForceBase>()] <= 0 &&
-             GradiusHelper.IsSameClientOwner(player);
-    }
-
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
@@ -81,6 +63,31 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       recipe.AddTile(TileID.DemonAltar);
       recipe.SetResult(this);
       recipe.AddRecipe();
+    }
+
+    protected void DeployForce(Player player)
+    {
+      if (IsForceNotDeployed(player))
+      {
+        float xSpawn;
+        if (player.direction == 1) xSpawn = Main.screenPosition.X - 36;
+        else xSpawn = Main.screenPosition.X + Main.screenWidth + 36;
+
+        int pInd = Projectile.NewProjectile(xSpawn, player.Center.Y, 0f, 0f,
+                                            ThisProjectileType(),
+                                            ForceBase.Dmg, ForceBase.Kb, player.whoAmI);
+        ModPlayer(player).forceProjectile = Main.projectile[pInd];
+        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
+                       Main.projectile[pInd].Center);
+      }
+    }
+
+    protected virtual int ThisProjectileType() => mod.ProjectileType<ForceBase>();
+
+    private bool IsForceNotDeployed(Player player)
+    {
+      return player.ownedProjectileCounts[ThisProjectileType()] <= 0 &&
+             GradiusHelper.IsSameClientOwner(player);
     }
   }
 }

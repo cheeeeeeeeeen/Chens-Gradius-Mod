@@ -23,6 +23,7 @@ namespace ChensGradiusMod
     public int revolveDirection;
     public bool isFreezing;
     public bool forceBase;
+    public bool needleForce;
     public Projectile forceProjectile;
     public bool optionOne;
     public bool optionTwo;
@@ -39,6 +40,7 @@ namespace ChensGradiusMod
     public override void ResetEffects()
     {
       forceBase = false;
+      needleForce = false;
       optionOne = false;
       optionTwo = false;
       optionThree = false;
