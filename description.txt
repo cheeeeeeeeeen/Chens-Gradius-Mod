@@ -32,6 +32,11 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.5.2
+  - Integrate new sprite of the Needle Force
+  - Integreat new accessory sprite for the Needle Bydo
+  - Fix bug where two forces can spawn upon world enter and cause weird behavior
+
 0.5.1
   - Fix a bug where there can only be one force in the field regardless of owner
   - Improve conditions to allow first equipped force to be retained
