@@ -13,7 +13,7 @@ namespace ChensGradiusMod.Projectiles.Forces
     private float shootAngle = 0f;
     private int angleDirection = 1;
 
-    public override string Texture => "ChensGradiusMod/Sprites/PlaceholderForce";
+    public override string Texture => "ChensGradiusMod/Sprites/NeedleForceSheet";
 
     public override void PerformAttack()
     {
