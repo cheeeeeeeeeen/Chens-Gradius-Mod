@@ -72,7 +72,7 @@ namespace ChensGradiusMod
       packet.Write(rotateMode);
       packet.Write(revolveDirection);
       packet.Write(optionFlightPath.Count);
-      for(int i = 0; i < optionFlightPath.Count; i++)
+      for (int i = 0; i < optionFlightPath.Count; i++)
       {
         packet.WriteVector2(optionFlightPath[i]);
       }

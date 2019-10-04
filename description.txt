@@ -32,6 +32,11 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.5.3
+  - Allow option accessories to be combined
+  - Fix Needle Bydo recipe to include Bydo Embryo
+  - Buff Force shots to be more effective
+
 0.5.2
   - Integrate new sprite of the Needle Force
   - Integreat new accessory sprite for the Needle Bydo

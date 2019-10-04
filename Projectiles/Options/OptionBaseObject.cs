@@ -15,7 +15,7 @@ namespace ChensGradiusMod.Projectiles.Options
     private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
-    private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f};
+    private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
     private bool isSpawning = true;
 
     public static int distanceInterval = 15;

@@ -1,5 +1,4 @@
-﻿using ChensGradiusMod.Items.Accessories.Forces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
@@ -207,7 +206,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     protected virtual float XAttachDistance { get; } = 42f;
 
-    protected virtual int[] AttackCooldowns { get; } = { 5, 5, 25 };
+    protected virtual int[] AttackCooldowns { get; } = { 5, 5, 5, 5, 25 };
 
     protected virtual int LaunchTickMax { get; } = 60;
 
