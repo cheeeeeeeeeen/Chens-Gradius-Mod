@@ -28,6 +28,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "BydoEmbryo");
       recipe.AddIngredient(ItemID.Wire, 200);
       recipe.AddIngredient(ItemID.Spike, 30);
       recipe.AddIngredient(ItemID.SpikyBall, 200);
