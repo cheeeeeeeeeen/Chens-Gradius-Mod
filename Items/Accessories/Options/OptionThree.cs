@@ -29,7 +29,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return player.GetModPlayer<GradiusModPlayer>().optionTwo &&
+      return base.CanEquipAccessory(player, slot) &&
+             player.GetModPlayer<GradiusModPlayer>().optionTwo &&
              player.GetModPlayer<GradiusModPlayer>().optionOne;
     }
 

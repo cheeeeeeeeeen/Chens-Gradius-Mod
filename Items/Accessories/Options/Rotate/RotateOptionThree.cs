@@ -23,14 +23,15 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionThree = true;
-      ModPlayer(player).rotateOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return player.GetModPlayer<GradiusModPlayer>().optionTwo &&
+      return base.CanEquipAccessory(player, slot) &&
+             player.GetModPlayer<GradiusModPlayer>().rotateOption &&
+             player.GetModPlayer<GradiusModPlayer>().optionTwo &&
              player.GetModPlayer<GradiusModPlayer>().optionOne;
     }
 

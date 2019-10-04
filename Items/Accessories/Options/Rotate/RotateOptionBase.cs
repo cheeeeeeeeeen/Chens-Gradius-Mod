@@ -14,7 +14,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       "Deploys an Option type Rotate.\n" +
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
-      "Hold the Option Action Key to have the drone revolve you!\n";
+      "Hold the Option Action Key to have the drone revolve you!";
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {

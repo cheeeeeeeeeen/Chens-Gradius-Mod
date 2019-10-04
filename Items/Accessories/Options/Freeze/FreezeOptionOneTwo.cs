@@ -2,49 +2,47 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Rotate
+namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
-  public class RotateOptionOne : RotateOptionBase
+  public class FreezeOptionOneTwo : TwoFreezeOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Rotate (First)");
+      DisplayName.SetDefault("Options type Freeze (1st & 2nd)");
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      item.rare = 3;
+      item.rare = 7;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).rotateOption = true;
+      ModPlayer(player).optionTwo = true;
+      ModPlayer(player).freezeOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot) => true;
 
-    protected override string ProjectileName => "OptionOneObject";
+    protected override string[] ProjectileName { get; } = { "OptionOneObject",
+                                                            "OptionTwoObject" };
 
-    protected override int OptionPosition => 1;
+    protected override int[] OptionPosition { get; } = { 1, 2 };
 
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionOne");
-      recipe.AddIngredient(ItemID.Code1);
-      recipe.AddIngredient(ItemID.Gel, 50);
-      recipe.AddIngredient(ItemID.Bone, 75);
-      recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
-      recipe.AddIngredient(ItemID.Wire, 150);
+      recipe.AddIngredient(mod, "FreezeOptionOne");
+      recipe.AddIngredient(mod, "FreezeOptionTwo");
+      recipe.AddIngredient(ItemID.ChlorophyteOre, 5);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.Loom);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

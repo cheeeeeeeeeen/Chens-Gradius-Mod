@@ -4,24 +4,25 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
-  public class OptionFour : OptionBase
+  public class OptionThreeFour : TwoOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option (Fourth)");
+      DisplayName.SetDefault("Options (3rd & 4th)");
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      item.rare = 7;
+      item.rare = 8;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+      ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
 
       base.UpdateAccessory(player, hideVisual);
@@ -30,29 +31,22 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override bool CanEquipAccessory(Player player, int slot)
     {
       return base.CanEquipAccessory(player, slot) &&
-             player.GetModPlayer<GradiusModPlayer>().optionThree &&
              player.GetModPlayer<GradiusModPlayer>().optionTwo &&
              player.GetModPlayer<GradiusModPlayer>().optionOne;
     }
 
-    protected override string ProjectileName => "OptionFourObject";
+    protected override string[] ProjectileName { get; } = { "OptionThreeObject",
+                                                            "OptionFourObject" };
 
-    protected override int OptionPosition => 4;
+    protected override int[] OptionPosition { get; } = { 3, 4 };
 
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.SoulofLight, 20);
-      recipe.AddIngredient(ItemID.SoulofNight, 20);
-      recipe.AddIngredient(ItemID.SoulofMight, 5);
-      recipe.AddIngredient(ItemID.SoulofFright, 5);
-      recipe.AddIngredient(ItemID.SoulofSight, 5);
-      recipe.AddIngredient(ItemID.LunarTabletFragment, 40);
-      recipe.AddIngredient(ItemID.ChlorophyteBar, 40);
-      recipe.AddIngredient(ItemID.Wire, 600);
-      recipe.AddIngredient(ItemID.Ruby, 24);
-      recipe.AddTile(TileID.Furnaces);
-      recipe.AddTile(TileID.Anvils);
+      recipe.AddIngredient(mod, "OptionThree");
+      recipe.AddIngredient(mod, "OptionFour");
+      recipe.AddIngredient(ItemID.BeetleHusk, 5);
+      recipe.AddTile(TileID.TinkerersWorkbench);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       "Deploys an Option type Freeze.\n" +
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
-      "Hold the Option Action Key to perform a different movement behavior!\n";
+      "Hold the Option Action Key to perform a different movement behavior!";
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {
