@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Gores;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -34,8 +35,6 @@ namespace ChensGradiusMod.NPCs
       npc.height = 126;
       npc.damage = 100;
       npc.lifeMax = 10;
-      npc.HitSound = SoundID.NPCHit1;
-      npc.DeathSound = SoundID.NPCDeath2;
       npc.value = 50f;
       npc.friendly = false;
       npc.knockBackResist = 0f;
@@ -44,7 +43,8 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode) return .1f;
+      if (Main.hardMode && spawnInfo.desertCave) return .1f;
+      else if (spawnInfo.lihzahrd) return .2f;
       else return 0f;
     }
 
@@ -114,7 +114,18 @@ namespace ChensGradiusMod.NPCs
           {
             if (mode == (int)States.Aggressive && MouthHitbox.Intersects(selectProj.Hitbox))
             {
-              npc.life--;
+              if (--npc.life <= 0)
+              {
+                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy"),
+                               npc.Center);
+                Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
+                                    mod.GetGoreSlot("Gores/GradiusExplode"));
+              }
+              else
+              {
+                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit"),
+                               MouthCenter);
+              }
             }
             if (!selectProj.minion && !Main.projPet[selectProj.type] &&
                 npc.Hitbox.Intersects(selectProj.Hitbox))

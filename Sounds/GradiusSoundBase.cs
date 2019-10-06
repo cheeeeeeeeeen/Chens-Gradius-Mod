@@ -7,9 +7,11 @@ namespace ChensGradiusMod.Sounds
   {
     protected virtual float VolumePercent => 1f;
 
+    protected virtual bool AnotherInstance => true;
+
     public override SoundEffectInstance PlaySound(ref SoundEffectInstance soundInstance, float volume, float pan, SoundType type)
     {
-      soundInstance = sound.CreateInstance();
+      if (AnotherInstance) soundInstance = sound.CreateInstance();
       soundInstance.Volume = volume * VolumePercent;
       soundInstance.Pan = pan;
       return soundInstance;

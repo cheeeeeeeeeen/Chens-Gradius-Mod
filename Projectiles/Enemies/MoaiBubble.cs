@@ -27,7 +27,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
       projectile.friendly = false;
       projectile.hostile = true;
       projectile.timeLeft = 300;
-      projectile.light = .2f;
+      projectile.light = .5f;
       projectile.ignoreWater = true;
       projectile.tileCollide = true;
     }
@@ -72,7 +72,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
             projectile.Hitbox.Intersects(selectProj.Hitbox))
         {
           if (!selectProj.minion && !Main.projPet[selectProj.type] &&
-              selectProj.maxPenetrate <= life)
+              (selectProj.maxPenetrate <= life && selectProj.penetrate != -1))
           {
             selectProj.Kill();
           }
