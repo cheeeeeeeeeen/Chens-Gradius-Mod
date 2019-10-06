@@ -1,6 +1,5 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
-using System.Drawing;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -56,8 +55,6 @@ namespace ChensGradiusMod.NPCs
       if (persistDirection == 0) persistDirection = Main.rand.NextBool().ToDirectionInt();
       npc.spriteDirection = npc.direction = persistDirection;
 
-      NullifyProjectiles();
-
       switch (mode)
       {
         case (int)States.Dormant:
@@ -88,6 +85,8 @@ namespace ChensGradiusMod.NPCs
           }
           break;
       }
+
+      InteractProjectiles();
     }
 
     public override void FindFrame(int frameHeight)
@@ -104,17 +103,24 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    private void NullifyProjectiles()
+    private void InteractProjectiles()
     {
       for (int i = 0; i < Main.maxProjectiles; i++)
       {
         Projectile selectProj = Main.projectile[i];
         if (!(selectProj.modProjectile is MoaiBubble))
         {
-          if (selectProj.active && GradiusHelper.CanDamage(selectProj) && !selectProj.minion &&
-              !Main.projPet[selectProj.type] && npc.Hitbox.Intersects(selectProj.Hitbox))
+          if (selectProj.active && GradiusHelper.CanDamage(selectProj))
           {
-            selectProj.Kill();
+            if (mode == (int)States.Aggressive && MouthHitbox.Intersects(selectProj.Hitbox))
+            {
+              npc.life--;
+            }
+            if (!selectProj.minion && !Main.projPet[selectProj.type] &&
+                npc.Hitbox.Intersects(selectProj.Hitbox))
+            {
+              selectProj.Kill();
+            }
           }
         }
       }
@@ -147,12 +153,12 @@ namespace ChensGradiusMod.NPCs
       return nearestPlayer;
     }
 
-    private RectangleF MouthHitbox
+    private Rectangle MouthHitbox
     {
       get
       {
-        if (persistDirection < 0) return new RectangleF(npc.position.X + 2f, npc.position.Y + 62f, 12f, 14f);
-        else return new RectangleF(npc.position.X + 70f, npc.position.Y + 62f, 12f, 14f);
+        if (persistDirection < 0) return new Rectangle((int)npc.position.X, (int)(npc.position.Y + 62f), 14, 14);
+        else return new Rectangle((int)(npc.position.X + 70f), (int)(npc.position.Y + 62f), 14, 14);
       }
     }
 
