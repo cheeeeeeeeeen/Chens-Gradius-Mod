@@ -26,11 +26,21 @@ Current features:
   - Attach and detach just like the Standard Force,
   - This Force sprays a lot of bullets when detached.
 
+New Enemies:
+1. Moai
+  - These eastern head statues are recurring enemyes within the Gradius series.
+  - Their weakness is the mouth.
+  - When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
+  - They spawn in the desert and the temple.
+
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.6.0
+  - Implement Moai enemy with a placeholder sprite and effects
 
 0.5.3
   - Allow option accessories to be combined

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -52,6 +53,16 @@ namespace ChensGradiusMod.Projectiles.Enemies
       }
 
       SustainDamage();
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(life);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      life = reader.ReadInt32();
     }
 
     public override void Kill(int timeLeft)

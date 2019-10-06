@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod
@@ -82,6 +83,8 @@ namespace ChensGradiusMod
     public static bool IsSameClientOwner(Projectile proj) => Main.myPlayer == proj.owner;
 
     public static bool IsSameClientOwner(Player player) => Main.myPlayer == player.whoAmI;
+
+    public static bool IsNotMultiplayerClient() => Main.netMode != NetmodeID.MultiplayerClient;
 
     public static bool IsBydoAccessory(ModItem modItem)
     {

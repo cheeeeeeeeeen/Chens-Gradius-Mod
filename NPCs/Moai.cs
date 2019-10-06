@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Gores;
+﻿using System.IO;
+using ChensGradiusMod.Gores;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -103,6 +104,18 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(mode);
+      writer.Write(persistDirection);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      mode = reader.ReadInt32();
+      persistDirection = reader.ReadInt32();
+    }
+
     private void InteractProjectiles()
     {
       for (int i = 0; i < Main.maxProjectiles; i++)
@@ -196,7 +209,7 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (Main.netMode != NetmodeID.MultiplayerClient)
+      if (GradiusHelper.IsNotMultiplayerClient())
       {
         Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, 3);
         Projectile.NewProjectile(MouthCenter, vel, mod.ProjectileType<MoaiBubble>(),
