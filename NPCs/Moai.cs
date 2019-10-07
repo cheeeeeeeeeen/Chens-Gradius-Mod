@@ -14,6 +14,7 @@ namespace ChensGradiusMod.NPCs
 
     private readonly int attackTickDelay = 5;
     private readonly int restingTime = 40;
+    private readonly int vulnerableTime = 5;
 
     private int persistDirection = 0;
     private int currentTarget = -1;
@@ -21,8 +22,9 @@ namespace ChensGradiusMod.NPCs
     private int currentProjNumber = 0;
     private int attackTick = 0;
     private int restTick = 0;
+    private int vulnerableTick = 0;
 
-    public enum States : int { Dormant, Aggressive, Resting };
+    public enum States : int { Dormant, Aggressive, Vulnerable, Resting };
 
     public override void SetStaticDefaults()
     {
@@ -36,7 +38,7 @@ namespace ChensGradiusMod.NPCs
       npc.height = 126;
       npc.damage = 100;
       npc.lifeMax = 10;
-      npc.value = 50f;
+      npc.value = 5000f;
       npc.friendly = false;
       npc.knockBackResist = 0f;
       npc.dontTakeDamage = true;
@@ -48,6 +50,8 @@ namespace ChensGradiusMod.NPCs
       else if (spawnInfo.lihzahrd) return .2f;
       else return 0f;
     }
+
+    public override bool SpecialNPCLoot() => true;
 
     public override string Texture => "ChensGradiusMod/Sprites/Moai";
 
@@ -74,8 +78,15 @@ namespace ChensGradiusMod.NPCs
             if (++currentProjNumber >= ProjectileNumber())
             {
               currentProjNumber = 0;
-              mode = (int)States.Resting;
+              mode = (int)States.Vulnerable;
             }
+          }
+          break;
+        case (int)States.Vulnerable:
+          if (++vulnerableTick >= vulnerableTime)
+          {
+            vulnerableTick = 0;
+            mode = (int)States.Resting;
           }
           break;
         case (int)States.Resting:
@@ -99,6 +110,7 @@ namespace ChensGradiusMod.NPCs
           npc.frame.Y = 0;
           break;
         case (int)States.Aggressive:
+        case (int)States.Vulnerable:
           npc.frame.Y = frameHeight;
           break;
       }
@@ -125,7 +137,8 @@ namespace ChensGradiusMod.NPCs
         {
           if (selectProj.active && GradiusHelper.CanDamage(selectProj))
           {
-            if (mode == (int)States.Aggressive && MouthHitbox.Intersects(selectProj.Hitbox))
+            if ((mode == (int)States.Aggressive || mode == (int)States.Vulnerable) &&
+                MouthHitbox.Intersects(selectProj.Hitbox))
             {
               if (--npc.life <= 0)
               {
@@ -133,6 +146,7 @@ namespace ChensGradiusMod.NPCs
                                npc.Center);
                 Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
                                     mod.GetGoreSlot("Gores/GradiusExplode"));
+                npc.NPCLoot();
               }
               else
               {
@@ -145,6 +159,7 @@ namespace ChensGradiusMod.NPCs
             {
               selectProj.Kill();
             }
+            if (npc.life <= 0) break;
           }
         }
       }

@@ -39,6 +39,10 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.6.1
+  - Add a state where the Moai pauses for a brief amount of time before closing its mouth again
+  - Change mod homepage to the forum page since it holds more information
+
 0.6.0
   - Implement Moai enemy with a placeholder sprite and effects
 
