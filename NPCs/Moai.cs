@@ -43,6 +43,7 @@ namespace ChensGradiusMod.NPCs
       npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
       npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
       npc.defense = 100;
+      ImmuneToBuffs();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -257,6 +258,14 @@ namespace ChensGradiusMod.NPCs
         Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, 3);
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
+      }
+    }
+
+    private void ImmuneToBuffs()
+    {
+      for(int i = 0; i < npc.buffImmune.Length; i++)
+      {
+        npc.buffImmune[i] = true;
       }
     }
   }
