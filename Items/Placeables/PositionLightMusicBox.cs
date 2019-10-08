@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.Tiles.MusicBoxes;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Placeables
@@ -27,5 +28,17 @@ namespace ChensGradiusMod.Items.Placeables
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/PlaceholderMusicBox";
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(ItemID.Cloud, 50);
+      recipe.AddIngredient(ItemID.Wire, 5);
+      recipe.AddIngredient(ItemID.FallenStar, 12);
+      recipe.AddIngredient(ItemID.MusicBox, 1);
+      recipe.AddTile(TileID.WorkBenches);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+    }
   }
 }
