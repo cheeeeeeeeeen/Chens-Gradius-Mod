@@ -1,3 +1,5 @@
+using ChensGradiusMod.Items.Placeables;
+using ChensGradiusMod.Tiles.MusicBoxes;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -17,6 +19,13 @@ namespace ChensGradiusMod
     {
       forceActionKey = RegisterHotKey("Force Action Toggle", "Mouse3");
       optionActionKey = RegisterHotKey("Option Action Key", "Mouse2");
+
+      if (!Main.dedServ)
+      {
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/PositionLight"),
+                    ModContent.ItemType<PositionLightMusicBox>(),
+                    ModContent.TileType<PositionLightMusicBoxTile>());
+      }
     }
 
     public override void Unload()
