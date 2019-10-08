@@ -31,13 +31,26 @@ New Enemies:
   - These eastern head statues are recurring enemies within the Gradius series.
   - Their weakness is the mouth.
   - When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
+  - Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
+  - Any weapon can damage the Moai given the Moai is hit in the open mouth.
   - They spawn in the desert and the temple.
+
+Added Music:
+1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
+
+Added music will only be in the form of a music box, for now.
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Join my Discord Server if you have any suggestions and bug reports.
 
 ----------
 
 Changelogs:
+
+0.6.2
+  - Vastly improve Moai behavior
+  - Moai now displays HP Bar and damage number indicators
+  - Moai Bubbles can now interact properly with piercing projectiles
+  - Add The Position Light Music Box
 
 0.6.1
   - Add a state where the Moai pauses for a brief amount of time before closing its mouth again

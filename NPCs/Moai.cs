@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.Gores;
+using ChensGradiusMod.Items;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System.IO;
@@ -138,10 +139,26 @@ namespace ChensGradiusMod.NPCs
             }
           }
         }
-        if ((mode == (int)States.Aggressive || mode == (int)States.Vulnerable) &&
-            MouthHitbox.Intersects(projectile.Hitbox))
+
+        if (IsHitInMouth(projectile.Hitbox)) return true;
+      }
+
+      return false;
+    }
+
+    public override bool? CanBeHitByItem(Player player, Item item)
+    {
+      for (int i = 0; i < Main.maxPlayers; i++)
+      {
+        if (GradiusGlobalItem.meleeHitbox[i].HasValue)
         {
-          return true;
+          Rectangle hitbox = GradiusGlobalItem.meleeHitbox[i].Value;
+          bool returnFlag = false;
+
+          if (IsHitInMouth(hitbox)) returnFlag = true;
+          GradiusGlobalItem.meleeHitbox[i] = null;
+
+          if (returnFlag) return true;
         }
       }
 
@@ -149,13 +166,10 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-    {
-      damage = 1;
-      crit = false;
-      knockback = 0f;
-    }
+  => ReduceDamage(ref damage, ref knockback, ref crit);
 
-    public override bool? CanBeHitByItem(Player player, Item item) => false;
+    public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+      => ReduceDamage(ref damage, ref knockback, ref crit);
 
     public override void SendExtraAI(BinaryWriter writer)
     {
@@ -263,10 +277,23 @@ namespace ChensGradiusMod.NPCs
 
     private void ImmuneToBuffs()
     {
-      for(int i = 0; i < npc.buffImmune.Length; i++)
+      for (int i = 0; i < npc.buffImmune.Length; i++)
       {
         npc.buffImmune[i] = true;
       }
+    }
+
+    private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
+    {
+      damage = 1;
+      crit = false;
+      knockback = 0f;
+    }
+
+    private bool IsHitInMouth(Rectangle hitbox)
+    {
+      return (mode == (int)States.Aggressive || mode == (int)States.Vulnerable) &&
+             MouthHitbox.Intersects(hitbox);
     }
   }
 }
