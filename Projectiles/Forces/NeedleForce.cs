@@ -32,8 +32,8 @@ namespace ChensGradiusMod.Projectiles.Forces
       }
 
       Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.Spd,
-                                   mod.ProjectileType<ForceLightBullet>(),
-                                   projectile.damage, projectile.knockBack, Owner.whoAmI);
+                               ModContent.ProjectileType<ForceLightBullet>(),
+                               projectile.damage, projectile.knockBack, Owner.whoAmI);
       Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/LightBulletShoot"),
                          projectile.Center);
     }

@@ -28,7 +28,7 @@ Current features:
 
 New Enemies:
 1. Moai
-  - These eastern head statues are recurring enemyes within the Gradius series.
+  - These eastern head statues are recurring enemies within the Gradius series.
   - Their weakness is the mouth.
   - When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
   - They spawn in the desert and the temple.

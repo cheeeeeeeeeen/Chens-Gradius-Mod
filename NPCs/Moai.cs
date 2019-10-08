@@ -1,9 +1,8 @@
-﻿using System.IO;
-using ChensGradiusMod.Gores;
+﻿using ChensGradiusMod.Gores;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
@@ -41,7 +40,9 @@ namespace ChensGradiusMod.NPCs
       npc.value = 5000f;
       npc.friendly = false;
       npc.knockBackResist = 0f;
-      npc.dontTakeDamage = true;
+      npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
+      npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
+      npc.defense = 100;
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -50,8 +51,6 @@ namespace ChensGradiusMod.NPCs
       else if (spawnInfo.lihzahrd) return .2f;
       else return 0f;
     }
-
-    public override bool SpecialNPCLoot() => true;
 
     public override string Texture => "ChensGradiusMod/Sprites/Moai";
 
@@ -97,8 +96,6 @@ namespace ChensGradiusMod.NPCs
           }
           break;
       }
-
-      InteractProjectiles();
     }
 
     public override void FindFrame(int frameHeight)
@@ -116,6 +113,49 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    public override void HitEffect(int hitDirection, double damage)
+    {
+      if (npc.life <= 0)
+      {
+        Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
+                            mod.GetGoreSlot("Gores/GradiusExplode"));
+      }
+    }
+
+    public override bool? CanBeHitByProjectile(Projectile projectile)
+    {
+      if (!(projectile.modProjectile is MoaiBubble) && projectile.active && GradiusHelper.CanDamage(projectile))
+      {
+        if (!projectile.minion && !Main.projPet[projectile.type])
+        {
+          for (int i = 0; i < InvulnerableHitboxes.Length; i++)
+          {
+            if (InvulnerableHitboxes[i].Intersects(projectile.Hitbox))
+            {
+              projectile.Kill();
+              break;
+            }
+          }
+        }
+        if ((mode == (int)States.Aggressive || mode == (int)States.Vulnerable) &&
+            MouthHitbox.Intersects(projectile.Hitbox))
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    {
+      damage = 1;
+      crit = false;
+      knockback = 0f;
+    }
+
+    public override bool? CanBeHitByItem(Player player, Item item) => false;
+
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(mode);
@@ -126,43 +166,6 @@ namespace ChensGradiusMod.NPCs
     {
       mode = reader.ReadInt32();
       persistDirection = reader.ReadInt32();
-    }
-
-    private void InteractProjectiles()
-    {
-      for (int i = 0; i < Main.maxProjectiles; i++)
-      {
-        Projectile selectProj = Main.projectile[i];
-        if (!(selectProj.modProjectile is MoaiBubble))
-        {
-          if (selectProj.active && GradiusHelper.CanDamage(selectProj))
-          {
-            if ((mode == (int)States.Aggressive || mode == (int)States.Vulnerable) &&
-                MouthHitbox.Intersects(selectProj.Hitbox))
-            {
-              if (--npc.life <= 0)
-              {
-                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy"),
-                               npc.Center);
-                Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
-                                    mod.GetGoreSlot("Gores/GradiusExplode"));
-                npc.NPCLoot();
-              }
-              else
-              {
-                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit"),
-                               MouthCenter);
-              }
-            }
-            if (!selectProj.minion && !Main.projPet[selectProj.type] &&
-                npc.Hitbox.Intersects(selectProj.Hitbox))
-            {
-              selectProj.Kill();
-            }
-            if (npc.life <= 0) break;
-          }
-        }
-      }
     }
 
     private int DetectPlayer()
@@ -213,6 +216,31 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    private Rectangle[] InvulnerableHitboxes
+    {
+      get
+      {
+        if (persistDirection < 0)
+        {
+          return new Rectangle[]
+          {
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+            new Rectangle((int)npc.position.X + 14, (int)npc.position.Y, 70, 126)
+          };
+        }
+        else
+        {
+          return new Rectangle[]
+          {
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 70, 126)
+          };
+        }
+      }
+    }
+
     private int ProjectileNumber()
     {
       int projNumber = 1;
@@ -227,7 +255,7 @@ namespace ChensGradiusMod.NPCs
       if (GradiusHelper.IsNotMultiplayerClient())
       {
         Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, 3);
-        Projectile.NewProjectile(MouthCenter, vel, mod.ProjectileType<MoaiBubble>(),
+        Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
       }
     }

@@ -38,6 +38,6 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       recipe.SetResult(this);
       recipe.AddRecipe();
     }
-    protected override int ThisProjectileType() => mod.ProjectileType<NeedleForce>();
+    protected override int ThisProjectileType() => ModContent.ProjectileType<NeedleForce>();
   }
 }

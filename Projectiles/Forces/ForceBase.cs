@@ -152,7 +152,7 @@ namespace ChensGradiusMod.Projectiles.Forces
           }
 
           Projectile.NewProjectile(projectile.Center, new Vector2(vX, vY) * ForceLightBullet.Spd,
-                                   mod.ProjectileType<ForceLightBullet>(),
+                                   ModContent.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
       }
@@ -171,7 +171,7 @@ namespace ChensGradiusMod.Projectiles.Forces
           }
 
           Projectile.NewProjectile(projectile.Center + new Vector2(vX, vY), new Vector2(1f, 0f) * ForceLightBullet.Spd * projectile.spriteDirection,
-                                   mod.ProjectileType<ForceLightBullet>(),
+                                   ModContent.ProjectileType<ForceLightBullet>(),
                                    projectile.damage, projectile.knockBack, Owner.whoAmI);
         }
       }

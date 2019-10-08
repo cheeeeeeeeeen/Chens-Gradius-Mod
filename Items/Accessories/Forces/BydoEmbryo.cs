@@ -82,7 +82,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       }
     }
 
-    protected virtual int ThisProjectileType() => mod.ProjectileType<ForceBase>();
+    protected virtual int ThisProjectileType() => ModContent.ProjectileType<ForceBase>();
 
     private bool IsForceAlreadyDeployed(Player player)
     {
