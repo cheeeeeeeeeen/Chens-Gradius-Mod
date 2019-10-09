@@ -48,6 +48,8 @@ Changelogs:
 
 0.6.3
   - Fix a bug where melee interactions with Moais are misbehaving and not functioning properly
+  - Optimize Moai code to improve multiplayer behavior
+  - Add Option balance support of arrows from Calamity and Bluemagic
 
 0.6.2
   - Vastly improve Moai behavior
