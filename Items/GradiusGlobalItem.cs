@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChensGradiusMod.NPCs;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -10,12 +11,20 @@ namespace ChensGradiusMod.Items
 
     public override void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
     {
-      meleeHitbox[player.whoAmI] = hitbox;
-    }
+      bool moaiExists = false;
 
-    public override void PostUpdate(Item item)
-    {
-      base.PostUpdate(item);
+      for (int i = 0; i < Main.maxNPCs; i++)
+      {
+        NPC selectedNpc = Main.npc[i];
+        if (selectedNpc.modNPC is Moai)
+        {
+          moaiExists = true;
+          meleeHitbox[player.whoAmI] = hitbox;
+          break;
+        }
+      }
+
+      if (!moaiExists) meleeHitbox = new Rectangle?[Main.maxPlayers];
     }
   }
 }

@@ -44,6 +44,7 @@ namespace ChensGradiusMod.NPCs
       npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
       npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
       npc.defense = 100;
+      npc.aiStyle = -1;
       ImmuneToBuffs();
     }
 
@@ -126,7 +127,8 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanBeHitByProjectile(Projectile projectile)
     {
-      if (!(projectile.modProjectile is MoaiBubble) && projectile.active && GradiusHelper.CanDamage(projectile))
+      if (!(projectile.modProjectile is MoaiBubble) && projectile.active &&
+          GradiusHelper.CanDamage(projectile) && projectile.friendly && !projectile.hostile)
       {
         if (!projectile.minion && !Main.projPet[projectile.type])
         {
@@ -156,7 +158,6 @@ namespace ChensGradiusMod.NPCs
           bool returnFlag = false;
 
           if (IsHitInMouth(hitbox)) returnFlag = true;
-          GradiusGlobalItem.meleeHitbox[i] = null;
 
           if (returnFlag) return true;
         }
@@ -166,7 +167,7 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-  => ReduceDamage(ref damage, ref knockback, ref crit);
+      => ReduceDamage(ref damage, ref knockback, ref crit);
 
     public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
       => ReduceDamage(ref damage, ref knockback, ref crit);
@@ -175,12 +176,18 @@ namespace ChensGradiusMod.NPCs
     {
       writer.Write(mode);
       writer.Write(persistDirection);
+      writer.Write(npc.position.X);
+      writer.Write(npc.position.Y);
+      writer.Write(npc.aiStyle);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
       mode = reader.ReadInt32();
       persistDirection = reader.ReadInt32();
+      npc.position.X = reader.ReadSingle();
+      npc.position.Y = reader.ReadSingle();
+      npc.aiStyle = reader.ReadInt32();
     }
 
     private int DetectPlayer()
