@@ -196,19 +196,36 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.MonkStaffT3_Alt &&
              p.type != ProjectileID.Electrosphere &&
              p.type != ProjectileID.Xenopopper &&
+             p.type != ProjectileID.MolotovFire &&
+             p.type != ProjectileID.MolotovFire2 &&
+             p.type != ProjectileID.MolotovFire3 &&
              p.type != ProjectileID.Phantasm;
     }
 
     public bool ModRules(Projectile p)
     {
+      Mod selectMod;
       bool result = true;
 
-      Mod crystilium = ModLoader.GetMod("CrystiliumMod");
-      if (crystilium != null)
+      selectMod = ModLoader.GetMod("CrystiliumMod");
+      if (selectMod != null)
       {
-        result = result && p.type != crystilium.ProjectileType("Shatter1")
-                        && p.type != crystilium.ProjectileType("Shatter2")
-                        && p.type != crystilium.ProjectileType("Shatter3");
+        result = result && p.type != selectMod.ProjectileType("Shatter1")
+                        && p.type != selectMod.ProjectileType("Shatter2")
+                        && p.type != selectMod.ProjectileType("Shatter3");
+      }
+
+      selectMod = ModLoader.GetMod("CalamityMod");
+      if (selectMod != null)
+      {
+        result = result && p.type != selectMod.ProjectileType("TerraArrow2");
+        result = result && p.type != selectMod.ProjectileType("VanquisherArrow2");
+      }
+
+      selectMod = ModLoader.GetMod("Bluemagic");
+      if (selectMod != null)
+      {
+        result = result && p.type != selectMod.ProjectileType("PuriumArrowTrail");
       }
 
       return result;

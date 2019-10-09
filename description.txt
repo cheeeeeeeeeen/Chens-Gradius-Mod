@@ -46,6 +46,9 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.6.3
+  - Fix a bug where melee interactions with Moais are misbehaving and not functioning properly
+
 0.6.2
   - Vastly improve Moai behavior
   - Moai now displays HP Bar and damage number indicators
