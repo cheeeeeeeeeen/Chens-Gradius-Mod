@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Items.Accessories.Options.Rotate;
+﻿using ChensGradiusMod.Items;
+using ChensGradiusMod.Items.Accessories.Options.Rotate;
 using ChensGradiusMod.Projectiles.Forces;
 using Microsoft.Xna.Framework;
 using System;
@@ -195,6 +196,7 @@ namespace ChensGradiusMod
     public override void PostUpdate()
     {
       if (HasAnyOptions()) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
+      if (GradiusGlobalItem.meleeHitbox[player.whoAmI].HasValue) GradiusGlobalItem.meleeHitbox[player.whoAmI] = null;
     }
 
     public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
