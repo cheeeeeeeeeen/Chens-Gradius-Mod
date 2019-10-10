@@ -1,17 +1,32 @@
 ﻿using ChensGradiusMod.Gores;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
 {
   public abstract class GradiusEnemy : ModNPC
   {
+    public enum Types { Small, Large, Boss };
+
     public override void SetDefaults()
     {
       npc.friendly = false;
-      npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
-      npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
+
+      switch (EnemyType)
+      {
+        case Types.Small:
+          npc.HitSound = SoundID.NPCHit4;
+          npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death");
+          break;
+        case Types.Large:
+        case Types.Boss:
+          npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
+          npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
+          break;
+      }
+       
       npc.aiStyle = -1;
     }
 
@@ -23,6 +38,8 @@ namespace ChensGradiusMod.NPCs
                             mod.GetGoreSlot("Gores/GradiusExplode"));
       }
     }
+
+    protected virtual Types EnemyType => Types.Small;
 
     protected virtual Rectangle[] InvulnerableHitboxes
     {

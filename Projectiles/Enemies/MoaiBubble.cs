@@ -8,9 +8,9 @@ namespace ChensGradiusMod.Projectiles.Enemies
 {
   public class MoaiBubble : ModProjectile
   {
-    public const float Spd = 10f;
+    public const float Spd = 3f;
     public const int Dmg = 50;
-    public const float Kb = 20;
+    public const float Kb = 20f;
 
     private readonly int expertMaxLife = 2;
     private readonly int normalMaxLife = 1;

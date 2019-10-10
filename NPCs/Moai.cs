@@ -175,6 +175,8 @@ namespace ChensGradiusMod.NPCs
       npc.aiStyle = reader.ReadInt32();
     }
 
+    protected override Types EnemyType => Types.Large;
+
     protected override Rectangle[] InvulnerableHitboxes
     {
       get
@@ -261,7 +263,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient())
       {
-        Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, 3);
+        Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, MoaiBubble.Spd);
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
       }
