@@ -34,6 +34,11 @@ New Enemies:
   - Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
   - Any weapon can damage the Moai given the Moai is hit in the open mouth.
   - They spawn in the desert and the temple.
+2. Garun
+  - For reference: https://gradius.fandom.com/wiki/Garun
+  - These Bacterion ships are known to travel fast, and will fire bullets towards you when you're behind them.
+  - They are famous for their sine wave movement pattern.
+  - They will spawn anywhere in the surface and space.
 
 Added Music:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
@@ -47,7 +52,8 @@ The mod is quite young, so the mod will focus in implementing features rather th
 Changelogs:
 
 0.6.4
-  - Update Option inventory sprites
+  - Implement the Garun enemy
+  - Update individual Option inventory sprites
 
 0.6.3
   - Fix a bug where melee interactions with Moais are misbehaving and not functioning properly
