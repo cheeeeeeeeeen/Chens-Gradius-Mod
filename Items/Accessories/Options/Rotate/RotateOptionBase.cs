@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.DataStructures;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 {
@@ -9,6 +10,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public const float Radius = 100f;
     public const float Speed = 10f;
     public const float AcceptedThreshold = .01f;
+
+    public override void SetStaticDefaults()
+    {
+      base.SetStaticDefaults();
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 6));
+    }
+
+    public override string Texture => $"ChensGradiusMod/Sprites/RotateInv{OptionPosition}";
 
     protected override string OptionTooltip =>
       "Deploys an Option type Rotate.\n" +

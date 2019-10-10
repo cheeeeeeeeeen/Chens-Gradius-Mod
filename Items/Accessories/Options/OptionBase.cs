@@ -8,18 +8,18 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault(OptionTooltip);
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 9));
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      item.width = 28;
-      item.height = 20;
+      item.width = 44;
+      item.height = 52;
     }
 
-    public override string Texture => "ChensGradiusMod/Sprites/OptionSheet";
+    public override string Texture => $"ChensGradiusMod/Sprites/OptionInv{OptionPosition}";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
