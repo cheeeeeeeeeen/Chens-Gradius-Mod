@@ -1,5 +1,4 @@
-﻿using ChensGradiusMod.Gores;
-using ChensGradiusMod.Items;
+﻿using ChensGradiusMod.Items;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System.IO;
@@ -8,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
 {
-  public class Moai : ModNPC
+  public class Moai : GradiusEnemy
   {
     private const float DetectionRange = 1400f;
 
@@ -34,17 +33,15 @@ namespace ChensGradiusMod.NPCs
 
     public override void SetDefaults()
     {
+      base.SetDefaults();
+
       npc.width = 84;
       npc.height = 126;
       npc.damage = 100;
       npc.lifeMax = 10;
       npc.value = 5000f;
-      npc.friendly = false;
       npc.knockBackResist = 0f;
-      npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
-      npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
-      npc.defense = 100;
-      npc.aiStyle = -1;
+      npc.defense = 1000;
       ImmuneToBuffs();
     }
 
@@ -116,15 +113,6 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    public override void HitEffect(int hitDirection, double damage)
-    {
-      if (npc.life <= 0)
-      {
-        Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
-                            mod.GetGoreSlot("Gores/GradiusExplode"));
-      }
-    }
-
     public override bool? CanBeHitByProjectile(Projectile projectile)
     {
       if (!(projectile.modProjectile is MoaiBubble) && projectile.active &&
@@ -155,11 +143,8 @@ namespace ChensGradiusMod.NPCs
         if (GradiusGlobalItem.meleeHitbox[i].HasValue)
         {
           Rectangle hitbox = GradiusGlobalItem.meleeHitbox[i].Value;
-          bool returnFlag = false;
 
-          if (IsHitInMouth(hitbox)) returnFlag = true;
-
-          if (returnFlag) return true;
+          if (IsHitInMouth(hitbox)) return true;
         }
       }
 
@@ -188,6 +173,31 @@ namespace ChensGradiusMod.NPCs
       npc.position.X = reader.ReadSingle();
       npc.position.Y = reader.ReadSingle();
       npc.aiStyle = reader.ReadInt32();
+    }
+
+    protected override Rectangle[] InvulnerableHitboxes
+    {
+      get
+      {
+        if (persistDirection < 0)
+        {
+          return new Rectangle[]
+          {
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+            new Rectangle((int)npc.position.X + 14, (int)npc.position.Y, 70, 126)
+          };
+        }
+        else
+        {
+          return new Rectangle[]
+          {
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+            new Rectangle((int)npc.position.X, (int)npc.position.Y, 70, 126)
+          };
+        }
+      }
     }
 
     private int DetectPlayer()
@@ -238,31 +248,6 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    private Rectangle[] InvulnerableHitboxes
-    {
-      get
-      {
-        if (persistDirection < 0)
-        {
-          return new Rectangle[]
-          {
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
-            new Rectangle((int)npc.position.X + 14, (int)npc.position.Y, 70, 126)
-          };
-        }
-        else
-        {
-          return new Rectangle[]
-          {
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 70, 126)
-          };
-        }
-      }
-    }
-
     private int ProjectileNumber()
     {
       int projNumber = 1;
@@ -280,21 +265,6 @@ namespace ChensGradiusMod.NPCs
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
       }
-    }
-
-    private void ImmuneToBuffs()
-    {
-      for (int i = 0; i < npc.buffImmune.Length; i++)
-      {
-        npc.buffImmune[i] = true;
-      }
-    }
-
-    private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
-    {
-      damage = 1;
-      crit = false;
-      knockback = 0f;
     }
 
     private bool IsHitInMouth(Rectangle hitbox)
