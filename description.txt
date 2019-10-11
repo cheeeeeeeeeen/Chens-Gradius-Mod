@@ -39,6 +39,12 @@ New Enemies:
   - These Bacterion ships are known to travel fast, and will fire bullets towards you when you're behind them.
   - They are famous for their sine wave movement pattern.
   - They will spawn anywhere in the surface and space.
+3. Zalk
+  - For reference: https://gradius.fandom.com/wiki/Fan
+  - These Bacterion vessels fly in groups in a series.
+  - They are called Zalk in Gradius II, but their implemented pattern is based from the first Gradius game.
+  - Destroy them quickly before they spray bullets when they start intercepting your position.
+  - They will spawn anywhere in the surface and space.
 
 Added Music:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
@@ -50,6 +56,13 @@ The mod is quite young, so the mod will focus in implementing features rather th
 ----------
 
 Changelogs:
+
+0.6.5
+  - Implement Zalk enemy
+  - Make Bacterion bullets smaller in size
+  - Optimize individual Option inventory sprites for better view
+  - Fix a bug where Option types can be mixed and matched
+  - Implement new coloring scheme for Options in field based on their inventory appearance
 
 0.6.4
   - Implement the Garun enemy
