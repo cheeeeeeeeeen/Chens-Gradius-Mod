@@ -39,6 +39,28 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    public override void FindFrame(int frameHeight)
+    {
+      if (++FrameTick >= FrameSpeed)
+      {
+        FrameTick = 0;
+        if (++FrameCounter >= Main.npcFrameCount[npc.type]) FrameCounter = 0;
+        npc.frame.Y = frameHeight * FrameCounter;
+      }
+    }
+
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+      if (Main.hardMode && spawnInfo.spawnTileY < Main.worldSurface) return .075f;
+      else return 0f;
+    }
+
+    protected virtual int FrameTick { get; set; } = 0;
+
+    protected virtual int FrameSpeed { get; set; } = 0;
+
+    protected virtual int FrameCounter { get; set; } = 0;
+
     protected virtual Types EnemyType => Types.Small;
 
     protected virtual Rectangle[] InvulnerableHitboxes

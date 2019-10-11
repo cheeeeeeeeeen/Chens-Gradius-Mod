@@ -74,6 +74,12 @@ namespace ChensGradiusMod
              questionedPoint.Y >= (referencePoint.Y - threshold);
     }
 
+    public static bool IsEqualWithThreshold(float questionedNumber, float referenceNumber, float threshold)
+    {
+      return questionedNumber <= (referenceNumber + threshold) &&
+             questionedNumber >= (referenceNumber - threshold);
+    }
+
     public static void NormalizeAngleDegrees(ref float angleDegrees)
     {
       if (angleDegrees >= FullAngle) angleDegrees -= FullAngle;
@@ -106,6 +112,14 @@ namespace ChensGradiusMod
         angleDegrees += 180f;
         NormalizeAngleDegrees(ref angleDegrees);
       }
+    }
+
+    public static int NewNPC(float X, float Y, int Type, int Start = 0, int ai0 = 0,
+                             int ai1 = 0, int ai2 = 0, int ai3 = 0, int Target = 255)
+    {
+      int npcIndex = NPC.NewNPC((int)X, (int)Y, Type, Start, ai0, ai1, ai2, ai3, Target);
+      Main.npc[npcIndex].Bottom = new Vector2(X, Y);
+      return npcIndex;
     }
   }
 }

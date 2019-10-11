@@ -12,11 +12,8 @@ namespace ChensGradiusMod.NPCs
     private readonly float waveFrequency = .05f;
     private readonly float waveAmplitude = 150f;
     private readonly float travelSpeed = 5f;
-    private readonly float attackDistance = 500f;
-    private readonly int frameSpeed = 4;
+    private readonly float attackDistance = 900;
     private readonly int fireRate = 30;
-    private int frameCounter = 0;
-    private int frameTick = 0;
     private int timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
@@ -41,12 +38,6 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 100;
       npc.noGravity = true;
       npc.noTileCollide = true;
-    }
-
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-      if (Main.hardMode && spawnInfo.spawnTileY < Main.worldSurface) return .075f;
-      else return 0f;
     }
 
     public override bool PreAI()
@@ -81,16 +72,6 @@ namespace ChensGradiusMod.NPCs
       PerformAttack();
     }
 
-    public override void FindFrame(int frameHeight)
-    {
-      if (++frameTick >= frameSpeed)
-      {
-        frameTick = 0;
-        if (++frameCounter >= Main.npcFrameCount[npc.type]) frameCounter = 0;
-        npc.frame.Y = frameHeight * frameCounter;
-      }
-    }
-
     public override string Texture => "ChensGradiusMod/Sprites/Garun";
 
     public override void SendExtraAI(BinaryWriter writer)
@@ -104,6 +85,8 @@ namespace ChensGradiusMod.NPCs
       persistDirection = reader.ReadInt32();
       targetDetermined = reader.ReadBoolean();
     }
+
+    protected override int FrameSpeed { get; set; } = 4;
 
     protected override Types EnemyType => Types.Small;
 
