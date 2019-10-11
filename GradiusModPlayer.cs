@@ -61,7 +61,6 @@ namespace ChensGradiusMod
       GradiusModPlayer clone = clientClone as GradiusModPlayer;
       clone.isFreezing = isFreezing;
       clone.rotateMode = rotateMode;
-      clone.optionFlightPath = optionFlightPath;
     }
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -72,11 +71,6 @@ namespace ChensGradiusMod
       packet.Write(isFreezing);
       packet.Write(rotateMode);
       packet.Write(revolveDirection);
-      packet.Write(optionFlightPath.Count);
-      for (int i = 0; i < optionFlightPath.Count; i++)
-      {
-        packet.WriteVector2(optionFlightPath[i]);
-      }
       packet.Send(toWho, fromWho);
     }
 
