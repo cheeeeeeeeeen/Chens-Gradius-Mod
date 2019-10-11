@@ -52,7 +52,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     protected void CreateOption(Player player, int optionPosition, string projectileName)
     {
       if (GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player), optionPosition) &&
-          IsOptionNotDeployed(player, projectileName))
+          ModeChecks(player, false) && IsOptionNotDeployed(player, projectileName))
       {
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(projectileName), 0, 0f,
