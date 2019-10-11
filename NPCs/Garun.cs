@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -68,7 +69,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-      // npc.spriteDirection = npc.direction = persistDirection;
+      npc.spriteDirection = npc.direction = persistDirection;
 
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
@@ -91,6 +92,18 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Garun";
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(persistDirection);
+      writer.Write(targetDetermined);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      persistDirection = reader.ReadInt32();
+      targetDetermined = reader.ReadBoolean();
+    }
 
     protected override Types EnemyType => Types.Small;
 
