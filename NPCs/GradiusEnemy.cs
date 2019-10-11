@@ -26,7 +26,7 @@ namespace ChensGradiusMod.NPCs
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
           break;
       }
-       
+
       npc.aiStyle = -1;
     }
 

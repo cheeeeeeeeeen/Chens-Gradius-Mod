@@ -14,12 +14,12 @@ namespace ChensGradiusMod.NPCs
     private readonly float travelSpeed = 5f;
     private readonly float attackDistance = 500f;
     private readonly int frameSpeed = 4;
+    private readonly int fireRate = 30;
     private int frameCounter = 0;
     private int frameTick = 0;
     private int timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
-    private int fireRate = 30;
     private int fireTick = 0;
 
     public override void SetStaticDefaults()
