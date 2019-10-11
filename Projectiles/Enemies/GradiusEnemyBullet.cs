@@ -18,8 +18,8 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override void SetDefaults()
     {
-      projectile.width = 24;
-      projectile.height = 24;
+      projectile.width = 12;
+      projectile.height = 12;
       projectile.friendly = false;
       projectile.hostile = true;
       projectile.timeLeft = 1800;
