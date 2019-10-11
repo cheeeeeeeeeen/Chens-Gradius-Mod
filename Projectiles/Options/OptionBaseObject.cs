@@ -12,11 +12,13 @@ namespace ChensGradiusMod.Projectiles.Options
     private const int KeepAlive = 2;
     private const int MaxBuffer = 300;
 
-    private readonly string optionTexture = "ChensGradiusMod/Sprites/OptionSheet";
+    private readonly string defaultTexture = "ChensGradiusMod/Sprites/OptionSheet";
     private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
     private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
     private bool isSpawning = true;
+    private string oldTexture = null;
+    private string currentTexture = null;
 
     public static int distanceInterval = 15;
 
@@ -59,6 +61,13 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public override void AI()
     {
+      currentTexture = DecideTexture();
+      if (oldTexture == null || currentTexture != oldTexture)
+      {
+        Main.projectileTexture[projectile.type] = ModContent.GetTexture(currentTexture);
+        oldTexture = currentTexture;
+      }
+
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
         for (int h = 0; h < playerAlreadyProducedProjectiles.Count; h++)
@@ -116,7 +125,7 @@ namespace ChensGradiusMod.Projectiles.Options
       }
     }
 
-    public override string Texture => optionTexture;
+    public override string Texture => defaultTexture;
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
 
@@ -127,6 +136,13 @@ namespace ChensGradiusMod.Projectiles.Options
     private int FrameDistance => (distanceInterval * Position) - 1;
 
     private int PathListSize => ModOwner.optionFlightPath.Count;
+
+    private string DecideTexture()
+    {
+      if (ModOwner.freezeOption) return "ChensGradiusMod/Sprites/FreezeSheet";
+      else if (ModOwner.rotateOption) return "ChensGradiusMod/Sprites/RotateSheet";
+      else return defaultTexture;
+    }
 
     private Vector2 ComputeOffset(Vector2 playPos, Vector2 projPos)
     {
