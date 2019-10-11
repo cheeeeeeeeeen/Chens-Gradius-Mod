@@ -12,6 +12,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override void SetStaticDefaults()
     {
+      DisplayName.SetDefault("Bacterion Bullet");
       Main.projFrames[projectile.type] = 2;
     }
 

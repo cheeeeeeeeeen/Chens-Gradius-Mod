@@ -20,6 +20,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     public override void SetStaticDefaults()
     {
+      DisplayName.SetDefault("Standard Force");
       Main.projFrames[projectile.type] = 6;
       Main.projPet[projectile.type] = true;
     }
