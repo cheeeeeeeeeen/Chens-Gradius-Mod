@@ -215,6 +215,7 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.MolotovFire &&
              p.type != ProjectileID.MolotovFire2 &&
              p.type != ProjectileID.MolotovFire3 &&
+             p.type != ProjectileID.PhantasmArrow &&
              p.type != ProjectileID.Phantasm;
     }
 
