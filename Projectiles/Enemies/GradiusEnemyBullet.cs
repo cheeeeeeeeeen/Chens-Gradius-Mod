@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
       projectile.height = 12;
       projectile.friendly = false;
       projectile.hostile = true;
-      projectile.timeLeft = 1800;
+      projectile.timeLeft = 600;
       projectile.light = .25f;
       projectile.ignoreWater = true;
       projectile.tileCollide = true;
