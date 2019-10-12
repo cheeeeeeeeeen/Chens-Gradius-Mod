@@ -13,12 +13,15 @@ namespace ChensGradiusMod.NPCs
     private readonly float xDistanceToIntercept = 120f;
     private readonly float yThresholdToRetreat = .01f;
     private readonly float xDistanceSeries = 60f;
-    private readonly int fireRate = 70;
+    private readonly int fireRate = 55;
+    private readonly float attackDistance = 1200;
     private bool targetDetermined = false;
     private int persistDirection = 0;
     private States mode = States.Attack;
     private bool initializedAction = false;
     private int fireTick = 0;
+    private int randomFireInterval = 10;
+    private int setFireInterval = 0;
 
     public enum States { Attack, Intercept, Retreat, Fire };
 
@@ -88,9 +91,15 @@ namespace ChensGradiusMod.NPCs
         case States.Fire:
           if (GradiusHelper.IsNotMultiplayerClient())
           {
-            int adjustRate = fireRate;
-            if (mode == States.Retreat) adjustRate = GradiusHelper.RoundOffToWhole(adjustRate * .5f);
-            PerformAttack(adjustRate);
+            if (Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= attackDistance)
+            {
+              int adjustRate = fireRate;
+              if (fireTick <= 0) setFireInterval = Main.rand.Next(0, randomFireInterval + 1);
+              adjustRate += setFireInterval;
+              if (mode == States.Retreat) adjustRate = GradiusHelper.RoundOffToWhole(adjustRate * .5f);
+              PerformAttack(adjustRate);
+            }
+            else fireTick = 0;
           }
           break;
       }
