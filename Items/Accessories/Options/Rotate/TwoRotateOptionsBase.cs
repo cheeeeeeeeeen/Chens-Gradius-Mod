@@ -1,10 +1,15 @@
 ﻿using Terraria;
+using Terraria.DataStructures;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 {
   public abstract class TwoRotateOptionsBase : RotateOptionBase
   {
-    public override void SetStaticDefaults() => Tooltip.SetDefault(OptionTooltip);
+    public override void SetStaticDefaults()
+    {
+      base.SetStaticDefaults();
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 9));
+    }
 
     public override void SetDefaults()
     {
@@ -14,7 +19,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       item.height = 30;
     }
 
-    public override string Texture => "ChensGradiusMod/Sprites/TwoOptions";
+    public override string Texture => $"ChensGradiusMod/Sprites/TwoRotateOptions{OptionPosition[0]}{OptionPosition[1]}";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

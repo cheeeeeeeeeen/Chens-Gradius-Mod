@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -8,13 +9,13 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void SetStaticDefaults()
     {
       Tooltip.SetDefault(OptionTooltip);
+      ItemID.Sets.ItemNoGravity[item.type] = true;
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
-
       item.width = 44;
       item.height = 52;
     }
