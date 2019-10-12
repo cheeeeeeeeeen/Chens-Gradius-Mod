@@ -12,8 +12,8 @@ namespace ChensGradiusMod.NPCs
     private readonly float waveFrequency = .05f;
     private readonly float waveAmplitude = 150f;
     private readonly float travelSpeed = 5f;
-    private readonly float attackDistance = 900;
-    private readonly int fireRate = 30;
+    private readonly float attackDistance = 1200;
+    private readonly int fireRate = 20;
     private int timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
@@ -32,7 +32,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 32;
       npc.height = 26;
       npc.damage = 100;
-      npc.lifeMax = 70;
+      npc.lifeMax = 80;
       npc.value = 1000f;
       npc.knockBackResist = 0f;
       npc.defense = 100;
