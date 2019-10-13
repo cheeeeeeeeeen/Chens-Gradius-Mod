@@ -250,7 +250,8 @@ namespace ChensGradiusMod.Projectiles.Options
       if (selectMod != null)
       {
         result = result && p.type != selectMod.ProjectileType("OmniBoom")
-                        && p.type != selectMod.ProjectileType("OmniBurst");
+                        && p.type != selectMod.ProjectileType("OmniBurst")
+                        && p.type != selectMod.ProjectileType("OmniBurstDamage");
       }
 
       return result;
