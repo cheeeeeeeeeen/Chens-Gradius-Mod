@@ -235,14 +235,22 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("TerraArrow2");
-        result = result && p.type != selectMod.ProjectileType("VanquisherArrow2");
+        result = result && p.type != selectMod.ProjectileType("TerraBulletSplit")
+                        && p.type != selectMod.ProjectileType("TerraArrow2")
+                        && p.type != selectMod.ProjectileType("VanquisherArrow2");
       }
 
       selectMod = ModLoader.GetMod("Bluemagic");
       if (selectMod != null)
       {
         result = result && p.type != selectMod.ProjectileType("PuriumArrowTrail");
+      }
+
+      selectMod = ModLoader.GetMod("ThoriumMod");
+      if (selectMod != null)
+      {
+        result = result && p.type != selectMod.ProjectileType("OmniBoom")
+                        && p.type != selectMod.ProjectileType("OmniBurst");
       }
 
       return result;
