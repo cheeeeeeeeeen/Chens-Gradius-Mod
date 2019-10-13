@@ -28,7 +28,10 @@ namespace ChensGradiusMod.NPCs
       }
 
       npc.aiStyle = -1;
+      aiType = 0;
     }
+
+    public override void PostAI() => ForceDefaults();
 
     public override void HitEffect(int hitDirection, double damage)
     {
@@ -81,6 +84,12 @@ namespace ChensGradiusMod.NPCs
       {
         npc.buffImmune[i] = true;
       }
+    }
+
+    protected void ForceDefaults()
+    {
+      if (npc.aiStyle != -1) npc.aiStyle = -1;
+      if (aiType != 0) aiType = 0;
     }
   }
 }
