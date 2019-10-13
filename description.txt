@@ -57,6 +57,11 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.6.7
+  - Add more Option rules to support weapons from other mods
+  - These mods are specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium for now
+  - Improve sync code of enemies to avoid wonky behavior in multiplayer
+
 0.6.6
   - Add Phantasm Arrows in the Option rule list to avoid it being copied due to buggy results
   - Add Zalk attack distance to not let it attack infinitely even from a long range
