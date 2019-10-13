@@ -57,6 +57,13 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.6.6
+  - Add Phantasm Arrows in the Option rule list to avoid it being copied due to buggy results
+  - Add Zalk attack distance to not let it attack infinitely even from a long range
+  - Adjust Garun stats to be more deadly
+  - Integrate Two Option inventory sprites to reflect changes done for the options
+  - Reduce life span of Bacterion Bullets to avoid lag
+
 0.6.5
   - Implement Zalk enemy
   - Make Bacterion bullets smaller in size
