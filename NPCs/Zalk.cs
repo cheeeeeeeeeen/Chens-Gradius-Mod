@@ -35,8 +35,8 @@ namespace ChensGradiusMod.NPCs
     {
       base.SetDefaults();
 
-      npc.width = 32;
-      npc.height = 32;
+      npc.width = 28;
+      npc.height = 28;
       npc.damage = 100;
       npc.lifeMax = 20;
       npc.value = 200f;

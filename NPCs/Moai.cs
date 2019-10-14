@@ -35,13 +35,14 @@ namespace ChensGradiusMod.NPCs
     {
       base.SetDefaults();
 
-      npc.width = 84;
-      npc.height = 126;
+      npc.width = 80;
+      npc.height = 122;
       npc.damage = 100;
       npc.lifeMax = 10;
       npc.value = 5000f;
       npc.knockBackResist = 0f;
       npc.defense = 1000;
+      npc.behindTiles = true; 
       ImmuneToBuffs();
     }
 
