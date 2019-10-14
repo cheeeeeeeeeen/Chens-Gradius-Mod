@@ -11,6 +11,7 @@ namespace ChensGradiusMod
   public static class GradiusHelper
   {
     public const float FullAngle = 360f;
+    public const float HalfAngle = 180f;
 
     public static void FreeListData(List<int> list, int buffer)
     {
@@ -41,13 +42,36 @@ namespace ChensGradiusMod
       float adjacent = destination.X - origin.X;
 
       float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
-      // float direction = (float)Math.Asin(Math.Abs(opposite) / hypotenuse);
-      // float direction = (float)Math.Atan(Math.Abs(opposite) / adjacent);
 
       float newX = (float)Math.Cos(direction) * Math.Sign(adjacent) * speed;
       float newY = -(float)Math.Sin(direction) * -Math.Sign(opposite) * speed;
 
       return new Vector2(newX, newY);
+    }
+
+    public static float GetBearing(Vector2 origin, Vector2 destination)
+    {
+      float hypotenuse = Vector2.Distance(origin, destination);
+      float opposite = -(destination.Y - origin.Y);
+      float adjacent = destination.X - origin.X;
+
+      float direction = (float)Math.Asin(Math.Abs(opposite) / hypotenuse);
+      direction = MathHelper.ToDegrees(direction);
+
+      if (adjacent < 0 && opposite < 0)
+      {
+        direction = HalfAngle + direction;
+      }
+      else if (adjacent < 0)
+      {
+        direction = HalfAngle - direction;
+      }
+      else if (opposite < 0)
+      {
+        direction = FullAngle - direction;
+      }
+
+      return direction;
     }
 
     public static bool CanDamage(Projectile proj) => proj.damage > 0;
@@ -101,8 +125,7 @@ namespace ChensGradiusMod
     public static int RoundOffToWhole(float num)
     {
       string numStr = num.ToString();
-      int decimalLength = numStr.Substring(numStr.IndexOf(".") + 1).Length;
-      return (int)Math.Round(num, decimalLength, MidpointRounding.AwayFromZero);
+      return (int)Math.Round(num, 0, MidpointRounding.AwayFromZero);
     }
 
     public static void FlipAngleDirection(ref float angleDegrees, int direction)
