@@ -38,7 +38,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 28;
       npc.height = 28;
       npc.damage = 100;
-      npc.lifeMax = 20;
+      npc.lifeMax = 80;
       npc.value = 200f;
       npc.knockBackResist = 0f;
       npc.defense = 100;
@@ -112,6 +112,7 @@ namespace ChensGradiusMod.NPCs
       writer.Write(persistDirection);
       writer.Write(targetDetermined);
       writer.Write((byte)mode);
+      writer.Write(npc.target);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -119,6 +120,7 @@ namespace ChensGradiusMod.NPCs
       persistDirection = reader.ReadInt32();
       targetDetermined = reader.ReadBoolean();
       mode = (States)reader.ReadByte();
+      npc.target = reader.ReadInt32();
     }
 
     protected override int FrameSpeed { get; set; } = 3;

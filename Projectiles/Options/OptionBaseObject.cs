@@ -184,7 +184,9 @@ namespace ChensGradiusMod.Projectiles.Options
 
     private bool VanillaRules(Projectile p)
     {
-      return p.type != ProjectileID.Bee &&
+      return p.type != ProjectileID.VilethornBase &&
+             p.type != ProjectileID.VilethornTip &&
+             p.type != ProjectileID.Bee &&
              p.type != ProjectileID.GiantBee &&
              p.type != ProjectileID.RainbowBack &&
              p.type != ProjectileID.CrystalPulse2 &&
@@ -227,7 +229,9 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CrystiliumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("Shatter1")
+        result = result && p.type != selectMod.ProjectileType("DiamondExplosion")
+                        && p.type != selectMod.ProjectileType("DiamondBomb")
+                        && p.type != selectMod.ProjectileType("Shatter1")
                         && p.type != selectMod.ProjectileType("Shatter2")
                         && p.type != selectMod.ProjectileType("Shatter3");
       }
@@ -235,14 +239,34 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("TerraArrow2");
-        result = result && p.type != selectMod.ProjectileType("VanquisherArrow2");
+        result = result && p.type != selectMod.ProjectileType("ChickenExplosion")
+                        && p.type != selectMod.ProjectileType("AquashardSplit")
+                        && p.type != selectMod.ProjectileType("ManaBoltSmall")
+                        && p.type != selectMod.ProjectileType("ManaBoltSmall2")
+                        && p.type != selectMod.ProjectileType("FungiOrb2")
+                        && p.type != selectMod.ProjectileType("SerpentineHead")
+                        && p.type != selectMod.ProjectileType("SerpentineBody")
+                        && p.type != selectMod.ProjectileType("SerpentineTail")
+                        && p.type != selectMod.ProjectileType("Flash")
+                        && p.type != selectMod.ProjectileType("TerraBulletSplit")
+                        && p.type != selectMod.ProjectileType("TerraArrow2")
+                        && p.type != selectMod.ProjectileType("VanquisherArrow2");
       }
 
       selectMod = ModLoader.GetMod("Bluemagic");
       if (selectMod != null)
       {
         result = result && p.type != selectMod.ProjectileType("PuriumArrowTrail");
+      }
+
+      selectMod = ModLoader.GetMod("ThoriumMod");
+      if (selectMod != null)
+      {
+        result = result && p.type != selectMod.ProjectileType("GorganGaze")
+                        && p.type != selectMod.ProjectileType("Spud2")
+                        && p.type != selectMod.ProjectileType("OmniBoom")
+                        && p.type != selectMod.ProjectileType("OmniBurst")
+                        && p.type != selectMod.ProjectileType("OmniBurstDamage");
       }
 
       return result;

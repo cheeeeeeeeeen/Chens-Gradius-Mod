@@ -16,7 +16,6 @@ namespace ChensGradiusMod.NPCs
     private readonly int vulnerableTime = 5;
 
     private int persistDirection = 0;
-    private int currentTarget = -1;
     private int mode = (int)States.Dormant;
     private int currentProjNumber = 0;
     private int attackTick = 0;
@@ -63,8 +62,8 @@ namespace ChensGradiusMod.NPCs
       switch (mode)
       {
         case (int)States.Dormant:
-          currentTarget = DetectPlayer();
-          if (currentTarget >= 0)
+          npc.target = DetectPlayer();
+          if (npc.target >= 0)
           {
             mode = (int)States.Aggressive;
             goto case (int)States.Aggressive;
@@ -164,7 +163,7 @@ namespace ChensGradiusMod.NPCs
       writer.Write(persistDirection);
       writer.Write(npc.position.X);
       writer.Write(npc.position.Y);
-      writer.Write(npc.aiStyle);
+      writer.Write(npc.target);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -173,7 +172,7 @@ namespace ChensGradiusMod.NPCs
       persistDirection = reader.ReadInt32();
       npc.position.X = reader.ReadSingle();
       npc.position.Y = reader.ReadSingle();
-      npc.aiStyle = reader.ReadInt32();
+      npc.target = reader.ReadInt32();
     }
 
     protected override Types EnemyType => Types.Large;
@@ -264,7 +263,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient())
       {
-        Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[currentTarget].Center, MoaiBubble.Spd);
+        Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[npc.target].Center, MoaiBubble.Spd);
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
       }

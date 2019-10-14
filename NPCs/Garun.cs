@@ -1,4 +1,4 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -32,7 +32,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 28;
       npc.height = 22;
       npc.damage = 100;
-      npc.lifeMax = 80;
+      npc.lifeMax = 150;
       npc.value = 1000f;
       npc.knockBackResist = 0f;
       npc.defense = 100;
@@ -65,7 +65,6 @@ namespace ChensGradiusMod.NPCs
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
       float wobble = waveAmplitude * (float)Math.Cos(waveFrequency * timerTick++) * waveFrequency;
-
       npc.velocity.X += xTo * travelSpeed - yTo * wobble;
       npc.velocity.Y += -yTo * travelSpeed + xTo * wobble;
 
@@ -77,11 +76,18 @@ namespace ChensGradiusMod.NPCs
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(persistDirection);
+
+      writer.Write(targetDetermined);
+      writer.Write(timerTick);
+      writer.Write(npc.target);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
       persistDirection = reader.ReadInt32();
+      targetDetermined = reader.ReadBoolean();
+      timerTick = reader.ReadInt32();
+      npc.target = reader.ReadInt32();
     }
 
     protected override int FrameSpeed { get; set; } = 4;
