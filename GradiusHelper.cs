@@ -122,11 +122,7 @@ namespace ChensGradiusMod
              modItem is NeedleBydo;
     }
 
-    public static int RoundOffToWhole(float num)
-    {
-      string numStr = num.ToString();
-      return (int)Math.Round(num, 0, MidpointRounding.AwayFromZero);
-    }
+    public static int RoundOffToWhole(float num) => (int) Math.Round(num, 0, MidpointRounding.AwayFromZero);
 
     public static void FlipAngleDirection(ref float angleDegrees, int direction)
     {
@@ -144,5 +140,9 @@ namespace ChensGradiusMod
       Main.npc[npcIndex].Bottom = new Vector2(X, Y);
       return npcIndex;
     }
+
+    public static int UnderworldTilesYLocation => Main.maxTilesY - 200;
+
+    public static int SkyTilesYLocation => RoundOffToWhole((float)Main.worldSurface * .35f);
   }
 }

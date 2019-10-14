@@ -42,7 +42,7 @@ namespace ChensGradiusMod.NPCs
       npc.value = 5000f;
       npc.knockBackResist = 0f;
       npc.defense = 1000;
-      npc.behindTiles = true; 
+      npc.behindTiles = true;
       ImmuneToBuffs();
     }
 

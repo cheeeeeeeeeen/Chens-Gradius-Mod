@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using System.IO;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -17,8 +18,8 @@ namespace ChensGradiusMod.NPCs
     private readonly int[] inverseLowerAngleAim = { 180, 201, 221, 241, 261, 280, 300, 320, 340 };
     private readonly int[] inverseHigherAngleAim = { 200, 220, 240, 260, 279, 299, 319, 339, 360 };
     private readonly int[] inverseFrameAngleAim = { 17, 16, 15, 14, 13, 12, 11, 10, 9 };
-
     private readonly int fireRate = 30;
+    private readonly int cancelDeployThreshold = 200;
 
     private int yDirection = 0;
     private int fireTick = 0;
@@ -45,6 +46,16 @@ namespace ChensGradiusMod.NPCs
       npc.frame.Y = 0;
     }
 
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+      if (Main.hardMode && spawnInfo.spawnTileY < GradiusHelper.UnderworldTilesYLocation &&
+          spawnInfo.spawnTileY > (GradiusHelper.SkyTilesYLocation + Main.worldSurface) * .5f)
+      {
+        return .05f;
+      }
+      else return 0f;
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/Grazia";
 
     public override void AI()
@@ -53,12 +64,15 @@ namespace ChensGradiusMod.NPCs
 
       if (yDirection == 0)
       {
-        yDirection = Main.rand.NextBool().ToDirectionInt();
+        yDirection = DecideDeploy();
         if (yDirection < 0) npc.frame.Y = 416;
       }
+      else
+      {
+        npc.velocity.Y = CustomGravity * yDirection;
+        npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
+      }
 
-      npc.velocity.Y = CustomGravity * yDirection;
-      npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
 
       if (GradiusHelper.IsNotMultiplayerClient())
       {
@@ -96,6 +110,22 @@ namespace ChensGradiusMod.NPCs
           }
         }
       }
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(yDirection);
+      writer.Write(npc.position.X);
+      writer.Write(npc.position.Y);
+      writer.Write(npc.target);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      yDirection = reader.ReadInt32();
+      npc.position.X = reader.ReadSingle();
+      npc.position.Y = reader.ReadSingle();
+      npc.target = reader.ReadInt32();
     }
 
     private Player TargetPlayer()
@@ -140,6 +170,41 @@ namespace ChensGradiusMod.NPCs
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                  GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }
+    }
+
+    private int DecideDeploy()
+    {
+      Vector2 upwardV = new Vector2(0, -CustomGravity),
+              downwardV = new Vector2(0, CustomGravity),
+              upwardP = npc.position,
+              downwardP = npc.position,
+              velocityOnCollide;
+
+      for (int i = 0; i < cancelDeployThreshold; i++)
+      {
+        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
+        if (downwardV != velocityOnCollide)
+        {
+          npc.position = downwardP;
+          npc.velocity = velocityOnCollide;
+          return 1;
+        }
+        else downwardP += downwardV;
+
+        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
+        if (upwardV != velocityOnCollide)
+        {
+          npc.position = upwardP;
+          npc.velocity = velocityOnCollide;
+          return -1;
+        }
+        else upwardP += upwardV;
+      }
+
+      npc.friendly = true;
+      npc.active = false;
+      npc.life = 0;
+      return 0;
     }
   }
 }
