@@ -1,4 +1,4 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -29,8 +29,8 @@ namespace ChensGradiusMod.NPCs
     {
       base.SetDefaults();
 
-      npc.width = 32;
-      npc.height = 26;
+      npc.width = 28;
+      npc.height = 22;
       npc.damage = 100;
       npc.lifeMax = 150;
       npc.value = 1000f;
@@ -60,7 +60,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-      npc.spriteDirection = npc.direction = persistDirection;
+      npc.spriteDirection = npc.direction = -persistDirection;
 
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
@@ -76,6 +76,7 @@ namespace ChensGradiusMod.NPCs
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(persistDirection);
+
       writer.Write(targetDetermined);
       writer.Write(timerTick);
       writer.Write(npc.target);
@@ -97,7 +98,7 @@ namespace ChensGradiusMod.NPCs
     {
       float degreeAngle;
 
-      if (npc.direction < 0) degreeAngle = 180f;
+      if (npc.direction > 0) degreeAngle = 180f;
       else degreeAngle = 0f;
 
       return MathHelper.ToRadians(degreeAngle);
@@ -108,8 +109,8 @@ namespace ChensGradiusMod.NPCs
       if (GradiusHelper.IsNotMultiplayerClient() &&
           Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= attackDistance)
       {
-        if ((npc.direction <= 0 && npc.Center.X <= Main.player[npc.target].Center.X) ||
-           (npc.direction >= 0 && npc.Center.X >= Main.player[npc.target].Center.X))
+        if ((npc.direction >= 0 && npc.Center.X <= Main.player[npc.target].Center.X) ||
+           (npc.direction <= 0 && npc.Center.X >= Main.player[npc.target].Center.X))
         {
           if (++fireTick >= fireRate)
           {
