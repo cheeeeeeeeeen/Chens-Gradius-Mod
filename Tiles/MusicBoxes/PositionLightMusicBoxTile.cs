@@ -1,10 +1,10 @@
-﻿using ChensGradiusMod.Items.Placeables;
+﻿using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.MusicBoxes
 {
-  public class PositionLightMusicBoxTile : GradiusMusicBox
+  public class PositionLightMusicBoxTile : GradiusMusicBoxTile
   {
     protected override Color MinimapColor => new Color(200, 200, 200);
 

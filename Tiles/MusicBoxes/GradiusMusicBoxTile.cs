@@ -6,7 +6,7 @@ using Terraria.ObjectData;
 
 namespace ChensGradiusMod.Tiles.MusicBoxes
 {
-  public abstract class GradiusMusicBox : ModTile
+  public abstract class GradiusMusicBoxTile : ModTile
   {
     protected virtual Color MinimapColor => new Color(0, 0, 0);
 

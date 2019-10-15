@@ -1,4 +1,4 @@
-using ChensGradiusMod.Items.Placeables;
+using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Tiles.MusicBoxes;
 using System.IO;
 using Terraria;
@@ -25,6 +25,9 @@ namespace ChensGradiusMod
         AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/PositionLight"),
                     ModContent.ItemType<PositionLightMusicBox>(),
                     ModContent.TileType<PositionLightMusicBoxTile>());
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/DepartureForSpace"),
+                    ModContent.ItemType<DepartureForSpaceMusicBox>(),
+                    ModContent.TileType<DepartureForSpaceMusicBoxTile>());
       }
     }
 

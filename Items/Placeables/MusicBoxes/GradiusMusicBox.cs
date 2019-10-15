@@ -1,16 +1,10 @@
-﻿using ChensGradiusMod.Tiles.MusicBoxes;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Placeables
+namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 {
-  public class PositionLightMusicBox : ModItem
+  public abstract class GradiusMusicBox : ModItem
   {
-    public override void SetStaticDefaults()
-    {
-      DisplayName.SetDefault("Music Box (The Position Light)");
-    }
-
     public override void SetDefaults()
     {
       item.useStyle = 1;
@@ -19,7 +13,6 @@ namespace ChensGradiusMod.Items.Placeables
       item.useTime = 10;
       item.autoReuse = true;
       item.consumable = true;
-      item.createTile = ModContent.TileType<PositionLightMusicBoxTile>();
       item.width = 32;
       item.height = 20;
       item.rare = 8;
