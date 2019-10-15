@@ -189,7 +189,7 @@ namespace ChensGradiusMod
 
     public override void PostUpdate()
     {
-      if (HasAnyOptions()) GradiusHelper.FreeListData(optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
+      if (HasAnyOptions()) GradiusHelper.FreeListData(ref optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
       if (GradiusGlobalItem.meleeHitbox[player.whoAmI].HasValue) GradiusGlobalItem.meleeHitbox[player.whoAmI] = null;
     }
 

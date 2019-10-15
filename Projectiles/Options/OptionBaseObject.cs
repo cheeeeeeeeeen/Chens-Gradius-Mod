@@ -13,7 +13,7 @@ namespace ChensGradiusMod.Projectiles.Options
     private const int MaxBuffer = 300;
 
     private readonly string defaultTexture = "ChensGradiusMod/Sprites/OptionSheet";
-    private readonly List<int> playerAlreadyProducedProjectiles = new List<int>();
+    private List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
     private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
     private bool isSpawning = true;
@@ -121,7 +121,7 @@ namespace ChensGradiusMod.Projectiles.Options
       {
         projectilesToProduce.Clear();
         projectilesToProduce = new List<int>();
-        GradiusHelper.FreeListData(playerAlreadyProducedProjectiles, MaxBuffer);
+        GradiusHelper.FreeListData(ref playerAlreadyProducedProjectiles, MaxBuffer);
       }
     }
 
