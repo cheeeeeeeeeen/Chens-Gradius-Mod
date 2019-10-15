@@ -239,7 +239,16 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("ChickenExplosion")
+        result = result && p.type != selectMod.ProjectileType("FossilShard")
+                        && p.type != selectMod.ProjectileType("SHPExplosion")
+                        && p.type != selectMod.ProjectileType("OMGWTH")
+                        && p.type != selectMod.ProjectileType("BrimstoneBeam2")
+                        && p.type != selectMod.ProjectileType("BrimstoneBeam3")
+                        && p.type != selectMod.ProjectileType("BrimstoneBeam4")
+                        && p.type != selectMod.ProjectileType("BrimstoneBeam5")
+                        && p.type != selectMod.ProjectileType("WaterStream2")
+                        && p.type != selectMod.ProjectileType("Shaderain")
+                        && p.type != selectMod.ProjectileType("ChickenExplosion")
                         && p.type != selectMod.ProjectileType("AquashardSplit")
                         && p.type != selectMod.ProjectileType("ManaBoltSmall")
                         && p.type != selectMod.ProjectileType("ManaBoltSmall2")
@@ -262,13 +271,34 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("GorganGaze")
+        result = result && p.type != selectMod.ProjectileType("FungalPopperPro2")
+                        && p.type != selectMod.ProjectileType("SpikeBombBoom")
+                        && p.type != selectMod.ProjectileType("InfernoStaffPro2")
+                        && p.type != selectMod.ProjectileType("HighTidePro2")
+                        && p.type != selectMod.ProjectileType("SeedBombPoof")
+                        && p.type != selectMod.ProjectileType("SpineBreaker2")
+                        && p.type != selectMod.ProjectileType("SpineBreaker1Dummy")
+                        && p.type != selectMod.ProjectileType("WebGunPro2")
+                        && p.type != selectMod.ProjectileType("MeteoriteClusterBombPro2")
+                        && p.type != selectMod.ProjectileType("JunglesWrathPro2")
+                        && p.type != selectMod.ProjectileType("GorganGaze")
                         && p.type != selectMod.ProjectileType("Spud2")
                         && p.type != selectMod.ProjectileType("OmniBoom")
                         && p.type != selectMod.ProjectileType("OmniBurst")
                         && p.type != selectMod.ProjectileType("OmniBurstDamage");
       }
 
+      selectMod = ModLoader.GetMod("SpiritMod");
+      if (selectMod != null)
+      {
+        result = result && p.type != selectMod.ProjectileType("StarTrail1")
+                        && p.type != selectMod.ProjectileType("GraniteShard1")
+                        && p.type != selectMod.ProjectileType("CoilMine")
+                        && p.type != selectMod.ProjectileType("AbyssalSludge")
+                        && p.type != selectMod.ProjectileType("WitherShard3")
+                        && p.type != selectMod.ProjectileType("HarpyFeather");
+      }
+        
       return result;
     }
   }
