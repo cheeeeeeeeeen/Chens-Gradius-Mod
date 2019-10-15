@@ -45,9 +45,16 @@ New Enemies:
   - They are called Zalk in Gradius II, but their implemented pattern is based from the first Gradius game.
   - Destroy them quickly before they spray bullets when they start intercepting your position.
   - They will spawn anywhere in the surface and space.
+4. Grazia
+  - For reference: https://gradius.fandom.com/wiki/Dee-01
+  - These are Bacterion turrets stationed on the ground.
+  - They are common in the Gradius series.
+  - They can be deployed on world floor or ceiling.
+  - They will spawn anywhere near the surface and underground.
 
 Added Music:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
+2. Departure For Space (Gradius III From Myth to Legend version)
 
 Added music will only be in the form of a music box, for now.
 
@@ -57,10 +64,15 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
-0.6.7
-  - Add more Option rules to support weapons from other mods
+0.7.0
+  - Implement Grazia enemy
+  - Add more Option rules to support weapons from other mods (still incomplete)
   - These mods are specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium for now
   - Improve sync code of enemies to avoid wonky behavior in multiplayer
+  - Fix bug about rounding errors of floats to integers
+  - Fix all sprites so that the hitboxes and sprite models are correctly set up
+  - Improve the code in freeing projectile data used by the Options
+  - Add Gradius III music Departure For Space and music box
 
 0.6.6
   - Add Phantasm Arrows in the Option rule list to avoid it being copied due to buggy results
