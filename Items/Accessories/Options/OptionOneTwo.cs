@@ -24,8 +24,15 @@ namespace ChensGradiusMod.Items.Accessories.Options
     {
       ModPlayer(player).optionOne = true;
       ModPlayer(player).optionTwo = true;
+      ModPlayer(player).normalOption = true;
 
       base.UpdateAccessory(player, hideVisual);
+    }
+
+    public override bool CanEquipAccessory(Player player, int slot)
+    {
+      return !ModPlayer(player).freezeOption &&
+             !ModPlayer(player).rotateOption;
     }
 
     protected override string[] ProjectileName { get; } = { "OptionOneObject",

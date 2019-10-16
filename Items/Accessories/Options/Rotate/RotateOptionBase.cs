@@ -19,6 +19,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 
     public override string Texture => $"ChensGradiusMod/Sprites/RotateInv{OptionPosition}";
 
+    protected override string ProjectileType => "Rotate";
+
     protected override string OptionTooltip =>
       "Deploys an Option type Rotate.\n" +
       "Some projectiles you create are copied by the drone.\n" +
@@ -27,7 +29,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {
-      return ModPlayer(player).rotateOption && !ModPlayer(player).freezeOption;
+      return ModPlayer(player).rotateOption &&
+             !ModPlayer(player).freezeOption &&
+             !ModPlayer(player).normalOption;
     }
   }
 }

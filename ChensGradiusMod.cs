@@ -110,6 +110,7 @@ namespace ChensGradiusMod
           modPlayer.optionTwo = reader.ReadBoolean();
           modPlayer.optionThree = reader.ReadBoolean();
           modPlayer.optionFour = reader.ReadBoolean();
+          modPlayer.normalOption = reader.ReadBoolean();
           modPlayer.freezeOption = reader.ReadBoolean();
           modPlayer.rotateOption = reader.ReadBoolean();
           int listCount = reader.ReadInt32();

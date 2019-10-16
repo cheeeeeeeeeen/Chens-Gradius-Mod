@@ -21,6 +21,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 
     public override string Texture => $"ChensGradiusMod/Sprites/FreezeInv{OptionPosition}";
 
+    protected override string ProjectileType => "Freeze";
+
     protected override string OptionTooltip =>
       "Deploys an Option type Freeze.\n" +
       "Some projectiles you create are copied by the drone.\n" +
@@ -29,7 +31,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 
     protected override bool ModeChecks(Player player, bool hideVisual)
     {
-      return ModPlayer(player).freezeOption && !ModPlayer(player).rotateOption;
+      return ModPlayer(player).freezeOption &&
+             !ModPlayer(player).rotateOption &&
+             !ModPlayer(player).normalOption;
     }
   }
 }

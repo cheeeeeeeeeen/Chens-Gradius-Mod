@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      CreateOption(player, OptionPosition, ProjectileName);
+      CreateOption(player, OptionPosition, ProjectileType + ProjectileName);
       CreationOrderingBypass(player, OptionPosition);
     }
 
@@ -32,6 +32,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
     {
       return ModeChecks(player, true);
     }
+
+    protected virtual string ProjectileType => "";
 
     protected virtual string ProjectileName => "OptionObject";
 
@@ -46,7 +48,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     protected virtual bool ModeChecks(Player player, bool hideVisual)
     {
-      return !ModPlayer(player).freezeOption &&
+      return ModPlayer(player).normalOption &&
+             !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption;
     }
 
@@ -66,13 +69,13 @@ namespace ChensGradiusMod.Items.Accessories.Options
       switch (position)
       {
         case 1:
-          CreateOption(player, 2, "OptionTwoObject");
+          CreateOption(player, 2, ProjectileType + "OptionTwoObject");
           goto case 2;
         case 2:
-          CreateOption(player, 3, "OptionThreeObject");
+          CreateOption(player, 3, ProjectileType + "OptionThreeObject");
           goto case 3;
         case 3:
-          CreateOption(player, 4, "OptionFourObject");
+          CreateOption(player, 4, ProjectileType + "OptionFourObject");
           goto case 4;
         case 4:
           break;

@@ -25,7 +25,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       for (int i = 0; i < 2; i++)
       {
-        CreateOption(player, OptionPosition[i], ProjectileName[i]);
+        CreateOption(player, OptionPosition[i], ProjectileType + ProjectileName[i]);
         CreationOrderingBypass(player, OptionPosition[i]);
       }
     }
