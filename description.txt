@@ -66,6 +66,11 @@ Changelogs:
 
 0.7.1
   - Improve player syncing to other clients when entering worlds
+  - Fix a bug where option colors are updated to all players
+  - Optimize code in checking for mixing and matching options to render them efficiently unavailable
+  - Fix a bug where equipping the 1st rotate option causes a frequent crash
+  - Further add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
 
 0.7.0
   - Implement Grazia enemy

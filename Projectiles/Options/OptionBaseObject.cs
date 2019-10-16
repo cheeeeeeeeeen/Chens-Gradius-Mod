@@ -167,7 +167,9 @@ namespace ChensGradiusMod.Projectiles.Options
 
     private bool VanillaRules(Projectile p)
     {
-      return p.type != ProjectileID.VilethornBase &&
+      return p.type != ProjectileID.CrystalVileShardHead &&
+             p.type != ProjectileID.CrystalVileShardShaft &&
+             p.type != ProjectileID.VilethornBase &&
              p.type != ProjectileID.VilethornTip &&
              p.type != ProjectileID.Bee &&
              p.type != ProjectileID.GiantBee &&
@@ -222,7 +224,12 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("FossilShard")
+        result = result && p.type != selectMod.ProjectileType("ClamorRifleProjSplit")
+                        && p.type != selectMod.ProjectileType("GleamingBolt2")
+                        && p.type != selectMod.ProjectileType("SandyWaifuShark")
+                        && p.type != selectMod.ProjectileType("ChargedBlast2")
+                        && p.type != selectMod.ProjectileType("FuckYou")
+                        && p.type != selectMod.ProjectileType("FossilShard")
                         && p.type != selectMod.ProjectileType("SHPExplosion")
                         && p.type != selectMod.ProjectileType("OMGWTH")
                         && p.type != selectMod.ProjectileType("BrimstoneBeam2")
@@ -254,7 +261,29 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("FungalPopperPro2")
+        result = result && p.type != selectMod.ProjectileType("StalagmitePro")
+                        && p.type != selectMod.ProjectileType("StalagmiteSpawnerR")
+                        && p.type != selectMod.ProjectileType("StalagmiteSpike")
+                        && p.type != selectMod.ProjectileType("ReactionFire")
+                        && p.type != selectMod.ProjectileType("HotPotFlame")
+                        && p.type != selectMod.ProjectileType("NightStar2")
+                        && p.type != selectMod.ProjectileType("BoomPlasma")
+                        && p.type != selectMod.ProjectileType("BoomNitrogen")
+                        && p.type != selectMod.ProjectileType("BoomCombustion")
+                        && p.type != selectMod.ProjectileType("BoomAphrodisiac")
+                        && p.type != selectMod.ProjectileType("BoomCorrosive")
+                        && p.type != selectMod.ProjectileType("DemonExplosion")
+                        && p.type != selectMod.ProjectileType("CrystalBalloonPro2")
+                        && p.type != selectMod.ProjectileType("CorrupterBalloonPro2")
+                        && p.type != selectMod.ProjectileType("FesteringBalloonPro2")
+                        && p.type != selectMod.ProjectileType("NightStaffPro2")
+                        && p.type != selectMod.ProjectileType("JellyPro")
+                        && p.type != selectMod.ProjectileType("PalladiumBoltShatter")
+                        && p.type != selectMod.ProjectileType("BuriedArrowFireBoom")
+                        && p.type != selectMod.ProjectileType("BuriedMagicPopPro")
+                        && p.type != selectMod.ProjectileType("MorelPoof")
+                        && p.type != selectMod.ProjectileType("ChumShark")
+                        && p.type != selectMod.ProjectileType("FungalPopperPro2")
                         && p.type != selectMod.ProjectileType("SpikeBombBoom")
                         && p.type != selectMod.ProjectileType("InfernoStaffPro2")
                         && p.type != selectMod.ProjectileType("HighTidePro2")
@@ -274,7 +303,11 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("SpiritMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("StarTrail1")
+        result = result && p.type != selectMod.ProjectileType("SoulRune")
+                        && p.type != selectMod.ProjectileType("IchorP")
+                        && p.type != selectMod.ProjectileType("Fae")
+                        && p.type != selectMod.ProjectileType("SadBeam")
+                        && p.type != selectMod.ProjectileType("StarTrail1")
                         && p.type != selectMod.ProjectileType("GraniteShard1")
                         && p.type != selectMod.ProjectileType("CoilMine")
                         && p.type != selectMod.ProjectileType("AbyssalSludge")
