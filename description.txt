@@ -64,6 +64,9 @@ The mod is quite young, so the mod will focus in implementing features rather th
 
 Changelogs:
 
+0.7.1
+  - Improve player syncing to other clients when entering worlds
+
 0.7.0
   - Implement Grazia enemy
   - Add more Option rules to support weapons from other mods (still incomplete)

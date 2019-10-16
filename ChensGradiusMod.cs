@@ -104,6 +104,16 @@ namespace ChensGradiusMod
           modPlayer.isFreezing = reader.ReadBoolean();
           modPlayer.rotateMode = reader.ReadInt32();
           modPlayer.revolveDirection = reader.ReadInt32();
+          modPlayer.forceBase = reader.ReadBoolean();
+          modPlayer.needleForce = reader.ReadBoolean();
+          modPlayer.optionOne = reader.ReadBoolean();
+          modPlayer.optionTwo = reader.ReadBoolean();
+          modPlayer.optionThree = reader.ReadBoolean();
+          modPlayer.optionFour = reader.ReadBoolean();
+          modPlayer.freezeOption = reader.ReadBoolean();
+          modPlayer.rotateOption = reader.ReadBoolean();
+          int listCount = reader.ReadInt32();
+          for (int i = 0; i < listCount; i++) modPlayer.optionFlightPath.Add(reader.ReadVector2());
           break;
 
         case PacketMessageType.ClientChangesFreezeOption:

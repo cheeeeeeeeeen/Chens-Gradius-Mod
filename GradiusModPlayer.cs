@@ -71,6 +71,16 @@ namespace ChensGradiusMod
       packet.Write(isFreezing);
       packet.Write(rotateMode);
       packet.Write(revolveDirection);
+      packet.Write(forceBase);
+      packet.Write(needleForce);
+      packet.Write(optionOne);
+      packet.Write(optionTwo);
+      packet.Write(optionThree);
+      packet.Write(optionFour);
+      packet.Write(freezeOption);
+      packet.Write(rotateOption);
+      packet.Write(optionFlightPath.Count);
+      for (int i = 0; i < optionFlightPath.Count; i++) packet.WriteVector2(optionFlightPath[i]);
       packet.Send(toWho, fromWho);
     }
 
