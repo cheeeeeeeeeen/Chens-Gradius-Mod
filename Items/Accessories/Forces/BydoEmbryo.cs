@@ -38,7 +38,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
-      Player clientPlayer = Main.player[Main.myPlayer];
+      Player clientPlayer = Main.LocalPlayer;
       if (IsForceAlreadyDeployed(clientPlayer))
       {
         string tooltipText = $"{ModPlayer(clientPlayer).forceProjectile.damage} damage";

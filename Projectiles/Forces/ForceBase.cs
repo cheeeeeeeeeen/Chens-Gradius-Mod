@@ -54,7 +54,8 @@ namespace ChensGradiusMod.Projectiles.Forces
       }
       else
       {
-        projectile.Kill();
+        ModOwner.forceProjectile = null;
+        projectile.active = false;
         return false;
       }
     }
