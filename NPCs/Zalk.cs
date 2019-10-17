@@ -15,7 +15,7 @@ namespace ChensGradiusMod.NPCs
     private readonly float xDistanceSeries = 60f;
     private readonly int fireRate = 55;
     private readonly float attackDistance = 1200;
-    private readonly int randomFireInterval = 10;
+    private readonly int randomFireInterval = 30;
     private bool targetDetermined = false;
     private int persistDirection = 0;
     private States mode = States.Attack;

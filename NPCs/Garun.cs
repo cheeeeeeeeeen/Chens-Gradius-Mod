@@ -71,6 +71,11 @@ namespace ChensGradiusMod.NPCs
       PerformAttack();
     }
 
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+      return base.SpawnChance(spawnInfo) * 2f;
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/Garun";
 
     public override void SendExtraAI(BinaryWriter writer)

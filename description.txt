@@ -71,6 +71,9 @@ Changelogs:
   - Fix a bug where equipping the 1st rotate option causes a frequent crash
   - Further add more Option rules to support weapons from other mods (still incomplete)
   - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+  - Decrease Grazia fire rate of Bacterion Bullets
+  - Decrease Grazia detection range
+  - Increase spawn chance of Garun
 
 0.7.0
   - Implement Grazia enemy

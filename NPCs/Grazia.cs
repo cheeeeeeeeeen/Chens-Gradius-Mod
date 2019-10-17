@@ -8,7 +8,7 @@ namespace ChensGradiusMod.NPCs
 {
   public class Grazia : GradiusEnemy
   {
-    private const float DetectionRange = 900f;
+    private const float DetectionRange = 800f;
     private const int PersistDirection = -1;
     private const float CustomGravity = 5f;
 
@@ -18,8 +18,8 @@ namespace ChensGradiusMod.NPCs
     private readonly int[] inverseLowerAngleAim = { 180, 201, 221, 241, 261, 280, 300, 320, 340 };
     private readonly int[] inverseHigherAngleAim = { 200, 220, 240, 260, 279, 299, 319, 339, 360 };
     private readonly int[] inverseFrameAngleAim = { 17, 16, 15, 14, 13, 12, 11, 10, 9 };
-    private readonly int fireRate = 30;
-    private readonly int cancelDeployThreshold = 200;
+    private readonly int fireRate = 50;
+    private readonly int cancelDeployThreshold = 500;
 
     private int yDirection = 0;
     private int fireTick = 0;
