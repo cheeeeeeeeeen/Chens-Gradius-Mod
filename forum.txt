@@ -1,0 +1,247 @@
+Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
+
+[ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
+[B][U][SIZE=6]Mod Version: 0.7.1
+tModLoader: 0.11.5[/SIZE][/U][/B]
+
+I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
+This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
+The mod will also focus to be [B][U]playable on multiplayer[/U][/B], so please file in a bug if there is a desync issue that is detected.
+
+This mod is on the Mod Browser, so download it from there.
+If the Mod Browser is down, then you can refer to this link to download the latest release: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/releases']Gradius Mod Releases[/URL]
+
+If you want to help making sprites for this mod, then you are welcome to join us. Check the Discord Link below in [I]Contact Us [/I]section.
+
+[B]Contents[/B]
+[LIST=1]
+[*]Options/Multiples
+[LIST]
+[*]These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
+[*]Deploy one, and the Option drone will copy some of your projectiles.
+[*]It is an accessory in the game, for now.
+[*]The accessories can be combined.
+[*][SPOILER="Movement Showcase"][ATTACH type="full" width="283px" alt="Normal_Option_Movement_v2.gif"]227873[/ATTACH]
+It follows your movement pathing!
+[/SPOILER]
+[*][SPOILER="Attack Pattern Showcase"][ATTACH type="full" width="481px" alt="Option_Projectiles.gif"]227874[/ATTACH]
+It copies your projectiles!
+[/SPOILER]
+[/LIST]
+[*]Force
+[LIST]
+[*]This is yet another drone from the R-Type series.
+[*]It has its own set of attacks, and you can control it like in the original game.
+[*]Its power is based from the held weapon's stats.
+[*]Set a keybind in Force Action to control it.
+[*]For now, it is an accessory to make it accessible.
+[/LIST]
+[*]Freeze Options
+[LIST]
+[*]An upgrade from the normal Options, and it is a new feature that came with Gradius V.
+[*]Functions the same as the normal one, except it has an added action.
+[*]Hold The Option Action hotkey, and these options will behave differently.
+[*]Allow your options to be more controllable.
+[*][SPOILER="Freeze Showcase"][ATTACH type="full" width="240px" alt="Freeze_Option.gif"]227876[/ATTACH]
+While hotkey is held down, their positions are paused even if you're moving!
+[/SPOILER]
+[/LIST]
+[*]Rotate Options
+[LIST]
+[*]Also an upgrade from normal Options, and it is a feature in Gradius III.
+[*]Implementation is inspired from Gradius V.
+[*]Hold The Option Action hotkey, and these options will revolve around the owner.
+[*]Switchable rotation directions by toggling the hotkey again.
+[*][SPOILER="Rotate Showcase"][ATTACH type="full" width="271px" alt="Rotate_Option.gif"]227877[/ATTACH]
+Hold hotkey to let them revolve around you! Rotation direction can be toggled by pressing the hotkey again.
+[/SPOILER]
+[/LIST]
+[*]Needle Force
+[LIST]
+[*]Functions the same as the Standard Force, except with different attack pattern.
+[*]Attach and detach just like the Standard Force,
+[*]This Force sprays a lot of bullets when detached.
+[/LIST]
+[/LIST]
+[B]New Enemies[/B]
+[LIST=1]
+[*]Moai
+[LIST]
+[*]These eastern head statues are recurring enemyes within the Gradius series.
+[*]Their weakness is the mouth.
+[*]When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
+[*]Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
+[*]Any weapon can damage the Moai given the Moai is hit in the open mouth.
+[*]They spawn in the desert and the temple.
+[/LIST]
+[*]Garun
+[LIST]
+[*]For reference: [URL='https://gradius.fandom.com/wiki/Garun']Garun[/URL]
+[*]These Bacterion ships are known to travel fast, and will fire bullets towards you when you're behind them.
+[*]They are famous for their sine wave movement pattern.
+[*]They will spawn anywhere in the surface and space.
+[/LIST]
+[*]Zalk
+[LIST]
+[*]For reference: [URL='https://gradius.fandom.com/wiki/Fan']Fan[/URL]
+[*]These Bacterion vessels fly in groups in a series.
+[*]They are called Zalk in Gradius II, but their implemented pattern is based from the first Gradius game.
+[*]Destroy them quickly before they spray bullets when they start intercepting your position.
+[*]They will spawn anywhere in the surface and space.
+[/LIST]
+[*]Grazia
+[LIST]
+[*]For reference: [URL='https://gradius.fandom.com/wiki/Dee-01']Dee-01[/URL]
+[*]These are Bacterion turrets stationed on the ground.
+[*]They are common in the Gradius series.
+[*]They can be deployed on world floor or ceiling.
+[*]They will spawn anywhere near the surface and underground.
+[/LIST]
+[/LIST]
+[B]Added Music[/B]
+All music will be in the form of a music box for now...
+[LIST=1]
+[*]The Position Light (Gradius ReBirth version, originally from Nemesis 3)
+[*]Departure For Space (Gradius III From Myth to Legend version)
+[/LIST]
+
+If you are curious about what our current plans are, you can look them up on the project board.
+Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
+
+[I][U]Highlighted Issue[/U][/I]
+The Options do copy even modded projectiles from other mods, which is great. This comes with a cost, however. Due to mod creator's unique way of coding projectile code, the options may not behave properly, [U]and may duplicate and copy generated projectiles created by another friendly projectile[/U].
+If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
+[URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
+
+[SPOILER="Changelogs"]
+0.7.1
+  - Improve player syncing to other clients when entering worlds
+  - Fix a bug where option colors are updated to all players
+  - Optimize code in checking for mixing and matching options to render them efficiently unavailable
+  - Fix a bug where equipping the 1st rotate option causes a frequent crash
+  - Further add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+  - Decrease Grazia fire rate of Bacterion Bullets
+  - Decrease Grazia detection range
+  - Increase spawn chance of Garun
+  - Fix bug where the 1st equipped Rotate Option spazzes out
+
+0.7.0
+  - Implement Grazia enemy
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium for now
+  - Improve sync code of enemies to avoid wonky behavior in multiplayer
+  - Fix bug about rounding errors of floats to integers
+  - Fix all sprites so that the hitboxes and sprite models are correctly set up
+  - Improve the code in freeing projectile data used by the Options
+  - Add Gradius III music Departure For Space and music box
+
+0.6.6
+  - Add Phantasm Arrows in the Option rule list to avoid it being copied due to buggy results
+  - Add Zalk attack distance to not let it attack infinitely even from a long range
+  - Adjust Garun stats to be more deadly
+  - Integrate Two Option inventory sprites to reflect changes done for the options
+  - Reduce life span of Bacterion Bullets to avoid lag
+
+0.6.5
+  - Implement Zalk enemy
+  - Make Bacterion bullets smaller in size
+  - Optimize individual Option inventory sprites for better view
+  - Fix a bug where Option types can be mixed and matched
+  - Implement new coloring scheme for Options in field based on their inventory appearance
+
+0.6.4
+  - Implement the Garun enemy
+  - Update individual Option inventory sprites
+
+0.6.3
+  - Fix a bug where melee interactions with Moais are misbehaving and not functioning properly
+  - Optimize Moai code to improve multiplayer behavior
+  - Add Option balance support of arrows from Calamity and Bluemagic
+
+0.6.2
+  - Vastly improve Moai behavior
+  - Moai now displays HP Bar and damage number indicators
+  - Moai Bubbles can now interact properly with piercing projectiles
+  - Add The Position Light Music Box
+
+0.6.1
+  - Add a state where the Moai pauses for a brief amount of time before closing its mouth again
+  - Change mod homepage to the forum page since it holds more information
+
+0.6.0
+  - Implement Moai enemy with a placeholder sprite and effects
+
+0.5.3
+  - Allow option accessories to be combined
+  - Fix Needle Bydo recipe to include Bydo Embryo
+  - Buff Force shots to be more effective
+
+0.5.2
+  - Integrate new sprite of the Needle Force
+  - Integreat new accessory sprite for the Needle Bydo
+  - Fix bug where two forces can spawn upon world enter and cause weird behavior
+
+0.5.1
+  - Fix a bug where there can only be one force in the field regardless of owner
+  - Improve conditions to allow first equipped force to be retained
+
+0.5.0
+  - Implement the Needle Force from R-Type Delta
+  - Improve a lot of code to enable easier implementation of future Forces
+
+0.4.0
+  - Fix all desync issues in Options and Force
+  - Mod is now multiplayer compatible
+  - Fix a bug where options do not appear even when accessories are equipped
+  - Optimize code related to projectile spawning
+  - Fix bug where Options have their own invisible options
+
+0.3.1
+  - Properly sync Force in multiplayer
+  - Optimize code
+
+0.3.0
+  - Implement Rotate options
+  - Fix bugs related with Freeze options that causes crashes
+  - Fix incomplete and wrong recipes of the Freeze options
+
+0.2.0
+  - Implement the Freeze options from Gradius V
+  - Fix a bug of catching an exception when the Force does not exist
+  - Add Option equip sound effect
+  - Adjust the rarities of the accessories to match Terraria's progression
+
+0.1.1
+  - Add recipes for Options and the Force
+  - Fixed a fatal bug: a crash when hovering over the Bydo Embryo in the crafting menu
+
+0.1.0
+  - Implement the Force from R-Type series
+  - Implement the exact behavior of it shown from the original games
+
+0.0.4
+  - Unequipping options now properly unloads them
+  - Add Mod icon
+
+0.0.3
+  - Bug fixes
+  - Options no longer generate friendly NPC projectiles
+  - Option projectiles no longer generate ammo drops
+  - Options are now limited to not work on some weapons
+  - Allow options to work on some melee projectiles
+
+0.0.2
+  - Initial release
+[/SPOILER]
+
+[B]Contact Us[/B]
+If you encounter any bugs or you have suggestions, you can reach us in several ways.
+[LIST]
+[*]Discord: [URL='https://discord.gg/z7ZMtYv']Discord Invite Link to #chens-gradius-mod[/URL]
+[*]E-mail: [EMAIL]blancfaye7@gmail.com[/EMAIL]
+[*]Issues: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues']Gradius Mod Project Issue Board[/URL]
+[/LIST]
+[B]Support Us[/B]
+You can support this mod by donating. I may also reward donators with special features, but that depends. We can discuss that.
+[URL unfurl="true"]https://ko-fi.com/cheeeeeeeeeen[/URL]
