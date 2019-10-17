@@ -22,6 +22,7 @@ namespace ChensGradiusMod
 
     public int rotateMode;
     public int revolveDirection;
+    public bool wasHolding;
     public bool isFreezing;
     public bool forceBase;
     public bool needleForce;
@@ -73,6 +74,7 @@ namespace ChensGradiusMod
       packet.Write(isFreezing);
       packet.Write(rotateMode);
       packet.Write(revolveDirection);
+      packet.Write(wasHolding);
       packet.Write(forceBase);
       packet.Write(needleForce);
       packet.Write(optionOne);
@@ -107,6 +109,7 @@ namespace ChensGradiusMod
           packet.Write((byte)player.whoAmI);
           packet.Write(rotateMode);
           packet.Write(revolveDirection);
+          packet.Write(wasHolding);
           packet.Send();
         }
       }
@@ -143,9 +146,14 @@ namespace ChensGradiusMod
       }
       else if (rotateOption)
       {
-        if (ChensGradiusMod.optionActionKey.JustPressed) rotateMode = (int)RotateOptionBase.States.Grouping;
-        if (ChensGradiusMod.optionActionKey.JustReleased)
+        if (ChensGradiusMod.optionActionKey.JustPressed)
         {
+          wasHolding = true;
+          rotateMode = (int)RotateOptionBase.States.Grouping;
+        }
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding)
+        {
+          wasHolding = false;
           rotateMode = (int)RotateOptionBase.States.Recovering;
           revolveDirection = -revolveDirection;
         }
@@ -226,6 +234,7 @@ namespace ChensGradiusMod
       rotateMode = (int)RotateOptionBase.States.Following;
       baitDirection = 0;
       revolveDirection = 1;
+      wasHolding = false;
     }
 
     private bool HasAnyOptions()
@@ -294,18 +303,14 @@ namespace ChensGradiusMod
 
     private void RotateBehaviorRecovering()
     {
-      if (!float.IsNaN(baitPoint.X) && !float.IsNaN(baitPoint.Y))
-      {
-        float recoverSpeed = Math.Min(RotateOptionBase.Speed, Vector2.Distance(player.Center, baitPoint));
-        baitPoint += GradiusHelper.MoveToward(baitPoint, player.Center, recoverSpeed);
-        optionFlightPath.Insert(0, baitPoint);
+      float recoverSpeed = Math.Min(RotateOptionBase.Speed, Vector2.Distance(player.Center, baitPoint));
+      baitPoint += GradiusHelper.MoveToward(baitPoint, player.Center, recoverSpeed);
+      optionFlightPath.Insert(0, baitPoint);
 
-        if (GradiusHelper.IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.AcceptedThreshold))
-        {
-          rotateMode = (int)RotateOptionBase.States.Following;
-        }
+      if (GradiusHelper.IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.AcceptedThreshold))
+      {
+        rotateMode = (int)RotateOptionBase.States.Following;
       }
-      else rotateMode = (int)RotateOptionBase.States.Following;
     }
   }
 }

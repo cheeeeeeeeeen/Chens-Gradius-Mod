@@ -104,6 +104,7 @@ namespace ChensGradiusMod
           modPlayer.isFreezing = reader.ReadBoolean();
           modPlayer.rotateMode = reader.ReadInt32();
           modPlayer.revolveDirection = reader.ReadInt32();
+          modPlayer.wasHolding = reader.ReadBoolean();
           modPlayer.forceBase = reader.ReadBoolean();
           modPlayer.needleForce = reader.ReadBoolean();
           modPlayer.optionOne = reader.ReadBoolean();
@@ -147,6 +148,7 @@ namespace ChensGradiusMod
             packet.Write(playerNumber);
             packet.Write(modPlayer.rotateMode);
             packet.Write(modPlayer.revolveDirection);
+            packet.Write(modPlayer.wasHolding);
             packet.Send(-1, playerNumber);
           }
           break;
