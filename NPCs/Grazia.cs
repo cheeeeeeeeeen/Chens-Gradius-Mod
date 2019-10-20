@@ -1,6 +1,6 @@
-﻿using System.IO;
-using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -72,7 +72,6 @@ namespace ChensGradiusMod.NPCs
         npc.velocity.Y = CustomGravity * yDirection;
         npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
       }
-
 
       if (GradiusHelper.IsNotMultiplayerClient())
       {
