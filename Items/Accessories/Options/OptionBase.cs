@@ -25,7 +25,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       CreateOption(player, OptionPosition, ProjectileType + ProjectileName);
-      CreationOrderingBypass(player, OptionPosition);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
@@ -61,24 +60,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(projectileName), 0, 0f,
                                  player.whoAmI, 0f, 0f);
-      }
-    }
-
-    protected void CreationOrderingBypass(Player player, int position)
-    {
-      switch (position)
-      {
-        case 1:
-          CreateOption(player, 2, ProjectileType + "OptionTwoObject");
-          goto case 2;
-        case 2:
-          CreateOption(player, 3, ProjectileType + "OptionThreeObject");
-          goto case 3;
-        case 3:
-          CreateOption(player, 4, ProjectileType + "OptionFourObject");
-          goto case 4;
-        case 4:
-          break;
       }
     }
 
