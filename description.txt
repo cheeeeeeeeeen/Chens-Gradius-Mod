@@ -52,13 +52,20 @@ New Enemies:
   - They are common in the Gradius series.
   - They can be deployed on world floor or ceiling.
   - They will spawn anywhere near the surface and underground.
+5. Big Core Custom
+  - Famous recurring boss from the whole series of Gradius.
+  - They are known for the 4 front laser cannons shooting towards their opponent.
+  - They are also known for their simple vertical movement.
+  - It has a Custom on its name due to it still being an incomplete implementation.
+  - Only spawnable through Cheat Sheet and Hero's Mod, for now.
 
-Added Music:
+Added Music with music box:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
 2. Departure For Space (Gradius III From Myth to Legend version)
 
-Added music will only be in the form of a music box, for now.
+Added Music without music boxes yet:
+1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
 
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Contact us if you have any suggestions and bug reports.
 
-For changelogs, please visit the homepage. Complete information can be found in there.
+For changelogs, please visit the homepage. Complete information can be found in there. There are plenty of ways in the homepage that you can help us with!

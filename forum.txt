@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.7.1
+[B][U][SIZE=6]Mod Version: 0.7.2
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -97,12 +97,23 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]They can be deployed on world floor or ceiling.
 [*]They will spawn anywhere near the surface and underground.
 [/LIST]
+[*]Big Core Custom
+[LIST]
+[*]Famous recurring boss from the whole series of Gradius.
+[*]They are known for the 4 front laser cannons shooting towards their opponent.
+[*]They are also known for their simple vertical movement.
+[*]It has a Custom on its name due to it still being an incomplete implementation.
+[*]Only spawnable through Cheat Sheet and Hero's Mod, for now.
 [/LIST]
-[B]Added Music[/B]
-All music will be in the form of a music box for now...
+[/LIST]
+[B]Added Music with music box[/B]
 [LIST=1]
 [*]The Position Light (Gradius ReBirth version, originally from Nemesis 3)
 [*]Departure For Space (Gradius III From Myth to Legend version)
+[/LIST]
+[B]Added Music without music box[/B]
+[LIST=1]
+[*]Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
 [/LIST]
 
 If you are curious about what our current plans are, you can look them up on the project board.
@@ -114,6 +125,14 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.7.2
+  - Implement Big Core Custom (incomplete)
+  - Big Core Custom is multiplayer compatible
+  - Optimize option code and fix bug where options are duplicated resulting to 7 options max
+  - Update the Needle Force sprite to reflect correct shadows
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.7.1
   - Improve player syncing to other clients when entering worlds
   - Fix a bug where option colors are updated to all players
