@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
 {
+  [AutoloadBossHead]
   public class BigCoreCustom : GradiusEnemy
   {
     private readonly int openCoreTime = 1200;
@@ -22,6 +23,8 @@ namespace ChensGradiusMod.NPCs
     private float regularAssaultXCurrentSpeed = 0f;
     private float regularAssaultYCurrentSpeed = 0f;
     private int regularAssaultDirection = 0;
+
+    private readonly Vector2 exitVelocity = new Vector2(.1f, 0);
 
     public enum States { RegularAssault, Exit };
 
@@ -53,9 +56,19 @@ namespace ChensGradiusMod.NPCs
 
     public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustom";
 
+    public override string BossHeadTexture => "ChensGradiusMod/Sprites/BigCoreCustomHead";
+
     public override void FindFrame(int frameHeight)
     {
-      if (!openCore && existenceTick >= openCoreTime)
+      if (mode == States.Exit && FrameCounter > 0)
+      {
+        if (++FrameTick >= FrameSpeed)
+        {
+          FrameTick = 0;
+          FrameCounter--;
+        }
+      }
+      else if (mode != States.Exit && !openCore && existenceTick >= openCoreTime)
       {
         if (++FrameTick >= FrameSpeed)
         {
@@ -81,9 +94,11 @@ namespace ChensGradiusMod.NPCs
       switch (mode)
       {
         case States.RegularAssault:
+          existenceTick++;
           RegularAssaultBehavior();
           break;
         case States.Exit:
+          ExitBehavior();
           break;
       }
 
@@ -123,11 +138,24 @@ namespace ChensGradiusMod.NPCs
         npc.TargetClosest(false);
         target = Main.player[npc.target];
 
-        if (target.Center.X > npc.Center.X) regularAssaultDirection = 1;
-        else if (target.Center.X < npc.Center.X) regularAssaultDirection = -1;
-        else regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
+        if (target.dead || !target.active)
+        {
+          mode = States.Exit;
+          npc.timeLeft = 300;
+          npc.velocity = Vector2.Zero;
+          openCore = false;
+          regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
+          npc.spriteDirection = npc.direction = regularAssaultDirection;
+          return;
+        }
+        else
+        {
+          if (target.Center.X > npc.Center.X) regularAssaultDirection = 1;
+          else if (target.Center.X < npc.Center.X) regularAssaultDirection = -1;
+          else regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
 
-        npc.spriteDirection = npc.direction = regularAssaultDirection;
+          npc.spriteDirection = npc.direction = regularAssaultDirection;
+        }
       }
 
       if (target.Center.Y > npc.Center.Y)
@@ -152,7 +180,7 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (GradiusHelper.IsNotMultiplayerClient() && mode != States.Exit)
       {
         if (++fireTick >= fireRate)
         {
@@ -196,6 +224,11 @@ namespace ChensGradiusMod.NPCs
           };
         }
       }
+    }
+
+    private void ExitBehavior()
+    {
+      if (FrameCounter <= 0) npc.velocity += exitVelocity * regularAssaultDirection;
     }
   }
 }

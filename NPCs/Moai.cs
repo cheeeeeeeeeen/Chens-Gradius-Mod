@@ -115,8 +115,8 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanBeHitByProjectile(Projectile projectile)
     {
-      if (!(projectile.modProjectile is MoaiBubble) && projectile.active &&
-          GradiusHelper.CanDamage(projectile) && projectile.friendly && !projectile.hostile)
+      if (!(projectile.modProjectile is MoaiBubble) && !(projectile.modProjectile is CoreLaser) &&
+          projectile.active && GradiusHelper.CanDamage(projectile) && projectile.friendly && !projectile.hostile)
       {
         if (!projectile.minion && !Main.projPet[projectile.type])
         {
