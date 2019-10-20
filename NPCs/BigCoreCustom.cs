@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -123,6 +124,28 @@ namespace ChensGradiusMod.NPCs
     {
       scale = 1.5f;
       return null;
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(openCore);
+      writer.Write((byte)mode);
+      if (mode == States.RegularAssault)
+      {
+        writer.Write(regularAssaultXCurrentSpeed);
+        writer.Write(regularAssaultYCurrentSpeed);
+      }
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      openCore = reader.ReadBoolean();
+      mode = (States)reader.ReadByte();
+      if (mode == States.RegularAssault)
+      {
+        regularAssaultXCurrentSpeed = reader.ReadSingle();
+        regularAssaultYCurrentSpeed = reader.ReadSingle();
+      }
     }
 
     protected override Types EnemyType => Types.Boss;
