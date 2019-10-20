@@ -12,6 +12,8 @@ namespace ChensGradiusMod
   {
     public const float FullAngle = 360f;
     public const float HalfAngle = 180f;
+    public const float MinRotate = -180f;
+    public const float MaxRotate = 180f;
 
     public static void FreeListData(ref List<int> list, int buffer)
     {
@@ -20,7 +22,6 @@ namespace ChensGradiusMod
         int bufferExcess = list.Count - buffer;
         for (int j = 0; j < bufferExcess; j++)
         {
-          // Main.projectile[list[0]].Kill();
           Main.projectile[list[0]].active = false;
           list.RemoveAt(0);
         }
@@ -50,10 +51,10 @@ namespace ChensGradiusMod
       return new Vector2(newX, newY);
     }
 
-    public static float GetBearing(Vector2 origin, Vector2 destination)
+    public static float GetBearing(Vector2 origin, Vector2 destination, bool reverse = true)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
-      float opposite = -(destination.Y - origin.Y);
+      float opposite = (destination.Y - origin.Y) * (reverse ? -1 : 1);
       float adjacent = destination.X - origin.X;
 
       float direction = (float)Math.Asin(Math.Abs(opposite) / hypotenuse);
@@ -123,7 +124,7 @@ namespace ChensGradiusMod
              modItem is NeedleBydo;
     }
 
-    public static int RoundOffToWhole(float num) => (int) Math.Round(num, 0, MidpointRounding.AwayFromZero);
+    public static int RoundOffToWhole(float num) => (int)Math.Round(num, 0, MidpointRounding.AwayFromZero);
 
     public static void FlipAngleDirection(ref float angleDegrees, int direction)
     {
@@ -145,5 +146,43 @@ namespace ChensGradiusMod
     public static int UnderworldTilesYLocation => Main.maxTilesY - 200;
 
     public static int SkyTilesYLocation => RoundOffToWhole((float)Main.worldSurface * .35f);
+
+    public static float AngularCycle(float value, float min, float max)
+    {
+      float delta = max - min;
+      float result = (value - min) % delta;
+
+      if (result < 0) result += delta;
+
+      return result + min;
+    }
+
+    public static float AngularRotate(float currentAngle, float targetAngle,
+                                      float min, float max, float speed)
+    {
+      float diff = AngularCycle(targetAngle - currentAngle, min, max);
+
+      if (diff < -speed) return currentAngle - speed;
+      else if (diff > speed) return currentAngle + speed;
+      else return targetAngle;
+    }
+
+    public static float ApproachValue(float currentValue, float targetValue, float speed)
+    {
+      if (currentValue < targetValue)
+      {
+        currentValue += speed;
+        if (currentValue > targetValue)
+          return targetValue;
+      }
+      else
+      {
+        currentValue -= speed;
+        if (currentValue < targetValue)
+          return targetValue;
+      }
+
+      return currentValue;
+    }
   }
 }
