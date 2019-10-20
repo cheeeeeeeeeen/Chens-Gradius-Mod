@@ -84,7 +84,7 @@ namespace ChensGradiusMod.Projectiles.Options
           int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
                                                    p.velocity, p.type, p.damage, p.knockBack,
                                                    projectile.owner, 0f, 0f);
-          OptionAlreadyProducedProjectiles.Add(new_p_ind);
+          ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
           Main.projectile[new_p_ind].noDropItem = true;
         }
       }
@@ -137,15 +137,13 @@ namespace ChensGradiusMod.Projectiles.Options
       return projectileSpawn;
     }
 
-    private List<int> OptionAlreadyProducedProjectiles => ModOwner.optionAlreadyProducedProjectiles;
-
     private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
     private bool IsNotProducedYet(int ind)
     {
-      if (HasProduced(OptionAlreadyProducedProjectiles, ind)) return false;
+      if (HasProduced(ModOwner.optionAlreadyProducedProjectiles, ind)) return false;
       if (HasProduced(playerAlreadyProducedProjectiles, ind)) return false;
 
       return true;
@@ -314,7 +312,7 @@ namespace ChensGradiusMod.Projectiles.Options
                         && p.type != selectMod.ProjectileType("WitherShard3")
                         && p.type != selectMod.ProjectileType("HarpyFeather");
       }
-        
+
       return result;
     }
   }

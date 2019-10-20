@@ -26,7 +26,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       for (int i = 0; i < 2; i++)
       {
         CreateOption(player, OptionPosition[i], ProjectileName[i]);
-        CreationOrderingBypass(player, OptionPosition[i]);
       }
     }
 
