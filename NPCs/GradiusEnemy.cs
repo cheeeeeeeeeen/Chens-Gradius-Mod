@@ -1,5 +1,7 @@
 ﻿using ChensGradiusMod.Gores;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,6 +44,19 @@ namespace ChensGradiusMod.NPCs
       {
         Gore.NewGorePerfect(GradiusExplode.CenterSpawn(npc.Center), Vector2.Zero,
                             mod.GetGoreSlot("Gores/GradiusExplode"));
+        if (Main.expertMode)
+        {
+          switch (EnemyType)
+          {
+            case Types.Small:
+            case Types.Large:
+              RetaliationSpread(npc.Center);
+              break;
+            case Types.Boss:
+              RetaliationExplode(npc.Center);
+              break;
+          }
+        }
       }
     }
 
@@ -61,6 +76,20 @@ namespace ChensGradiusMod.NPCs
       else return 0f;
     }
 
+    public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
+    {
+      if (Main.expertMode)
+      {
+        switch (EnemyType)
+        {
+          case Types.Boss:
+          case Types.Large:
+            RetaliationSpray(projectile.Center);
+            break;
+        }
+      }
+    }
+
     protected virtual int FrameTick { get; set; } = 0;
 
     protected virtual int FrameSpeed { get; set; } = 0;
@@ -68,6 +97,20 @@ namespace ChensGradiusMod.NPCs
     protected virtual int FrameCounter { get; set; } = 0;
 
     protected virtual Types EnemyType => Types.Small;
+
+    protected virtual float RetaliationSprayRandomAngleDifference => 5f;
+
+    protected virtual float RetaliationSpreadAngleDifference => 45f;
+
+    protected virtual int RetaliationSpreadBulletNumber => 4;
+
+    protected virtual int RetaliationExplodeBulletNumberPerLayer => 24;
+
+    protected virtual int RetaliationExplodeBulletLayers => 2;
+
+    protected virtual float RetaliationExplodeBulletAcceleration => 2f;
+
+    protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
 
     protected virtual Rectangle[] InvulnerableHitboxes
     {
@@ -93,6 +136,83 @@ namespace ChensGradiusMod.NPCs
     {
       if (npc.aiStyle != -1) npc.aiStyle = -1;
       if (aiType != 0) aiType = 0;
+    }
+
+    protected void RetaliationSpray(Vector2 spawnPoint)
+    {
+      if (GradiusHelper.IsNotMultiplayerClient())
+      {
+        int targetIndex = npc.target;
+        npc.TargetClosest(false);
+        Player retaliationTarget = Main.player[npc.target];
+
+        float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
+        direction = MathHelper.ToDegrees(direction);
+        direction = Main.rand.NextFloat(direction - RetaliationSprayRandomAngleDifference,
+                                        direction + RetaliationSprayRandomAngleDifference + .0001f);
+        direction = MathHelper.ToRadians((float)Math.Round(direction, 4, MidpointRounding.AwayFromZero));
+
+        Projectile.NewProjectile(spawnPoint, direction.ToRotationVector2() * RetaliationBulletSpeed,
+                                 ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+
+        npc.target = targetIndex;
+      }
+    }
+
+    protected void RetaliationSpread(Vector2 spawnPoint)
+    {
+      if (GradiusHelper.IsNotMultiplayerClient())
+      {
+        int targetIndex = npc.target;
+        npc.TargetClosest(false);
+        Player retaliationTarget = Main.player[npc.target];
+
+        float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
+        direction = MathHelper.ToDegrees(direction);
+        float higherAngleBound = direction + RetaliationSpreadAngleDifference;
+        float lowerAngleBound = direction - RetaliationSpreadAngleDifference;
+        float angleDifference = higherAngleBound - lowerAngleBound;
+        float angleLength = angleDifference / RetaliationSpreadBulletNumber;
+
+        float currentAngle = lowerAngleBound;
+        for (int i = 0; i < RetaliationSpreadBulletNumber; i++)
+        {
+          Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * RetaliationBulletSpeed;
+          Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                   GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+          currentAngle += angleLength;
+        }
+
+        npc.target = targetIndex;
+      }
+    }
+
+    protected void RetaliationExplode(Vector2 spawnPoint)
+    {
+      if (GradiusHelper.IsNotMultiplayerClient())
+      {
+        float angleLength = GradiusHelper.FullAngle / RetaliationExplodeBulletNumberPerLayer;
+        float currentVelocity = GradiusEnemyBullet.Spd;
+        int halfCounter = GradiusHelper.RoundOffToWhole(RetaliationExplodeBulletLayers * .5f);
+
+        for (int i = 0; i < RetaliationExplodeBulletLayers; i++)
+        {
+          float currentAngle = 0;
+          for (int j = 0; j < RetaliationExplodeBulletNumberPerLayer; j++)
+          {
+            Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * currentVelocity;
+            Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                     GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+            currentAngle += angleLength;
+          }
+
+          if (i == halfCounter) currentVelocity = GradiusEnemyBullet.Spd;
+
+          if (i < halfCounter) currentVelocity += RetaliationExplodeBulletAcceleration;
+          else currentVelocity -= RetaliationExplodeBulletAcceleration;
+        }
+      }
     }
   }
 }

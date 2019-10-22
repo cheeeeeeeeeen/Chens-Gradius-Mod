@@ -99,6 +99,12 @@ namespace ChensGradiusMod.NPCs
 
     protected override Types EnemyType => Types.Small;
 
+    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2.5f;
+
+    protected override int RetaliationSpreadBulletNumber => 1;
+
+    protected override float RetaliationSpreadAngleDifference => 0f;
+
     private double GetDirection()
     {
       float degreeAngle;

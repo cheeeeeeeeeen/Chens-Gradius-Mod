@@ -28,6 +28,7 @@ Current features:
   - This Force sprays a lot of bullets when detached.
 
 New Enemies:
+
 1. Moai
   - These eastern head statues are recurring enemies within the Gradius series.
   - Their weakness is the mouth.
@@ -58,6 +59,14 @@ New Enemies:
   - They are also known for their simple vertical movement.
   - It has a Custom on its name due to it still being an incomplete implementation.
   - It will spawn by a random chance in Space after Golem is defeated.
+
+These enemies will only spawn in Hard mode.
+
+All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
+Retaliation behavior is an enemy trait where the enemy shoots hostile bullets upon taking damage. Currently, there are three kinds of behaviors implemented: Spray, Spread and Explode.
+Spray pattern is a single inaccurate bullet spawned towards the player. They are often faster than the normal attacks of the enemies.
+Spread pattern is a group of bullets fired in a single shot. All of the bullets have the same speed, only their directions differ.
+Explode pattern is a group of bullets fired in all directions in a single shot. There is room for evasion here compared to Spread pattern, and are often slower.
 
 Added Music with music box:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)

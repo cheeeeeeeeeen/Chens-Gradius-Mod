@@ -127,6 +127,12 @@ namespace ChensGradiusMod.NPCs
 
     protected override Types EnemyType => Types.Small;
 
+    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 1.5f;
+
+    protected override int RetaliationSpreadBulletNumber => 2;
+
+    protected override float RetaliationSpreadAngleDifference => 3f;
+
     private Player TargetPlayer => Main.player[npc.target];
 
     private int SeriesCount => Main.expertMode ? 9 : 4;

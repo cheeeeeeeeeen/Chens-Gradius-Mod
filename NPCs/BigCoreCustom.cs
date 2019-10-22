@@ -57,7 +57,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && NPC.downedGolemBoss && spawnInfo.spawnTileY > GradiusHelper.SkyTilesYLocation) return .01f;
+      if (Main.hardMode && NPC.downedGolemBoss && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation) return .04f;
       else return 0f;
     }
 
@@ -159,6 +159,12 @@ namespace ChensGradiusMod.NPCs
     protected override Types EnemyType => Types.Boss;
 
     protected override int FrameSpeed { get; set; } = 30;
+
+    protected override float RetaliationBulletSpeed => 12;
+
+    protected override int RetaliationExplodeBulletLayers => 5;
+
+    protected override int RetaliationExplodeBulletNumberPerLayer => 40;
 
     private void RegularAssaultBehavior()
     {

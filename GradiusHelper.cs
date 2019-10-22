@@ -52,7 +52,7 @@ namespace ChensGradiusMod
              OptionOwnPositionCheck(gp, pos);
     }
 
-    public static Vector2 MoveToward(Vector2 origin, Vector2 destination, float speed)
+    public static Vector2 MoveToward(Vector2 origin, Vector2 destination, float speed = 1)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
       float opposite = destination.Y - origin.Y;

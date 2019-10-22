@@ -124,7 +124,7 @@ namespace ChensGradiusMod.NPCs
           {
             if (InvulnerableHitboxes[i].Intersects(projectile.Hitbox))
             {
-              projectile.Kill();
+              projectile.active = false;
               break;
             }
           }
@@ -176,6 +176,10 @@ namespace ChensGradiusMod.NPCs
     }
 
     protected override Types EnemyType => Types.Large;
+
+    protected override int RetaliationSpreadBulletNumber => 9;
+
+    protected override float RetaliationSpreadAngleDifference => 25f;
 
     protected override Rectangle[] InvulnerableHitboxes
     {

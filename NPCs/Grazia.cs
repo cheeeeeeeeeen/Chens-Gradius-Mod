@@ -127,6 +127,12 @@ namespace ChensGradiusMod.NPCs
       npc.target = reader.ReadInt32();
     }
 
+    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2f;
+
+    protected override int RetaliationSpreadBulletNumber => 3;
+
+    protected override float RetaliationSpreadAngleDifference => 2f;
+
     private Player TargetPlayer()
     {
       npc.target = DetectTarget();
