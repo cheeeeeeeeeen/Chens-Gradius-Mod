@@ -57,7 +57,7 @@ New Enemies:
   - They are known for the 4 front laser cannons shooting towards their opponent.
   - They are also known for their simple vertical movement.
   - It has a Custom on its name due to it still being an incomplete implementation.
-  - Only spawnable through Cheat Sheet and Hero's Mod, for now.
+  - It will spawn by a random chance in Space after Golem is defeated.
 
 Added Music with music box:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)

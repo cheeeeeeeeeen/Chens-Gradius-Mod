@@ -23,10 +23,13 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+      StoreProjectileCounts(player);
       for (int i = 0; i < 2; i++)
       {
         CreateOption(player, OptionPosition[i], ProjectileType + ProjectileName[i]);
+        CreationOrderingBypass(player, OptionPosition[i]);
       }
+      ResetProjectileCounts(player);
     }
 
     protected new virtual string[] ProjectileName { get; } = { "1", "2" };

@@ -55,6 +55,12 @@ namespace ChensGradiusMod.NPCs
       ImmuneToBuffs();
     }
 
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+      if (Main.hardMode && NPC.downedGolemBoss && spawnInfo.spawnTileY > GradiusHelper.SkyTilesYLocation) return .01f;
+      else return 0f;
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustom";
 
     public override string BossHeadTexture => "ChensGradiusMod/Sprites/BigCoreCustomHead";
@@ -130,6 +136,7 @@ namespace ChensGradiusMod.NPCs
     {
       writer.Write(openCore);
       writer.Write((byte)mode);
+      writer.Write(npc.target);
       if (mode == States.RegularAssault)
       {
         writer.Write(regularAssaultXCurrentSpeed);
@@ -141,6 +148,7 @@ namespace ChensGradiusMod.NPCs
     {
       openCore = reader.ReadBoolean();
       mode = (States)reader.ReadByte();
+      npc.target = reader.ReadInt32();
       if (mode == States.RegularAssault)
       {
         regularAssaultXCurrentSpeed = reader.ReadSingle();

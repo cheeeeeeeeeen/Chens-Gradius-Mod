@@ -103,7 +103,7 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]They are known for the 4 front laser cannons shooting towards their opponent.
 [*]They are also known for their simple vertical movement.
 [*]It has a Custom on its name due to it still being an incomplete implementation.
-[*]Only spawnable through Cheat Sheet and Hero's Mod, for now.
+[*]It will spawn by a random chance in Space after Golem is defeated.
 [/LIST]
 [/LIST]
 [B]Added Music with music box[/B]
@@ -125,6 +125,10 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.7.3
+  - Fix bug of Big Core's target not syncing
+  - Fix bug where options are needed to be ordered again
+
 0.7.2
   - Implement Big Core Custom (incomplete)
   - Big Core Custom is multiplayer compatible

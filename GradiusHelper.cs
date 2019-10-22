@@ -37,6 +37,21 @@ namespace ChensGradiusMod
       else return false;
     }
 
+    public static bool OptionOwnPositionCheck(GradiusModPlayer gp, int pos)
+    {
+      if (pos == 1) return gp.optionOne;
+      else if (pos == 2) return gp.optionTwo;
+      else if (pos == 3) return gp.optionThree;
+      else if (pos == 4) return gp.optionFour;
+      else return false;
+    }
+    
+    public static bool OptionCheckSelfAndPredecessors(GradiusModPlayer gp, int pos)
+    {
+      return OptionsPredecessorRequirement(gp, pos) &&
+             OptionOwnPositionCheck(gp, pos);
+    }
+
     public static Vector2 MoveToward(Vector2 origin, Vector2 destination, float speed)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
