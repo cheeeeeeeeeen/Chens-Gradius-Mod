@@ -200,6 +200,9 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.MolotovFire &&
              p.type != ProjectileID.MolotovFire2 &&
              p.type != ProjectileID.MolotovFire3 &&
+             p.type != ProjectileID.NettleBurstLeft &&
+             p.type != ProjectileID.NettleBurstRight &&
+             p.type != ProjectileID.NettleBurstEnd &&
              p.type != ProjectileID.PhantasmArrow &&
              p.type != ProjectileID.Phantasm;
     }
@@ -261,7 +264,8 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("ClockWorkBombPro1")
+        result = result && p.type != selectMod.ProjectileType("LegionOrnamentShard")
+                        && p.type != selectMod.ProjectileType("ClockWorkBombPro1")
                         && p.type != selectMod.ProjectileType("ClockWorkBombPro2")
                         && p.type != selectMod.ProjectileType("ClockWorkBombPro3")
                         && p.type != selectMod.ProjectileType("StalagmitePro")
@@ -306,7 +310,11 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("SpiritMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("Blaze")
+        result = result && p.type != selectMod.ProjectileType("TitaniumStaffProj2")
+                        && p.type != selectMod.ProjectileType("IchorBomb")
+                        && p.type != selectMod.ProjectileType("SpiritBoom")
+                        && p.type != selectMod.ProjectileType("GhostJellyBombProj")
+                        && p.type != selectMod.ProjectileType("Blaze")
                         && p.type != selectMod.ProjectileType("SoulRune")
                         && p.type != selectMod.ProjectileType("IchorP")
                         && p.type != selectMod.ProjectileType("Fae")
