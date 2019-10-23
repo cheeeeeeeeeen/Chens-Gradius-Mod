@@ -85,7 +85,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
           if (!selectProj.minion && !Main.projPet[selectProj.type] &&
               (selectProj.maxPenetrate <= life && selectProj.penetrate != -1))
           {
-            selectProj.Kill();
+            GradiusHelper.ProjectileDestroy(selectProj);
           }
           else selectProj.maxPenetrate--;
           if (--life <= 0)

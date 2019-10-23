@@ -124,8 +124,6 @@ namespace ChensGradiusMod.NPCs
       else return false;
     }
 
-    public override bool PreNPCLoot() => false;
-
     public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
     {
       scale = 1.5f;

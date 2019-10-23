@@ -343,7 +343,7 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (selectProj.active && selectProj.hostile && GradiusHelper.CanDamage(selectProj) &&
             projectile.Hitbox.Intersects(selectProj.Hitbox))
         {
-          selectProj.Kill();
+          GradiusHelper.ProjectileDestroy(selectProj);
         }
       }
     }

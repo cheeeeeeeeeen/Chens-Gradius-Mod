@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
@@ -32,10 +33,10 @@ namespace ChensGradiusMod.NPCs
       npc.width = 28;
       npc.height = 22;
       npc.damage = 100;
-      npc.lifeMax = 150;
+      npc.lifeMax = 240;
       npc.value = 1000f;
       npc.knockBackResist = 0f;
-      npc.defense = 100;
+      npc.defense = 30;
       npc.noGravity = true;
       npc.noTileCollide = true;
     }
@@ -95,11 +96,16 @@ namespace ChensGradiusMod.NPCs
       npc.target = reader.ReadInt32();
     }
 
+    public override void BossLoot(ref string name, ref int potionType)
+    {
+      potionType = ItemID.GreaterHealingPotion;
+    }
+
     protected override int FrameSpeed { get; set; } = 4;
 
     protected override Types EnemyType => Types.Small;
 
-    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2.5f;
+    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2.3f;
 
     protected override int RetaliationSpreadBulletNumber => 1;
 

@@ -199,5 +199,17 @@ namespace ChensGradiusMod
 
       return currentValue;
     }
+
+    public static void ProjectileDestroy(Projectile proj)
+    {
+      try
+      {
+        proj.Kill();
+      }
+      catch (StackOverflowException)
+      {
+        proj.active = false;
+      }
+    }
   }
 }

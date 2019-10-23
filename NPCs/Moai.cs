@@ -124,7 +124,7 @@ namespace ChensGradiusMod.NPCs
           {
             if (InvulnerableHitboxes[i].Intersects(projectile.Hitbox))
             {
-              projectile.active = false;
+              GradiusHelper.ProjectileDestroy(projectile);
               break;
             }
           }

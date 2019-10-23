@@ -37,10 +37,10 @@ namespace ChensGradiusMod.NPCs
       npc.width = 28;
       npc.height = 28;
       npc.damage = 100;
-      npc.lifeMax = 80;
+      npc.lifeMax = 200;
       npc.value = 2000f;
       npc.knockBackResist = 0f;
-      npc.defense = 150;
+      npc.defense = 50;
       npc.noGravity = true;
       npc.behindTiles = true;
       npc.frame.Y = 0;
@@ -131,7 +131,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override int RetaliationSpreadBulletNumber => 3;
 
-    protected override float RetaliationSpreadAngleDifference => 2f;
+    protected override float RetaliationSpreadAngleDifference => 3f;
 
     private Player TargetPlayer()
     {
