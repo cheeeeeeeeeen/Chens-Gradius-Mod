@@ -2,71 +2,23 @@ My Gradius Mod is really just a fun mod in implementing Gradius features into Te
 
 Current features:
 1. Options/Multiples
-  - These are powerful drones in the Gradius series, and Gradius is well-known for this feature.
-  - Deploy one, and the Option drone will copy some of your projectiles.
-  - It is an accessory in the game, for now.
-  - The accessories can be combined.
 2. Force
-  - This is yet another drone from the R-Type series.
-  - It has its own set of attacks, and you can control it like in the original game.
-  - Its power is based from the held weapon's stats.
-  - Set a keybind in Force Action to control it.
-  - For now, it is an accessory to make it accessible.
 3. Freeze Options
-  - An upgrade from the normal Options, and it is a new feature that came with Gradius V.
-  - Functions the same as the normal one, except it has an added action.
-  - Hold The Option Action hotkey, and these options will behave differently.
-  - Allow your options to be more controllable.
 4. Rotate Options
-  - Also an upgrade from normal Options, and it is a feature in Gradius III.
-  - Implementation is inspired from Gradius V.
-  - Hold The Option Action hotkey, and these options will revolve around the owner.
-  - Switchable rotation directions by toggling the hotkey again.
 5. Needle Force
-  - Functions the same as the Standard Force, except with different attack pattern.
-  - Attach and detach just like the Standard Force,
-  - This Force sprays a lot of bullets when detached.
+
+For more information about these features, visit the homepage.
 
 New Enemies:
-
 1. Moai
-  - These eastern head statues are recurring enemies within the Gradius series.
-  - Their weakness is the mouth.
-  - When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
-  - Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
-  - Any weapon can damage the Moai given the Moai is hit in the open mouth.
-  - They spawn in the desert and the temple.
 2. Garun
-  - For reference: https://gradius.fandom.com/wiki/Garun
-  - These Bacterion ships are known to travel fast, and will fire bullets towards you when you're behind them.
-  - They are famous for their sine wave movement pattern.
-  - They will spawn anywhere in the surface and space.
 3. Zalk
-  - For reference: https://gradius.fandom.com/wiki/Fan
-  - These Bacterion vessels fly in groups in a series.
-  - They are called Zalk in Gradius II, but their implemented pattern is based from the first Gradius game.
-  - Destroy them quickly before they spray bullets when they start intercepting your position.
-  - They will spawn anywhere in the surface and space.
 4. Grazia
-  - For reference: https://gradius.fandom.com/wiki/Dee-01
-  - These are Bacterion turrets stationed on the ground.
-  - They are common in the Gradius series.
-  - They can be deployed on world floor or ceiling.
-  - They will spawn anywhere near the surface and underground.
 5. Big Core Custom
-  - Famous recurring boss from the whole series of Gradius.
-  - They are known for the 4 front laser cannons shooting towards their opponent.
-  - They are also known for their simple vertical movement.
-  - It has a Custom on its name due to it still being an incomplete implementation.
-  - It will spawn by a random chance in Space after Golem is defeated.
 
 These enemies will only spawn in Hard mode.
-
 All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
-Retaliation behavior is an enemy trait where the enemy shoots hostile bullets upon taking damage. Currently, there are three kinds of behaviors implemented: Spray, Spread and Explode.
-Spray pattern is a single inaccurate bullet spawned towards the player. They are often faster than the normal attacks of the enemies.
-Spread pattern is a group of bullets fired in a single shot. All of the bullets have the same speed, only their directions differ.
-Explode pattern is a group of bullets fired in all directions in a single shot. There is room for evasion here compared to Spread pattern, and are often slower.
+For more information about these enemies and the behaviors, visit the homepage.
 
 Added Music with music box:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
