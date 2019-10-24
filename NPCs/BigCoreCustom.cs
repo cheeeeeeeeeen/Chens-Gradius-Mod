@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using AchievementLib.Elements;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -128,6 +129,12 @@ namespace ChensGradiusMod.NPCs
     {
       scale = 1.5f;
       return null;
+    }
+
+    public override bool CheckDead()
+    {
+      ModAchievement.UnlockGlobal<FromMythToLegendAchievement>();
+      return base.CheckDead();
     }
 
     public override void SendExtraAI(BinaryWriter writer)

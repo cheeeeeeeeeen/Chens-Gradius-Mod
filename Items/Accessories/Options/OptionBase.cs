@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using AchievementLib.Elements;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -35,6 +36,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override bool CanEquipAccessory(Player player, int slot)
     {
       return ModeChecks(player, true);
+    }
+
+    public override void OnCraft(Recipe recipe)
+    {
+      ModAchievement.UnlockLocal<WreekWeaponAchievement>(Main.LocalPlayer);
     }
 
     protected virtual string ProjectileType => "";

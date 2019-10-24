@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Forces;
+﻿using AchievementLib.Elements;
+using ChensGradiusMod.Projectiles.Forces;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -63,6 +64,11 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       recipe.AddTile(TileID.DemonAltar);
       recipe.SetResult(this);
       recipe.AddRecipe();
+    }
+
+    public override void OnCraft(Recipe recipe)
+    {
+      ModAchievement.UnlockLocal<BydoTechnologyAchievement>(Main.LocalPlayer);
     }
 
     protected void DeployForce(Player player)
