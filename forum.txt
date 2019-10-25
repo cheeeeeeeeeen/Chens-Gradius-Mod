@@ -3,8 +3,6 @@ Hello. I decided to share my mod here in the forums. I'm not very good at docume
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
 [B][U][SIZE=6]Mod Version: 0.7.4
 tModLoader: 0.11.5[/SIZE][/U][/B]
-[B][I]Additional Content:[/I][/B]
-[*][B][U]AchievementLib[/U][/B] - Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
@@ -72,6 +70,16 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Their attacks are based on the ammos found in the Ammo slots.
 [*]They can only copy Bullets and Arrows.
 [*]They can be upgraded to regular options!
+[/LIST]
+[/LIST]
+[B]Additional Content[/B]
+The following are additional contents thanks to other mods. They are not required, but recommended.
+[LIST]
+[*][B][U]AchievementLib[/U][/B] - Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/
+[LIST]
+[*]Bydo Technology - Create an indestructible weapon made of alien flesh.
+[*]Wreek Weapon - Create an Option, an invulnerable drone which copies the host's attacks.
+[*]From Myth To Legend - Create your own legend by destroying a Big Core.
 [/LIST]
 [/LIST]
 [B]New Enemies[/B]
@@ -146,6 +154,13 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.7.4
+  - Buff the Needle Force so it is more effective
+  - Implement Option Seed
+  - Add achievements thanks to AchievementLib
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.7.3
   - Add retaliation mechanics to Gradius enemies and boss
   - Fix bug of Big Core's target not syncing

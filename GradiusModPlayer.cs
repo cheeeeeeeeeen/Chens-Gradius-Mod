@@ -37,6 +37,7 @@ namespace ChensGradiusMod
     public bool rotateOption;
     public bool optionSeed;
     public Projectile seedProjectile;
+    public int seedRotateDirection;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -61,6 +62,7 @@ namespace ChensGradiusMod
     {
       ResetEffects();
       ResetOptionVariables();
+      ResetOtherVariables();
     }
 
     public override void clientClone(ModPlayer clientClone)
@@ -68,6 +70,7 @@ namespace ChensGradiusMod
       GradiusModPlayer clone = clientClone as GradiusModPlayer;
       clone.isFreezing = isFreezing;
       clone.rotateMode = rotateMode;
+      clone.seedRotateDirection = seedRotateDirection;
     }
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -90,6 +93,8 @@ namespace ChensGradiusMod
       packet.Write(rotateOption);
       packet.Write(optionFlightPath.Count);
       for (int i = 0; i < optionFlightPath.Count; i++) packet.WriteVector2(optionFlightPath[i]);
+      packet.Write(optionSeed);
+      packet.Write(seedRotateDirection);
       packet.Send(toWho, fromWho);
     }
 
@@ -114,6 +119,14 @@ namespace ChensGradiusMod
           packet.Write(rotateMode);
           packet.Write(revolveDirection);
           packet.Write(wasHolding);
+          packet.Send();
+        }
+
+        if (clone.seedRotateDirection != seedRotateDirection)
+        {
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSeedDirection);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(seedRotateDirection);
           packet.Send();
         }
       }
@@ -241,6 +254,11 @@ namespace ChensGradiusMod
       baitDirection = 0;
       revolveDirection = 1;
       wasHolding = false;
+    }
+
+    private void ResetOtherVariables()
+    {
+      seedRotateDirection = 0;
     }
 
     private bool HasAnyOptions()

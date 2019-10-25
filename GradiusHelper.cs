@@ -48,7 +48,7 @@ namespace ChensGradiusMod
       else if (pos == 4) return gp.optionFour;
       else return false;
     }
-    
+
     public static bool OptionCheckSelfAndPredecessors(GradiusModPlayer gp, int pos)
     {
       return OptionsPredecessorRequirement(gp, pos) &&
@@ -217,14 +217,14 @@ namespace ChensGradiusMod
 
     public static bool AchievementLibUnlock(string achievement, Player player = null)
     {
-      Mod achievementLib = ModLoader.GetMod("AchievementLib");
-      if (achievementLib != null)
-      {
-        if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
-        else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
+      //Mod achievementLib = ModLoader.GetMod("AchievementLib");
+      //if (achievementLib != null)
+      //{
+      //  if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
+      //  else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
 
-        return true;
-      }
+      //  return true;
+      //}
 
       return false;
     }

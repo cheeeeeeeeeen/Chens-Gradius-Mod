@@ -86,7 +86,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
           goto case 3;
         case 3:
           if (ModPlayer(player).optionFour)
-          CreateOption(player, 4, ProjectileType + "OptionFourObject");
+            CreateOption(player, 4, ProjectileType + "OptionFourObject");
           goto case 4;
         case 4:
           break;

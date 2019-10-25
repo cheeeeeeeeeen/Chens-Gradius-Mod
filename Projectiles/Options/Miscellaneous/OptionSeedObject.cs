@@ -10,13 +10,13 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
     public const float SeedDistance = 50f;
 
     public int rotateDirection = 0;
-    public bool isSpawning = true;
-    public float currentAngle = 0f;
 
     private readonly int fireRate = 23;
     private readonly float rotateSpeed = 7f;
     private readonly int inBattleDuration = 180;
 
+    private bool isSpawning = true;
+    private float currentAngle = 0f;
     private int fireTick = 0;
     private int inBattleTick = 0;
     private bool inBattle = false;
@@ -40,6 +40,11 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
     {
       if (PlayerHasAccessory())
       {
+        if (isSpawning)
+        {
+          isSpawning = false;
+          if (Owner.direction < 0) currentAngle = GradiusHelper.HalfAngle;
+        }
         projectile.timeLeft = KeepAlive;
         return true;
       }
@@ -53,8 +58,12 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     public override void AI()
     {
+      rotateDirection = ModOwner.seedRotateDirection;
       OptionAnimate();
-      if (++inBattleTick >= inBattleDuration) inBattle = false;
+      if (inBattle)
+      {
+        if (++inBattleTick >= inBattleDuration) inBattle = false;
+      }
       if (inBattle && SetProjectileToSpawn()) PerformAttack();
       MoveSeed();
       OptionSpawnSoundEffect();
@@ -132,7 +141,8 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
     private void MoveSeed()
     {
       float directionRadians = MathHelper.ToRadians(currentAngle);
-      projectile.Center = new Vector2 {
+      projectile.Center = new Vector2
+      {
         X = Owner.Center.X + (float)Math.Cos(directionRadians) * SeedDistance,
         Y = Owner.Center.Y - (float)Math.Sin(directionRadians) * SeedDistance
       };

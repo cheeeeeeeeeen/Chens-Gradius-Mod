@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using ChensGradiusMod.Projectiles.Options.Miscellaneous;
+﻿using ChensGradiusMod.Projectiles.Options.Miscellaneous;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
 {
   public class OptionSeed : ParentGradiusAccessory
   {
-    private int? pInd = null;
     private readonly string projectileName = "OptionSeedObject";
 
     public override void SetStaticDefaults()
@@ -35,34 +32,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
     {
       ModPlayer(player).optionSeed = true;
 
-      if (GradiusHelper.IsSameClientOwner(player) && player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0)
+      if (GradiusHelper.IsSameClientOwner(player))
       {
-        pInd = Projectile.NewProjectile(player.Center.X + OptionSeedObject.SeedDistance * player.direction,
-                                        player.Center.Y, 0f, 0f, mod.ProjectileType(projectileName), 0, 0f,
-                                        player.whoAmI, 0f, 0f);
-        ModOwner(player).seedProjectile = OptionObject;
-      }
-
-      if (pInd != null && OptionObject.active && OptionObject.modProjectile is OptionSeedObject optSeed)
-      {
-        optSeed.rotateDirection = -hideVisual.ToDirectionInt();
-        if (optSeed.isSpawning)
+        if (player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0)
         {
-          optSeed.isSpawning = false;
-          if (player.direction < 0) optSeed.currentAngle = GradiusHelper.HalfAngle;
+          int pInd = Projectile.NewProjectile(player.Center.X + OptionSeedObject.SeedDistance * player.direction,
+                                              player.Center.Y, 0f, 0f, mod.ProjectileType(projectileName), 0, 0f,
+                                              player.whoAmI, 0f, 0f);
+          ModOwner(player).seedProjectile = Main.projectile[pInd];
         }
-      }
-      else pInd = null;
-    }
 
-    public override void ModifyTooltips(List<TooltipLine> tooltips)
-    {
-      base.ModifyTooltips(tooltips);
+        ModOwner(player).seedRotateDirection = -hideVisual.ToDirectionInt();
+      }
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/OptionSeedSheet";
-
-    private Projectile OptionObject => Main.projectile[(int)pInd];
 
     private GradiusModPlayer ModOwner(Player p) => p.GetModPlayer<GradiusModPlayer>();
   }

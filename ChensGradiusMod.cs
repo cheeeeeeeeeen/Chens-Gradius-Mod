@@ -30,22 +30,22 @@ namespace ChensGradiusMod
                     ModContent.TileType<DepartureForSpaceMusicBoxTile>());
       }
 
-      Mod achievementLib = ModLoader.GetMod("AchievementLib");
-      if (achievementLib != null)
-      {
-        achievementLib.Call("AddAchievement", this, "Bydo Technology",
-                            "Create an indestructible weapon made of alien flesh.",
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-        achievementLib.Call("AddAchievement", this, "Wreek Weapon",
-                            "Create an Option, an invulnerable drone which copies the host's attacks.",
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-        achievementLib.Call("AddAchievement", this, "From Myth To Legend",
-                            "Create your own legend by destroying a Big Core.",
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-                            GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-      }
+      //Mod achievementLib = ModLoader.GetMod("AchievementLib");
+      //if (achievementLib != null)
+      //{
+      //  achievementLib.Call("AddAchievement", this, "Bydo Technology",
+      //                      "Create an indestructible weapon made of alien flesh.",
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
+      //  achievementLib.Call("AddAchievement", this, "Wreek Weapon",
+      //                      "Create an Option, an invulnerable drone which copies the host's attacks.",
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
+      //  achievementLib.Call("AddAchievement", this, "From Myth To Legend",
+      //                      "Create your own legend by destroying a Big Core.",
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
+      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
+      //}
     }
 
     public override void Unload()
@@ -135,6 +135,8 @@ namespace ChensGradiusMod
           modPlayer.rotateOption = reader.ReadBoolean();
           int listCount = reader.ReadInt32();
           for (int i = 0; i < listCount; i++) modPlayer.optionFlightPath.Add(reader.ReadVector2());
+          modPlayer.optionSeed = reader.ReadBoolean();
+          modPlayer.seedRotateDirection = reader.ReadInt32();
           break;
 
         case PacketMessageType.ClientChangesFreezeOption:
@@ -159,6 +161,7 @@ namespace ChensGradiusMod
 
           modPlayer.rotateMode = reader.ReadInt32();
           modPlayer.revolveDirection = reader.ReadInt32();
+          modPlayer.wasHolding = reader.ReadBoolean();
 
           if (Main.netMode == NetmodeID.Server)
           {
@@ -171,6 +174,22 @@ namespace ChensGradiusMod
             packet.Send(-1, playerNumber);
           }
           break;
+
+        case PacketMessageType.ClientChangesSeedDirection:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+
+          modPlayer.seedRotateDirection = reader.ReadInt32();
+
+          if (Main.netMode == NetmodeID.Server)
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.ClientChangesSeedDirection);
+            packet.Write(playerNumber);
+            packet.Write(modPlayer.seedRotateDirection);
+            packet.Send(-1, playerNumber);
+          }
+          break;
       }
     }
 
@@ -178,7 +197,8 @@ namespace ChensGradiusMod
     {
       GradiusModSyncPlayer,
       ClientChangesFreezeOption,
-      ClientChangesRotateOption
+      ClientChangesRotateOption,
+      ClientChangesSeedDirection
     }
   }
 }
