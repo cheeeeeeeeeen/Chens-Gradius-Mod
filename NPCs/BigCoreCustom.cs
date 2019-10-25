@@ -1,5 +1,4 @@
-﻿using AchievementLib.Elements;
-using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -133,7 +132,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool CheckDead()
     {
-      ModAchievement.UnlockGlobal<FromMythToLegendAchievement>();
+      GradiusHelper.AchievementLibUnlock("From Myth To Legend");
       return base.CheckDead();
     }
 

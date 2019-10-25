@@ -10,9 +10,4 @@
   <Target Name="BuildMod" AfterTargets="Build">
     <Exec Command="&quot;$(tMLBuildServerPath)&quot; -build $(ProjectDir) -eac $(TargetPath) -define $(DefineConstants) -unsafe $(AllowUnsafeBlocks)" />
   </Target>
-  <ItemGroup>
-    <Reference Include="AchievementLib">
-      <HintPath>..\..\references\mods\AchievementLib_v1.0.1.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>

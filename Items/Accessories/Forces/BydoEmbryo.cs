@@ -1,5 +1,4 @@
-﻿using AchievementLib.Elements;
-using ChensGradiusMod.Projectiles.Forces;
+﻿using ChensGradiusMod.Projectiles.Forces;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -68,7 +67,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     public override void OnCraft(Recipe recipe)
     {
-      ModAchievement.UnlockLocal<BydoTechnologyAchievement>(Main.LocalPlayer);
+      GradiusHelper.AchievementLibUnlock("Bydo Technology", Main.LocalPlayer);
     }
 
     protected void DeployForce(Player player)

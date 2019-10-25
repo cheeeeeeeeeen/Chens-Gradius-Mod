@@ -10,6 +10,7 @@ namespace ChensGradiusMod
 {
   public static class GradiusHelper
   {
+    public const string InternalModName = "ChensGradiusMod";
     public const float FullAngle = 360f;
     public const float HalfAngle = 180f;
     public const float MinRotate = -180f;
@@ -212,6 +213,20 @@ namespace ChensGradiusMod
       {
         proj.active = false;
       }
+    }
+
+    public static bool AchievementLibUnlock(string achievement, Player player = null)
+    {
+      Mod achievementLib = ModLoader.GetMod("AchievementLib");
+      if (achievementLib != null)
+      {
+        if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
+        else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
+
+        return true;
+      }
+
+      return false;
     }
   }
 }

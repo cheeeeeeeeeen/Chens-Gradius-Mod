@@ -1,5 +1,4 @@
-﻿using AchievementLib.Elements;
-using Terraria;
+﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -40,7 +39,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override void OnCraft(Recipe recipe)
     {
-      ModAchievement.UnlockLocal<WreekWeaponAchievement>(Main.LocalPlayer);
+      GradiusHelper.AchievementLibUnlock("Wreek Weapon", Main.LocalPlayer);
     }
 
     protected virtual string ProjectileType => "";
