@@ -3,8 +3,8 @@ Hello. I decided to share my mod here in the forums. I'm not very good at docume
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
 [B][U][SIZE=6]Mod Version: 0.7.4
 tModLoader: 0.11.5[/SIZE][/U][/B]
-Dependencies:
-[*][B][U]AchievementLib[/U][/B] - https://forums.terraria.org/index.php?threads/achievementlib.83635/
+[B][I]Additional Content:[/I][/B]
+[*][B][U]AchievementLib[/U][/B] - Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
@@ -63,6 +63,15 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Functions the same as the Standard Force, except with different attack pattern.
 [*]Attach and detach just like the Standard Force,
 [*]This Force sprays a lot of bullets when detached.
+[/LIST]
+[*]Option Seed
+[LIST]
+[*]This type of Option can be seen in Salamander 2.
+[*]They are smaller and inferior versions of the regular Options.
+[*]They closely rotate around the player, and attack independently.
+[*]Their attacks are based on the ammos found in the Ammo slots.
+[*]They can only copy Bullets and Arrows.
+[*]They can be upgraded to regular options!
 [/LIST]
 [/LIST]
 [B]New Enemies[/B]

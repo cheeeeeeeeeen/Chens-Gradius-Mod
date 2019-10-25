@@ -6,6 +6,7 @@ Current features:
 3. Freeze Options
 4. Rotate Options
 5. Needle Force
+6. Option Seed
 
 For more information about these features, visit the homepage.
 
