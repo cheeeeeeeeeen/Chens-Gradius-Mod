@@ -72,16 +72,18 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]They can be upgraded to regular options!
 [/LIST]
 [/LIST]
-[B]Additional Content[/B]
-The following are additional contents thanks to other mods. They are not required, but recommended.
+[B][S]Additional Content[/S][/B]
+[S]The following are additional contents thanks to other mods. They are not required, but recommended.[/S]
 [LIST]
-[*][B][U]AchievementLib[/U][/B] - Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/
+[*][S][B][U]AchievementLib[/U][/B]- Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/[/S]
 [LIST]
-[*]Bydo Technology - Create an indestructible weapon made of alien flesh.
-[*]Wreek Weapon - Create an Option, an invulnerable drone which copies the host's attacks.
-[*]From Myth To Legend - Create your own legend by destroying a Big Core.
+[*][S]Bydo Technology - Create an indestructible weapon made of alien flesh.[/S]
+[*][S]Wreek Weapon - Create an Option, an invulnerable drone which copies the host's attacks.[/S]
+[*][S]From Myth To Legend - Create your own legend by destroying a Big Core.[/S]
 [/LIST]
 [/LIST]
+[I]AchievementLib[/I] is still being developed upon, but my code is ready to add these achievements. Stay tuned!
+[S][/S]
 [B]New Enemies[/B]
 [LIST=1]
 [*]Moai
