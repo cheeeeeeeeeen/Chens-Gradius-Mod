@@ -7,8 +7,8 @@ namespace ChensGradiusMod.Projectiles.Forces
 {
   public class NeedleForce : ForceBase
   {
-    private const float StatReduction = .75f;
-    private readonly float angleIncrease = 5f;
+    private const float StatReduction = 1f;
+    private readonly float angleIncrease = 6f;
     private readonly int[] detachedCooldown = { 2, 2, 2 };
     private float shootAngle = 0f;
     private int angleDirection = 1;
@@ -86,8 +86,6 @@ namespace ChensGradiusMod.Projectiles.Forces
 
       return false;
     }
-
-    protected override int InBattleExpire { get; } = 270;
 
     protected override int[] AttackCooldowns { get; } = { 4, 4, 19 };
   }
