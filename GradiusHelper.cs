@@ -14,6 +14,8 @@ namespace ChensGradiusMod
     public const float HalfAngle = 180f;
     public const float MinRotate = -180f;
     public const float MaxRotate = 180f;
+    public const int lowerAmmoSlot = 54;
+    public const int higherAmmoSlot = 57;
 
     public static void FreeListData(ref List<int> list, int buffer)
     {

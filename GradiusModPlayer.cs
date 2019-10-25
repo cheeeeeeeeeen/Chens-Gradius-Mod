@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Items;
 using ChensGradiusMod.Items.Accessories.Options.Rotate;
 using ChensGradiusMod.Projectiles.Forces;
+using ChensGradiusMod.Projectiles.Options.Miscellaneous;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,8 @@ namespace ChensGradiusMod
     public bool normalOption;
     public bool freezeOption;
     public bool rotateOption;
+    public bool optionSeed;
+    public Projectile seedProjectile;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -51,6 +54,7 @@ namespace ChensGradiusMod
       normalOption = false;
       freezeOption = false;
       rotateOption = false;
+      optionSeed = false;
     }
 
     public override void UpdateDead()
@@ -217,11 +221,13 @@ namespace ChensGradiusMod
     public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
     {
       MakeForceBattle();
+      MakeOptionSeedBattle();
     }
 
     public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
     {
       MakeForceBattle();
+      MakeOptionSeedBattle();
     }
 
     private void ResetOptionVariables()
@@ -251,6 +257,15 @@ namespace ChensGradiusMod
           forceProjectile.modProjectile is ForceBase fbProj)
       {
         fbProj.BattleMode();
+      }
+    }
+
+    private void MakeOptionSeedBattle()
+    {
+      if (optionSeed && GradiusHelper.IsSameClientOwner(seedProjectile) &&
+          seedProjectile.modProjectile is OptionSeedObject opSeed)
+      {
+        opSeed.BattleMode();
       }
     }
 

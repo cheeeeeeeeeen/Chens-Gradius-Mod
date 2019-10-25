@@ -6,7 +6,7 @@ namespace ChensGradiusMod
 {
   public static class GradiusAchievement
   {
-    private static readonly string texturePath = "ChensGradiusMod/Sprites/";
+    private const string texturePath = "ChensGradiusMod/Sprites/";
 
     public static Texture2D TextureString(string tName, bool locked)
     {

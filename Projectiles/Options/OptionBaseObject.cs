@@ -9,19 +9,15 @@ namespace ChensGradiusMod.Projectiles.Options
 {
   public abstract class OptionBaseObject : ModProjectile
   {
-    private const int KeepAlive = 2;
+    public const int DistanceInterval = 15;
+
+    protected const int KeepAlive = 2;
+
     private const int MaxBuffer = 300;
 
     private List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
-    private readonly float[] lightValues = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
     private bool isSpawning = true;
-
-    public static int distanceInterval = 15;
-
-    protected Player Owner => Main.player[projectile.owner];
-
-    protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
 
     public override void SetStaticDefaults()
     {
@@ -89,20 +85,11 @@ namespace ChensGradiusMod.Projectiles.Options
         }
       }
 
-      if (++projectile.frameCounter >= 5)
-      {
-        projectile.frameCounter = 0;
-        if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
-        projectile.light = lightValues[projectile.frame];
-      }
+      OptionAnimate();
 
       projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
-      if (isSpawning)
-      {
-        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionSpawn"),
-                       projectile.Center);
-        isSpawning = false;
-      }
+
+      OptionSpawnSoundEffect();
     }
 
     public override void PostAI()
@@ -123,7 +110,35 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public virtual bool PlayerHasAccessory() => false;
 
-    private int FrameDistance => (distanceInterval * Position) - 1;
+    protected virtual int FrameSpeed => 5;
+
+    protected virtual float[] LightValues { get; } = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
+
+    protected Player Owner => Main.player[projectile.owner];
+
+    protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
+
+    protected void OptionAnimate()
+    {
+      if (++projectile.frameCounter >= FrameSpeed)
+      {
+        projectile.frameCounter = 0;
+        if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
+        projectile.light = LightValues[projectile.frame];
+      }
+    }
+
+    protected void OptionSpawnSoundEffect()
+    {
+      if (isSpawning)
+      {
+        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionSpawn"),
+                       projectile.Center);
+        isSpawning = false;
+      }
+    }
+
+    private int FrameDistance => (DistanceInterval * Position) - 1;
 
     private int PathListSize => ModOwner.optionFlightPath.Count;
 
