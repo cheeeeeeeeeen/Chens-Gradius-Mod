@@ -240,7 +240,10 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("BlueBubble")
+        result = result && p.type != selectMod.ProjectileType("InfernalBlade2")
+                        && p.type != selectMod.ProjectileType("FlameBeamTip")
+                        && p.type != selectMod.ProjectileType("FlameBeamTip2")
+                        && p.type != selectMod.ProjectileType("BlueBubble")
                         && p.type != selectMod.ProjectileType("Shockblast")
                         && p.type != selectMod.ProjectileType("ClamorRifleProjSplit")
                         && p.type != selectMod.ProjectileType("GleamingBolt2")
@@ -279,7 +282,8 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("LegionOrnamentShard")
+        result = result && p.type != selectMod.ProjectileType("BlackHole")
+                        && p.type != selectMod.ProjectileType("LegionOrnamentShard")
                         && p.type != selectMod.ProjectileType("ClockWorkBombPro1")
                         && p.type != selectMod.ProjectileType("ClockWorkBombPro2")
                         && p.type != selectMod.ProjectileType("ClockWorkBombPro3")
@@ -325,7 +329,9 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("SpiritMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("TitaniumStaffProj2")
+        result = result && p.type != selectMod.ProjectileType("OrichHoming")
+                        && p.type != selectMod.ProjectileType("SpiritLinger")
+                        && p.type != selectMod.ProjectileType("TitaniumStaffProj2")
                         && p.type != selectMod.ProjectileType("IchorBomb")
                         && p.type != selectMod.ProjectileType("SpiritBoom")
                         && p.type != selectMod.ProjectileType("GhostJellyBombProj")
