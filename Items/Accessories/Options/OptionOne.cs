@@ -50,6 +50,18 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
+
+      recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionSeed");
+      recipe.AddIngredient(ItemID.Gel, 70);
+      recipe.AddIngredient(ItemID.Bone, 105);
+      recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 14);
+      recipe.AddIngredient(ItemID.Wire, 210);
+      recipe.AddIngredient(ItemID.Topaz, 5);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }

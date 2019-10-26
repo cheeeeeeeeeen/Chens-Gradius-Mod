@@ -107,6 +107,13 @@ namespace ChensGradiusMod
         ItemID.SilverBar
       });
       RecipeGroup.RegisterGroup("ChensGradiusMod:SilverTierBar", group);
+
+      group = new RecipeGroup(() => Language.GetTextValue("Any Evil Mushroom"), new int[]
+      {
+        ItemID.VileMushroom,
+        ItemID.ViciousMushroom
+      });
+      RecipeGroup.RegisterGroup("ChensGradiusMod:EvilMushroom", group);
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)

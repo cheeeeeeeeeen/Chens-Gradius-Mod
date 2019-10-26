@@ -51,6 +51,18 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
+
+      recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionSeed");
+      recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 10);
+      recipe.AddIngredient(ItemID.HallowedBar, 17);
+      recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 70);
+      recipe.AddIngredient(ItemID.Wire, 350);
+      recipe.AddIngredient(ItemID.Emerald, 12);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }

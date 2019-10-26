@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
 {
@@ -47,6 +48,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/OptionSeedSheet";
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddRecipeGroup("Wood", 400);
+      recipe.AddRecipeGroup("IronBar", 10);
+      recipe.AddIngredient(ItemID.Daybloom, 1);
+      recipe.AddIngredient(ItemID.Moonglow, 1);
+      recipe.AddIngredient(ItemID.Deathweed, 1);
+      recipe.AddIngredient(ItemID.Mushroom, 1);
+      recipe.AddRecipeGroup("ChensGradiusMod:EvilMushroom", 1);
+      recipe.AddRecipeGroup("PresurePlate", 1);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+    }
 
     private GradiusModPlayer ModOwner(Player p) => p.GetModPlayer<GradiusModPlayer>();
   }

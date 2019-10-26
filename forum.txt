@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.7.4
+[B][U][SIZE=6]Mod Version: 0.7.4.1
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -70,12 +70,13 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Their attacks are based on the ammos found in the Ammo slots.
 [*]They can only copy Bullets and Arrows.
 [*]They can be upgraded to regular options!
+[*][SPOILER="Option Seed Showcase"]
 [/LIST]
 [/LIST]
 [B][S]Additional Content[/S][/B]
 [S]The following are additional contents thanks to other mods. They are not required, but recommended.[/S]
 [LIST]
-[*][S][B][U]AchievementLib[/U][/B]- Thanks to this mod, it is possible to create Gradius-related achievements! https://forums.terraria.org/index.php?threads/achievementlib.83635/[/S]
+[*][S][B][U]AchievementLib[/U][/B]- Thanks to this mod, it is possible to create Gradius-related achievements! [URL='https://forums.terraria.org/index.php?threads/achievementlib.83635/']tModLoader - AchievementLib[/URL][/S]
 [LIST]
 [*][S]Bydo Technology - Create an indestructible weapon made of alien flesh.[/S]
 [*][S]Wreek Weapon - Create an Option, an invulnerable drone which copies the host's attacks.[/S]
@@ -83,7 +84,7 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [/LIST]
 [/LIST]
 [I]AchievementLib[/I] is still being developed upon, but my code is ready to add these achievements. Stay tuned!
-[S][/S]
+
 [B]New Enemies[/B]
 [LIST=1]
 [*]Moai
@@ -156,6 +157,11 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.7.4.1
+  - Add recipes for Option Seed
+  - Add upgrade recipes of Options including the Option Seed
+  - Change recipe of 4th Option to Ectoplasms instead of all Souls
+
 0.7.4
   - Buff the Needle Force so it is more effective
   - Implement Option Seed
@@ -244,7 +250,7 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 
 0.5.2
   - Integrate new sprite of the Needle Force
-  - Integreat new accessory sprite for the Needle Bydo
+  - Integrate new accessory sprite for the Needle Bydo
   - Fix bug where two forces can spawn upon world enter and cause weird behavior
 
 0.5.1

@@ -43,15 +43,23 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.SoulofLight, 20);
-      recipe.AddIngredient(ItemID.SoulofNight, 20);
-      recipe.AddIngredient(ItemID.SoulofMight, 5);
-      recipe.AddIngredient(ItemID.SoulofFright, 5);
-      recipe.AddIngredient(ItemID.SoulofSight, 5);
-      recipe.AddIngredient(ItemID.LunarTabletFragment, 40);
+      recipe.AddIngredient(ItemID.Ectoplasm, 30);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 30);
       recipe.AddIngredient(ItemID.ChlorophyteBar, 40);
       recipe.AddIngredient(ItemID.Wire, 600);
       recipe.AddIngredient(ItemID.Ruby, 24);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+
+      recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionSeed");
+      recipe.AddIngredient(ItemID.Ectoplasm, 21);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 21);
+      recipe.AddIngredient(ItemID.ChlorophyteBar, 28);
+      recipe.AddIngredient(ItemID.Wire, 420);
+      recipe.AddIngredient(ItemID.Ruby, 16);
       recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);

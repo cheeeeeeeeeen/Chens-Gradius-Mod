@@ -51,6 +51,19 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
+
+      recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionSeed");
+      recipe.AddIngredient(ItemID.SoulofLight, 7);
+      recipe.AddIngredient(ItemID.SoulofNight, 4);
+      recipe.AddRecipeGroup("ChensGradiusMod:CobaltTierBar", 14);
+      recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 56);
+      recipe.AddIngredient(ItemID.Wire, 280);
+      recipe.AddIngredient(ItemID.Sapphire, 8);
+      recipe.AddTile(TileID.Furnaces);
+      recipe.AddTile(TileID.Anvils);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }
