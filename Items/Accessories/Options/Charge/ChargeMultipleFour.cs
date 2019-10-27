@@ -1,4 +1,6 @@
 ﻿using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Charge
 {
@@ -41,7 +43,17 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
 
     public override void AddRecipes()
     {
-      
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionFour");
+      recipe.AddIngredient(ItemID.TruffleWorm);
+      recipe.AddIngredient(ItemID.Ectoplasm, 15);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
+      recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
+      recipe.AddIngredient(ItemID.Wire, 300);
+      recipe.AddTile(TileID.TinkerersWorkbench);
+      recipe.AddTile(TileID.BewitchingTable);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }
