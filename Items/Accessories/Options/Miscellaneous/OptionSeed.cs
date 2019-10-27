@@ -60,6 +60,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
       recipe.AddIngredient(ItemID.Mushroom, 1);
       recipe.AddRecipeGroup("ChensGradiusMod:EvilMushroom", 1);
       recipe.AddRecipeGroup("PresurePlate", 1);
+      recipe.AddTile(TileID.HeavyWorkBench);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }
