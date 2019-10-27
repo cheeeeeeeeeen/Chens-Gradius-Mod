@@ -75,6 +75,7 @@ namespace ChensGradiusMod
       clone.isFreezing = isFreezing;
       clone.rotateMode = rotateMode;
       clone.seedRotateDirection = seedRotateDirection;
+      clone.chargeMode = chargeMode;
     }
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -99,6 +100,8 @@ namespace ChensGradiusMod
       for (int i = 0; i < optionFlightPath.Count; i++) packet.WriteVector2(optionFlightPath[i]);
       packet.Write(optionSeed);
       packet.Write(seedRotateDirection);
+      packet.Write(chargeMultiple);
+      packet.Write(chargeMode);
       packet.Send(toWho, fromWho);
     }
 
@@ -113,6 +116,7 @@ namespace ChensGradiusMod
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesFreezeOption);
           packet.Write((byte)player.whoAmI);
           packet.Write(isFreezing);
+          packet.Write(wasHolding);
           packet.Send();
         }
 
@@ -131,6 +135,15 @@ namespace ChensGradiusMod
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSeedDirection);
           packet.Write((byte)player.whoAmI);
           packet.Write(seedRotateDirection);
+          packet.Send();
+        }
+
+        if (clone.chargeMode != chargeMode)
+        {
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesChargeMultiple);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(chargeMode);
+          packet.Write(wasHolding);
           packet.Send();
         }
       }
@@ -162,8 +175,8 @@ namespace ChensGradiusMod
 
       if (freezeOption)
       {
-        if (ChensGradiusMod.optionActionKey.JustPressed) isFreezing = true;
-        if (ChensGradiusMod.optionActionKey.JustReleased) isFreezing = false;
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isFreezing = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isFreezing = false;
       }
       else if (rotateOption)
       {

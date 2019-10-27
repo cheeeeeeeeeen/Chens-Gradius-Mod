@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -66,7 +67,20 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     public override void Kill(int timeLeft)
     {
-      GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero, force: true);
+      if (GradiusHelper.IsSameClientOwner(projectile))
+      {
+        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero, force: true);
+      }
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(enemyTarget);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      enemyTarget = reader.ReadInt32();
     }
 
     private void CreateTrail()

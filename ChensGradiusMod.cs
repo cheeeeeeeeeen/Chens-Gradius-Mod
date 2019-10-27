@@ -144,6 +144,8 @@ namespace ChensGradiusMod
           for (int i = 0; i < listCount; i++) modPlayer.optionFlightPath.Add(reader.ReadVector2());
           modPlayer.optionSeed = reader.ReadBoolean();
           modPlayer.seedRotateDirection = reader.ReadInt32();
+          modPlayer.chargeMultiple = reader.ReadBoolean();
+          modPlayer.chargeMode = reader.ReadInt32();
           break;
 
         case PacketMessageType.ClientChangesFreezeOption:
@@ -151,6 +153,7 @@ namespace ChensGradiusMod
           modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
 
           modPlayer.isFreezing = reader.ReadBoolean();
+          modPlayer.wasHolding = reader.ReadBoolean();
 
           if (Main.netMode == NetmodeID.Server)
           {
@@ -158,6 +161,7 @@ namespace ChensGradiusMod
             packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
             packet.Write(playerNumber);
             packet.Write(modPlayer.isFreezing);
+            packet.Write(modPlayer.wasHolding);
             packet.Send(-1, playerNumber);
           }
           break;
@@ -197,6 +201,24 @@ namespace ChensGradiusMod
             packet.Send(-1, playerNumber);
           }
           break;
+
+        case PacketMessageType.ClientChangesChargeMultiple:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+
+          modPlayer.chargeMode = reader.ReadInt32();
+          modPlayer.wasHolding = reader.ReadBoolean();
+
+          if (Main.netMode == NetmodeID.Server)
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.ClientChangesChargeMultiple);
+            packet.Write(playerNumber);
+            packet.Write(modPlayer.chargeMode);
+            packet.Write(modPlayer.wasHolding);
+            packet.Send(-1, playerNumber);
+          }
+          break;
       }
     }
 
@@ -205,7 +227,8 @@ namespace ChensGradiusMod
       GradiusModSyncPlayer,
       ClientChangesFreezeOption,
       ClientChangesRotateOption,
-      ClientChangesSeedDirection
+      ClientChangesSeedDirection,
+      ClientChangesChargeMultiple
     }
   }
 }
