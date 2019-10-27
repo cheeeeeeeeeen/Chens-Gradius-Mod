@@ -46,12 +46,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionFour");
       recipe.AddIngredient(ItemID.TheEyeOfCthulhu);
-      recipe.AddIngredient(ItemID.SoulofLight, 10);
-      recipe.AddIngredient(ItemID.SoulofNight, 10);
-      recipe.AddIngredient(ItemID.SoulofMight, 3);
-      recipe.AddIngredient(ItemID.SoulofFright, 3);
-      recipe.AddIngredient(ItemID.SoulofSight, 3);
-      recipe.AddIngredient(ItemID.LunarTabletFragment, 20);
+      recipe.AddIngredient(ItemID.Ectoplasm, 15);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
       recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
       recipe.AddIngredient(ItemID.Wire, 300);
       recipe.AddTile(TileID.TinkerersWorkbench);
