@@ -33,7 +33,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       return ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).normalOption;
+             !ModPlayer(player).normalOption &&
+             !ModPlayer(player).chargeMultiple;
     }
   }
 }

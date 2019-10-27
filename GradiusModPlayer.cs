@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.Items;
+using ChensGradiusMod.Items.Accessories.Options.Charge;
 using ChensGradiusMod.Items.Accessories.Options.Rotate;
 using ChensGradiusMod.Projectiles.Forces;
 using ChensGradiusMod.Projectiles.Options.Miscellaneous;
@@ -35,6 +36,8 @@ namespace ChensGradiusMod
     public bool normalOption;
     public bool freezeOption;
     public bool rotateOption;
+    public bool chargeMultiple;
+    public int chargeMode;
     public bool optionSeed;
     public Projectile seedProjectile;
     public int seedRotateDirection;
@@ -55,6 +58,7 @@ namespace ChensGradiusMod
       normalOption = false;
       freezeOption = false;
       rotateOption = false;
+      chargeMultiple = false;
       optionSeed = false;
     }
 
@@ -175,6 +179,19 @@ namespace ChensGradiusMod
           revolveDirection = -revolveDirection;
         }
       }
+      else if (chargeMultiple && HasAnyChargeMultipleAccessory())
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed)
+        {
+          wasHolding = true;
+          chargeMode = (int)ChargeMultipleBase.States.Charging;
+        }
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding)
+        {
+          wasHolding = false;
+          chargeMode = (int)ChargeMultipleBase.States.Dying;
+        }
+      }
     }
 
     public override void PreUpdate()
@@ -254,6 +271,7 @@ namespace ChensGradiusMod
       baitDirection = 0;
       revolveDirection = 1;
       wasHolding = false;
+      chargeMode = (int)ChargeMultipleBase.States.Following;
     }
 
     private void ResetOtherVariables()
@@ -267,6 +285,11 @@ namespace ChensGradiusMod
              (optionTwo && GradiusHelper.OptionsPredecessorRequirement(this, 2)) ||
              (optionThree && GradiusHelper.OptionsPredecessorRequirement(this, 3)) ||
              (optionFour && GradiusHelper.OptionsPredecessorRequirement(this, 4));
+    }
+
+    private bool HasAnyChargeMultipleAccessory()
+    {
+      return GradiusHelper.FindEquippedAccessory(player, ModContent.ItemType<ChargeMultipleOne>()) != null;
     }
 
     private void MakeForceBattle()

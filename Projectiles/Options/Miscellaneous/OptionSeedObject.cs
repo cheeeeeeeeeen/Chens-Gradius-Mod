@@ -96,7 +96,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     private bool SetProjectileToSpawn()
     {
-      for (int i = GradiusHelper.lowerAmmoSlot; i <= GradiusHelper.higherAmmoSlot; i++)
+      for (int i = GradiusHelper.LowerAmmoSlot; i <= GradiusHelper.HigherAmmoSlot; i++)
       {
         Item item = Owner.inventory[i];
 

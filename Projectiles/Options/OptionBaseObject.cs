@@ -62,26 +62,29 @@ namespace ChensGradiusMod.Projectiles.Options
           if (!p.active) playerAlreadyProducedProjectiles.RemoveAt(h--);
         }
 
-        for (int i = 0; i < Main.maxProjectiles; i++)
+        if (AttackLimitation())
         {
-          Projectile p = Main.projectile[i];
-          if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
-              !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+          for (int i = 0; i < Main.maxProjectiles; i++)
           {
-            projectilesToProduce.Add(i);
+            Projectile p = Main.projectile[i];
+            if (p.active && FollowsRules(p) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
+                !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+            {
+              projectilesToProduce.Add(i);
+            }
           }
-        }
 
-        foreach (int prog_ind in projectilesToProduce)
-        {
-          Projectile p = Main.projectile[prog_ind];
-          playerAlreadyProducedProjectiles.Add(prog_ind);
+          foreach (int prog_ind in projectilesToProduce)
+          {
+            Projectile p = Main.projectile[prog_ind];
+            playerAlreadyProducedProjectiles.Add(prog_ind);
 
-          int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
-                                                   p.velocity, p.type, p.damage, p.knockBack,
-                                                   projectile.owner, 0f, 0f);
-          ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
-          Main.projectile[new_p_ind].noDropItem = true;
+            int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
+                                                     p.velocity, p.type, p.damage, p.knockBack,
+                                                     projectile.owner, 0f, 0f);
+            ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
+            Main.projectile[new_p_ind].noDropItem = true;
+          }
         }
       }
 
@@ -113,6 +116,8 @@ namespace ChensGradiusMod.Projectiles.Options
     protected virtual int FrameSpeed => 5;
 
     protected virtual float[] LightValues { get; } = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
+
+    protected virtual bool AttackLimitation() => true;
 
     protected Player Owner => Main.player[projectile.owner];
 

@@ -46,6 +46,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     protected virtual string ProjectileName => "OptionObject";
 
+    protected virtual string OptionName => "Option";
+
     protected virtual int OptionPosition => 0;
 
     protected virtual string OptionTooltip =>
@@ -59,7 +61,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
     {
       return ModPlayer(player).normalOption &&
              !ModPlayer(player).freezeOption &&
-             !ModPlayer(player).rotateOption;
+             !ModPlayer(player).rotateOption &&
+             !ModPlayer(player).chargeMultiple;
     }
 
     protected void CreateOption(Player player, int optionPosition, string projectileName)
@@ -79,14 +82,14 @@ namespace ChensGradiusMod.Items.Accessories.Options
       switch (position)
       {
         case 1:
-          CreateOption(player, 2, ProjectileType + "OptionTwoObject");
+          CreateOption(player, 2, ProjectileType + OptionName + "TwoObject");
           goto case 2;
         case 2:
-          CreateOption(player, 3, ProjectileType + "OptionThreeObject");
+          CreateOption(player, 3, ProjectileType + OptionName + "ThreeObject");
           goto case 3;
         case 3:
           if (ModPlayer(player).optionFour)
-            CreateOption(player, 4, ProjectileType + "OptionFourObject");
+            CreateOption(player, 4, ProjectileType + OptionName + "FourObject");
           goto case 4;
         case 4:
           break;
@@ -95,26 +98,26 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     protected void ResetProjectileCounts(Player player)
     {
-      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionOneObject")] =
+      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "OneObject")] =
         cloneProjectileCounts[0];
-      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionTwoObject")] =
+      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "TwoObject")] =
         cloneProjectileCounts[1];
-      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionThreeObject")] =
+      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "ThreeObject")] =
         cloneProjectileCounts[2];
-      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionFourObject")] =
+      player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "FourObject")] =
         cloneProjectileCounts[3];
     }
 
     protected void StoreProjectileCounts(Player player)
     {
       cloneProjectileCounts[0] =
-        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionOneObject")];
+        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "OneObject")];
       cloneProjectileCounts[1] =
-        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionTwoObject")];
+        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "TwoObject")];
       cloneProjectileCounts[2] =
-        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionThreeObject")];
+        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "ThreeObject")];
       cloneProjectileCounts[3] =
-        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + "OptionFourObject")];
+        player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "FourObject")];
     }
 
     private bool IsOptionNotDeployed(Player player, string projectileName)

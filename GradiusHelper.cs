@@ -15,8 +15,10 @@ namespace ChensGradiusMod
     public const float HalfAngle = 180f;
     public const float MinRotate = -180f;
     public const float MaxRotate = 180f;
-    public const int lowerAmmoSlot = 54;
-    public const int higherAmmoSlot = 57;
+    public const int LowerAmmoSlot = 54;
+    public const int HigherAmmoSlot = 57;
+    public const int LowerAccessorySlot = 3;
+    public const int HigherAccessorySlot = 9;
 
     public static void FreeListData(ref List<int> list, int buffer)
     {
@@ -227,6 +229,41 @@ namespace ChensGradiusMod
       //}
 
       return false;
+    }
+
+    public static int? FindEquippedAccessory(Player player, int accType)
+    {
+      for (int i = LowerAccessorySlot; i <= HigherAccessorySlot; i++)
+      {
+        if (player.armor[i].type == accType) return i;
+      }
+
+      return null;
+    }
+
+    public static int? SpawnItem(Item item, Vector2 position, Vector2 velocity, bool force = false)
+    {
+      for (int i = 0; i < Main.maxItems; i++)
+      {
+        if (Main.item[i].IsAir || !Main.item[i].active)
+        {
+          Main.item[i] = item;
+          Main.item[i].Center = position;
+          Main.item[i].velocity = velocity;
+          return i;
+        }
+      }
+
+      if (force)
+      {
+        int forceCounter = Main.maxItems - 1;
+        Main.item[forceCounter] = item;
+        Main.item[forceCounter].Center = position;
+        Main.item[forceCounter].velocity = velocity;
+        return forceCounter;
+      }
+
+      return null;
     }
   }
 }
