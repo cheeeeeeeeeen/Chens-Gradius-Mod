@@ -7,6 +7,7 @@ Current features:
 4. Rotate Options
 5. Needle Force
 6. Option Seed
+7. Charge Multiple
 
 For more information about these features, visit the homepage.
 

@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.7.4.1
+[B][U][SIZE=6]Mod Version: 0.8.0
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -70,7 +70,18 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Their attacks are based on the ammos found in the Ammo slots.
 [*]They can only copy Bullets and Arrows.
 [*]They can be upgraded to regular options!
-[*][SPOILER="Option Seed Showcase"]
+[*][SPOILER="Option Seed Showcase"][IMG]https://previews.dropbox.com/p/orig/AAl-ya9qDidsornsFcPez7mUBumyaxB08_Jrk_R9Vj3KTV4SxTG_XKNlN5pIb-9kYykPFAGxpR4cEdqtxCdUzLFBKpaM-hlh4ssqIUchyggNbf_FstPVJMi4eHKRGLWHwN0O7pXho2COkUgP0ES2eaPb6kssxZvoYc-e_i9DNQwR7EHfNKUYHEKFO7xRKi5-KAE5dYJNLflnH3G8nDidzVOmRuI6Ss4n-_OynyaNrb499AnbASOnbbZpkXaRNa7adDB-W3EiOtPC5coWawgrYs4UHv3tdEFFyI7lzkNC05-uTf9K8ji2eZ59SUvtaZQd-QS7Z6Nigs_WNtA6WEnLXIWIGVkoHnyF-qhLmKS7-ClkGVcD9P0jPHXj5vyDvkyQ64A/p.gif?size=2048x1536&size_mode=3[/IMG]
+They have weaker firepower, but they behave differently.[/SPOILER]
+[/LIST]
+[*]Charge Multiples
+[LIST]
+[*]This type of Options are featured in Salamander 2.
+[*]It normally functions the same as the regular Option.
+[*]Hold the Option Action Key to have the Multiples charge energy.
+[*]Release the key for a devastating special attack!
+[*]The longer the Multiples charge energy, the longer the duration of the special attack.
+[*]Be warned that the Multiples will be lost from your inventory.
+[*]They can later be retrieved again after the special attack.
 [/LIST]
 [/LIST]
 [B][S]Additional Content[/S][/B]
@@ -157,6 +168,14 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.8.0
+  - Implement Charge Multiple
+  - Sprites and Sound effects are still placeholders
+  - Multiplayer sync codes improved
+  - Another stable release of the mod
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.7.4.1
   - Add recipes for Option Seed
   - Add upgrade recipes of Options including the Option Seed
