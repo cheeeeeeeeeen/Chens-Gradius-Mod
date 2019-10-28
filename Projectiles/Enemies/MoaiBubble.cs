@@ -55,16 +55,6 @@ namespace ChensGradiusMod.Projectiles.Enemies
       SustainDamage();
     }
 
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-      writer.Write(life);
-    }
-
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-      life = reader.ReadInt32();
-    }
-
     public override void Kill(int timeLeft)
     {
       Main.PlaySound(SoundID.NPCHit1, projectile.Center);
@@ -88,6 +78,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
             GradiusHelper.ProjectileDestroy(selectProj);
           }
           else selectProj.maxPenetrate--;
+
           if (--life <= 0)
           {
             projectile.Kill();
