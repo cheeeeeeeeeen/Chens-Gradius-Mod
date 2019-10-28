@@ -84,7 +84,7 @@ namespace ChensGradiusMod.NPCs
         {
           case Types.Boss:
           case Types.Large:
-            RetaliationSpray(projectile.Center);
+            RetaliationSpray(projectile.Center, projectile.owner);
             break;
         }
       }
@@ -138,9 +138,9 @@ namespace ChensGradiusMod.NPCs
       if (aiType != 0) aiType = 0;
     }
 
-    protected void RetaliationSpray(Vector2 spawnPoint)
+    protected void RetaliationSpray(Vector2 spawnPoint, int trigerrer)
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (GradiusHelper.IsSameClientOwner(trigerrer))
       {
         int targetIndex = npc.target;
         npc.TargetClosest(false);
