@@ -211,7 +211,7 @@ namespace ChensGradiusMod
       {
         proj.Kill();
       }
-      catch (StackOverflowException)
+      catch
       {
         proj.active = false;
       }
@@ -239,7 +239,7 @@ namespace ChensGradiusMod
       }
 
       return null;
-    }
+    } 
 
     public static int SpawnItem(Item item, Vector2 position, Vector2 velocity)
     {
