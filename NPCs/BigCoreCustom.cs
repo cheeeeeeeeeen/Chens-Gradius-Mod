@@ -221,18 +221,18 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (++fireTick >= fireRate)
+      if (GradiusHelper.IsNotMultiplayerClient() && mode != States.Exit)
       {
-        fireTick = 0;
-
-        if (GradiusHelper.IsSameClientOwner(npc.target) && mode != States.Exit)
+        if (++fireTick >= fireRate)
         {
+          fireTick = 0;
+        
           Vector2 pVel = new Vector2(1, 0) * CoreLaser.Spd * regularAssaultDirection;
 
           for (int i = 0; i < AttackVectors.Length; i++)
           {
             Projectile.NewProjectile(AttackVectors[i], pVel, ModContent.ProjectileType<CoreLaser>(),
-                                      CoreLaser.Dmg, CoreLaser.Kb);
+                                     CoreLaser.Dmg, CoreLaser.Kb, Main.myPlayer);
           }
 
           Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreShoot"),

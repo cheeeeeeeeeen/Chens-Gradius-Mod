@@ -76,7 +76,7 @@ namespace ChensGradiusMod.NPCs
       else return 0f;
     }
 
-    public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
+    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
     {
       if (Main.expertMode)
       {
@@ -84,7 +84,7 @@ namespace ChensGradiusMod.NPCs
         {
           case Types.Boss:
           case Types.Large:
-            RetaliationSpray(projectile.Center, projectile.owner);
+            RetaliationSpray(projectile.Center);
             break;
         }
       }
@@ -112,10 +112,10 @@ namespace ChensGradiusMod.NPCs
 
     protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
 
-    protected virtual Rectangle[] InvulnerableHitboxes
-    {
-      get { return new Rectangle[0]; }
-    }
+    //protected virtual Rectangle[] InvulnerableHitboxes
+    //{
+    //  get { return new Rectangle[0]; }
+    //}
 
     protected void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {
@@ -138,9 +138,9 @@ namespace ChensGradiusMod.NPCs
       if (aiType != 0) aiType = 0;
     }
 
-    protected void RetaliationSpray(Vector2 spawnPoint, int trigerrer)
+    protected void RetaliationSpray(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsSameClientOwner(trigerrer))
+      if (GradiusHelper.IsNotMultiplayerClient())
       {
         int targetIndex = npc.target;
         npc.TargetClosest(false);

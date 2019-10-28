@@ -249,6 +249,8 @@ namespace ChensGradiusMod
       item.Center = position;
       item.velocity = velocity;
       Main.item[iInd] = item;
+      Main.item[iInd].Center = position;
+      Main.item[iInd].velocity = velocity;
 
       return iInd;
     }

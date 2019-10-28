@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Items;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -125,24 +126,12 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanBeHitByProjectile(Projectile projectile)
     {
-      if (!(projectile.modProjectile is MoaiBubble) && !(projectile.modProjectile is CoreLaser) &&
-          projectile.active && GradiusHelper.CanDamage(projectile) && projectile.friendly && !projectile.hostile)
+      if (IsHitInMouth(projectile.Hitbox))
       {
-        if (!projectile.minion && !Main.projPet[projectile.type])
-        {
-          for (int i = 0; i < InvulnerableHitboxes.Length; i++)
-          {
-            if (InvulnerableHitboxes[i].Intersects(projectile.Hitbox))
-            {
-              GradiusHelper.ProjectileDestroy(projectile);
-              break;
-            }
-          }
-        }
-
-        if (IsHitInMouth(projectile.Hitbox)) return true;
+        int reverseVeloDiff = Math.Sign(projectile.oldPosition.X - projectile.position.X);
+        if (reverseVeloDiff == npc.spriteDirection) return null;
       }
-
+      
       return false;
     }
 
@@ -154,7 +143,11 @@ namespace ChensGradiusMod.NPCs
         {
           Rectangle hitbox = GradiusGlobalItem.meleeHitbox[i].Value;
 
-          if (IsHitInMouth(hitbox)) return true;
+          if (IsHitInMouth(hitbox))
+          {
+            int positionDiff = Math.Sign(player.Center.X - npc.Center.X);
+            if (positionDiff == npc.spriteDirection) return null;
+          }
         }
       }
 
@@ -183,30 +176,30 @@ namespace ChensGradiusMod.NPCs
 
     protected override float RetaliationSpreadAngleDifference => 25f;
 
-    protected override Rectangle[] InvulnerableHitboxes
-    {
-      get
-      {
-        if (persistDirection < 0)
-        {
-          return new Rectangle[]
-          {
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
-            new Rectangle((int)npc.position.X + 14, (int)npc.position.Y, 70, 126)
-          };
-        }
-        else
-        {
-          return new Rectangle[]
-          {
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
-            new Rectangle((int)npc.position.X, (int)npc.position.Y, 70, 126)
-          };
-        }
-      }
-    }
+    //protected override Rectangle[] InvulnerableHitboxes
+    //{
+    //  get
+    //  {
+    //    if (persistDirection < 0)
+    //    {
+    //      return new Rectangle[]
+    //      {
+    //        new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+    //        new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+    //        new Rectangle((int)npc.position.X + 14, (int)npc.position.Y, 70, 126)
+    //      };
+    //    }
+    //    else
+    //    {
+    //      return new Rectangle[]
+    //      {
+    //        new Rectangle((int)npc.position.X, (int)npc.position.Y, 84, 62),
+    //        new Rectangle((int)npc.position.X, (int)npc.position.Y + 76, 84, 50),
+    //        new Rectangle((int)npc.position.X, (int)npc.position.Y, 70, 126)
+    //      };
+    //    }
+    //  }
+    //}
 
     private int DetectPlayer()
     {
