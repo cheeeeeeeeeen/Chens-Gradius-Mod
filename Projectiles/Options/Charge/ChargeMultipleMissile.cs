@@ -69,7 +69,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     {
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero, force: true);
+        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero);
       }
     }
 

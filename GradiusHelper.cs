@@ -241,29 +241,14 @@ namespace ChensGradiusMod
       return null;
     }
 
-    public static int? SpawnItem(Item item, Vector2 position, Vector2 velocity, bool force = false)
+    public static int SpawnItem(Item item, Vector2 position, Vector2 velocity)
     {
-      for (int i = 0; i < Main.maxItems; i++)
-      {
-        if (Main.item[i].IsAir || !Main.item[i].active)
-        {
-          Main.item[i] = item;
-          Main.item[i].Center = position;
-          Main.item[i].velocity = velocity;
-          return i;
-        }
-      }
+      int iInd = Item.NewItem(position, item.type);
+      item.Center = position;
+      item.velocity = velocity;
+      Main.item[iInd] = item;
 
-      if (force)
-      {
-        int forceCounter = Main.maxItems - 1;
-        Main.item[forceCounter] = item;
-        Main.item[forceCounter].Center = position;
-        Main.item[forceCounter].velocity = velocity;
-        return forceCounter;
-      }
-
-      return null;
+      return iInd;
     }
   }
 }
