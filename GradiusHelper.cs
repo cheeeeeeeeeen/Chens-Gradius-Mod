@@ -136,6 +136,8 @@ namespace ChensGradiusMod
 
     public static bool IsSameClientOwner(Player player) => Main.myPlayer == player.whoAmI;
 
+    public static bool IsSameClientOwner(int playerIndex) => Main.myPlayer == playerIndex;
+
     public static bool IsNotMultiplayerClient() => Main.netMode != NetmodeID.MultiplayerClient;
 
     public static bool IsBydoAccessory(ModItem modItem)
