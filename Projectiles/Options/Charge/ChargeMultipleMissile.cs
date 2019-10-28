@@ -17,7 +17,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     private readonly float angleSpeed = 20f;
     private readonly float angleVariation = 5f;
     private readonly int delayToRotate = 10;
+    private float oldCurrentAngle = 0f;
     private float currentAngle = 0f;
+    private int oldEnemyTarget = -1;
     private int enemyTarget = -1;
     private bool initialized = false;
     private int delayTick = 0;
@@ -49,11 +51,11 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       if (!initialized)
       {
         initialized = true;
-        currentAngle = projectile.ai[0];
+        oldCurrentAngle = currentAngle = projectile.ai[0];
         projectile.timeLeft = GradiusHelper.RoundOffToWhole(projectile.ai[1]);
       }
 
-      return projectile.active;
+      return initialized;
     }
 
     public override void AI()
@@ -76,11 +78,13 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(enemyTarget);
+      writer.Write(currentAngle);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
       enemyTarget = reader.ReadInt32();
+      currentAngle = reader.ReadSingle();
     }
 
     private void CreateTrail()
@@ -120,6 +124,12 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
           enemyTarget = i;
         }
       }
+
+      if (oldEnemyTarget != enemyTarget)
+      {
+        oldEnemyTarget = enemyTarget;
+        projectile.netUpdate = true;
+      }
     }
 
     private void RotateTowardsTarget()
@@ -139,11 +149,18 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
           targetVector = playerTarget.Center;
         }
 
-        float chosenVariant = Main.rand.NextFloat(angleVariation);
-
         targetAngle = GradiusHelper.GetBearing(projectile.Center, targetVector);
-        currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
-                                                   GradiusHelper.MaxRotate, angleSpeed - chosenVariant);
+        if (GradiusHelper.IsSameClientOwner(projectile))
+        {
+          float chosenVariant = Main.rand.NextFloat(angleVariation);
+          currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
+                                                     GradiusHelper.MaxRotate, angleSpeed - chosenVariant);
+          if (oldCurrentAngle != currentAngle)
+          {
+            oldCurrentAngle = currentAngle;
+            projectile.netUpdate = true;
+          }
+        }
         projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2
