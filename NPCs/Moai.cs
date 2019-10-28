@@ -54,9 +54,19 @@ namespace ChensGradiusMod.NPCs
 
     public override string Texture => "ChensGradiusMod/Sprites/Moai";
 
+    public override bool PreAI()
+    {
+      if (GradiusHelper.IsNotMultiplayerClient() && persistDirection == 0)
+      {
+        persistDirection = Main.rand.NextBool().ToDirectionInt();
+        npc.netUpdate = true;
+      }
+
+      return persistDirection == 0 ? false : true;
+    }
+
     public override void AI()
     {
-      if (persistDirection == 0) persistDirection = Main.rand.NextBool().ToDirectionInt();
       npc.spriteDirection = npc.direction = persistDirection;
 
       switch (mode)
@@ -159,20 +169,12 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
-      writer.Write(mode);
       writer.Write(persistDirection);
-      writer.Write(npc.position.X);
-      writer.Write(npc.position.Y);
-      writer.Write(npc.target);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      mode = reader.ReadInt32();
       persistDirection = reader.ReadInt32();
-      npc.position.X = reader.ReadSingle();
-      npc.position.Y = reader.ReadSingle();
-      npc.target = reader.ReadInt32();
     }
 
     protected override Types EnemyType => Types.Large;
