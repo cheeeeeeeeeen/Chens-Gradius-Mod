@@ -107,22 +107,6 @@ namespace ChensGradiusMod.NPCs
 
     public override string Texture => "ChensGradiusMod/Sprites/Zalk";
 
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-      writer.Write(persistDirection);
-      writer.Write(targetDetermined);
-      writer.Write((byte)mode);
-      writer.Write(npc.target);
-    }
-
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-      persistDirection = reader.ReadInt32();
-      targetDetermined = reader.ReadBoolean();
-      mode = (States)reader.ReadByte();
-      npc.target = reader.ReadInt32();
-    }
-
     protected override int FrameSpeed { get; set; } = 3;
 
     protected override Types EnemyType => Types.Small;
