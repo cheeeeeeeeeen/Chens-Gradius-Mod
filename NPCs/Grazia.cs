@@ -1,6 +1,5 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
-using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -109,22 +108,6 @@ namespace ChensGradiusMod.NPCs
           }
         }
       }
-    }
-
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-      writer.Write(yDirection);
-      writer.Write(npc.position.X);
-      writer.Write(npc.position.Y);
-      writer.Write(npc.target);
-    }
-
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-      yDirection = reader.ReadInt32();
-      npc.position.X = reader.ReadSingle();
-      npc.position.Y = reader.ReadSingle();
-      npc.target = reader.ReadInt32();
     }
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2f;
