@@ -239,7 +239,7 @@ namespace ChensGradiusMod
       }
 
       return null;
-    } 
+    }
 
     public static int SpawnItem(Item item, Vector2 position, Vector2 velocity)
     {

@@ -144,26 +144,16 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
-      writer.Write(openCore);
       writer.Write((byte)mode);
       writer.Write(npc.target);
-      if (mode == States.RegularAssault)
-      {
-        writer.Write(regularAssaultXCurrentSpeed);
-        writer.Write(regularAssaultYCurrentSpeed);
-      }
+      writer.Write(regularAssaultDirection);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      openCore = reader.ReadBoolean();
       mode = (States)reader.ReadByte();
       npc.target = reader.ReadInt32();
-      if (mode == States.RegularAssault)
-      {
-        regularAssaultXCurrentSpeed = reader.ReadSingle();
-        regularAssaultYCurrentSpeed = reader.ReadSingle();
-      }
+      regularAssaultDirection = reader.ReadInt32();
     }
 
     protected override Types EnemyType => Types.Boss;
@@ -184,22 +174,26 @@ namespace ChensGradiusMod.NPCs
       {
         npc.TargetClosest(false);
         target = Main.player[npc.target];
+        if (GradiusHelper.IsNotMultiplayerClient()) npc.netUpdate = true;
 
         if (target.dead || !target.active)
         {
           mode = States.Exit;
-          npc.timeLeft = 300;
+          npc.timeLeft = 150;
           npc.velocity = Vector2.Zero;
           openCore = false;
-          regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
-          npc.spriteDirection = npc.direction = regularAssaultDirection;
           return;
         }
         else
         {
           if (target.Center.X > npc.Center.X) regularAssaultDirection = 1;
           else if (target.Center.X < npc.Center.X) regularAssaultDirection = -1;
-          else regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
+          else if (GradiusHelper.IsNotMultiplayerClient())
+          {
+            regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
+            npc.netUpdate = true;
+          }
+          else regularAssaultDirection = 0;
 
           npc.spriteDirection = npc.direction = regularAssaultDirection;
         }
@@ -275,7 +269,7 @@ namespace ChensGradiusMod.NPCs
 
     private void ExitBehavior()
     {
-      if (FrameCounter <= 0) npc.velocity += exitVelocity * regularAssaultDirection;
+      if (FrameCounter <= 0) npc.velocity += exitVelocity * npc.spriteDirection;
     }
   }
 }
