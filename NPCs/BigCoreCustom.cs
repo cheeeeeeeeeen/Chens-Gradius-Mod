@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
@@ -128,6 +129,11 @@ namespace ChensGradiusMod.NPCs
     {
       scale = 1.5f;
       return null;
+    }
+
+    public override void BossLoot(ref string name, ref int potionType)
+    {
+      potionType = ItemID.GreaterHealingPotion;
     }
 
     public override bool CheckDead()

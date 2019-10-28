@@ -79,28 +79,6 @@ namespace ChensGradiusMod.NPCs
 
     public override string Texture => "ChensGradiusMod/Sprites/Garun";
 
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-      writer.Write(persistDirection);
-
-      writer.Write(targetDetermined);
-      writer.Write(timerTick);
-      writer.Write(npc.target);
-    }
-
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-      persistDirection = reader.ReadInt32();
-      targetDetermined = reader.ReadBoolean();
-      timerTick = reader.ReadInt32();
-      npc.target = reader.ReadInt32();
-    }
-
-    public override void BossLoot(ref string name, ref int potionType)
-    {
-      potionType = ItemID.GreaterHealingPotion;
-    }
-
     protected override int FrameSpeed { get; set; } = 4;
 
     protected override Types EnemyType => Types.Small;
