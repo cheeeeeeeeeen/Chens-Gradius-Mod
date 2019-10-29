@@ -147,6 +147,7 @@ namespace ChensGradiusMod.NPCs
       writer.Write((byte)mode);
       writer.Write(npc.target);
       writer.Write(regularAssaultDirection);
+      writer.Write(regularAssaultYCurrentSpeed);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -154,6 +155,7 @@ namespace ChensGradiusMod.NPCs
       mode = (States)reader.ReadByte();
       npc.target = reader.ReadInt32();
       regularAssaultDirection = reader.ReadInt32();
+      regularAssaultYCurrentSpeed = reader.ReadSingle();
     }
 
     protected override Types EnemyType => Types.Boss;
@@ -210,6 +212,11 @@ namespace ChensGradiusMod.NPCs
         regularAssaultYCurrentSpeed = Math.Max(regularAssaultYCurrentSpeed, -regularAssaultMaxSpeed);
       }
       npc.position.Y += regularAssaultYCurrentSpeed;
+      if (GradiusHelper.IsNotMultiplayerClient() &&
+          GradiusHelper.IsEqualWithThreshold(regularAssaultYCurrentSpeed, 0f, 3f))
+      {
+        npc.netUpdate = true;
+      }
 
       float destinationX = target.Center.X + regularAssaultHorizontalGap * -regularAssaultDirection;
       regularAssaultXCurrentSpeed += regularAssaultAcceleration;

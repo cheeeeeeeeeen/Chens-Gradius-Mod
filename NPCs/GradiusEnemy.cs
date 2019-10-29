@@ -140,24 +140,35 @@ namespace ChensGradiusMod.NPCs
 
     protected void RetaliationSpray(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsMultiplayerClient())
+      int targetIndex = npc.target;
+      npc.TargetClosest(false);
+      Player retaliationTarget = Main.player[npc.target];
+
+      float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
+      direction = MathHelper.ToDegrees(direction);
+      direction = Main.rand.NextFloat(direction - RetaliationSprayRandomAngleDifference,
+                                      direction + RetaliationSprayRandomAngleDifference + .0001f);
+      direction = MathHelper.ToRadians((float)Math.Round(direction, 4, MidpointRounding.AwayFromZero));
+      Vector2 spawnVelocity = direction.ToRotationVector2() * RetaliationBulletSpeed;
+
+      if (GradiusHelper.IsSinglePlayer())
       {
-        int targetIndex = npc.target;
-        npc.TargetClosest(false);
-        Player retaliationTarget = Main.player[npc.target];
-
-        float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
-        direction = MathHelper.ToDegrees(direction);
-        direction = Main.rand.NextFloat(direction - RetaliationSprayRandomAngleDifference,
-                                        direction + RetaliationSprayRandomAngleDifference + .0001f);
-        direction = MathHelper.ToRadians((float)Math.Round(direction, 4, MidpointRounding.AwayFromZero));
-
-        Projectile.NewProjectile(spawnPoint, direction.ToRotationVector2() * RetaliationBulletSpeed,
-                                 ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, 255);
-
-        npc.target = targetIndex;
+        Projectile.NewProjectile(spawnPoint, spawnVelocity, ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }
+      else if (GradiusHelper.IsMultiplayerClient())
+      {
+        ModPacket packet = mod.GetPacket();
+
+        packet.Write((byte)ChensGradiusMod.PacketMessageType.SpawnRetaliationBullet);
+        packet.WriteVector2(spawnPoint);
+        packet.WriteVector2(spawnVelocity);
+        packet.Write(GradiusEnemyBullet.Dmg);
+        packet.Write(GradiusEnemyBullet.Kb);
+        packet.Send();
+      }
+
+      npc.target = targetIndex;
     }
 
     protected void RetaliationSpread(Vector2 spawnPoint)

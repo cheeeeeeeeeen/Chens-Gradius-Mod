@@ -1,5 +1,7 @@
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
+using ChensGradiusMod.Projectiles.Enemies;
 using ChensGradiusMod.Tiles.MusicBoxes;
+using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -155,7 +157,7 @@ namespace ChensGradiusMod
           modPlayer.isFreezing = reader.ReadBoolean();
           modPlayer.wasHolding = reader.ReadBoolean();
 
-          if (Main.netMode == NetmodeID.Server)
+          if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
@@ -174,7 +176,7 @@ namespace ChensGradiusMod
           modPlayer.revolveDirection = reader.ReadInt32();
           modPlayer.wasHolding = reader.ReadBoolean();
 
-          if (Main.netMode == NetmodeID.Server)
+          if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesRotateOption);
@@ -192,7 +194,7 @@ namespace ChensGradiusMod
 
           modPlayer.seedRotateDirection = reader.ReadInt32();
 
-          if (Main.netMode == NetmodeID.Server)
+          if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesSeedDirection);
@@ -209,7 +211,7 @@ namespace ChensGradiusMod
           modPlayer.chargeMode = reader.ReadInt32();
           modPlayer.wasHolding = reader.ReadBoolean();
 
-          if (Main.netMode == NetmodeID.Server)
+          if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesChargeMultiple);
@@ -218,6 +220,21 @@ namespace ChensGradiusMod
             packet.Write(modPlayer.wasHolding);
             packet.Send(-1, playerNumber);
           }
+          break;
+
+        case PacketMessageType.SpawnRetaliationBullet:
+          if (GradiusHelper.IsServer())
+          {
+            Vector2 spawnPoint = reader.ReadVector2();
+            Vector2 spawnVelocity = reader.ReadVector2();
+            int dmg = reader.ReadInt32();
+            float kb = reader.ReadSingle();
+
+            Projectile.NewProjectile(spawnPoint, spawnVelocity,
+                                     ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                     dmg, kb, Main.myPlayer);
+          }
+
           break;
       }
     }
@@ -228,7 +245,8 @@ namespace ChensGradiusMod
       ClientChangesFreezeOption,
       ClientChangesRotateOption,
       ClientChangesSeedDirection,
-      ClientChangesChargeMultiple
+      ClientChangesChargeMultiple,
+      SpawnRetaliationBullet
     }
   }
 }
