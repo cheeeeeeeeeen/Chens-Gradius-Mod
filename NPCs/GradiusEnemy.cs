@@ -2,6 +2,7 @@
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,8 @@ namespace ChensGradiusMod.NPCs
 {
   public abstract class GradiusEnemy : ModNPC
   {
+    private bool syncRetaliate = false;
+
     public enum Types { Small, Large, Boss };
 
     public override void SetDefaults()
@@ -36,7 +39,17 @@ namespace ChensGradiusMod.NPCs
       aiType = 0;
     }
 
-    public override void PostAI() => ForceDefaults();
+    public override void PostAI()
+    {
+      ForceDefaults();
+
+      if (GradiusHelper.IsServerOnly() && syncRetaliate)
+      {
+        RetaliationSpread(npc.Center);
+        syncRetaliate = false;
+        npc.netUpdate = true;
+      }
+    }
 
     public override void HitEffect(int hitDirection, double damage)
     {
@@ -78,16 +91,31 @@ namespace ChensGradiusMod.NPCs
 
     public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
     {
-      if (Main.expertMode)
+      switch (EnemyType)
       {
-        switch (EnemyType)
-        {
-          case Types.Boss:
-          case Types.Large:
-            RetaliationSpray(projectile.Center);
-            break;
-        }
+        case Types.Boss:
+        case Types.Large:
+          if (Main.expertMode)
+          {
+            if (GradiusHelper.IsSinglePlayer()) RetaliationSpray(projectile.Center);
+            else if (GradiusHelper.IsMultiplayerClient())
+            {
+              syncRetaliate = true;
+              npc.netUpdate = true;
+            }
+          }
+          break;
       }
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(syncRetaliate);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      syncRetaliate = reader.ReadBoolean();
     }
 
     protected virtual int FrameTick { get; set; } = 0;
@@ -140,7 +168,7 @@ namespace ChensGradiusMod.NPCs
 
     protected void RetaliationSpray(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsMultiplayerClient())
+      if (GradiusHelper.IsNotMultiplayerClient())
       {
         int targetIndex = npc.target;
         npc.TargetClosest(false);

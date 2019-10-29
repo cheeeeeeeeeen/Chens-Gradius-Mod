@@ -142,6 +142,10 @@ namespace ChensGradiusMod
 
     public static bool IsMultiplayerClient() => Main.netMode == NetmodeID.MultiplayerClient;
 
+    public static bool IsServerOnly() => Main.netMode == NetmodeID.Server;
+
+    public static bool IsSinglePlayer() => Main.netMode == NetmodeID.SinglePlayer;
+
     public static bool IsBydoAccessory(ModItem modItem)
     {
       return modItem is BydoEmbryo ||
