@@ -162,13 +162,11 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
-      base.SendExtraAI(writer);
       writer.Write(persistDirection);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      base.ReceiveExtraAI(reader);
       persistDirection = reader.ReadInt32();
     }
 
