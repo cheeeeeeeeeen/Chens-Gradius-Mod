@@ -69,7 +69,12 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     public override void Kill(int timeLeft)
     {
-      GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero);
+      if (GradiusHelper.IsSameClientOwner(projectile))
+      {
+        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero,
+                                projectile.owner, true, true);
+        projectile.netUpdate = true;
+      }
     }
 
     public override void SendExtraAI(BinaryWriter writer)
@@ -158,6 +163,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
             projectile.netUpdate = true;
           }
         }
+        else currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
+                                                        GradiusHelper.MaxRotate, angleSpeed);
+
         projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2
