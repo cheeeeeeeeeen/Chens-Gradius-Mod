@@ -69,10 +69,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     public override void Kill(int timeLeft)
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
-      {
-        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero);
-      }
+      GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero);
     }
 
     public override void SendExtraAI(BinaryWriter writer)

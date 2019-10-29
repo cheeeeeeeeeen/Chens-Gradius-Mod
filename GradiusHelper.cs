@@ -140,6 +140,8 @@ namespace ChensGradiusMod
 
     public static bool IsNotMultiplayerClient() => Main.netMode != NetmodeID.MultiplayerClient;
 
+    public static bool IsMultiplayerClient() => Main.netMode == NetmodeID.MultiplayerClient;
+
     public static bool IsBydoAccessory(ModItem modItem)
     {
       return modItem is BydoEmbryo ||
@@ -246,11 +248,12 @@ namespace ChensGradiusMod
     public static int SpawnItem(Item item, Vector2 position, Vector2 velocity)
     {
       int iInd = Item.NewItem(position, item.type);
+      Main.item[iInd].active = false;
+      Main.item[iInd].TurnToAir();
+
       item.Center = position;
       item.velocity = velocity;
       Main.item[iInd] = item;
-      Main.item[iInd].Center = position;
-      Main.item[iInd].velocity = velocity;
 
       return iInd;
     }

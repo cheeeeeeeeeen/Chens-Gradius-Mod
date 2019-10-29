@@ -76,7 +76,7 @@ namespace ChensGradiusMod.NPCs
       else return 0f;
     }
 
-    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
     {
       if (Main.expertMode)
       {
@@ -140,7 +140,7 @@ namespace ChensGradiusMod.NPCs
 
     protected void RetaliationSpray(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (GradiusHelper.IsMultiplayerClient())
       {
         int targetIndex = npc.target;
         npc.TargetClosest(false);
@@ -154,7 +154,7 @@ namespace ChensGradiusMod.NPCs
 
         Projectile.NewProjectile(spawnPoint, direction.ToRotationVector2() * RetaliationBulletSpeed,
                                  ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, 255);
 
         npc.target = targetIndex;
       }
