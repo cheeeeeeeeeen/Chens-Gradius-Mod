@@ -131,7 +131,7 @@ namespace ChensGradiusMod.NPCs
         int reverseVeloDiff = Math.Sign(projectile.oldPosition.X - projectile.position.X);
         if (reverseVeloDiff == npc.spriteDirection) return null;
       }
-      
+
       return false;
     }
 

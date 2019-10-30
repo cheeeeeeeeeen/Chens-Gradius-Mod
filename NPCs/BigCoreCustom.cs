@@ -1,5 +1,6 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using Terraria;
@@ -11,6 +12,9 @@ namespace ChensGradiusMod.NPCs
   [AutoloadBossHead]
   public class BigCoreCustom : GradiusEnemy
   {
+    private const int FrameWidth = 192;
+    private const int FrameHeight = 130;
+
     private readonly int openCoreTime = 1200;
     private readonly int maxFrameIndex = 4;
     private readonly int fireRate = 25;
@@ -18,6 +22,7 @@ namespace ChensGradiusMod.NPCs
     private States mode = States.RegularAssault;
     private int fireTick = 0;
     private int existenceTick = 0;
+    private int frameCounterX = 7;
 
     private readonly float regularAssaultMaxSpeed = 30f;
     private readonly float regularAssaultAcceleration = 1f;
@@ -33,17 +38,16 @@ namespace ChensGradiusMod.NPCs
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Big Core Custom");
-      Main.npcFrameCount[npc.type] = 40;
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      npc.width = 186;
+      npc.width = 188;
       npc.height = 124;
       npc.damage = 200;
-      npc.lifeMax = 1000;
+      npc.lifeMax = 1500;
       npc.value = 10000f;
       npc.knockBackResist = 0f;
       npc.defense = 700;
@@ -66,39 +70,11 @@ namespace ChensGradiusMod.NPCs
 
     public override string BossHeadTexture => "ChensGradiusMod/Sprites/BigCoreCustomHead";
 
-    public override void FindFrame(int frameHeight)
-    {
-      if (mode == States.Exit && FrameCounter > 0)
-      {
-        if (++FrameTick >= FrameSpeed)
-        {
-          FrameTick = 0;
-          FrameCounter--;
-        }
-      }
-      else if (mode != States.Exit && !openCore && existenceTick >= openCoreTime)
-      {
-        if (++FrameTick >= FrameSpeed)
-        {
-          FrameTick = 0;
-          if (++FrameCounter >= maxFrameIndex) openCore = true;
-        }
-      }
-
-      int addedFrames = 0;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .125f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .25f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .375f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .5f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .625f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .75f)) addedFrames += 5;
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .875f)) addedFrames += 5;
-
-      npc.frame.Y = (FrameCounter + addedFrames) * frameHeight;
-    }
-
     public override void AI()
     {
+      CoreManagement();
+      BarrierStatus();
+
       switch (mode)
       {
         case States.RegularAssault:
@@ -112,6 +88,23 @@ namespace ChensGradiusMod.NPCs
 
       PerformAttack();
     }
+
+    public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+    {
+      SpriteEffects spriteEffects = SpriteEffects.None;
+      if (npc.spriteDirection > 0) spriteEffects = SpriteEffects.FlipHorizontally;
+      Vector2 drawPos = npc.TopLeft - Main.screenPosition;
+      Rectangle frame = new Rectangle(frameCounterX * FrameWidth, FrameCounter * FrameHeight,
+                                      FrameWidth, FrameHeight);
+      Vector2 drawCenter = new Vector2(2f, 2f);
+
+      spriteBatch.Draw(Main.npcTexture[npc.type], drawPos, frame, drawColor,
+                       0f, drawCenter, 1f, spriteEffects, 0f);
+
+      return false;
+    }
+
+    public override void FindFrame(int frameHeight) { }
 
     public override bool? CanBeHitByItem(Player player, Item item)
     {
@@ -233,7 +226,7 @@ namespace ChensGradiusMod.NPCs
         if (++fireTick >= fireRate)
         {
           fireTick = 0;
-        
+
           Vector2 pVel = new Vector2(1, 0) * CoreLaser.Spd * regularAssaultDirection;
 
           for (int i = 0; i < AttackVectors.Length; i++)
@@ -278,6 +271,38 @@ namespace ChensGradiusMod.NPCs
     private void ExitBehavior()
     {
       if (FrameCounter <= 0) npc.velocity += exitVelocity * npc.spriteDirection;
+    }
+
+    private void CoreManagement()
+    {
+      if (mode == States.Exit && FrameCounter > 0)
+      {
+        if (++FrameTick >= FrameSpeed)
+        {
+          FrameTick = 0;
+          FrameCounter--;
+        }
+      }
+      else if (mode != States.Exit && !openCore && existenceTick >= openCoreTime)
+      {
+        if (++FrameTick >= FrameSpeed)
+        {
+          FrameTick = 0;
+          if (++FrameCounter >= maxFrameIndex) openCore = true;
+        }
+      }
+    }
+
+    private void BarrierStatus()
+    {
+      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .875f)) frameCounterX = 7;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .75f)) frameCounterX = 6;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .625f)) frameCounterX = 5;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .5f)) frameCounterX = 4;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .375f)) frameCounterX = 3;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .25f)) frameCounterX = 2;
+      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .125f)) frameCounterX = 1;
+      else frameCounterX = 0;
     }
   }
 }
