@@ -109,10 +109,11 @@ namespace ChensGradiusMod
     {
       if (clientPlayer is GradiusModPlayer clone)
       {
-        ModPacket packet = mod.GetPacket();
+        ModPacket packet;
 
         if (clone.isFreezing != isFreezing)
         {
+          packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesFreezeOption);
           packet.Write((byte)player.whoAmI);
           packet.Write(isFreezing);
@@ -122,6 +123,7 @@ namespace ChensGradiusMod
 
         if (clone.rotateMode != rotateMode)
         {
+          packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesRotateOption);
           packet.Write((byte)player.whoAmI);
           packet.Write(rotateMode);
@@ -132,6 +134,7 @@ namespace ChensGradiusMod
 
         if (clone.seedRotateDirection != seedRotateDirection)
         {
+          packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSeedDirection);
           packet.Write((byte)player.whoAmI);
           packet.Write(seedRotateDirection);
@@ -140,6 +143,7 @@ namespace ChensGradiusMod
 
         if (clone.chargeMode != chargeMode)
         {
+          packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesChargeMultiple);
           packet.Write((byte)player.whoAmI);
           packet.Write(chargeMode);
