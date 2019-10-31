@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.8.1.1
+[B][U][SIZE=6]Mod Version: 0.8.2
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -153,6 +153,7 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [LIST=1]
 [*]The Position Light (Gradius ReBirth version, originally from Nemesis 3)
 [*]Departure For Space (Gradius III From Myth to Legend version)
+[*]Tabidachi (Gradius II Gofer no Yabou Version)
 [/LIST]
 [B]Added Music without music box[/B]
 [LIST=1]
@@ -168,6 +169,15 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.8.2
+  - Fix multiplayer bug issue where Charge Multiples are getting replaced when another player picks an item
+  - Add field sprites for the Charge Multiples
+  - Charge multiple special attack missile and trails are still placeholders
+  - Charge multiple inventory sprite is also still a placeholder
+  - Add Tabidachi music and music box from Gradius II
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.8.1.1
   - Redesign Big Core Custom's sprite sheet to support most GPUs
   - Add more health to Big Core Custom

@@ -25,6 +25,7 @@ For more information about these enemies and the behaviors, visit the homepage.
 Added Music with music box:
 1. The Position Light (Gradius ReBirth version, originally from Nemesis 3)
 2. Departure For Space (Gradius III From Myth to Legend version)
+3. Tabidachi (Gradius II Gofer no Yabou Version)
 
 Added Music without music boxes yet:
 1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)

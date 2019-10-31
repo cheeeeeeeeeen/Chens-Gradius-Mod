@@ -30,6 +30,9 @@ namespace ChensGradiusMod
         AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/DepartureForSpace"),
                     ModContent.ItemType<DepartureForSpaceMusicBox>(),
                     ModContent.TileType<DepartureForSpaceMusicBoxTile>());
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Tabidachi"),
+                    ModContent.ItemType<TabidachiMusicBox>(),
+                    ModContent.TileType<TabidachiMusicBoxTile>());
       }
 
       //Mod achievementLib = ModLoader.GetMod("AchievementLib");
