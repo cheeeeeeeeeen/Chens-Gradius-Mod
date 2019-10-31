@@ -10,15 +10,15 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
   {
     private readonly int maxCharge = 180;
     private readonly int minCharge = 30;
-    private readonly int chargeDustId = 159;
-    private readonly int maxChargeDustId = 55;
+    private readonly int chargeDustId = 71;
+    private readonly int maxChargeDustId = 124;
     private readonly int chargeSoundRate = 60;
     private readonly int dustRate = 3;
     private int chargeTime = 0;
     private int chargeSoundTick = 0;
     private int dustTick = 0;
 
-    public override string Texture => "ChensGradiusMod/Sprites/OptionSheet";
+    public override string Texture => "ChensGradiusMod/Sprites/ChargeSheet";
 
     public override bool PreAI()
     {

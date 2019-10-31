@@ -5,7 +5,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 {
   public class ChargeMultipleTrail : ModProjectile
   {
-    private readonly int dustId = 159;
+    private readonly int dustId = 112;
     private readonly int dustRate = 5;
     private int dustTick = 0;
 
@@ -34,6 +34,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     public override void AI()
     {
+      projectile.rotation = projectile.ai[0];
+
       if (++projectile.frameCounter >= 5)
       {
         projectile.frameCounter = 0;

@@ -249,24 +249,21 @@ namespace ChensGradiusMod
       return null;
     }
 
-    public static int? SpawnItem(Item item, Vector2 position, Vector2 velocity, int owner = 255,
-                                 bool force = false, bool ownerOnly = false)
+    public static void SpawnClonedItem(Item clonedItem, Vector2 center, Vector2 velocity, int stack = 1)
     {
-      for (int i = 0; i < Main.maxItems; i++)
+      int index = Item.NewItem(center, clonedItem.type, stack, false, -1, false, false);
+      Main.item[index] = clonedItem.Clone();
+      Main.item[index].whoAmI = index;
+      Main.item[index].Center = center;
+      Main.item[index].velocity = velocity;
+      if (stack != Main.item[index].stack)
       {
-        if ((i >= Main.maxItems - 1 && force) ||
-            Main.item[i].IsAir || !Main.item[i].active)
-        {
-          Main.item[i] = item;
-          Main.item[i].Center = position;
-          Main.item[i].velocity = velocity;
-          Main.item[i].owner = owner;
-          Main.item[i].instanced = ownerOnly;
-          return i;
-        }
+        Main.item[index].stack = stack;
       }
-
-      return null;
+      if (IsMultiplayerClient())
+      {
+        NetMessage.SendData(21, -1, -1, null, index, 1f, 0f, 0f, 0, 0, 0);
+      }
     }
   }
 }

@@ -11,7 +11,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     public const float Spd = 18f;
     public Item clonedAccessory = null;
 
-    private readonly int[] dustIds = new int[2] { 159, 55 };
+    private readonly int[] dustIds = new int[2] { 55, 112 };
     private readonly int trailType = ModContent.ProjectileType<ChargeMultipleTrail>();
     private readonly float detectionRange = 600f;
     private readonly float angleSpeed = 20f;
@@ -71,9 +71,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     {
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        GradiusHelper.SpawnItem(clonedAccessory, projectile.Center, Vector2.Zero,
-                                projectile.owner, true, true);
-        projectile.netUpdate = true;
+        Vector2 vel = GradiusHelper.MoveToward(projectile.oldPosition, projectile.position, Spd);
+        GradiusHelper.SpawnClonedItem(clonedAccessory, projectile.Center, vel);
       }
     }
 
@@ -93,8 +92,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     {
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        Projectile.NewProjectile(projectile.Center, Vector2.Zero, trailType,
-                                 projectile.damage, projectile.knockBack, projectile.owner);
+        Projectile.NewProjectile(projectile.Center, Vector2.Zero, trailType, projectile.damage,
+                                 projectile.knockBack, projectile.owner, projectile.rotation);
       }
     }
 
@@ -166,7 +165,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         else currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
                                                         GradiusHelper.MaxRotate, angleSpeed);
 
-        projectile.rotation = MathHelper.ToRadians(currentAngle);
+        projectile.rotation = 0f;
+        // projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2
         {
