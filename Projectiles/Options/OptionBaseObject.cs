@@ -223,6 +223,7 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.NettleBurstLeft &&
              p.type != ProjectileID.NettleBurstRight &&
              p.type != ProjectileID.NettleBurstEnd &&
+             p.type != ProjectileID.StyngerShrapnel &&
              p.type != ProjectileID.PhantasmArrow &&
              p.type != ProjectileID.Phantasm;
     }
@@ -287,7 +288,8 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("AdamantiteStaffPro2")
+        result = result && p.type != selectMod.ProjectileType("ChlorophyteCloud")
+                        && p.type != selectMod.ProjectileType("AdamantiteStaffPro2")
                         && p.type != selectMod.ProjectileType("EarthenSpawner")
                         && p.type != selectMod.ProjectileType("EarthenCascade")
                         && p.type != selectMod.ProjectileType("EarthenSpawnerR")
@@ -338,7 +340,12 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("SpiritMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("AdamantiteStaffProj2")
+        result = result && p.type != ProjectileID.VortexLightning // Vanilla but no vanilla weapon uses this
+                        && p.type != selectMod.ProjectileType("BlueEmber")
+                        && p.type != selectMod.ProjectileType("ChaosB")
+                        && p.type != selectMod.ProjectileType("CogW")
+                        && p.type != selectMod.ProjectileType("GrassPortal")
+                        && p.type != selectMod.ProjectileType("AdamantiteStaffProj2")
                         && p.type != selectMod.ProjectileType("BloodVessel")
                         && p.type != selectMod.ProjectileType("Blood3")
                         && p.type != selectMod.ProjectileType("Fire")
