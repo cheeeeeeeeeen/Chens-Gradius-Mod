@@ -224,6 +224,7 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.NettleBurstRight &&
              p.type != ProjectileID.NettleBurstEnd &&
              p.type != ProjectileID.StyngerShrapnel &&
+             p.type != ProjectileID.SeedlerThorn &&
              p.type != ProjectileID.PhantasmArrow &&
              p.type != ProjectileID.Phantasm;
     }
@@ -246,7 +247,12 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("CalamityMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("InfernalBlade2")
+        result = result && p.type != selectMod.ProjectileType("Judgement")
+                        && p.type != selectMod.ProjectileType("Whiterain")
+                        && p.type != selectMod.ProjectileType("WhiteOrb")
+                        && p.type != selectMod.ProjectileType("PlagueExplosionFriendly")
+                        && p.type != selectMod.ProjectileType("BeamingBolt2")
+                        && p.type != selectMod.ProjectileType("InfernalBlade2")
                         && p.type != selectMod.ProjectileType("FlameBeamTip")
                         && p.type != selectMod.ProjectileType("FlameBeamTip2")
                         && p.type != selectMod.ProjectileType("BlueBubble")
@@ -288,7 +294,12 @@ namespace ChensGradiusMod.Projectiles.Options
       selectMod = ModLoader.GetMod("ThoriumMod");
       if (selectMod != null)
       {
-        result = result && p.type != selectMod.ProjectileType("ChlorophyteCloud")
+        result = result && p.type != selectMod.ProjectileType("TitaniumStaffPro2")
+                        && p.type != selectMod.ProjectileType("NightStar2")
+                        && p.type != selectMod.ProjectileType("NightStarTrue2")
+                        && p.type != selectMod.ProjectileType("ShusSandstorm")
+                        && p.type != selectMod.ProjectileType("Shroomy")
+                        && p.type != selectMod.ProjectileType("ChlorophyteCloud")
                         && p.type != selectMod.ProjectileType("AdamantiteStaffPro2")
                         && p.type != selectMod.ProjectileType("EarthenSpawner")
                         && p.type != selectMod.ProjectileType("EarthenCascade")
@@ -341,6 +352,7 @@ namespace ChensGradiusMod.Projectiles.Options
       if (selectMod != null)
       {
         result = result && p.type != ProjectileID.VortexLightning // Vanilla but no vanilla weapon uses this
+                        && p.type != selectMod.ProjectileType("QuicksilverBolt1")
                         && p.type != selectMod.ProjectileType("BlueEmber")
                         && p.type != selectMod.ProjectileType("ChaosB")
                         && p.type != selectMod.ProjectileType("CogW")
