@@ -4,3 +4,4 @@ version = 0.8.2
 homepage = https://forums.terraria.org/index.php?threads/chens-gradius-mod.83289/
 hideCode = true
 hideResources = true
+buildIgnore = build.txt, .gitattributes, .gitignore, .git/, .vs/, .idea/, bin/, obj/, Thumbs.db, *.csproj, .cs, .sln, forum.txt
