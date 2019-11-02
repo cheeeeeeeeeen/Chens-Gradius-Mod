@@ -71,8 +71,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     {
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        Vector2 vel = GradiusHelper.MoveToward(projectile.oldPosition, projectile.position, Spd);
-        GradiusHelper.SpawnClonedItem(clonedAccessory, projectile.Center, vel);
+        GradiusHelper.SpawnClonedItem(clonedAccessory, projectile.Center, projectile.velocity);
       }
     }
 
@@ -164,9 +163,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         }
         else currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
                                                         GradiusHelper.MaxRotate, angleSpeed);
-
-        projectile.rotation = 0f;
-        // projectile.rotation = MathHelper.ToRadians(currentAngle);
+        projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2
         {
