@@ -19,6 +19,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       item.height = 60;
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, 0f, .749f, 1f);
+    }
+
     public override string Texture => $"ChensGradiusMod/Sprites/FreezeInv{OptionPosition}";
 
     protected override string ProjectileType => "Freeze";

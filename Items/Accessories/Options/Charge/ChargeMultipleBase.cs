@@ -13,6 +13,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, 0.8667f, 0.6275f, 0.8667f);
+    }
+
     public override string Texture => $"ChensGradiusMod/Sprites/ChargeInv{OptionPosition}";
 
     protected override string ProjectileType => "Charge";

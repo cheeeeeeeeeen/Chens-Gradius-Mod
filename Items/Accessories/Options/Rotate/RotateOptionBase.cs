@@ -17,6 +17,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 6));
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, .498f, 1f, 0f);
+    }
+
     public override string Texture => $"ChensGradiusMod/Sprites/RotateInv{OptionPosition}";
 
     protected override string ProjectileType => "Rotate";

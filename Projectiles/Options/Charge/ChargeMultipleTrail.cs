@@ -20,7 +20,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       projectile.netImportant = true;
       projectile.width = 16;
       projectile.height = 16;
-      projectile.light = 1f;
+      projectile.light = .7f;
       projectile.friendly = true;
       projectile.hostile = false;
       projectile.tileCollide = false;

@@ -32,6 +32,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
       ResetProjectileCounts(player);
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, 1f, .498f, 0f);
+    }
+
     public override bool CanEquipAccessory(Player player, int slot)
     {
       return ModeChecks(player, true);

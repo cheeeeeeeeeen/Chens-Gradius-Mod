@@ -47,6 +47,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
       }
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, .5f, .249f, 0f);
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/OptionSeedSheet";
 
     public override void AddRecipes()

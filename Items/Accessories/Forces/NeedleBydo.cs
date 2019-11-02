@@ -25,6 +25,11 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       DeployForce(player);
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, .15f, .15f, 1.125f);
+    }
+
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);

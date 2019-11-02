@@ -5,10 +5,6 @@ namespace ChensGradiusMod.Items.Accessories
 {
   public abstract class ParentGradiusAccessory : ModItem
   {
-    protected string RealItemTexture => base.Texture;
-
-    protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
-
     public override void SetDefaults()
     {
       item.accessory = true;
@@ -25,5 +21,7 @@ namespace ChensGradiusMod.Items.Accessories
       recipe.SetResult(this);
       recipe.AddRecipe();
     }
+
+    protected GradiusModPlayer ModPlayer(Player p) => p.GetModPlayer<GradiusModPlayer>();
   }
 }

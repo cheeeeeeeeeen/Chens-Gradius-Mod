@@ -36,6 +36,11 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       DeployForce(player);
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, 1.125f, .5602f, 0f);
+    }
+
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
       Player clientPlayer = Main.LocalPlayer;

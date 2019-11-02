@@ -32,6 +32,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
       ResetProjectileCounts(player);
     }
 
+    public override void PostUpdate()
+    {
+      Lighting.AddLight(item.Center, 1.5f, .747f, 0f);
+    }
+
     protected new virtual string[] ProjectileName { get; } = { "1", "2" };
 
     protected new virtual int[] OptionPosition { get; } = { 1, 2 };
