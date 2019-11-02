@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.8.2
+[B][U][SIZE=6]Mod Version: 0.8.2.1
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -70,7 +70,7 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Their attacks are based on the ammos found in the Ammo slots.
 [*]They can only copy Bullets and Arrows.
 [*]They can be upgraded to regular options!
-[*][SPOILER="Option Seed Showcase"][IMG]https://previews.dropbox.com/p/orig/AAl-ya9qDidsornsFcPez7mUBumyaxB08_Jrk_R9Vj3KTV4SxTG_XKNlN5pIb-9kYykPFAGxpR4cEdqtxCdUzLFBKpaM-hlh4ssqIUchyggNbf_FstPVJMi4eHKRGLWHwN0O7pXho2COkUgP0ES2eaPb6kssxZvoYc-e_i9DNQwR7EHfNKUYHEKFO7xRKi5-KAE5dYJNLflnH3G8nDidzVOmRuI6Ss4n-_OynyaNrb499AnbASOnbbZpkXaRNa7adDB-W3EiOtPC5coWawgrYs4UHv3tdEFFyI7lzkNC05-uTf9K8ji2eZ59SUvtaZQd-QS7Z6Nigs_WNtA6WEnLXIWIGVkoHnyF-qhLmKS7-ClkGVcD9P0jPHXj5vyDvkyQ64A/p.gif?size=2048x1536&size_mode=3[/IMG]
+[*][SPOILER="Option Seed Showcase"][IMG]https://lh3.googleusercontent.com/yLkArMyJRvi-nceGbstxUTff-0ArFzCcFIa-3a8r-P5asMZ_VTH1OP7Tn9Y6y3w4m8lgNHHF5qsDaDherEg0IUsXvlrwOtKABrfojL5PD1OmXC5D59C8lolTyizEsTL-UkNRfqH6WiP0S2M_yo7MxLbQUpA1hsUu3ybtvkXHqvRDj26cBmhi5FT599ek-krub1heu477UJUBbgZcFgUVz2fsVjWA6k6sD36FH9Y1sjKMslf8wKxoEMslQiWgBJgpoLtirk4sdWy1vdY3GwUVJRKZhw8_N0wXQ9wpuEZ4-PL9h6rk737KsRUBew60Y2H-0jSXXDcvK7MTEQDXP2Tbb0UbwA9FeqyiO9MozVtPeadUBaPBU86sBFD5AHkOXBw4XPvCBxLzPKkErT_zbd9hWw1GN2OxkMW0sgEwDgWxc6UW6tyhU8aLnY8OwT-W3nFRNBY3TKwHbWyM3UM15_7qB736UpRspZhT_MtDEGo_k76tuDOnqFIyjrVzIXrjZDC8hFT33iUlyKkxcFvIpUjCc75ZUQQqhpSwSUUQYitzhEUpXLo2dlhGDbTy5hMEy-swrb56rWI8VkzqnizXz-YZO1OfhT8L0Q8BVFj4NWb8y7NdObppcC-iEQPp8oh9uKZxoll7ATI6j4cgLQ3UIq9roWYM1vsgGPj_yTer9eeYCbUh6kjkkOatjd1cRwIl3B97Yj2yY_0eTLM0dSsTfUOeG8n5EERlE28ZMAiutJzdgpbH7vEd=w415-h368-no[/IMG]
 They have weaker firepower, but they behave differently.[/SPOILER]
 [/LIST]
 [*]Charge Multiples
@@ -82,6 +82,8 @@ They have weaker firepower, but they behave differently.[/SPOILER]
 [*]The longer the Multiples charge energy, the longer the duration of the special attack.
 [*]Be warned that the Multiples will be lost from your inventory.
 [*]They can later be retrieved again after the special attack.
+[*][SPOILER="Charge Multiple Showcase"][IMG]https://lh3.googleusercontent.com/X0LunPT07YTx2GDElRaZNL9NuNFHv7FsnbRRTcYKA8GFBjrx87CTGW722CnVGnizUPceQikvNyZLWLffgSb9ky7rG5HxA-z6OvLThl8jHLBSa0ybE4O5glsdrjcVo-GpM4fS-I_Hlox0Af321bpKxMdSoXGpgdKKwL19IPRbH5gYNdlhCrCuhJH8XkdjC8_vTkNYXn7x5v3CIAg8nxznTxiI8ROZapE04GdOS7799efi93PXKjwJcuq4Yye7i4v3eFFXEItZrWV1K-zPWAeOfXarUVp2R088YuglG0l8dLhULU_g-PX817xl2Deqp931WehQwhkVKzbxycHo7aV10d0xINaFWIciF_GqlxMBLQh3MQil_GNXhhsOS8IV2bPYiYdur-FBMunglpv40cwBjAiuXF6vaiJiDv9Kc6bN-gPJYNCWrWSRt7tDlMLEr1dteTfA_1GvtUwHAiPk5FlFk0IAjojYWnilqKdqoabA8rOfxvr_R3tNc4HinGs8ItPGZdHwR1MQ10iff78zMtveZKwFIQB-jSTMjyzXTHwxztmTkVDdoTAcPJs9gmGtd8OZ5NhgG8gS6Z42TwFhueoAHLcdYHXBZ41VnlYLDSH5LWQWrMnkxi73gy4EWBCjIz_DS_CxOtl3FM3zNDzT8-kt-JgT-GmQ04ve0YmMbu_NnbCzY7eNK7PCkn_SK2N4zX62jt5YUgWM47DwqHVkut9jQOIHLYhusJ45ja42FxDq3fWJTDYt=w611-h341-no[/IMG]
+They can unleash a power special attack, but be advised that the accessory will be left on the world. Retrieve it if possible![/SPOILER]
 [/LIST]
 [/LIST]
 [B][S]Additional Content[/S][/B]
@@ -169,6 +171,13 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Changelogs"]
+0.8.2.1
+  - Fix multiplayer bug where there is a silent exception that occurs in Charge Multiples
+  - Add light for Option items in the world
+  - Exclude some note files that was bundled with the mod
+  - Add a lot of Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.8.2
   - Fix multiplayer bug issue where Charge Multiples are getting replaced when another player picks an item
   - Add field sprites for the Charge Multiples
