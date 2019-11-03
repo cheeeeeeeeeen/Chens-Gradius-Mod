@@ -63,7 +63,8 @@ namespace ChensGradiusMod.NPCs
 
       if (yDirection == 0)
       {
-        yDirection = DecideDeploy();
+        yDirection = DecideYDeploy(npc.height * .5f, cancelDeployThreshold);
+        if (yDirection == 0) return;
         if (yDirection < 0) npc.frame.Y = 416;
       }
       else
@@ -158,41 +159,6 @@ namespace ChensGradiusMod.NPCs
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                  GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }
-    }
-
-    private int DecideDeploy()
-    {
-      Vector2 upwardV = new Vector2(0, -npc.height * .5f),
-              downwardV = new Vector2(0, npc.height * .5f),
-              upwardP = npc.position,
-              downwardP = npc.position,
-              velocityOnCollide;
-
-      for (int i = 0; i < cancelDeployThreshold; i++)
-      {
-        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
-        if (downwardV != velocityOnCollide)
-        {
-          npc.position = downwardP;
-          npc.velocity = velocityOnCollide;
-          return 1;
-        }
-        else downwardP += downwardV;
-
-        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
-        if (upwardV != velocityOnCollide)
-        {
-          npc.position = upwardP;
-          npc.velocity = velocityOnCollide;
-          return -1;
-        }
-        else upwardP += upwardV;
-      }
-
-      npc.friendly = true;
-      npc.active = false;
-      npc.life = 0;
-      return 0;
     }
   }
 }

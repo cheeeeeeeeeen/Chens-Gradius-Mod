@@ -12,7 +12,7 @@ namespace ChensGradiusMod.NPCs
     private readonly float xSpeed = 3f;
     private readonly float yGravity = .1f;
     private readonly float maxYSpeed = 5f;
-    private readonly int jumpCountForSpray = 2;
+    private readonly int jumpCountForSpray = 1;
 
     private bool initialized = false;
     private int persistDirection = 0;
@@ -40,7 +40,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 28;
       npc.height = 28;
       npc.damage = 100;
-      npc.lifeMax = 130;
+      npc.lifeMax = 150;
       npc.value = 2000f;
       npc.knockBackResist = 0f;
       npc.defense = 50;
@@ -68,7 +68,7 @@ namespace ChensGradiusMod.NPCs
         if (npc.Center.X > Main.player[npc.target].Center.X) persistDirection = -1;
         else persistDirection = 1;
         xDirection = persistDirection;
-        yDirection = DecideDeploy();
+        yDirection = DecideYDeploy(npc.height, cancelDeployThreshold, false, true, 1);
         if (yDirection < 0)
         {
           startFrame = 8;
@@ -132,37 +132,6 @@ namespace ChensGradiusMod.NPCs
     {
       npc.position = p;
       npc.velocity = v;
-    }
-
-    private int DecideDeploy()
-    {
-      Vector2 savedPosition = npc.position,
-              upwardV = new Vector2(0, -npc.height),
-              downwardV = new Vector2(0, npc.height),
-              upwardP = npc.position,
-              downwardP = npc.position,
-              velocityOnCollide;
-
-      for (int i = 0; i < cancelDeployThreshold; i++)
-      {
-        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
-        if (downwardV != velocityOnCollide)
-        {
-          SetPositionAndVelocity(savedPosition, Vector2.Zero);
-          return 1;
-        }
-        else downwardP += downwardV;
-
-        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
-        if (upwardV != velocityOnCollide)
-        {
-          SetPositionAndVelocity(savedPosition, Vector2.Zero);
-          return -1;
-        }
-        else upwardP += upwardV;
-      }
-
-      return 1;
     }
 
     private void MoveHorizontally()

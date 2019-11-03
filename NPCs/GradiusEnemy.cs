@@ -225,5 +225,45 @@ namespace ChensGradiusMod.NPCs
         }
       }
     }
+
+    protected int DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
+                                bool forceSpawn = false, int fallbackValue = 0)
+    {
+      Vector2 savedPosition = npc.position,
+              upwardV = new Vector2(0, -yLength),
+              downwardV = new Vector2(0, yLength),
+              upwardP = npc.position,
+              downwardP = npc.position,
+              velocityOnCollide;
+
+      for (int i = 0; i < checkLimit; i++)
+      {
+        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
+        if (downwardV != velocityOnCollide)
+        {
+          npc.position = moveNpc ? downwardP : savedPosition;
+          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
+          return 1;
+        }
+        else downwardP += downwardV;
+
+        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
+        if (upwardV != velocityOnCollide)
+        {
+          npc.position = moveNpc ? upwardP : savedPosition;
+          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
+          return -1;
+        }
+        else upwardP += upwardV;
+      }
+
+      if (!forceSpawn)
+      {
+        npc.friendly = true;
+        npc.active = false;
+        npc.life = 0;
+      }
+      return fallbackValue;
+    }
   }
 }
