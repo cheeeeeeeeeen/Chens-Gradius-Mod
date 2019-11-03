@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using System.IO;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -19,9 +20,11 @@ namespace ChensGradiusMod.NPCs
     private readonly int[] inverseFrameAngleAim = { 17, 16, 15, 14, 13, 12, 11, 10, 9 };
     private readonly int fireRate = 50;
     private readonly int cancelDeployThreshold = 500;
+    private readonly int syncRate = 600;
 
     private int yDirection = 0;
     private int fireTick = 0;
+    private int syncTick = 0;
 
     public override void SetStaticDefaults()
     {
@@ -78,6 +81,8 @@ namespace ChensGradiusMod.NPCs
         if (npc.target >= 0) PerformAttack();
         else fireTick = 0;
       }
+
+      ConstantSync(ref syncTick, syncRate);
     }
 
     public override void FindFrame(int frameHeight)
@@ -109,6 +114,16 @@ namespace ChensGradiusMod.NPCs
           }
         }
       }
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(yDirection);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      yDirection = reader.ReadInt32();
     }
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2f;

@@ -265,5 +265,20 @@ namespace ChensGradiusMod.NPCs
       }
       return fallbackValue;
     }
+
+    protected bool ConstantSync(ref int tick, int rate)
+    {
+      if (GradiusHelper.IsServer())
+      {
+        if (++tick >= rate)
+        {
+          tick = 0;
+          npc.netUpdate = true;
+          return true;
+        }
+      }
+
+      return false;
+    }
   }
 }

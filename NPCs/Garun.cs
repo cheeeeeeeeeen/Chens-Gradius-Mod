@@ -1,6 +1,7 @@
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -13,10 +14,12 @@ namespace ChensGradiusMod.NPCs
     private readonly float travelSpeed = 5f;
     private readonly float attackDistance = 1200;
     private readonly int fireRate = 20;
+    private readonly int syncRate = 120;
     private int timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
     private int fireTick = 0;
+    private int syncTick = 0;
 
     public override void SetStaticDefaults()
     {
@@ -68,6 +71,8 @@ namespace ChensGradiusMod.NPCs
       npc.velocity.Y += -yTo * travelSpeed + xTo * wobble;
 
       PerformAttack();
+
+      ConstantSync(ref syncTick, syncRate);
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -76,6 +81,16 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Garun";
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(timerTick);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      timerTick = reader.ReadInt32();
+    }
 
     protected override int FrameSpeed { get; set; } = 4;
 

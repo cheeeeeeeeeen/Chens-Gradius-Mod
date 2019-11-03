@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -13,6 +14,7 @@ namespace ChensGradiusMod.NPCs
     private readonly float yGravity = .1f;
     private readonly float maxYSpeed = 5f;
     private readonly int jumpCountForSpray = 1;
+    private readonly int syncRate = 600;
 
     private bool initialized = false;
     private int persistDirection = 0;
@@ -24,6 +26,7 @@ namespace ChensGradiusMod.NPCs
     private int startFrame = 0;
     private int endFrame = 4;
     private int maxFrame = 8;
+    private int syncTick = 0;
 
     public enum States { Hop, Fall, Spray };
 
@@ -88,6 +91,8 @@ namespace ChensGradiusMod.NPCs
       MoveHorizontally();
       MoveVertically();
       if (mode != States.Spray) AdjustMovementBehavior();
+
+      ConstantSync(ref syncTick, syncRate);
     }
 
     public override void FindFrame(int frameHeight)
@@ -120,6 +125,30 @@ namespace ChensGradiusMod.NPCs
       npc.frame.Y = frameHeight * FrameCounter;
     }
 
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(animateDirection);
+      writer.Write((byte)mode);
+      writer.Write(xDirection);
+      writer.Write(yDirection);
+      writer.Write(jumpCount);
+      writer.Write(startFrame);
+      writer.Write(endFrame);
+      writer.Write(maxFrame);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      animateDirection = reader.ReadInt32();
+      mode = (States)reader.ReadByte();
+      xDirection = reader.ReadInt32();
+      yDirection = reader.ReadInt32();
+      jumpCount = reader.ReadInt32();
+      startFrame = reader.ReadInt32();
+      endFrame = reader.ReadInt32();
+      maxFrame = reader.ReadInt32();
+    }
+
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 0.9f;
 
     protected override int RetaliationSpreadBulletNumber => 10;
@@ -127,12 +156,6 @@ namespace ChensGradiusMod.NPCs
     protected override float RetaliationSpreadAngleDifference => 180f;
 
     protected override int FrameSpeed { get; set; } = 6;
-
-    private void SetPositionAndVelocity(Vector2 p, Vector2 v)
-    {
-      npc.position = p;
-      npc.velocity = v;
-    }
 
     private void MoveHorizontally()
     {
