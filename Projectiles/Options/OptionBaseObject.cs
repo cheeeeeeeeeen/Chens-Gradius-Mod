@@ -225,6 +225,7 @@ namespace ChensGradiusMod.Projectiles.Options
              p.type != ProjectileID.NettleBurstEnd &&
              p.type != ProjectileID.StyngerShrapnel &&
              p.type != ProjectileID.SeedlerThorn &&
+             p.type != ProjectileID.DD2BetsyArrow &&
              p.type != ProjectileID.PhantasmArrow &&
              p.type != ProjectileID.Phantasm;
     }
@@ -352,6 +353,12 @@ namespace ChensGradiusMod.Projectiles.Options
       if (selectMod != null)
       {
         result = result && p.type != ProjectileID.VortexLightning // Vanilla but no vanilla weapon uses this
+                        && p.type != selectMod.ProjectileType("FieryAura")
+                        && p.type != selectMod.ProjectileType("DuskAura")
+                        && p.type != selectMod.ProjectileType("FireBolt")
+                        && p.type != selectMod.ProjectileType("GeodeStaveProjectile")
+                        && p.type != selectMod.ProjectileType("AquaBolt")
+                        && p.type != selectMod.ProjectileType("AquaFlareProj")
                         && p.type != selectMod.ProjectileType("QuicksilverBolt1")
                         && p.type != selectMod.ProjectileType("BlueEmber")
                         && p.type != selectMod.ProjectileType("ChaosB")

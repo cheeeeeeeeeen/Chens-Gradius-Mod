@@ -1,4 +1,4 @@
-My Gradius Mod is really just a fun mod in implementing Gradius features into Terraria.
+My Gradius Mod is really just a fun mod in implementing Gradius features into Terraria (along with other SHMUP games).
 
 Current features:
 1. Options/Multiples
@@ -17,6 +17,7 @@ New Enemies:
 3. Zalk
 4. Grazia
 5. Big Core Custom
+6. Sagna
 
 These enemies will only spawn in Hard mode.
 All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
