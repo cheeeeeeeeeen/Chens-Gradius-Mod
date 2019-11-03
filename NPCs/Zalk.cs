@@ -49,7 +49,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (!targetDetermined)
       {
-        npc.TargetClosest(true);
+        npc.TargetClosest(false);
         targetDetermined = true;
         if (persistDirection == 0)
         {
