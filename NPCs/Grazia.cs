@@ -162,8 +162,8 @@ namespace ChensGradiusMod.NPCs
 
     private int DecideDeploy()
     {
-      Vector2 upwardV = new Vector2(0, -CustomGravity),
-              downwardV = new Vector2(0, CustomGravity),
+      Vector2 upwardV = new Vector2(0, -npc.height * .5f),
+              downwardV = new Vector2(0, npc.height * .5f),
               upwardP = npc.position,
               downwardP = npc.position,
               velocityOnCollide;
