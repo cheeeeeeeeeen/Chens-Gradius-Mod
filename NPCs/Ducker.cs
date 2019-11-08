@@ -19,7 +19,6 @@ namespace ChensGradiusMod.NPCs
 
     private States mode = States.Run;
     private bool initialized = false;
-    private int originalXDirection = 0;
     private int persistDirection = 0;
     private int yDirection = 0;
     private bool hasJumped = false;
@@ -113,7 +112,6 @@ namespace ChensGradiusMod.NPCs
             {
               FrameCounter = 6;
               mode = States.Run;
-              persistDirection = originalXDirection;
             }
           }
           break;
@@ -148,7 +146,6 @@ namespace ChensGradiusMod.NPCs
             HaltMovement();
             FrameCounter = 6;
             FrameTick = 0;
-            originalXDirection = persistDirection;
             FaceTarget(Target.Center);
           }
           else
