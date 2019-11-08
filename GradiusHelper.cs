@@ -71,6 +71,16 @@ namespace ChensGradiusMod
       return new Vector2(newX, newY);
     }
 
+    public static float GetAngleRelativeXDirection(Vector2 origin, Vector2 destination, bool degrees = true)
+    {
+      float hypotenuse = Vector2.Distance(origin, destination);
+      float adjacent = destination.X - origin.X;
+      float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
+
+      if (degrees) direction = MathHelper.ToDegrees(direction);
+      return direction;
+    }
+
     public static float GetBearing(Vector2 origin, Vector2 destination, bool reverse = true)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
@@ -215,14 +225,8 @@ namespace ChensGradiusMod
 
     public static void ProjectileDestroy(Projectile proj)
     {
-      try
-      {
-        proj.Kill();
-      }
-      catch
-      {
-        proj.active = false;
-      }
+      try { proj.Kill(); }
+      catch { proj.active = false; }
     }
 
     //public static bool AchievementLibUnlock(string achievement, Player player = null)
@@ -294,6 +298,26 @@ namespace ChensGradiusMod
         X = i * 16f + 8f,
         Y = j * 16f + 8f
       };
+    }
+
+    public static bool VanillaStepUpTileComputationCatcher(Vector2 p, Vector2 v, float w)
+    {
+      int direction = 0;
+      if (v.X < 0f) direction = -1;
+      else if (v.X > 0f) direction = 1;
+      Vector2 destination = p;
+      destination.X += v.X;
+
+      int tileX = (int)((destination.X + (w / 2) + ((w / 2 + 1) * direction)) / 16f);
+      int tileY = (int)((destination.Y + 0.1) / 16.0);
+
+      if (tileX >= Main.tile.GetLength(0) || tileY >= Main.tile.GetLength(1)
+          || tileX < 0 || tileY < 0)
+      {
+        return true;
+      }
+
+      return false;
     }
   }
 }
