@@ -20,7 +20,7 @@ namespace ChensGradiusMod.NPCs
     private int yDirection = 0;
     private bool hasJumped = false;
 
-    public enum States { Run, Target, Jump, Fall, Land, Retreat };
+    public enum States { Run, Target, Jump, Fall, Land };
 
     public override void SetStaticDefaults()
     {
@@ -145,7 +145,7 @@ namespace ChensGradiusMod.NPCs
           if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, CustomGravity);
           else npc.velocity.Y = Math.Max(npc.velocity.Y, -CustomGravity);
 
-          if (IsSteppingOnTiles(update: true) || npc.oldPosition == npc.position)
+          if (IsSteppingOnTiles())
           {
             mode = States.Land;
             UsualMovement();
@@ -155,7 +155,7 @@ namespace ChensGradiusMod.NPCs
             {
               persistDirection = -persistDirection;
             }
-            npc.velocity = Vector2.Zero;
+            npc.velocity.X = 0f;
           }
           break;
 
@@ -200,23 +200,20 @@ namespace ChensGradiusMod.NPCs
 
     protected override float RetaliationSpreadAngleDifference => 0f;
 
-    private bool IsSteppingOnTiles(bool update = false)
+    private bool IsSteppingOnTiles()
     {
-      Vector2 oldV = npc.velocity;
-      Vector2 newV = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height,
-                                             false, false, yDirection);
-      if (update) npc.velocity = newV;
-      if (yDirection > 0) return newV.Y < oldV.Y;
-      else return newV.Y > oldV.Y;
+      Vector2 newV = Collision.TileCollision(npc.position, npc.velocity, npc.width,
+                                             npc.height, false, false, yDirection);
+      npc.velocity = newV;
+      return Collision.SolidCollision(npc.position + newV + new Vector2(0, 2 * yDirection),
+                                      npc.width, npc.height);
     }
 
     private bool WillHitWall()
     {
-      Vector2 oldV = npc.velocity;
-      Vector2 newV = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height,
-                                             false, false, yDirection);
-      if (persistDirection > 0) return newV.X < oldV.X;
-      else return newV.X > oldV.X;
+
+      return Collision.SolidCollision(npc.position + new Vector2(npc.velocity.X, 0),
+                                      npc.width, npc.height);
     }
 
     private void UsualMovement()
