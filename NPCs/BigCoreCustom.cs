@@ -131,7 +131,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool CheckDead()
     {
-      GradiusHelper.AchievementLibUnlock("From Myth To Legend");
+      // GradiusHelper.AchievementLibUnlock("From Myth To Legend");
       return base.CheckDead();
     }
 

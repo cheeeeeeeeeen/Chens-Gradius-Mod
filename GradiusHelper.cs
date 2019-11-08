@@ -225,19 +225,19 @@ namespace ChensGradiusMod
       }
     }
 
-    public static bool AchievementLibUnlock(string achievement, Player player = null)
-    {
-      //Mod achievementLib = ModLoader.GetMod("AchievementLib");
-      //if (achievementLib != null)
-      //{
-      //  if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
-      //  else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
+    //public static bool AchievementLibUnlock(string achievement, Player player = null)
+    //{
+    //  Mod achievementLib = ModLoader.GetMod("AchievementLib");
+    //  if (achievementLib != null)
+    //  {
+    //    if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
+    //    else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
 
-      //  return true;
-      //}
+    //    return true;
+    //  }
 
-      return false;
-    }
+    //  return false;
+    //}
 
     public static int? FindEquippedAccessory(Player player, int accType)
     {
@@ -264,6 +264,36 @@ namespace ChensGradiusMod
       {
         NetMessage.SendData(21, -1, -1, null, index, 1f, 0f, 0f, 0, 0, 0);
       }
+    }
+
+    public static float NPCSpawnRate(string npcName, NPCSpawnInfo spawnInfo)
+    {
+      switch (npcName)
+      {
+        case "Sagna":
+          if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
+            spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
+          {
+            return .05f;
+          }
+          else return 0f;
+        default:
+          return 0f;
+      }
+    }
+
+    public static int ToTileCoordinate(float coordinate)
+    {
+      return (int)(coordinate / 16f);
+    }
+
+    public static Vector2 ToPositionCoordinate(int i, int j)
+    {
+      return new Vector2
+      {
+        X = i * 16f + 8f,
+        Y = j * 16f + 8f
+      };
     }
   }
 }
