@@ -96,15 +96,36 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather")
     };
 
-    public static bool IsBanned(int pType) => VanillaCheck(pType) || LocalModCheck(pType);
+    private static List<AlienProjectile> ImportedModRules = new List<AlienProjectile>();
+
+    public static bool IsBanned(int pType) => VanillaCheck(pType) || LocalModCheck(pType) || ImportedModCheck(pType);
 
     public static bool IsAllowed(int pType) => !IsBanned(pType);
+
+    public static void ImportOptionRule(string modName, string projName)
+    {
+      if (!ImportedModRules.Exists(ap => modName == ap.modName && projName == ap.projectileName))
+      {
+        AlienProjectile alienProjectile = new AlienProjectile(modName, projName);
+        ImportedModRules.Add(alienProjectile);
+      }
+    }
 
     private static bool VanillaCheck(int pType) => VanillaRules.Contains(pType);
 
     private static bool LocalModCheck(int pType)
     {
       foreach (AlienProjectile ap in LocalModRules)
+      {
+        if (ap.CheckType(pType)) return true;
+      };
+
+      return false;
+    }
+
+    private static bool ImportedModCheck(int pType)
+    {
+      foreach (AlienProjectile ap in ImportedModRules)
       {
         if (ap.CheckType(pType)) return true;
       };

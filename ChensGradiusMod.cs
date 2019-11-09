@@ -2,6 +2,7 @@ using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Projectiles.Enemies;
 using ChensGradiusMod.Tiles.MusicBoxes;
 using Microsoft.Xna.Framework;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -119,6 +120,32 @@ namespace ChensGradiusMod
         ItemID.ViciousMushroom
       });
       RecipeGroup.RegisterGroup("ChensGradiusMod:EvilMushroom", group);
+    }
+
+    public override object Call(params object[] args)
+    {
+      try
+      {
+        string functionName = args[0] as string;
+        switch (functionName)
+        {
+          case "AddOptionRule":
+            // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+            // args[2]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
+
+            if (args.Length > 3) Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
+                                             "Wrong number of arguments.");
+
+            OptionRules.ImportOptionRule(args[1] as string, args[2] as string);
+            return true;
+        }
+      }
+      catch (Exception e)
+      {
+        Logger.Error("ChensGradiusMod Call Error: " + e.StackTrace + e.Message);
+      }
+
+      return false;
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)
