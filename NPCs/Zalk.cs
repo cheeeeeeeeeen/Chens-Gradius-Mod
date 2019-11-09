@@ -12,7 +12,7 @@ namespace ChensGradiusMod.NPCs
     private readonly float xDistanceToIntercept = 120f;
     private readonly float yThresholdToRetreat = .01f;
     private readonly float xDistanceSeries = 60f;
-    private readonly int fireRate = 55;
+    private readonly int fireRate = 111;
     private readonly float attackDistance = 1200;
     private readonly int randomFireInterval = 30;
     private bool targetDetermined = false;
@@ -104,17 +104,22 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+      return base.SpawnChance(spawnInfo) * .5f;
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/Zalk";
 
     protected override int FrameSpeed { get; set; } = 3;
 
     protected override Types EnemyType => Types.Small;
 
-    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 1.5f;
+    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * .7f;
 
-    protected override int RetaliationSpreadBulletNumber => 2;
+    protected override int RetaliationSpreadBulletNumber => 1;
 
-    protected override float RetaliationSpreadAngleDifference => 5f;
+    protected override float RetaliationSpreadAngleDifference => 0f;
 
     private Player TargetPlayer => Main.player[npc.target];
 
