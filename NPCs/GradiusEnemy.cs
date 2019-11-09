@@ -119,7 +119,7 @@ namespace ChensGradiusMod.NPCs
 
     protected void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {
-      damage = 1;
+      damage = GradiusHelper.RoundOffToWhole(damage * .02f);
       crit = false;
       knockback = 0f;
     }

@@ -14,7 +14,7 @@ namespace ChensGradiusMod.NPCs
 
     private readonly int attackTickDelay = 5;
     private readonly int restingTime = 40;
-    private readonly int vulnerableTime = 5;
+    private readonly int vulnerableTime = 10;
 
     private int persistDirection = 0;
     private int mode = (int)States.Dormant;
@@ -41,7 +41,7 @@ namespace ChensGradiusMod.NPCs
       npc.lifeMax = 10;
       npc.value = 5000f;
       npc.knockBackResist = 0f;
-      npc.defense = 1000;
+      npc.defense = 50;
       npc.behindTiles = true;
       ImmuneToBuffs();
     }

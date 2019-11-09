@@ -50,7 +50,7 @@ namespace ChensGradiusMod.NPCs
       npc.lifeMax = 1500;
       npc.value = 10000f;
       npc.knockBackResist = 0f;
-      npc.defense = 700;
+      npc.defense = 90;
       npc.noGravity = true;
       npc.noTileCollide = true;
       npc.npcSlots = 1;
@@ -117,6 +117,12 @@ namespace ChensGradiusMod.NPCs
       if (openCore) return null;
       else return false;
     }
+
+    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+      => ReduceDamage(ref damage, ref knockback, ref crit);
+
+    public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+      => ReduceDamage(ref damage, ref knockback, ref crit);
 
     public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
     {
