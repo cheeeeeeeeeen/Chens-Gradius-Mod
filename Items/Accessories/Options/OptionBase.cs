@@ -44,7 +44,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override void OnCraft(Recipe recipe)
     {
-      GradiusHelper.AchievementLibUnlock("Wreek Weapon", Main.LocalPlayer);
+      // GradiusHelper.AchievementLibUnlock("Wreek Weapon", Main.LocalPlayer);
     }
 
     protected virtual string ProjectileType => "";

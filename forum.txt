@@ -106,7 +106,8 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Their weakness is the mouth.
 [*]When their mouth is open, attack it! Be careful that they release Moai Bubbles as they open their mouths.
 [*]Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
-[*]Any weapon can damage the Moai given the Moai is hit in the open mouth.
+[*]They will only take damage if their mouth is open, and when you're in front of it.
+[*]If the attack is a projectile, the projectile must be travelling towards them.
 [*]They spawn in the desert and the temple.
 [/LIST]
 [*]Garun
@@ -147,6 +148,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]They have an upside-down version, in which they have reversed gravity.
 [*]They can be found in the first Gradius game, but the behavior is inspired from Gradius III.
 [*]It will spawn by a random chance in surface and underground caverns.
+[*][SPOILER="Sagna Showcase"][IMG]https://lh3.googleusercontent.com/zRi5CRtYJ2doo3fsAWsCZvdyMtYDGCjb38EI8x9lD6IkcHf861xasw141hLJCiWubiYWMB5j2xWAKKqLbLzASXHk6vr5xk6DSslrRFHN_wJsmy03YCZWIh6aG-UN9cY08lIKBmxAp8hdWAnC0emfeCwkHxrHsegS3YjlOa4FaaWyF-3PO-ckQm6_EbT-Nb8JnR7qa7qlCus9jIRq74q1oxOh_st9kgpbPIYLXR0vVQeDIE6trnIAlfRBilk7wKBmVcJ1aS-mszO65n9dkT490R6vVI11MTPbTKceYC_hU9z5bcj8JXuidVx3RX0hQNFvMy2GUKXmn9tP9_-87eyiZ0k47ZjyjPfECkKrCBBDNezjZDq-_aHYTTnvaQPI7xoP7zcGHF3aMaYRqnWphcRZ2ocBQmXkgHu_fZHqcArgOqgkY1NK19FMWVvyeUVZ7QYMCX7HEkvfcLf6tv10FKZsi5Jq6q9wMulhYzkkdb1kmCD7SsHxloL0zHjzekCWb0-WCnIhWsf8fRWsqtEo2hZkwgQjddwLG0nrQAj53Pq8WOoGxOCHh72nvEw81X4QVcjQCPipsV0PP-bBxEH4KiTkToiIYYZaqkwwqq9UZa1SuSxCN9nT2a0cauxvIIOmg9up_ykcw0mhIn1_eJpqI_2rYFA1EwZ6dEwX-rdJlE4CNWq6c3NlloXdTbg=w335-h257-no[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 

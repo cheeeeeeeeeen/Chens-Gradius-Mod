@@ -52,12 +52,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < GradiusHelper.UnderworldTilesYLocation &&
-          spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
-      {
-        return .05f;
-      }
-      else return 0f;
+      return GradiusHelper.NPCSpawnRate(Name, spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Sagna";
@@ -197,7 +192,7 @@ namespace ChensGradiusMod.NPCs
       npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
 
       if (beforeVelocity.X != npc.velocity.X) xDirection = -xDirection;
-      
+
       switch (mode)
       {
         case States.Hop:

@@ -71,6 +71,16 @@ namespace ChensGradiusMod
       return new Vector2(newX, newY);
     }
 
+    public static float GetAngleRelativeXDirection(Vector2 origin, Vector2 destination, bool degrees = true)
+    {
+      float hypotenuse = Vector2.Distance(origin, destination);
+      float adjacent = destination.X - origin.X;
+      float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
+
+      if (degrees) direction = MathHelper.ToDegrees(direction);
+      return direction;
+    }
+
     public static float GetBearing(Vector2 origin, Vector2 destination, bool reverse = true)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
@@ -215,29 +225,23 @@ namespace ChensGradiusMod
 
     public static void ProjectileDestroy(Projectile proj)
     {
-      try
-      {
-        proj.Kill();
-      }
-      catch
-      {
-        proj.active = false;
-      }
+      try { proj.Kill(); }
+      catch { proj.active = false; }
     }
 
-    public static bool AchievementLibUnlock(string achievement, Player player = null)
-    {
-      //Mod achievementLib = ModLoader.GetMod("AchievementLib");
-      //if (achievementLib != null)
-      //{
-      //  if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
-      //  else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
+    //public static bool AchievementLibUnlock(string achievement, Player player = null)
+    //{
+    //  Mod achievementLib = ModLoader.GetMod("AchievementLib");
+    //  if (achievementLib != null)
+    //  {
+    //    if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
+    //    else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
 
-      //  return true;
-      //}
+    //    return true;
+    //  }
 
-      return false;
-    }
+    //  return false;
+    //}
 
     public static int? FindEquippedAccessory(Player player, int accType)
     {
@@ -264,6 +268,56 @@ namespace ChensGradiusMod
       {
         NetMessage.SendData(21, -1, -1, null, index, 1f, 0f, 0f, 0, 0, 0);
       }
+    }
+
+    public static float NPCSpawnRate(string npcName, NPCSpawnInfo spawnInfo)
+    {
+      switch (npcName)
+      {
+        case "Sagna":
+          if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
+            spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
+          {
+            return .05f;
+          }
+          else return 0f;
+        default:
+          return 0f;
+      }
+    }
+
+    public static int ToTileCoordinate(float coordinate)
+    {
+      return (int)(coordinate / 16f);
+    }
+
+    public static Vector2 ToPositionCoordinate(int i, int j)
+    {
+      return new Vector2
+      {
+        X = i * 16f + 8f,
+        Y = j * 16f + 8f
+      };
+    }
+
+    public static bool VanillaStepUpTileComputationCatcher(Vector2 p, Vector2 v, float w)
+    {
+      int direction = 0;
+      if (v.X < 0f) direction = -1;
+      else if (v.X > 0f) direction = 1;
+      Vector2 destination = p;
+      destination.X += v.X;
+
+      int tileX = (int)((destination.X + (w / 2) + ((w / 2 + 1) * direction)) / 16f);
+      int tileY = (int)((destination.Y + 0.1) / 16.0);
+
+      if (tileX >= Main.tile.GetLength(0) || tileY >= Main.tile.GetLength(1)
+          || tileX < 0 || tileY < 0)
+      {
+        return true;
+      }
+
+      return false;
     }
   }
 }

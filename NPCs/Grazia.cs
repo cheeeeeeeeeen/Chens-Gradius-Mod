@@ -1,6 +1,6 @@
-﻿using System.IO;
-using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
