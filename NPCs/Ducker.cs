@@ -1,5 +1,6 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -8,7 +9,7 @@ namespace ChensGradiusMod.NPCs
 {
   public class Ducker : GradiusEnemy
   {
-    private const float CustomGravity = 5f;
+    private const float CustomGravity = 8f;
     private const int CancelThreshold = 500;
     private const float AttackAngleDifference = 13f;
 
@@ -36,8 +37,8 @@ namespace ChensGradiusMod.NPCs
     {
       base.SetDefaults();
 
-      npc.width = 38;
-      npc.height = 30;
+      npc.width = 36;
+      npc.height = 26;
       npc.damage = 100;
       npc.lifeMax = 170;
       npc.value = 2000f;
@@ -57,26 +58,20 @@ namespace ChensGradiusMod.NPCs
             if (++FrameCounter > 5) FrameCounter = 0;
           }
           break;
-        case States.Fall:
-          if (FrameCounter < 13)
-          {
-            if (++FrameTick >= FrameSpeed)
-            {
-              FrameTick = 0;
-              FrameCounter++;
-            }
-          }
-          break;
+        //case States.Fall:
+        //  if (++FrameTick >= FrameSpeed)
+        //  {
+        //    FrameTick = 0;
+        //    FrameCounter--;
+        //    if (FrameCounter <= 9 && FrameCounter > 6) FrameCounter = 10;
+        //  }
+        //  break;
         case States.Land:
           if (++FrameTick >= FrameSpeed)
           {
             FrameTick = 0;
             FrameCounter--;
-            if (FrameCounter <= 9 && FrameCounter > 5)
-            {
-              FrameCounter = 6;
-              mode = States.Run;
-            }
+            if (FrameCounter <= 9 && FrameCounter > 5) SwitchRunMode();
           }
           break;
         case States.Jump:
@@ -108,16 +103,41 @@ namespace ChensGradiusMod.NPCs
           if (++FrameTick >= FrameSpeed)
           {
             FrameTick = 0;
-            if (--FrameCounter <= 5)
-            {
-              FrameCounter = 6;
-              mode = States.Run;
-            }
+            if (--FrameCounter <= 5) SwitchRunMode();
           }
           break;
       }
 
       npc.frame.Y = FrameCounter * frameHeight;
+    }
+
+    public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+    {
+      Vector2 drawPos, origin = Vector2.Zero;
+      SpriteEffects spriteEffects = SpriteEffects.None;
+
+      if (yDirection > 0) 
+      {
+        drawPos = npc.TopLeft - Main.screenPosition;
+        drawPos.Y -= npc.height;
+      }
+      else
+      {
+        spriteEffects |= SpriteEffects.FlipVertically;
+        drawPos = npc.TopLeft - Main.screenPosition;
+        drawPos.Y -= 4  ;
+      }
+
+      if (persistDirection > 0)
+      {
+        spriteEffects |= SpriteEffects.FlipHorizontally;
+        drawPos.X -= 6;
+      }
+      else drawPos.X -= npc.width - 16;
+
+      spriteBatch.Draw(Main.npcTexture[npc.type], drawPos, npc.frame,
+                       drawColor, 0f, origin, 1f, spriteEffects, 0f);
+      return false;
     }
 
     public override bool PreAI()
@@ -216,6 +236,12 @@ namespace ChensGradiusMod.NPCs
             }
           }
           break;
+        case States.Fire:
+        case States.Land:
+        case States.Recompose:
+        case States.Target:
+          HaltMovement();
+          break;
       }
 
       npc.spriteDirection = npc.direction = persistDirection;
@@ -301,7 +327,7 @@ namespace ChensGradiusMod.NPCs
           return true;
       }
 
-      FrameCounter++;
+      if (++FrameCounter >= 10) SwitchRunMode();
       return false;
     }
 
@@ -325,6 +351,12 @@ namespace ChensGradiusMod.NPCs
                                    GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
         }
       }
+    }
+
+    private void SwitchRunMode()
+    {
+      FrameCounter = 6;
+      mode = States.Run;
     }
   }
 }
