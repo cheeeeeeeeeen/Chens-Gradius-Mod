@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.8.3
+[B][U][SIZE=6]Mod Version: 0.8.5
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -107,7 +107,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]When their mouth is open, attack it! Be careful that they release Moai Bubbles as they open their mouths.
 [*]Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
 [*]They will only take damage if their mouth is open, and when you're in front of it.
-[*]If the attack is a projectile, the projectile must be travelling towards them.
+[*]If the attack is a projectile, the projectile must be traveling towards them.
 [*]They spawn in the desert and the temple.
 [/LIST]
 [*]Garun
@@ -149,6 +149,16 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]They can be found in the first Gradius game, but the behavior is inspired from Gradius III.
 [*]It will spawn by a random chance in surface and underground caverns.
 [*][SPOILER="Sagna Showcase"][IMG]https://lh3.googleusercontent.com/zRi5CRtYJ2doo3fsAWsCZvdyMtYDGCjb38EI8x9lD6IkcHf861xasw141hLJCiWubiYWMB5j2xWAKKqLbLzASXHk6vr5xk6DSslrRFHN_wJsmy03YCZWIh6aG-UN9cY08lIKBmxAp8hdWAnC0emfeCwkHxrHsegS3YjlOa4FaaWyF-3PO-ckQm6_EbT-Nb8JnR7qa7qlCus9jIRq74q1oxOh_st9kgpbPIYLXR0vVQeDIE6trnIAlfRBilk7wKBmVcJ1aS-mszO65n9dkT490R6vVI11MTPbTKceYC_hU9z5bcj8JXuidVx3RX0hQNFvMy2GUKXmn9tP9_-87eyiZ0k47ZjyjPfECkKrCBBDNezjZDq-_aHYTTnvaQPI7xoP7zcGHF3aMaYRqnWphcRZ2ocBQmXkgHu_fZHqcArgOqgkY1NK19FMWVvyeUVZ7QYMCX7HEkvfcLf6tv10FKZsi5Jq6q9wMulhYzkkdb1kmCD7SsHxloL0zHjzekCWb0-WCnIhWsf8fRWsqtEo2hZkwgQjddwLG0nrQAj53Pq8WOoGxOCHh72nvEw81X4QVcjQCPipsV0PP-bBxEH4KiTkToiIYYZaqkwwqq9UZa1SuSxCN9nT2a0cauxvIIOmg9up_ykcw0mhIn1_eJpqI_2rYFA1EwZ6dEwX-rdJlE4CNWq6c3NlloXdTbg=w335-h257-no[/IMG][/SPOILER]
+[/LIST]
+[*]Ducker
+[LIST]
+[*]For reference: [URL='https://gradius.fandom.com/wiki/Ducker']Ducker[/URL]
+[*]Famous enemies ever since the ever first Gradius Game up to the latest ones.
+[*]They are bipedal ground units which pursues intruders.
+[*]Their implementation in this mod is a hybrid of Gradius I, III and V.
+[*]Like Sagna and Grazia, they have an upside-down version.
+[*]They have the same spawn parameters as Sagna.
+[*][SPOILER="Ducker Showcase"][IMG]https://lh3.googleusercontent.com/3kwDTuHR-qkbIEUc6DZsjlBxct-3r1bgUog5mXwMt85AGEwViDnR6dWsKi_tSEd1FsLhFqC83X86mAfxKosJBkUdx82SJ4GXBgOEMC6UOH1OPVWwkBX8b78jsZQnOd7DFnzqkCmrCoHqMRs1juZEC81Mx2jtlCoVq7sf_AR_-ujp6sbveMbnxtfUmvPq_3yS2MAb0gx6WxS5AjZtrBF8n2-W28RjCkRfUMjJof5dyvmkgZXmfEjmh9PASS2CZtbeeu8RSxWtC3DpKiGQMS8t6pgvKQy7pqNjd23AxADjhJqAy0aK4_tzoO7WK8my0TJEP_Lxpuh2GwWQ0eNIdGRYyUODDhYhTsQ0knF1yweqfKR81C8qU8I1Ts6fPSTpNS-UdteASo2IkE-H64_hU1LpaLiSVkyQ3ZVh3a7GhJVx9r34nrkLvxD1H-3sM3Sn5T9MteGEjqCtWP691zcOJjxz_FZLIOAR9RNSzKMx-ijCaAZRfdO2Nx2VDyxZOP7onRtTvHgthCtOD20_72tWyFQouwBPZvyNvA6OaRuO9TGhkjxIH_-mx9Ah5PoN3C-7lUAkYBsadx-XeCxT0Q4smYu0yRRoeQ9xf092dG92NCYMV3GM1DIteQXvlvFAPikx_xphX1kCj1yMWCDTFjDBcH_zp0bkqHPYtJ6I52nn0zW-_2J5MVuv1_GmplCwANXK1Iw6VG1g1HoNme3HRPSz-gEwyUUPsdY8anNJfxyxbT3KbRtH3k8Z=w777-h398-no[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 
@@ -198,12 +208,22 @@ If you want [U]your own mod's projectiles to be compatible with the Options[/U],
 Following the list above, your projectiles will surely be copied by the Options. There is still, however, something that should be tackled.
 If [U]your projectile creates more projectiles, it is possible the Options may infinitely copy them[/U], which can cause a severe lag and power output.
 If you want to avoid this problem, please follow one of the items below to avoid infinite duplication.
+[LIST]
 [*]Set the newer projectiles [B]to be an NPC projectile[/B]. (projectile.npcProj is true)
 [*]Set the newer projectiles [B]to be a trap projectile[/B]. (projectile.trap is true)
 [*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. (projectile.melee, projectile.ranged, etc is false)
+[/LIST]
 There will be a better API for this sooner or later. Stay tuned.
 
 [SPOILER="Changelogs"]
+0.8.5
+  - Implement Ducker
+  - Nerf Zalk enemies by reducing their fire rate and reducing their retaliation bullets
+  - Fix a bug where the 3rd Charge Multiple uses Option 4 as ingredient
+  - Remove damage cap of 1 to Moai and Big Core
+  - Moai and Big Core instead has a high % of damage reduction
+  - Add documentation for other modders so that they can enable their projectiles to be supported by the Options
+
 0.8.3
   - Implement Sagna
   - Optimize Grazia spawn mechanic to avoid it being buried into the tiles

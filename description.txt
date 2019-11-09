@@ -18,6 +18,7 @@ New Enemies:
 4. Grazia
 5. Big Core Custom
 6. Sagna
+7. Ducker
 
 These enemies will only spawn in Hard mode.
 All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
