@@ -43,7 +43,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionFour");
+      recipe.AddIngredient(mod, "OptionThree");
       recipe.AddIngredient(ItemID.LightningBug, 3);
       recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 8);
       recipe.AddIngredient(ItemID.HallowedBar, 12);
