@@ -102,9 +102,9 @@ They can unleash a power special attack, but be advised that the accessory will 
 [LIST=1]
 [*]Moai
 [LIST]
-[*]These eastern head statues are recurring enemyes within the Gradius series.
+[*]These eastern head statues are recurring enemies within the Gradius series.
 [*]Their weakness is the mouth.
-[*]When their mouth is open, attack it! Be careful that they release moai bubbles as they open their mouths.
+[*]When their mouth is open, attack it! Be careful that they release Moai Bubbles as they open their mouths.
 [*]Any projectiles can damage Moai Bubbles, but be warned that swung melee weapons cannot destroy the bubbles.
 [*]Any weapon can damage the Moai given the Moai is hit in the open mouth.
 [*]They spawn in the desert and the temple.
@@ -178,6 +178,29 @@ The Options do copy even modded projectiles from other mods, which is great. Thi
 If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
+[I][U]Option Compatibility[/U][/I]
+Due to the issue above, it is highly unlikely that we will support all the mods existing. The more appropriate description for the task is it being impossible to complete.
+If you want [U]your own mod's projectiles to be compatible with the Options[/U], then take these items below in mind when implementing your projectile:
+[LIST]
+[*]Make sure the projectile is [B]active[/B]. (projectile.active is true)
+[*]Make sure that your projectile is [B]not a Yo-yo[/B].
+[*]Make sure the projectile [B]is not hostile[/B]. (projectile.hostile is false)
+[*]Make sure the projectile [B]is friendly[/B]. (projectile.friendly is true)
+[*]Make sure the projectile [B]is not an NPC projectile[/B]. (projectile.npcProj is false)
+[*]Make sure the projectile [B]has damage[/B].
+[*]Make sure the projectile [B]can deal critical damage[/B]. (Melee, Ranged, Thrown and Magic)
+[*]Make sure the projectile [B]is not a minion[/B]. (projectile.minion is false)
+[*]Make sure the projectile [B]is not a trap[/B]. (projectile.trap is false)
+[*]Make sure the projectile [B]is owned by the same player who generated the projectile[/B].
+[/LIST]
+Following the list above, your projectiles will surely be copied by the Options. There is still, however, something that should be tackled.
+If [U]your projectile creates more projectiles, it is possible the Options may infinitely copy them[/U], which can cause a severe lag and power output.
+If you want to avoid this problem, please follow one of the items below to avoid infinite duplication.
+[*]Set the newer projectiles [B]to be an NPC projectile[/B]. (projectile.npcProj is true)
+[*]Set the newer projectiles [B]to be a trap projectile[/B]. (projectile.trap is true)
+[*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. (projectile.melee, projectile.ranged, etc is false)
+There will be a better API for this sooner or later. Stay tuned.
+
 [SPOILER="Changelogs"]
 0.8.3
   - Implement Sagna
@@ -225,7 +248,7 @@ If you know a mod's projectile that does this, and you do not want this overpowe
 0.7.4.1
   - Add recipes for Option Seed
   - Add upgrade recipes of Options including the Option Seed
-  - Change recipe of 4th Option to Ectoplasms instead of all Souls
+  - Change recipe of 4th Option to Ectoplasm instead of all Souls
 
 0.7.4
   - Buff the Needle Force so it is more effective
