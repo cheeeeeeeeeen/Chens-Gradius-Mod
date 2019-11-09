@@ -116,7 +116,7 @@ namespace ChensGradiusMod.NPCs
       Vector2 drawPos, origin = Vector2.Zero;
       SpriteEffects spriteEffects = SpriteEffects.None;
 
-      if (yDirection > 0) 
+      if (yDirection > 0)
       {
         drawPos = npc.TopLeft - Main.screenPosition;
         drawPos.Y -= npc.height;
@@ -125,7 +125,7 @@ namespace ChensGradiusMod.NPCs
       {
         spriteEffects |= SpriteEffects.FlipVertically;
         drawPos = npc.TopLeft - Main.screenPosition;
-        drawPos.Y -= 4  ;
+        drawPos.Y -= 4;
       }
 
       if (persistDirection > 0)
