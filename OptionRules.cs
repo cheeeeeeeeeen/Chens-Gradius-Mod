@@ -1,5 +1,6 @@
-﻿using ChensGradiusMod.Projectiles;
+﻿using ChensGradiusMod.Projectiles.Aliens;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace ChensGradiusMod
@@ -21,7 +22,7 @@ namespace ChensGradiusMod
       ProjectileID.Phantasm, ProjectileID.VortexLightning
     };
 
-    private static readonly List<AlienProjectile> LocalModRules = new List<AlienProjectile>()
+    private static readonly List<AlienProjectile> ModRules = new List<AlienProjectile>()
     {
       new AlienProjectile("CrystiliumMod", "DiamondExplosion"), new AlienProjectile("CrystiliumMod", "DiamondBomb"),
       new AlienProjectile("CrystiliumMod", "Shatter1"), new AlienProjectile("CrystiliumMod", "Shatter2"),
@@ -96,39 +97,78 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather")
     };
 
-    private static readonly List<AlienProjectile> ImportedModRules = new List<AlienProjectile>();
-
-    public static bool IsBanned(int pType) => VanillaCheck(pType) || LocalModCheck(pType) || ImportedModCheck(pType);
-
-    public static bool IsAllowed(int pType) => !IsBanned(pType);
-
-    public static void ImportOptionRule(string modName, string projName)
+    private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
     {
-      if (!ImportedModRules.Exists(ap => modName == ap.modName && projName == ap.projectileName))
-      {
-        AlienProjectile alienProjectile = new AlienProjectile(modName, projName);
-        ImportedModRules.Add(alienProjectile);
-      }
+      new AlienDamageType("CalamityMod", "CalamityGlobalProjectile", "rogue")
+    };
+
+    public static bool CompleteRuleCheck(Projectile p)
+    {
+      return p.active && IsAllowed(p.type) && IsNotAYoyo(p) && !p.hostile && p.friendly &&
+             !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap;
     }
 
-    private static bool VanillaCheck(int pType) => VanillaRules.Contains(pType);
-
-    private static bool LocalModCheck(int pType)
+    public static bool? ImportOptionRule(string modName, string projName)
     {
-      foreach (AlienProjectile ap in LocalModRules)
+      if (!ModRules.Exists(ap => modName == ap.modName && projName == ap.projectileName))
       {
-        if (ap.CheckType(pType)) return true;
-      };
+        AlienProjectile alienProjectile = new AlienProjectile(modName, projName);
+        ModRules.Add(alienProjectile);
+        return true;
+      }
 
       return false;
     }
 
-    private static bool ImportedModCheck(int pType)
+    public static bool? ImportOptionRule(int pType)
     {
-      foreach (AlienProjectile ap in ImportedModRules)
+      if (!VanillaCheck(pType))
       {
-        if (ap.CheckType(pType)) return true;
-      };
+        VanillaRules.Add(pType);
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool? ImportDamageType(string modName, string internalName, string damageType)
+    {
+      if (!SupportedDamageTypes.Exists(sdt => modName == sdt.modName
+                                              && internalName == sdt.internalName
+                                              && damageType == sdt.damageType))
+      {
+        AlienDamageType alienDamageType = new AlienDamageType(modName, internalName, damageType);
+        SupportedDamageTypes.Add(alienDamageType);
+        return true;
+      }
+
+      return false;
+    }
+
+    private static bool IsBanned(int pType) => VanillaCheck(pType) || ModCheck(pType);
+
+    private static bool IsAllowed(int pType) => !IsBanned(pType);
+
+    private static bool VanillaCheck(int pType) => VanillaRules.Contains(pType);
+
+    private static bool ModCheck(int pType)
+    {
+      foreach (AlienProjectile ap in ModRules) if (ap.CheckType(pType)) return true;
+
+      return false;
+    }
+
+    private static bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
+
+    private static bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic
+                                                      || IsDamageTypeSupported(p.whoAmI);
+
+    private static bool IsDamageTypeSupported(int pWhoAmI)
+    {
+      foreach (AlienDamageType aDamageType in SupportedDamageTypes)
+      {
+        if (aDamageType.IsMatchingDamageType(pWhoAmI)) return true;
+      }
 
       return false;
     }

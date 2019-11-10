@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -66,8 +65,7 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (p.active && OptionRules.IsAllowed(p.type) && IsNotAYoyo(p) && IsNotProducedYet(i) && !p.hostile && p.friendly &&
-                !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap && IsSameOwner(p))
+            if (OptionRules.CompleteRuleCheck(p) && IsNotProducedYet(i) && IsSameOwner(p))
             {
               projectilesToProduce.Add(i);
             }
@@ -156,8 +154,6 @@ namespace ChensGradiusMod.Projectiles.Options
       return projectileSpawn;
     }
 
-    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic || CalamitySupportRogue(p);
-
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
     private bool IsNotProducedYet(int ind)
@@ -173,21 +169,6 @@ namespace ChensGradiusMod.Projectiles.Options
       foreach (int alreadyProducedInd in list)
       {
         if (alreadyProducedInd == ind) return true;
-      }
-
-      return false;
-    }
-
-    private bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
-
-    private bool CalamitySupportRogue(Projectile p)
-    {
-      Mod calamityMod = ModLoader.GetMod("CalamityMod");
-      if (calamityMod != null)
-      {
-        GlobalProjectile calamityGProj = p.GetGlobalProjectile(calamityMod, "CalamityGlobalProjectile");
-        FieldInfo field = calamityGProj.GetType().GetField("rogue", BindingFlags.Public | BindingFlags.Instance);
-        return (bool)field.GetValue(calamityGProj);
       }
 
       return false;

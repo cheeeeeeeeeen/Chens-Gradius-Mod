@@ -185,12 +185,12 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 If you are curious about what our current plans are, you can look them up on the project board.
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
-[I][U]Highlighted Issue[/U][/I]
+[B][I][U]Highlighted Issue[/U][/I][/B]
 The Options do copy even modded projectiles from other mods, which is great. This comes with a cost, however. Due to mod creator's unique way of coding projectile code, the options may not behave properly, [U]and may duplicate and copy generated projectiles created by another friendly projectile[/U].
 If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
 [URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
-[I][U]Option Compatibility[/U][/I]
+[B][I][U]Option Compatibility[/U][/I][/B]
 Due to the issue above, it is highly unlikely that we will support all the mods existing. The more appropriate description for the task is it being impossible to complete.
 If you want [U]your own mod's projectiles to be compatible with the Options[/U], then take these items below in mind when implementing your projectile:
 [LIST]
@@ -213,7 +213,7 @@ If you want to avoid this problem, please follow one of the items below to avoid
 [*]Set the newer projectiles [B]to be a trap projectile[/B]. (projectile.trap is true)
 [*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. (projectile.melee, projectile.ranged, etc is false)
 [/LIST]
-There will be a better API for this sooner or later. Stay tuned.
+The most recommended way to avoid the duplication is to set the new projectiles to be an NPC projectile.There will be a better API for this sooner or later. Stay tuned.
 
 [SPOILER="Changelogs"]
 0.8.5
