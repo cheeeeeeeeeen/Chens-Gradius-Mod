@@ -278,7 +278,7 @@ namespace ChensGradiusMod
           if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
             spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
           {
-            return .05f;
+            return .075f;
           }
           else return 0f;
         default:
