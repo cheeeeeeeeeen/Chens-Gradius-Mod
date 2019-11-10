@@ -6,7 +6,7 @@ namespace ChensGradiusMod
 {
   public static class OptionRules
   {
-    private static List<int> VanillaRules = new List<int>()
+    private static readonly List<int> VanillaRules = new List<int>()
     {
       ProjectileID.CrystalVileShardHead, ProjectileID.CrystalVileShardShaft, ProjectileID.VilethornBase, ProjectileID.VilethornTip,
       ProjectileID.Bee, ProjectileID.GiantBee, ProjectileID.RainbowBack, ProjectileID.CrystalPulse2, ProjectileID.ToxicCloud,
@@ -21,7 +21,7 @@ namespace ChensGradiusMod
       ProjectileID.Phantasm, ProjectileID.VortexLightning
     };
 
-    private static List<AlienProjectile> LocalModRules = new List<AlienProjectile>()
+    private static readonly List<AlienProjectile> LocalModRules = new List<AlienProjectile>()
     {
       new AlienProjectile("CrystiliumMod", "DiamondExplosion"), new AlienProjectile("CrystiliumMod", "DiamondBomb"),
       new AlienProjectile("CrystiliumMod", "Shatter1"), new AlienProjectile("CrystiliumMod", "Shatter2"),
@@ -96,7 +96,7 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather")
     };
 
-    private static List<AlienProjectile> ImportedModRules = new List<AlienProjectile>();
+    private static readonly List<AlienProjectile> ImportedModRules = new List<AlienProjectile>();
 
     public static bool IsBanned(int pType) => VanillaCheck(pType) || LocalModCheck(pType) || ImportedModCheck(pType);
 

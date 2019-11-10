@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -155,7 +156,7 @@ namespace ChensGradiusMod.Projectiles.Options
       return projectileSpawn;
     }
 
-    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic;
+    private bool IsAbleToCrit(Projectile p) => p.melee || p.ranged || p.thrown || p.magic || CalamitySupportRogue(p);
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
@@ -178,5 +179,18 @@ namespace ChensGradiusMod.Projectiles.Options
     }
 
     private bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
+
+    private bool CalamitySupportRogue(Projectile p)
+    {
+      Mod calamityMod = ModLoader.GetMod("CalamityMod");
+      if (calamityMod != null)
+      {
+        GlobalProjectile calamityGProj = p.GetGlobalProjectile(calamityMod, "CalamityGlobalProjectile");
+        FieldInfo field = calamityGProj.GetType().GetField("rogue", BindingFlags.Public | BindingFlags.Instance);
+        return (bool)field.GetValue(calamityGProj);
+      }
+
+      return false;
+    }
   }
 }
