@@ -70,48 +70,78 @@ namespace ChensGradiusMod
         switch (functionName)
         {
           case "AddOptionRule":
-            // Vanilla Projectile Rule
-            // args[1]: Vanilla Projectile Type. e.g. ProjectileID.Bee
-            // ... or Mod Projectile Rule
-            // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-            // args[2]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
-
-            if (args.Length > 3 && args.Length < 2)
             {
-              Logger.Error($"ChensGradiusMod {functionName} Error:" +
-                           "Wrong number of arguments.");
-              throw new Exception($"ChensGradiusMod {functionName} Error:" +
-                                  "Wrong number of arguments.");
-            }
+              // Vanilla Projectile Rule
+              // args[1]: Vanilla Projectile Type. e.g. ProjectileID.Bee
+              // ... or Mod Projectile Rule
+              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              // args[2]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
 
-            bool? result;
-            if (args.Length == 2)
-            {
-              if (args[1] == null) result = null;
-              else result = OptionRules.ImportOptionRule(Convert.ToInt32(args[1]));
-            }
-            else result = OptionRules.ImportOptionRule(args[1] as string, args[2] as string);
+              if (args.Length > 3 && args.Length < 2)
+              {
+                Logger.Error($"ChensGradiusMod {functionName} Error:" +
+                             "Wrong number of arguments.");
+                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                                    "Wrong number of arguments.");
+              }
 
-            if (result == null) Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
-                                            "Given projectile type is null. This projectile type is not added.");
-            return true;
+              bool? result;
+              if (args.Length == 2)
+              {
+                if (args[1] == null) result = null;
+                else result = OptionRules.ImportOptionRule(Convert.ToInt32(args[1]));
+              }
+              else result = OptionRules.ImportOptionRule(args[1] as string, args[2] as string);
+
+              if (result == null)
+              {
+                Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
+                            "Given projectile type is null. This projectile type is not added.");
+                result = false;
+              }
+              return result;
+            }
 
           case "AddCustomDamage":
-            // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-            // args[2]: Internal class name of the GlobalProjectile or ModProjectile. e.g. "MyGlobalProjectile"
-            // args[3]: Internal boolean variable name of your custom damage.
-
-            if (args.Length > 4)
             {
-              Logger.Error($"ChensGradiusMod {functionName} Error:" +
-                           "Wrong number of arguments.");
-              throw new Exception($"ChensGradiusMod {functionName} Error:" +
-                                  "Wrong number of arguments.");
+              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              // args[2]: Internal class name of the GlobalProjectile or ModProjectile. e.g. "MyGlobalProjectile"
+              // args[3]: Internal boolean variable name of your custom damage.
+
+              if (args.Length > 4)
+              {
+                Logger.Error($"ChensGradiusMod {functionName} Error:" +
+                             "Wrong number of arguments.");
+                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                                    "Wrong number of arguments.");
+              }
+
+              bool result = OptionRules.ImportDamageType(args[1] as string, args[2] as string, args[3] as string);
+              return result;
             }
 
-            OptionRules.ImportDamageType(args[1] as string, args[2] as string, args[3] as string);
+          case "ProjectileBanCheck":
+            {
+              // args[1]: integer Type of the projectile to check. (projectile.type)
 
-            return true;
+              if (args.Length > 2)
+              {
+                Logger.Error($"ChensGradiusMod {functionName} Error:" +
+                             "Wrong number of arguments.");
+                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                                    "Wrong number of arguments.");
+              }
+
+              bool? result;
+              if (args[1] == null)
+              {
+                result = null;
+                Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
+                            "Given projectile type is null.");
+              }
+              else result = OptionRules.IsBanned(Convert.ToInt32(args[1]));
+              return result;
+            }
         }
       }
       catch (Exception e)
@@ -119,7 +149,7 @@ namespace ChensGradiusMod
         Logger.Error("ChensGradiusMod Call Error: " + e.StackTrace + e.Message);
       }
 
-      return false;
+      return null;
     }
 
     public override void AddRecipeGroups()

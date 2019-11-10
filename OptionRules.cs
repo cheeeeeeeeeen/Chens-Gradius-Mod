@@ -131,7 +131,7 @@ namespace ChensGradiusMod
       return false;
     }
 
-    public static bool? ImportDamageType(string modName, string internalName, string damageType)
+    public static bool ImportDamageType(string modName, string internalName, string damageType)
     {
       if (!SupportedDamageTypes.Exists(sdt => modName == sdt.modName
                                               && internalName == sdt.internalName
@@ -145,9 +145,9 @@ namespace ChensGradiusMod
       return false;
     }
 
-    private static bool IsBanned(int pType) => VanillaCheck(pType) || ModCheck(pType);
+    public static bool IsBanned(int pType) => VanillaCheck(pType) || ModCheck(pType);
 
-    private static bool IsAllowed(int pType) => !IsBanned(pType);
+    public static bool IsAllowed(int pType) => !IsBanned(pType);
 
     private static bool VanillaCheck(int pType) => VanillaRules.Contains(pType);
 
