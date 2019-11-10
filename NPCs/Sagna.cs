@@ -14,12 +14,13 @@ namespace ChensGradiusMod.NPCs
     private readonly float yGravity = .1f;
     private readonly float maxYSpeed = 5f;
     private readonly int jumpCountForSpray = 1;
-    private readonly int syncRate = 600;
+    private readonly int syncRate = 60;
 
     private bool initialized = false;
     private int persistDirection = 0;
     private int animateDirection = 1;
     private States mode = States.Fall;
+    private States oldMode = States.Fall;
     private int xDirection = 0;
     private int yDirection = 0;
     private int jumpCount = 0;
@@ -87,7 +88,18 @@ namespace ChensGradiusMod.NPCs
       MoveVertically();
       if (mode != States.Spray) AdjustMovementBehavior();
 
-      ConstantSync(ref syncTick, syncRate);
+      
+    }
+
+    public override void PostAI()
+    {
+      base.PostAI();
+      if (!ConstantSync(ref syncTick, syncRate) && GradiusHelper.IsNotMultiplayerClient()
+          && oldMode != mode)
+      {
+        npc.netUpdate = true;
+        oldMode = mode;
+      }
     }
 
     public override void FindFrame(int frameHeight)
@@ -124,6 +136,7 @@ namespace ChensGradiusMod.NPCs
     {
       writer.Write(animateDirection);
       writer.Write((byte)mode);
+      writer.Write((byte)oldMode);
       writer.Write(xDirection);
       writer.Write(yDirection);
       writer.Write(jumpCount);
@@ -136,6 +149,7 @@ namespace ChensGradiusMod.NPCs
     {
       animateDirection = reader.ReadInt32();
       mode = (States)reader.ReadByte();
+      oldMode = (States)reader.ReadByte();
       xDirection = reader.ReadInt32();
       yDirection = reader.ReadInt32();
       jumpCount = reader.ReadInt32();
@@ -230,6 +244,7 @@ namespace ChensGradiusMod.NPCs
                                    GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
           radianAngle += MathHelper.PiOver4;
         }
+        npc.netUpdate = true;
       }
     }
   }

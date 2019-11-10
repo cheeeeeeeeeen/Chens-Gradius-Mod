@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -17,13 +18,16 @@ namespace ChensGradiusMod.NPCs
     private readonly float fallSpeedYAccel = .5f;
     private readonly float fallSpeedXAccel = .1f;
     private readonly float targetDistance = 500f;
+    private readonly int syncRate = 30;
 
     private States mode = States.Run;
+    private States oldMode = States.Run;
     private bool initialized = false;
     private int persistDirection = 0;
     private int yDirection = 0;
     private bool hasJumped = false;
     private Vector2 targetLastSeen = Vector2.Zero;
+    private int syncTick = 0;
 
     public enum States { Run, Target, Fire, Recompose, Jump, Fall, Land };
 
@@ -247,12 +251,43 @@ namespace ChensGradiusMod.NPCs
       npc.spriteDirection = npc.direction = persistDirection;
     }
 
+    public override void PostAI()
+    {
+      base.PostAI();
+      if (!ConstantSync(ref syncTick, syncRate) && GradiusHelper.IsNotMultiplayerClient()
+          && oldMode != mode)
+      {
+        npc.netUpdate = true;
+        oldMode = mode;
+      }
+    }
+
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
       return GradiusHelper.NPCSpawnRate("Sagna", spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Ducker";
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write((byte)mode);
+      writer.Write((byte)oldMode);
+      writer.Write(persistDirection);
+      writer.Write(yDirection);
+      writer.Write(hasJumped);
+      writer.WriteVector2(targetLastSeen);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      mode = (States)reader.ReadByte();
+      oldMode = (States)reader.ReadByte();
+      persistDirection = reader.ReadInt32();
+      yDirection = reader.ReadInt32();
+      hasJumped = reader.ReadBoolean();
+      targetLastSeen = reader.ReadVector2();
+  }
 
     protected override int FrameSpeed { get; set; } = 5;
 
@@ -350,6 +385,7 @@ namespace ChensGradiusMod.NPCs
                                    ModContent.ProjectileType<GradiusEnemyBullet>(),
                                    GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
         }
+        npc.netUpdate = true;
       }
     }
 

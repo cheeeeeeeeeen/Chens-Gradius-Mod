@@ -12,7 +12,7 @@ namespace ChensGradiusMod.NPCs
     private readonly float xDistanceToIntercept = 120f;
     private readonly float yThresholdToRetreat = .01f;
     private readonly float xDistanceSeries = 60f;
-    private readonly int fireRate = 111;
+    private readonly int fireRate = 57;
     private readonly float attackDistance = 1200;
     private readonly int randomFireInterval = 30;
     private bool targetDetermined = false;
@@ -106,7 +106,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      return base.SpawnChance(spawnInfo) * .5f;
+      return base.SpawnChance(spawnInfo) * .9f;
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Zalk";
