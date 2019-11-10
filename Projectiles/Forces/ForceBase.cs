@@ -10,6 +10,7 @@ namespace ChensGradiusMod.Projectiles.Forces
   {
     public const int Dmg = 1;
     public const float Kb = 0.01f;
+
     protected const int KeepAlive = 5;
     protected const float AcceptedVerticalThreshold = .24f;
 
@@ -198,6 +199,8 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     protected virtual bool ForceCheck() => ModOwner.forceBase;
 
+    protected virtual float BasisMultiplier { get; } = 2f;
+
     protected virtual float TravelSpeed { get; } = 3f;
 
     protected virtual float LaunchSpeed { get; } = 20f;
@@ -256,8 +259,8 @@ namespace ChensGradiusMod.Projectiles.Forces
       }
       else
       {
-        projectile.damage = basis.damage;
-        projectile.knockBack = basis.knockBack;
+        projectile.damage = GradiusHelper.RoundOffToWhole(basis.damage * BasisMultiplier);
+        projectile.knockBack = basis.knockBack * BasisMultiplier;
       }
     }
 

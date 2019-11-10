@@ -188,6 +188,7 @@ Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/proje
 
 [SPOILER="Changelogs"]
 0.9.0
+  - Optimize general code
   - Optimize Option Rule list code execution
   - Create Cross Mod Content API for adding Option rules
   - Also create API for supporting custom damage types
@@ -195,6 +196,9 @@ Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/proje
   - Fix Ducker desync issue
   - Improve Sagna sync code for it to be smoother in multiplayer
   - Increase spawn chance of Zalk, Sagna and Ducker
+  - Buff the Forces and give them more damage
+  - Change Needle Force to have all benefits of Standard Force
+  - Allow Needle Force to have more damage than Standard Force
 
 0.8.5
   - Implement Ducker

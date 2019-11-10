@@ -9,9 +9,9 @@ namespace ChensGradiusMod.Items.Accessories.Forces
   {
     public override void SetStaticDefaults()
     {
-      Tooltip.SetDefault("Deploys the Needle Force.\n" +
+      Tooltip.SetDefault("Slightly increases life regeneration.\n" +
+                         "Deploys the Needle Force.\n" +
                          "Damage and Knockback are based on the held weapon.\n" +
-                         "Inherited Damage and Knockback are only 3/4 of the actual values.\n" +
                          "Any enemy projectile that comes in contact are destroyed.\n" +
                          "Press the Force Action hotkey to launch or pull it!\n" +
                          "Modified Force to enhance offensive capabilties.");
@@ -21,6 +21,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+      player.lifeRegen += 1;
       ModPlayer(player).needleForce = true;
       DeployForce(player);
     }

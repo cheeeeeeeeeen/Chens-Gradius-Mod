@@ -48,6 +48,8 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     protected override bool ForceCheck() => ModOwner.needleForce;
 
+    protected override float BasisMultiplier => 3f;
+
     protected override void Engage()
     {
       if (InBattle)
