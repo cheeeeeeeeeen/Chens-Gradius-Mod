@@ -105,7 +105,7 @@ namespace ChensGradiusMod
           case "AddCustomDamage":
             {
               // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Internal class name of the GlobalProjectile or ModProjectile. e.g. "MyGlobalProjectile"
+              // args[2]: Internal class name of the GlobalProjectile containing the custom damage type. e.g. "MyGlobalProjectile"
               // args[3]: Internal boolean variable name of your custom damage.
 
               if (args.Length > 4)

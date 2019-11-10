@@ -13,6 +13,7 @@ If the Mod Browser is down, then you can refer to this link to download the late
 
 If you want to help making sprites for this mod, then you are welcome to join us. Check the Discord Link below in [I]Contact Us [/I]section.
 
+[SPOILER="Mod Contents"]
 [B]Contents[/B]
 [LIST=1]
 [*]Options/Multiples
@@ -170,7 +171,6 @@ Spray pattern is a single inaccurate bullet spawned towards the player. They are
 Spread pattern is a group of bullets fired in a single shot. All of the bullets have the same speed, only their directions differ.
 Explode pattern is a group of bullets fired in all directions in a single shot. There is room for evasion here compared to Spread pattern, and are often slower.
 
-
 [B]Added Music with music box[/B]
 [LIST=1]
 [*]The Position Light (Gradius ReBirth version, originally from Nemesis 3)
@@ -181,39 +181,10 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [LIST=1]
 [*]Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
 [/LIST]
+[/SPOILER]
 
 If you are curious about what our current plans are, you can look them up on the project board.
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
-
-[B][I][U]Highlighted Issue[/U][/I][/B]
-The Options do copy even modded projectiles from other mods, which is great. This comes with a cost, however. Due to mod creator's unique way of coding projectile code, the options may not behave properly, [U]and may duplicate and copy generated projectiles created by another friendly projectile[/U].
-If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
-[URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
-
-[B][I][U]Option Compatibility[/U][/I][/B]
-Due to the issue above, it is highly unlikely that we will support all the mods existing. The more appropriate description for the task is it being impossible to complete.
-If you want [U]your own mod's projectiles to be compatible with the Options[/U], then take these items below in mind when implementing your projectile:
-[LIST]
-[*]Make sure the projectile is [B]active[/B]. (projectile.active is true)
-[*]Make sure that your projectile is [B]not a Yo-yo[/B].
-[*]Make sure the projectile [B]is not hostile[/B]. (projectile.hostile is false)
-[*]Make sure the projectile [B]is friendly[/B]. (projectile.friendly is true)
-[*]Make sure the projectile [B]is not an NPC projectile[/B]. (projectile.npcProj is false)
-[*]Make sure the projectile [B]has damage[/B].
-[*]Make sure the projectile [B]can deal critical damage[/B]. (Melee, Ranged, Thrown and Magic)
-[*]Make sure the projectile [B]is not a minion[/B]. (projectile.minion is false)
-[*]Make sure the projectile [B]is not a trap[/B]. (projectile.trap is false)
-[*]Make sure the projectile [B]is owned by the same player who generated the projectile[/B].
-[/LIST]
-Following the list above, your projectiles will surely be copied by the Options. There is still, however, something that should be tackled.
-If [U]your projectile creates more projectiles, it is possible the Options may infinitely copy them[/U], which can cause a severe lag and power output.
-If you want to avoid this problem, please follow one of the items below to avoid infinite duplication.
-[LIST]
-[*]Set the newer projectiles [B]to be an NPC projectile[/B]. (projectile.npcProj is true)
-[*]Set the newer projectiles [B]to be a trap projectile[/B]. (projectile.trap is true)
-[*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. (projectile.melee, projectile.ranged, etc is false)
-[/LIST]
-The most recommended way to avoid the duplication is to set the new projectiles to be an NPC projectile.There will be a better API for this sooner or later. Stay tuned.
 
 [SPOILER="Changelogs"]
 0.8.5
@@ -414,6 +385,82 @@ The most recommended way to avoid the duplication is to set the new projectiles 
 
 0.0.2
   - Initial release
+[/SPOILER]
+
+[B][U][SIZE=6]Highlighted Issue[/SIZE][/U][/B]
+The Options do copy even modded projectiles from other mods, which is great. This comes with a cost, however. Due to mod creator's unique way of coding projectile code, the options may not behave properly, [U]and may duplicate and copy generated projectiles created by another friendly projectile[/U].
+If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
+[URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
+
+[SPOILER="Cross Mod Content Capabilities (For Other Modders)"]
+[B][U][SIZE=6]Option Compatibility[/SIZE][/U][/B]
+Due to the [I]Highlighted Issue[/I] above, it is highly unlikely that we will support all the mods existing. The more appropriate description for the task is it being impossible to complete.
+If you want [U]your own mod's projectiles to be compatible with the Options[/U], then take these items below in mind when implementing your projectile:
+[LIST]
+[*]Make sure the projectile is [B]active[/B]. ([I]projectile.active[/I] is true)
+[*]Make sure that your projectile is [B]not a Yo-yo[/B].
+[*]Make sure the projectile [B]is not hostile[/B]. ([I]projectile.hostile[/I] is false)
+[*]Make sure the projectile [B]is friendly[/B]. ([I]projectile.friendly[/I] is true)
+[*]Make sure the projectile [B]is not an NPC projectile[/B]. ([I]projectile.npcProj[/I] is false)
+[*]Make sure the projectile [B]has damage[/B].
+[*]Make sure the projectile [B]can deal critical damage[/B]. (Melee, Ranged, Thrown and Magic)
+[*]Make sure the projectile [B]is not a minion[/B]. ([I]projectile.minion[/I] is false)
+[*]Make sure the projectile [B]is not a trap[/B]. ([I]projectile.trap[/I] is false)
+[*]Make sure the projectile [B]is owned by the same player who generated the projectile[/B].
+[/LIST]
+Following the list above, your projectiles will surely be copied by the Options. There is still, however, something that should be tackled.
+If [U]your projectile creates more projectiles, it is possible the Options may infinitely copy them, which can cause a severe lag and power output[/U].
+If you want to avoid this problem, please follow one of the items below to avoid infinite duplication.
+[LIST]
+[*]Set the newer projectiles [B]to be an NPC projectile[/B]. ([I]projectile.npcProj[/I] is true)
+[*]Set the newer projectiles [B]to be a trap projectile[/B]. ([I]projectile.trap[/I] is true)
+[*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. ([I]projectile.melee[/I], [I]projectile.ranged[/I], etc is false)
+[/LIST]
+The most recommended way to avoid the duplication is to set the new projectiles to be an NPC projectile. However, using the ways above, there may be side effects.
+Thankfully, this mod [U]offers an API for other mod creators so that they can get rid of this problem in their modded projectiles through Mod.Call[/U].
+Using this method as a means to remove the problem of duplication is the [B]most recommended way[/B]. Head on over to [I]API[/I] Section just below for more details.
+[/SPOILER]
+
+[SPOILER="Mod API for Cross Mod Content"]
+[LIST]
+[*][B]"AddOptionRule"[/B]
+[LIST]
+[*]This function will add an Option Rule in the lists that will be checked for Options Projectile Duplication ability. Adding a rule in the list [U]will ban that projectile from being duplicated[/U].
+[*][I]When to use:[/I] Use this function to add projectiles that are:
+[LIST]
+[*]Misbehaving in function (e.g. the Projectile has a limit on how much can exist in the world)
+[*]Produced by another projectile (e.g. Bees from the Beenade, and Bees from the Bee Arrow, not the arrow itself)
+[*]Duplicating a lot that can cause lag or crash (e.g. Vilethorn causes infinite duplication due to the nature of how it works)
+[/LIST]
+[*][I]Invoke #1:[/I]   mod.Call("AddOptionRule", ProjectileID.Bee);
+[LIST]
+[*]Use this for adding a [I]vanilla[/I] projectile in the rule list.
+[/LIST]
+[*][I]Invoke #2:[/I]   mod.Call("AddOptionRule", "Bluemagic", "PuriumArrowTrail");
+[LIST]
+[*]Use this for adding a [I]mod[/I] projectile in the rule list.
+[*]Make sure to use internal names and not the display names.
+[/LIST]
+[*][I]Where to put:[/I] In your Mod's Load() override.
+[*][I]Returns:[/I] [B]True[/B] (Rule was added) or [B]False[/B] (Rule already existing)
+[/LIST]
+[*][B]"AddCustomDamage"[/B]
+[LIST]
+[*]This function will add [U]your mod's custom damage type[/U] so that the Options may copy those projectiles as well!
+[*][I]When to use:[/I] Use this function if you want to allow the Options to duplicate your projectiles with custom damage type.
+[*][I]Invoke:[/I]   mod.Call("AddCustomDamage", "CalamityMod", "CalamityGlobalProjectile", "rogue");
+[*][I]Where to put:[/I] In your Mod's Load() override.
+[*][I]Returns:[/I] [B]True[/B] (Custom Damage added for support) or [B]False[/B] (Custom Damage is already supported)
+[/LIST]
+[*][B]"ProjectileBanCheck"[/B]
+[LIST]
+[*]This function is for checking whether a projectile is in the rule list or not.
+[*][I]When to use:[/I] This function is not really necessary, but it might help for debugging something.
+[*][I]Invoke:[/I]   mod.Call("ProjectileBanCheck", projectile.type);
+[*][I]Where to put:[/I] Anywhere
+[*][I]Returns:[/I] [B]True[/B] if banned, [B]False[/B] if not.
+[/LIST]
+[/LIST]
 [/SPOILER]
 
 [B]Contact Us[/B]
