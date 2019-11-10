@@ -8,12 +8,13 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 {
   public abstract class ChargeMultipleBaseObject : OptionBaseObject
   {
-    private readonly int maxCharge = 180;
-    private readonly int minCharge = 30;
-    private readonly int chargeDustId = 71;
-    private readonly int maxChargeDustId = 124;
-    private readonly int chargeSoundRate = 60;
-    private readonly int dustRate = 3;
+    private const int MaxCharge = 180;
+    private const int MinCharge = 30;
+    private const int ChargeDustId = 71;
+    private const int MaxChargeDustId = 124;
+    private const int ChargeSoundRate = 60;
+    private const int DustRate = 3;
+
     private int chargeTime = 0;
     private int chargeSoundTick = 0;
     private int dustTick = 0;
@@ -26,7 +27,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
       if (baseResult && ModOwner.chargeMode == (int)ChargeMultipleBase.States.Dying)
       {
-        if (chargeTime > minCharge)
+        if (chargeTime > MinCharge)
         {
           if (GradiusHelper.IsSameClientOwner(projectile))
           {
@@ -77,23 +78,23 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
       if (ModOwner.chargeMode == (int)ChargeMultipleBase.States.Charging)
       {
-        chargeTime = Math.Min(maxCharge, ++chargeTime);
+        chargeTime = Math.Min(MaxCharge, ++chargeTime);
 
-        if (++dustTick >= dustRate && chargeTime <= maxCharge)
+        if (++dustTick >= DustRate && chargeTime <= MaxCharge)
         {
           dustTick = 0;
 
-          Dust.NewDust(projectile.position, projectile.width, projectile.height, chargeDustId);
+          Dust.NewDust(projectile.position, projectile.width, projectile.height, ChargeDustId);
 
-          if (chargeTime == maxCharge)
+          if (chargeTime == MaxCharge)
           {
-            Dust.NewDust(projectile.position, projectile.width, projectile.height, maxChargeDustId);
+            Dust.NewDust(projectile.position, projectile.width, projectile.height, MaxChargeDustId);
           }
         }
 
         if (Position <= 1)
         {
-          if (++chargeSoundTick >= chargeSoundRate) chargeSoundTick = 0;
+          if (++chargeSoundTick >= ChargeSoundRate) chargeSoundTick = 0;
           else if (chargeSoundTick <= 1)
           {
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionCharging"),

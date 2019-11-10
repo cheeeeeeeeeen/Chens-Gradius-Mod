@@ -32,6 +32,8 @@ Added Music with music box:
 Added Music without music boxes yet:
 1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
 
+Cross Mod Content API is available already! Check the homepage for more info.
+
 The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Contact us if you have any suggestions and bug reports.
 
 For changelogs, please visit the homepage. Complete information can be found in there. There are plenty of ways in the homepage that you can help us with!

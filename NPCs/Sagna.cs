@@ -9,12 +9,12 @@ namespace ChensGradiusMod.NPCs
 {
   public class Sagna : GradiusEnemy
   {
-    private readonly int cancelDeployThreshold = 500;
-    private readonly float xSpeed = 3f;
-    private readonly float yGravity = .1f;
-    private readonly float maxYSpeed = 5f;
-    private readonly int jumpCountForSpray = 1;
-    private readonly int syncRate = 60;
+    private const int CancelDeployThreshold = 500;
+    private const float XSpeed = 3f;
+    private const float YGravity = .1f;
+    private const float MaxYSpeed = 5f;
+    private const int JumpCountForSpray = 1;
+    private const int SyncRate = 60;
 
     private bool initialized = false;
     private int persistDirection = 0;
@@ -67,7 +67,7 @@ namespace ChensGradiusMod.NPCs
         if (npc.Center.X > Main.player[npc.target].Center.X) persistDirection = -1;
         else persistDirection = 1;
         xDirection = persistDirection;
-        yDirection = DecideYDeploy(npc.height, cancelDeployThreshold, false, true, 1);
+        yDirection = DecideYDeploy(npc.height, CancelDeployThreshold, false, true, 1);
         if (yDirection < 0)
         {
           startFrame = 8;
@@ -88,13 +88,13 @@ namespace ChensGradiusMod.NPCs
       MoveVertically();
       if (mode != States.Spray) AdjustMovementBehavior();
 
-      
+
     }
 
     public override void PostAI()
     {
       base.PostAI();
-      if (!ConstantSync(ref syncTick, syncRate) && GradiusHelper.IsNotMultiplayerClient()
+      if (!ConstantSync(ref syncTick, SyncRate) && GradiusHelper.IsNotMultiplayerClient()
           && oldMode != mode)
       {
         npc.netUpdate = true;
@@ -172,7 +172,7 @@ namespace ChensGradiusMod.NPCs
       {
         case States.Hop:
         case States.Fall:
-          npc.velocity.X = xSpeed * xDirection;
+          npc.velocity.X = XSpeed * xDirection;
           break;
         case States.Spray:
           npc.velocity.X = 0f;
@@ -185,14 +185,14 @@ namespace ChensGradiusMod.NPCs
       switch (mode)
       {
         case States.Hop:
-          npc.velocity.Y += yGravity * yDirection;
+          npc.velocity.Y += YGravity * yDirection;
           if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, 0f);
           else npc.velocity.Y = Math.Max(npc.velocity.Y, 0f);
           break;
         case States.Fall:
-          npc.velocity.Y += yGravity * yDirection;
-          if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, maxYSpeed);
-          else npc.velocity.Y = Math.Max(npc.velocity.Y, -maxYSpeed);
+          npc.velocity.Y += YGravity * yDirection;
+          if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, MaxYSpeed);
+          else npc.velocity.Y = Math.Max(npc.velocity.Y, -MaxYSpeed);
           break;
         case States.Spray:
           npc.velocity.Y = 0f;
@@ -214,7 +214,7 @@ namespace ChensGradiusMod.NPCs
               yDirection < 0 && npc.velocity.Y <= 0f)
           {
             npc.velocity.Y = 0f;
-            if (++jumpCount >= jumpCountForSpray)
+            if (++jumpCount >= JumpCountForSpray)
             {
               jumpCount = 0;
               mode = States.Spray;
@@ -226,7 +226,7 @@ namespace ChensGradiusMod.NPCs
           if (beforeVelocity.Y != npc.velocity.Y)
           {
             mode = States.Hop;
-            npc.velocity.Y = maxYSpeed * -yDirection;
+            npc.velocity.Y = MaxYSpeed * -yDirection;
           }
           break;
       }

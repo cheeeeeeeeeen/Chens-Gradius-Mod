@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
 {
   public class OptionSeed : ParentGradiusAccessory
   {
-    private readonly string projectileName = "OptionSeedObject";
+    private const string ProjectileName = "OptionSeedObject";
 
     public override void SetStaticDefaults()
     {
@@ -35,10 +35,10 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
 
       if (GradiusHelper.IsSameClientOwner(player))
       {
-        if (player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0)
+        if (player.ownedProjectileCounts[mod.ProjectileType(ProjectileName)] <= 0)
         {
           int pInd = Projectile.NewProjectile(player.Center.X + OptionSeedObject.SeedDistance * player.direction,
-                                              player.Center.Y, 0f, 0f, mod.ProjectileType(projectileName), 0, 0f,
+                                              player.Center.Y, 0f, 0f, mod.ProjectileType(ProjectileName), 0, 0f,
                                               player.whoAmI, 0f, 0f);
           ModOwner(player).seedProjectile = Main.projectile[pInd];
         }

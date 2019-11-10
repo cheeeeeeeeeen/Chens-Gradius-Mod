@@ -11,8 +11,9 @@ namespace ChensGradiusMod.Projectiles.Enemies
     public const int Dmg = 100;
     public const float Kb = 20f;
 
-    private readonly int expertMaxLife = 2;
-    private readonly int normalMaxLife = 1;
+    private const int ExpertMaxLife = 2;
+    private const int NormalMaxLife = 1;
+
     private int life = 3;
 
     public override void SetStaticDefaults()
@@ -34,10 +35,10 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override bool PreAI()
     {
-      if (life > expertMaxLife)
+      if (life > ExpertMaxLife)
       {
-        if (Main.expertMode) life = expertMaxLife;
-        else life = normalMaxLife;
+        if (Main.expertMode) life = ExpertMaxLife;
+        else life = NormalMaxLife;
       }
 
       return true;

@@ -9,14 +9,17 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
   public class ChargeMultipleMissile : ModProjectile
   {
     public const float Spd = 18f;
+
     public Item clonedAccessory = null;
+
+    private const float DetectionRange = 600f;
+    private const float AngleSpeed = 20f;
+    private const float AngleVariation = 5f;
+    private const int DelayToRotate = 10;
 
     private readonly int[] dustIds = new int[2] { 55, 112 };
     private readonly int trailType = ModContent.ProjectileType<ChargeMultipleTrail>();
-    private readonly float detectionRange = 600f;
-    private readonly float angleSpeed = 20f;
-    private readonly float angleVariation = 5f;
-    private readonly int delayToRotate = 10;
+
     private float oldCurrentAngle = 0f;
     private float currentAngle = 0f;
     private int oldEnemyTarget = -1;
@@ -108,7 +111,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     private void SeekEnemy()
     {
       Player owner = Main.player[projectile.owner];
-      float shortestDistance = detectionRange;
+      float shortestDistance = DetectionRange;
       enemyTarget = -1;
 
       for (int i = 0; i < Main.maxNPCs; i++)
@@ -117,7 +120,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         float distance = Vector2.Distance(projectile.Center, selectNpc.Center);
         float enemyDistance = Vector2.Distance(owner.Center, selectNpc.Center);
 
-        if (enemyDistance <= detectionRange && distance < shortestDistance &&
+        if (enemyDistance <= DetectionRange && distance < shortestDistance &&
             !selectNpc.friendly && selectNpc.active)
         {
           shortestDistance = distance;
@@ -134,7 +137,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     private void RotateTowardsTarget()
     {
-      if (++delayTick >= delayToRotate)
+      if (++delayTick >= DelayToRotate)
       {
         float targetAngle;
         Vector2 targetVector;
@@ -152,9 +155,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         targetAngle = GradiusHelper.GetBearing(projectile.Center, targetVector);
         if (GradiusHelper.IsSameClientOwner(projectile))
         {
-          float chosenVariant = Main.rand.NextFloat(angleVariation);
+          float chosenVariant = Main.rand.NextFloat(AngleVariation);
           currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
-                                                     GradiusHelper.MaxRotate, angleSpeed - chosenVariant);
+                                                     GradiusHelper.MaxRotate, AngleSpeed - chosenVariant);
           if (oldCurrentAngle != currentAngle)
           {
             oldCurrentAngle = currentAngle;
@@ -162,7 +165,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
           }
         }
         else currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
-                                                        GradiusHelper.MaxRotate, angleSpeed);
+                                                        GradiusHelper.MaxRotate, AngleSpeed);
         projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2

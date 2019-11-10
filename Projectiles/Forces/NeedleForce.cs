@@ -8,8 +8,10 @@ namespace ChensGradiusMod.Projectiles.Forces
   public class NeedleForce : ForceBase
   {
     private const float StatReduction = 1f;
-    private readonly float angleIncrease = 6f;
+    private const float AngleIncrease = 6f;
+
     private readonly int[] detachedCooldown = { 2, 2, 2 };
+
     private float shootAngle = 0f;
     private int angleDirection = 1;
 
@@ -23,7 +25,7 @@ namespace ChensGradiusMod.Projectiles.Forces
       {
         vX = (float)Math.Cos(MathHelper.ToRadians(shootAngle));
         vY = (float)-Math.Sin(MathHelper.ToRadians(shootAngle));
-        shootAngle += angleIncrease * angleDirection;
+        shootAngle += AngleIncrease * angleDirection;
       }
       else
       {

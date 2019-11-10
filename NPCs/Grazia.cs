@@ -11,6 +11,9 @@ namespace ChensGradiusMod.NPCs
     private const float DetectionRange = 800f;
     private const int PersistDirection = -1;
     private const float CustomGravity = 5f;
+    private const int FireRate = 50;
+    private const int CancelDeployThreshold = 500;
+    private const int SyncRate = 300;
 
     private readonly int[] directLowerAngleAim = { 0, 21, 41, 61, 81, 100, 120, 140, 160 };
     private readonly int[] directHigherAngleAim = { 20, 40, 60, 80, 99, 119, 139, 159, 180 };
@@ -18,9 +21,6 @@ namespace ChensGradiusMod.NPCs
     private readonly int[] inverseLowerAngleAim = { 180, 201, 221, 241, 261, 280, 300, 320, 340 };
     private readonly int[] inverseHigherAngleAim = { 200, 220, 240, 260, 279, 299, 319, 339, 360 };
     private readonly int[] inverseFrameAngleAim = { 17, 16, 15, 14, 13, 12, 11, 10, 9 };
-    private readonly int fireRate = 50;
-    private readonly int cancelDeployThreshold = 500;
-    private readonly int syncRate = 600;
 
     private int yDirection = 0;
     private int fireTick = 0;
@@ -66,7 +66,7 @@ namespace ChensGradiusMod.NPCs
 
       if (yDirection == 0)
       {
-        yDirection = DecideYDeploy(npc.height * .5f, cancelDeployThreshold);
+        yDirection = DecideYDeploy(npc.height * .5f, CancelDeployThreshold);
         if (yDirection == 0) return;
         if (yDirection < 0) npc.frame.Y = 416;
       }
@@ -82,7 +82,7 @@ namespace ChensGradiusMod.NPCs
         else fireTick = 0;
       }
 
-      ConstantSync(ref syncTick, syncRate);
+      ConstantSync(ref syncTick, SyncRate);
     }
 
     public override void FindFrame(int frameHeight)
@@ -167,7 +167,7 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (++fireTick >= fireRate)
+      if (++fireTick >= FireRate)
       {
         fireTick = 0;
         Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);

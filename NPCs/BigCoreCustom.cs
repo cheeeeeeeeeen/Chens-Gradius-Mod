@@ -14,19 +14,19 @@ namespace ChensGradiusMod.NPCs
   {
     private const int FrameWidth = 192;
     private const int FrameHeight = 130;
+    private const float RegularAssaultMaxSpeed = 30f;
+    private const float RegularAssaultAcceleration = 1f;
+    private const float RegularAssaultHorizontalGap = 600f;
+    private const int OpenCoreTime = 1200;
+    private const int MaxFrameIndex = 4;
+    private const int FireRate = 25;
 
-    private readonly int openCoreTime = 1200;
-    private readonly int maxFrameIndex = 4;
-    private readonly int fireRate = 25;
     private bool openCore = false;
     private States mode = States.RegularAssault;
     private int fireTick = 0;
     private int existenceTick = 0;
     private int frameCounterX = 7;
 
-    private readonly float regularAssaultMaxSpeed = 30f;
-    private readonly float regularAssaultAcceleration = 1f;
-    private readonly float regularAssaultHorizontalGap = 600f;
     private float regularAssaultXCurrentSpeed = 0f;
     private float regularAssaultYCurrentSpeed = 0f;
     private int regularAssaultDirection = 0;
@@ -202,13 +202,13 @@ namespace ChensGradiusMod.NPCs
 
       if (target.Center.Y > npc.Center.Y)
       {
-        regularAssaultYCurrentSpeed += regularAssaultAcceleration;
-        regularAssaultYCurrentSpeed = Math.Min(regularAssaultYCurrentSpeed, regularAssaultMaxSpeed);
+        regularAssaultYCurrentSpeed += RegularAssaultAcceleration;
+        regularAssaultYCurrentSpeed = Math.Min(regularAssaultYCurrentSpeed, RegularAssaultMaxSpeed);
       }
       else if (target.Center.Y < npc.Center.Y)
       {
-        regularAssaultYCurrentSpeed -= regularAssaultAcceleration;
-        regularAssaultYCurrentSpeed = Math.Max(regularAssaultYCurrentSpeed, -regularAssaultMaxSpeed);
+        regularAssaultYCurrentSpeed -= RegularAssaultAcceleration;
+        regularAssaultYCurrentSpeed = Math.Max(regularAssaultYCurrentSpeed, -RegularAssaultMaxSpeed);
       }
       npc.position.Y += regularAssaultYCurrentSpeed;
       if (GradiusHelper.IsNotMultiplayerClient() &&
@@ -217,9 +217,9 @@ namespace ChensGradiusMod.NPCs
         npc.netUpdate = true;
       }
 
-      float destinationX = target.Center.X + regularAssaultHorizontalGap * -regularAssaultDirection;
-      regularAssaultXCurrentSpeed += regularAssaultAcceleration;
-      regularAssaultXCurrentSpeed = Math.Min(regularAssaultXCurrentSpeed, regularAssaultMaxSpeed);
+      float destinationX = target.Center.X + RegularAssaultHorizontalGap * -regularAssaultDirection;
+      regularAssaultXCurrentSpeed += RegularAssaultAcceleration;
+      regularAssaultXCurrentSpeed = Math.Min(regularAssaultXCurrentSpeed, RegularAssaultMaxSpeed);
       float newX = GradiusHelper.ApproachValue(npc.Center.X, destinationX, regularAssaultXCurrentSpeed);
       if (newX == destinationX) regularAssaultXCurrentSpeed = 0f;
       npc.Center = new Vector2(newX, npc.Center.Y);
@@ -229,7 +229,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient() && mode != States.Exit)
       {
-        if (++fireTick >= fireRate)
+        if (++fireTick >= FireRate)
         {
           fireTick = 0;
 
@@ -289,12 +289,12 @@ namespace ChensGradiusMod.NPCs
           FrameCounter--;
         }
       }
-      else if (mode != States.Exit && !openCore && existenceTick >= openCoreTime)
+      else if (mode != States.Exit && !openCore && existenceTick >= OpenCoreTime)
       {
         if (++FrameTick >= FrameSpeed)
         {
           FrameTick = 0;
-          if (++FrameCounter >= maxFrameIndex) openCore = true;
+          if (++FrameCounter >= MaxFrameIndex) openCore = true;
         }
       }
     }

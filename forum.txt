@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.8.5
+[B][U][SIZE=6]Mod Version: 0.9.0
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -187,6 +187,15 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.9.0
+  - Optimize Option Rule list code execution
+  - Create Cross Mod Content API for adding Option rules
+  - Also create API for supporting custom damage types
+  - By default, support rogue weapons from Calamity Mod
+  - Fix Ducker desync issue
+  - Improve Sagna sync code for it to be smoother in multiplayer
+  - Increase spawn chance of Zalk, Sagna and Ducker
+
 0.8.5
   - Implement Ducker
   - Nerf Zalk enemies by reducing their fire rate and reducing their retaliation bullets

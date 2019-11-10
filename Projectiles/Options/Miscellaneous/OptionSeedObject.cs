@@ -11,9 +11,9 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     public int rotateDirection = 0;
 
-    private readonly int fireRate = 23;
-    private readonly float rotateSpeed = 7f;
-    private readonly int inBattleDuration = 180;
+    private const int FireRate = 23;
+    private const float RotateSpeed = 7f;
+    private const int InBattleDuration = 180;
 
     private bool isSpawning = true;
     private float currentAngle = 0f;
@@ -62,7 +62,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
       OptionAnimate();
       if (inBattle)
       {
-        if (++inBattleTick >= inBattleDuration) inBattle = false;
+        if (++inBattleTick >= InBattleDuration) inBattle = false;
       }
       if (inBattle && SetProjectileToSpawn()) PerformAttack();
       MoveSeed();
@@ -117,7 +117,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
     {
       if (GradiusHelper.IsSameClientOwner(projectile))
       {
-        if (++fireTick >= fireRate || fireNow)
+        if (++fireTick >= FireRate || fireNow)
         {
           fireTick = 0;
 
@@ -148,7 +148,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
       };
 
       projectile.velocity = Vector2.Zero;
-      currentAngle += rotateSpeed * rotateDirection;
+      currentAngle += RotateSpeed * rotateDirection;
       GradiusHelper.NormalizeAngleDegrees(ref currentAngle);
     }
   }

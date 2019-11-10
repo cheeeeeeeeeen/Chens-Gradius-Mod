@@ -13,12 +13,11 @@ namespace ChensGradiusMod.NPCs
     private const float CustomGravity = 8f;
     private const int CancelThreshold = 500;
     private const float AttackAngleDifference = 13f;
-
-    private readonly float runSpeed = 4f;
-    private readonly float fallSpeedYAccel = .5f;
-    private readonly float fallSpeedXAccel = .1f;
-    private readonly float targetDistance = 500f;
-    private readonly int syncRate = 30;
+    private const float RunSpeed = 4f;
+    private const float FallSpeedYAccel = .5f;
+    private const float FallSpeedXAccel = .1f;
+    private const float TargetDistance = 500f;
+    private const int SyncRate = 30;
 
     private States mode = States.Run;
     private States oldMode = States.Run;
@@ -199,11 +198,11 @@ namespace ChensGradiusMod.NPCs
         case States.Fall:
           npc.velocity += new Vector2
           {
-            X = fallSpeedXAccel * persistDirection,
-            Y = fallSpeedYAccel * yDirection
+            X = FallSpeedXAccel * persistDirection,
+            Y = FallSpeedYAccel * yDirection
           };
-          if (persistDirection > 0) npc.velocity.X = Math.Min(npc.velocity.X, runSpeed);
-          else npc.velocity.X = Math.Max(npc.velocity.X, -runSpeed);
+          if (persistDirection > 0) npc.velocity.X = Math.Min(npc.velocity.X, RunSpeed);
+          else npc.velocity.X = Math.Max(npc.velocity.X, -RunSpeed);
           if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, CustomGravity);
           else npc.velocity.Y = Math.Max(npc.velocity.Y, -CustomGravity);
 
@@ -229,7 +228,7 @@ namespace ChensGradiusMod.NPCs
               npc.velocity = new Vector2(0, 20f * -yDirection);
               hasJumped = true;
             }
-            else npc.velocity += new Vector2(fallSpeedXAccel * persistDirection, fallSpeedYAccel * yDirection);
+            else npc.velocity += new Vector2(FallSpeedXAccel * persistDirection, FallSpeedYAccel * yDirection);
 
             if (hasJumped && ((yDirection > 0 && npc.velocity.Y >= 0) ||
                               (yDirection < 0 && npc.velocity.Y <= 0)))
@@ -254,7 +253,7 @@ namespace ChensGradiusMod.NPCs
     public override void PostAI()
     {
       base.PostAI();
-      if (!ConstantSync(ref syncTick, syncRate) && GradiusHelper.IsNotMultiplayerClient()
+      if (!ConstantSync(ref syncTick, SyncRate) && GradiusHelper.IsNotMultiplayerClient()
           && oldMode != mode)
       {
         npc.netUpdate = true;
@@ -287,7 +286,7 @@ namespace ChensGradiusMod.NPCs
       yDirection = reader.ReadInt32();
       hasJumped = reader.ReadBoolean();
       targetLastSeen = reader.ReadVector2();
-  }
+    }
 
     protected override int FrameSpeed { get; set; } = 5;
 
@@ -323,7 +322,7 @@ namespace ChensGradiusMod.NPCs
     {
       npc.velocity = new Vector2
       {
-        X = runSpeed * persistDirection,
+        X = RunSpeed * persistDirection,
         Y = CustomGravity * yDirection
       };
     }
@@ -332,7 +331,7 @@ namespace ChensGradiusMod.NPCs
     {
       npc.TargetClosest(false);
       targetLastSeen = Target.Center;
-      return Vector2.Distance(Target.Center, npc.Center) <= targetDistance
+      return Vector2.Distance(Target.Center, npc.Center) <= TargetDistance
              && ((yDirection > 0 && npc.Center.Y >= Target.Center.Y)
                  || (yDirection < 0 && npc.Center.Y <= Target.Center.Y));
     }

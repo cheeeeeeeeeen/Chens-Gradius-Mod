@@ -9,12 +9,13 @@ namespace ChensGradiusMod.NPCs
 {
   public class Garun : GradiusEnemy
   {
-    private readonly float waveFrequency = .05f;
-    private readonly float waveAmplitude = 150f;
-    private readonly float travelSpeed = 5f;
-    private readonly float attackDistance = 1200;
-    private readonly int fireRate = 20;
-    private readonly int syncRate = 120;
+    private const float WaveFrequency = .05f;
+    private const float WaveAmplitude = 150f;
+    private const float TravelSpeed = 5f;
+    private const float AttackDistance = 1200;
+    private const int FireRate = 20;
+    private const int SyncRate = 120;
+
     private int timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
@@ -66,13 +67,13 @@ namespace ChensGradiusMod.NPCs
 
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
-      float wobble = waveAmplitude * (float)Math.Cos(waveFrequency * timerTick++) * waveFrequency;
-      npc.velocity.X += xTo * travelSpeed - yTo * wobble;
-      npc.velocity.Y += -yTo * travelSpeed + xTo * wobble;
+      float wobble = WaveAmplitude * (float)Math.Cos(WaveFrequency * timerTick++) * WaveFrequency;
+      npc.velocity.X += xTo * TravelSpeed - yTo * wobble;
+      npc.velocity.Y += -yTo * TravelSpeed + xTo * wobble;
 
       PerformAttack();
 
-      ConstantSync(ref syncTick, syncRate);
+      ConstantSync(ref syncTick, SyncRate);
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -115,12 +116,12 @@ namespace ChensGradiusMod.NPCs
     private void PerformAttack()
     {
       if (GradiusHelper.IsNotMultiplayerClient() &&
-          Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= attackDistance)
+          Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= AttackDistance)
       {
         if ((npc.direction >= 0 && npc.Center.X <= Main.player[npc.target].Center.X) ||
            (npc.direction <= 0 && npc.Center.X >= Main.player[npc.target].Center.X))
         {
-          if (++fireTick >= fireRate)
+          if (++fireTick >= FireRate)
           {
             fireTick = 0;
             Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);

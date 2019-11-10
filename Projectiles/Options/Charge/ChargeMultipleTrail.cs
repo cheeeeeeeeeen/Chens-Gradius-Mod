@@ -5,8 +5,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 {
   public class ChargeMultipleTrail : ModProjectile
   {
-    private readonly int dustId = 112;
-    private readonly int dustRate = 5;
+    private const int DustId = 112;
+    private const int DustRate = 5;
+
     private int dustTick = 0;
 
     public override void SetStaticDefaults()
@@ -42,10 +43,10 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
       }
 
-      if (++dustTick >= dustRate)
+      if (++dustTick >= DustRate)
       {
         dustTick = 0;
-        Dust.NewDust(projectile.position, projectile.width, projectile.height, dustId);
+        Dust.NewDust(projectile.position, projectile.width, projectile.height, DustId);
       }
     }
   }

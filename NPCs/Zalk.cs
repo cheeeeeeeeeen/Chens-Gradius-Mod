@@ -8,13 +8,14 @@ namespace ChensGradiusMod.NPCs
 {
   public class Zalk : GradiusEnemy
   {
-    private readonly float travelSpeed = 5f;
-    private readonly float xDistanceToIntercept = 120f;
-    private readonly float yThresholdToRetreat = .01f;
-    private readonly float xDistanceSeries = 60f;
-    private readonly int fireRate = 57;
-    private readonly float attackDistance = 1200;
-    private readonly int randomFireInterval = 30;
+    private const float TravelSpeed = 5f;
+    private const float XDistanceToIntercept = 120f;
+    private const float YThresholdToRetreat = .01f;
+    private const float XDistanceSeries = 60f;
+    private const int FireRate = 57;
+    private const float AttackDistance = 1200;
+    private const int RandomFireInterval = 30;
+
     private bool targetDetermined = false;
     private int persistDirection = 0;
     private States mode = States.Attack;
@@ -90,10 +91,10 @@ namespace ChensGradiusMod.NPCs
         case States.Fire:
           if (GradiusHelper.IsNotMultiplayerClient())
           {
-            if (Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= attackDistance)
+            if (Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= AttackDistance)
             {
-              int adjustRate = fireRate;
-              if (fireTick <= 0) setFireInterval = Main.rand.Next(0, randomFireInterval + 1);
+              int adjustRate = FireRate;
+              if (fireTick <= 0) setFireInterval = Main.rand.Next(0, RandomFireInterval + 1);
               adjustRate += setFireInterval;
               if (mode == States.Retreat) adjustRate = GradiusHelper.RoundOffToWhole(adjustRate * .5f);
               PerformAttack(adjustRate);
@@ -127,14 +128,14 @@ namespace ChensGradiusMod.NPCs
 
     private bool AttackBehavior()
     {
-      npc.velocity = new Vector2(persistDirection, 0f) * travelSpeed;
+      npc.velocity = new Vector2(persistDirection, 0f) * TravelSpeed;
       return true;
     }
 
     private bool AttackToIntercept()
     {
       float xCurrentDistance = Math.Abs(npc.Center.X - TargetPlayer.Center.X);
-      return xCurrentDistance <= xDistanceToIntercept;
+      return xCurrentDistance <= XDistanceToIntercept;
     }
 
     private bool InterceptBehavior()
@@ -158,7 +159,7 @@ namespace ChensGradiusMod.NPCs
       {
         X = (float)Math.Cos(MathHelper.ToRadians(angleDirection)),
         Y = (float)-Math.Sin(MathHelper.ToRadians(angleDirection))
-      } * travelSpeed;
+      } * TravelSpeed;
 
       return true;
     }
@@ -167,12 +168,12 @@ namespace ChensGradiusMod.NPCs
     {
       return GradiusHelper.IsEqualWithThreshold(npc.Center.Y,
                                                 TargetPlayer.Center.Y,
-                                                travelSpeed + yThresholdToRetreat);
+                                                TravelSpeed + YThresholdToRetreat);
     }
 
     private bool RetreatBehavior()
     {
-      npc.velocity = new Vector2(-persistDirection, 0f) * travelSpeed * 2;
+      npc.velocity = new Vector2(-persistDirection, 0f) * TravelSpeed * 2;
       return true;
     }
 
@@ -182,7 +183,7 @@ namespace ChensGradiusMod.NPCs
       {
         for (int i = 1; i <= SeriesCount; i++)
         {
-          GradiusHelper.NewNPC(npc.Bottom.X + (xDistanceSeries * i * -persistDirection),
+          GradiusHelper.NewNPC(npc.Bottom.X + (XDistanceSeries * i * -persistDirection),
                                npc.Bottom.Y, ModContent.NPCType<Zalk>(), 0, 1);
         }
       }

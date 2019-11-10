@@ -11,10 +11,9 @@ namespace ChensGradiusMod.NPCs
   public class Moai : GradiusEnemy
   {
     private const float DetectionRange = 1400f;
-
-    private readonly int attackTickDelay = 5;
-    private readonly int restingTime = 40;
-    private readonly int vulnerableTime = 10;
+    private const int AttackTickDelay = 5;
+    private const int RestingTime = 40;
+    private const int VulnerableTime = 20;
 
     private int persistDirection = 0;
     private int mode = (int)States.Dormant;
@@ -81,7 +80,7 @@ namespace ChensGradiusMod.NPCs
           }
           break;
         case (int)States.Aggressive:
-          if (++attackTick >= attackTickDelay)
+          if (++attackTick >= AttackTickDelay)
           {
             attackTick = 0;
             PerformAttack();
@@ -93,14 +92,14 @@ namespace ChensGradiusMod.NPCs
           }
           break;
         case (int)States.Vulnerable:
-          if (++vulnerableTick >= vulnerableTime)
+          if (++vulnerableTick >= VulnerableTime)
           {
             vulnerableTick = 0;
             mode = (int)States.Resting;
           }
           break;
         case (int)States.Resting:
-          if (++restTick >= restingTime)
+          if (++restTick >= RestingTime)
           {
             restTick = 0;
             mode = (int)States.Dormant;
