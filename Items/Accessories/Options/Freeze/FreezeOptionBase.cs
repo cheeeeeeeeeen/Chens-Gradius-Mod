@@ -34,9 +34,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to perform a different movement behavior!";
 
-    protected override bool ModeChecks(Player player, bool hideVisual)
+    protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
-      return ModPlayer(player).freezeOption &&
+      bool result = true;
+      if (includeSelf) result &= ModPlayer(player).freezeOption;
+      return result &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&

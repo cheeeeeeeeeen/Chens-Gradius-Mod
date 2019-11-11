@@ -28,14 +28,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       base.UpdateAccessory(player, hideVisual);
     }
 
-    public override bool CanEquipAccessory(Player player, int slot)
-    {
-      return base.CanEquipAccessory(player, slot) &&
-             player.GetModPlayer<GradiusModPlayer>().chargeMultiple &&
-             player.GetModPlayer<GradiusModPlayer>().optionTwo &&
-             player.GetModPlayer<GradiusModPlayer>().optionOne;
-    }
-
     protected override string ProjectileName => "MultipleThreeObject";
 
     protected override int OptionPosition => 3;

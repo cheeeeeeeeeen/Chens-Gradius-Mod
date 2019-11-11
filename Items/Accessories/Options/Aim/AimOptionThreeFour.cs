@@ -2,15 +2,15 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Freeze
+namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
-  public class FreezeOptionThreeFour : TwoFreezeOptionsBase
+  public class AimOptionThreeFour : TwoAimOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Options type Freeze (3rd & 4th)");
+      DisplayName.SetDefault("Options type Aim (3rd & 4th)");
     }
 
     public override void SetDefaults()
@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).freezeOption = true;
+      ModPlayer(player).aimOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

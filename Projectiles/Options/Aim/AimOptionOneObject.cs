@@ -1,6 +1,6 @@
 namespace ChensGradiusMod.Projectiles.Options.Aim
 {
-  public class AimMultipleOneObject : AimOptionBaseObject
+  public class AimOptionOneObject : AimOptionBaseObject
   {
     public override int Position => 1;
 

@@ -1,36 +1,36 @@
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
-  public class AimOptionThree : AimOptionBase
+  public class AimOptionFour : AimOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Aim (Third)");
+      DisplayName.SetDefault("Option type Aim (Fourth)");
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      item.rare = 6;
+      item.rare = 8;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-      ModPlayer(player).optionThree = true;
+      ModPlayer(player).optionFour = true;
       ModPlayer(player).aimOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
-    protected override string ProjectileName => "OptionThreeObject";
+    protected override string ProjectileName => "OptionFourObject";
 
-    protected override int OptionPosition => 3;
+    protected override int OptionPosition => 4;
 
     public override void AddRecipes()
     {

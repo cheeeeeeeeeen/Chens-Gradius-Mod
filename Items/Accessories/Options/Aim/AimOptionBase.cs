@@ -24,11 +24,13 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       "Deploys an Option type Aim.\n" +
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
-      "Hold the Option Action Key to allow the options shoot towards cursor position!";
+      "Hold the Option Action Key to allow the option to shoot towards cursor position!";
 
-    protected override bool ModeChecks(Player player, bool hideVisual)
+    protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
-      return ModPlayer(player).aimOption &&
+      bool result = true;
+      if (includeSelf) result &= ModPlayer(player).aimOption;
+      return result &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&

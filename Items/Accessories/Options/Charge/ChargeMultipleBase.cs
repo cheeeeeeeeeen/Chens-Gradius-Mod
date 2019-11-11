@@ -33,9 +33,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       "Hold the Option Action Key to have the drone charge energy!\n" +
       "Release the key to activate the drone's special attack sequence!";
 
-    protected override bool ModeChecks(Player player, bool hideVisual)
+    protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
-      return ModPlayer(player).chargeMultiple &&
+      bool result = true;
+      if (includeSelf) result &= ModPlayer(player).chargeMultiple;
+      return result &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&

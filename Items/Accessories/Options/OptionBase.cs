@@ -39,7 +39,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, true) &&
+      return ModeChecks(player) &&
              GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player),
                                                          OptionPosition);
     }
@@ -64,9 +64,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
       "This advanced drone uses Wreek technology,\n" +
       "infusing both technology and psychic elements together.";
 
-    protected virtual bool ModeChecks(Player player, bool hideVisual)
+    protected virtual bool ModeChecks(Player player, bool includeSelf = true)
     {
-      return ModPlayer(player).normalOption &&
+      bool result = true;
+      if (includeSelf) result &= ModPlayer(player).normalOption;
+      return result &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).chargeMultiple &&
@@ -76,7 +78,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     protected void CreateOption(Player player, int optionPosition, string projectileName)
     {
       if (GradiusHelper.OptionCheckSelfAndPredecessors(ModPlayer(player), optionPosition) &&
-          ModeChecks(player, false) && IsOptionNotDeployed(player, projectileName))
+          ModeChecks(player) && IsOptionNotDeployed(player, projectileName))
       {
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(projectileName), 0, 0f,
