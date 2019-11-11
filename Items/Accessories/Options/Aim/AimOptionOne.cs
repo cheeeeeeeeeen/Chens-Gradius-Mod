@@ -1,16 +1,16 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Freeze
+namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
-  public class FreezeOptionOne : FreezeOptionBase
+  public class AimOptionOne : AimOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Freeze (First)");
+      DisplayName.SetDefault("Option type Aim (First)");
     }
 
     public override void SetDefaults()
@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).freezeOption = true;
+      ModPlayer(player).aimOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -33,7 +33,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       return !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption;
+             !ModPlayer(player).freezeOption;
     }
 
     protected override string ProjectileName => "OptionOneObject";
@@ -42,18 +42,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 
     public override void AddRecipes()
     {
-      ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionOne");
-      recipe.AddIngredient(ItemID.IceBlock, 90);
-      recipe.AddIngredient(ItemID.SnowBlock, 10);
-      recipe.AddIngredient(ItemID.Gel, 50);
-      recipe.AddIngredient(ItemID.Bone, 75);
-      recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
-      recipe.AddIngredient(ItemID.Wire, 150);
-      recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.IceMachine);
-      recipe.SetResult(this);
-      recipe.AddRecipe();
     }
   }
 }

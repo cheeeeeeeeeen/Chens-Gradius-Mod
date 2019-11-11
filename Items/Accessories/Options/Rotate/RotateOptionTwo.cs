@@ -31,8 +31,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public override bool CanEquipAccessory(Player player, int slot)
     {
       return base.CanEquipAccessory(player, slot) &&
-             player.GetModPlayer<GradiusModPlayer>().rotateOption &&
-             player.GetModPlayer<GradiusModPlayer>().optionOne;
+             ModPlayer(player).rotateOption &&
+             ModPlayer(player).optionOne;
     }
 
     protected override string ProjectileName => "OptionTwoObject";

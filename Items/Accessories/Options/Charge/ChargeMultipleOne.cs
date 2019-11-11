@@ -32,7 +32,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     {
       return !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
-             !ModPlayer(player).rotateOption;
+             !ModPlayer(player).rotateOption &&
+             !ModPlayer(player).aimOption;
     }
 
     protected override string ProjectileName => "MultipleOneObject";

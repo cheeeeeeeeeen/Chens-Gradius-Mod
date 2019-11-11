@@ -39,7 +39,9 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, true);
+      return ModeChecks(player, true) &&
+             GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player),
+                                                         OptionPosition);
     }
 
     public override void OnCraft(Recipe recipe)
@@ -67,7 +69,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
       return ModPlayer(player).normalOption &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).chargeMultiple;
+             !ModPlayer(player).chargeMultiple &&
+             !ModPlayer(player).aimOption;
     }
 
     protected void CreateOption(Player player, int optionPosition, string projectileName)

@@ -37,7 +37,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       return ModPlayer(player).rotateOption &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple;
+             !ModPlayer(player).chargeMultiple &&
+             !ModPlayer(player).aimOption;
     }
   }
 }

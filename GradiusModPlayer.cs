@@ -26,6 +26,7 @@ namespace ChensGradiusMod
     public int revolveDirection;
     public bool wasHolding;
     public bool isFreezing;
+    public bool isAiming;
     public bool forceBase;
     public bool needleForce;
     public Projectile forceProjectile;
@@ -35,6 +36,7 @@ namespace ChensGradiusMod
     public bool optionFour;
     public bool normalOption;
     public bool freezeOption;
+    public bool aimOption;
     public bool rotateOption;
     public bool chargeMultiple;
     public int chargeMode;
@@ -57,6 +59,7 @@ namespace ChensGradiusMod
       optionFour = false;
       normalOption = false;
       freezeOption = false;
+      aimOption = false;
       rotateOption = false;
       chargeMultiple = false;
       optionSeed = false;
@@ -102,6 +105,7 @@ namespace ChensGradiusMod
       packet.Write(seedRotateDirection);
       packet.Write(chargeMultiple);
       packet.Write(chargeMode);
+      packet.Write(aimOption);
       packet.Send(toWho, fromWho);
     }
 
@@ -181,6 +185,11 @@ namespace ChensGradiusMod
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isFreezing = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isFreezing = false;
+      }
+      else if (aimOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isAiming = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isAiming = false;
       }
       else if (rotateOption)
       {
@@ -284,6 +293,7 @@ namespace ChensGradiusMod
       optionAlreadyProducedProjectiles.Clear();
       optionAlreadyProducedProjectiles = new List<int>();
       isFreezing = false;
+      isAiming = false;
       rotateMode = (int)RotateOptionBase.States.Following;
       baitDirection = 0;
       revolveDirection = 1;
