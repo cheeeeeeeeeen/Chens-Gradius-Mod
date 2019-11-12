@@ -34,6 +34,18 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
 
     public override void AddRecipes()
     {
+      ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(mod, "OptionFour");
+      recipe.AddIngredient(ItemID.RifleScope);
+      recipe.AddIngredient(ItemID.MechanicalLens);
+      recipe.AddIngredient(ItemID.Ectoplasm, 15);
+      recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
+      recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
+      recipe.AddIngredient(ItemID.Wire, 300);
+      recipe.AddTile(TileID.TinkerersWorkbench);
+      recipe.AddTile(TileID.IceMachine);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }
