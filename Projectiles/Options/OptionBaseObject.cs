@@ -77,16 +77,17 @@ namespace ChensGradiusMod.Projectiles.Options
             playerAlreadyProducedProjectiles.Add(prog_ind);
 
             int new_p_ind = SpawnDuplicateProjectile(p);
-            ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
-            Main.projectile[new_p_ind].noDropItem = true;
+            if (new_p_ind >= 0)
+            {
+              ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
+              SetDuplicateDefaults(Main.projectile[new_p_ind]);
+            }
           }
         }
       }
 
       OptionAnimate();
-
-      projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
-
+      OptionMovement();
       OptionSpawnSoundEffect();
     }
 
@@ -119,6 +120,13 @@ namespace ChensGradiusMod.Projectiles.Options
       return Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
                                       p.velocity, p.type, p.damage, p.knockBack,
                                       projectile.owner, 0f, 0f);
+    }
+
+    protected virtual void SetDuplicateDefaults(Projectile p) => p.noDropItem = true;
+
+    protected virtual void OptionMovement()
+    {
+      projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
     }
 
     protected Player Owner => Main.player[projectile.owner];

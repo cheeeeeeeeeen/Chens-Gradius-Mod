@@ -319,5 +319,27 @@ namespace ChensGradiusMod
 
       return false;
     }
+
+    public static int FindTarget(Vector2 projPosition, Vector2 ownPosition, float range)
+    {
+      float shortestDistance = range;
+      int target = -1;
+
+      for (int i = 0; i < Main.maxNPCs; i++)
+      {
+        NPC selectNpc = Main.npc[i];
+        float distance = Vector2.Distance(projPosition, selectNpc.Center);
+        float enemyDistance = Vector2.Distance(ownPosition, selectNpc.Center);
+
+        if (enemyDistance <= range && distance < shortestDistance &&
+            !selectNpc.friendly && selectNpc.active)
+        {
+          shortestDistance = distance;
+          target = i;
+        }
+      }
+
+      return target;
+    }
   }
 }
