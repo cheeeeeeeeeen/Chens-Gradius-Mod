@@ -47,7 +47,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
       recipe.AddIngredient(ItemID.Wire, 150);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.Loom);
+      recipe.AddTile(TileID.BewitchingTable);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }
