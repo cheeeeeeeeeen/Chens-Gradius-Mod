@@ -37,6 +37,13 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       ResetProjectileCounts(player);
     }
 
+    public override bool CanEquipAccessory(Player player, int slot)
+    {
+      return ModeChecks(player) &&
+             GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player),
+                                                         OptionPosition[0]);
+    }
+
     protected new virtual string[] ProjectileName { get; } = { "1", "2" };
 
     protected new virtual int[] OptionPosition { get; } = { 1, 2 };

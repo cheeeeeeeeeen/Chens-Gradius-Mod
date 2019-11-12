@@ -32,12 +32,15 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to have the drone revolve you!";
 
-    protected override bool ModeChecks(Player player, bool hideVisual)
+    protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
-      return ModPlayer(player).rotateOption &&
+      bool result = true;
+      if (includeSelf) result &= ModPlayer(player).rotateOption;
+      return result &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple;
+             !ModPlayer(player).chargeMultiple &&
+             !ModPlayer(player).aimOption;
     }
   }
 }

@@ -76,9 +76,7 @@ namespace ChensGradiusMod.Projectiles.Options
             Projectile p = Main.projectile[prog_ind];
             playerAlreadyProducedProjectiles.Add(prog_ind);
 
-            int new_p_ind = Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
-                                                     p.velocity, p.type, p.damage, p.knockBack,
-                                                     projectile.owner, 0f, 0f);
+            int new_p_ind = SpawnDuplicateProjectile(p);
             ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
             Main.projectile[new_p_ind].noDropItem = true;
           }
@@ -116,6 +114,13 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected virtual bool AttackLimitation() => true;
 
+    protected virtual int SpawnDuplicateProjectile(Projectile p)
+    {
+      return Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
+                                      p.velocity, p.type, p.damage, p.knockBack,
+                                      projectile.owner, 0f, 0f);
+    }
+
     protected Player Owner => Main.player[projectile.owner];
 
     protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
@@ -140,11 +145,7 @@ namespace ChensGradiusMod.Projectiles.Options
       }
     }
 
-    private int FrameDistance => (DistanceInterval * Position) - 1;
-
-    private int PathListSize => ModOwner.optionFlightPath.Count;
-
-    private Vector2 ComputeOffset(Vector2 playPos, Vector2 projPos)
+    protected Vector2 ComputeOffset(Vector2 playPos, Vector2 projPos)
     {
       Vector2 projectileSpawn = new Vector2(projectile.Center.X, projectile.Center.Y);
 
@@ -153,6 +154,10 @@ namespace ChensGradiusMod.Projectiles.Options
 
       return projectileSpawn;
     }
+
+    private int FrameDistance => (DistanceInterval * Position) - 1;
+
+    private int PathListSize => ModOwner.optionFlightPath.Count;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 

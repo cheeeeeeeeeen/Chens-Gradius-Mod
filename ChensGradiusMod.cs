@@ -242,6 +242,7 @@ namespace ChensGradiusMod
           modPlayer.seedRotateDirection = reader.ReadInt32();
           modPlayer.chargeMultiple = reader.ReadBoolean();
           modPlayer.chargeMode = reader.ReadInt32();
+          modPlayer.aimOption = reader.ReadBoolean();
           break;
 
         case PacketMessageType.ClientChangesFreezeOption:

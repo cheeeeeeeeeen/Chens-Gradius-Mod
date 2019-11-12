@@ -28,13 +28,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       base.UpdateAccessory(player, hideVisual);
     }
 
-    public override bool CanEquipAccessory(Player player, int slot)
-    {
-      return base.CanEquipAccessory(player, slot) &&
-             player.GetModPlayer<GradiusModPlayer>().freezeOption &&
-             player.GetModPlayer<GradiusModPlayer>().optionOne;
-    }
-
     protected override string ProjectileName => "OptionTwoObject";
 
     protected override int OptionPosition => 2;

@@ -30,9 +30,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return !ModPlayer(player).freezeOption &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).chargeMultiple;
+      return ModeChecks(player, false);
     }
 
     protected override string ProjectileName => "OptionOneObject";

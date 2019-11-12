@@ -1,16 +1,16 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Rotate
+namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
-  public class RotateOptionTwo : RotateOptionBase
+  public class AimOptionTwo : AimOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Rotate (Second)");
+      DisplayName.SetDefault("Option type Aim (Second)");
     }
 
     public override void SetDefaults()
@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).rotateOption = true;
+      ModPlayer(player).aimOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -36,14 +36,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionTwo");
-      recipe.AddIngredient(ItemID.HelFire);
+      recipe.AddIngredient(ItemID.SuspiciousLookingEye, 10);
       recipe.AddIngredient(ItemID.SoulofLight, 5);
       recipe.AddIngredient(ItemID.SoulofNight, 3);
       recipe.AddRecipeGroup("ChensGradiusMod:CobaltTierBar", 10);
       recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 40);
       recipe.AddIngredient(ItemID.Wire, 200);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.Loom);
+      recipe.AddTile(TileID.HeavyWorkBench);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }
