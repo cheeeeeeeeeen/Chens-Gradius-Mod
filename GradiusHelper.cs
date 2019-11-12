@@ -81,10 +81,10 @@ namespace ChensGradiusMod
       return direction;
     }
 
-    public static float GetBearing(Vector2 origin, Vector2 destination, bool reverse = true)
+    public static float GetBearing(Vector2 origin, Vector2 destination, bool upward = true)
     {
       float hypotenuse = Vector2.Distance(origin, destination);
-      float opposite = (destination.Y - origin.Y) * (reverse ? -1 : 1);
+      float opposite = (destination.Y - origin.Y) * (upward ? -1 : 1);
       float adjacent = destination.X - origin.X;
 
       float direction = (float)Math.Asin(Math.Abs(opposite) / hypotenuse);
@@ -331,8 +331,8 @@ namespace ChensGradiusMod
         float distance = Vector2.Distance(projPosition, selectNpc.Center);
         float enemyDistance = Vector2.Distance(ownPosition, selectNpc.Center);
 
-        if (enemyDistance <= range && distance < shortestDistance &&
-            !selectNpc.friendly && selectNpc.active)
+        if (enemyDistance <= range && distance < shortestDistance && selectNpc.active
+            && !selectNpc.friendly && !IsCritter(selectNpc))
         {
           shortestDistance = distance;
           target = i;
@@ -340,6 +340,11 @@ namespace ChensGradiusMod
       }
 
       return target;
+    }
+
+    public static bool IsCritter(NPC npc)
+    {
+      return npc.damage <= 0 && npc.lifeMax <= 5;
     }
   }
 }

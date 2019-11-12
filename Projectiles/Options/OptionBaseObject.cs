@@ -133,6 +133,10 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
 
+    protected int FrameDistance => (DistanceInterval * Position) - 1;
+
+    protected int PathListSize => ModOwner.optionFlightPath.Count;
+
     protected void OptionAnimate()
     {
       if (++projectile.frameCounter >= FrameSpeed)
@@ -162,10 +166,6 @@ namespace ChensGradiusMod.Projectiles.Options
 
       return projectileSpawn;
     }
-
-    private int FrameDistance => (DistanceInterval * Position) - 1;
-
-    private int PathListSize => ModOwner.optionFlightPath.Count;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
