@@ -8,11 +8,11 @@ namespace ChensGradiusMod.Projectiles.Options.Search
   public abstract class SearchOptionBaseObject : OptionBaseObject
   {
     private const int FireRate = 2;
-    private const float SeekDistance = 700f;
+    private const float SeekDistance = 800f;
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
-    private const float NearerPercentage = .95f;
+    private const float NearerPercentage = .9f;
     private const float ReturnToFollowThreshold = 5f;
     private const float RotateAccel = .15f;
     private const float MaxRotateSpeed = 7f;
@@ -70,15 +70,18 @@ namespace ChensGradiusMod.Projectiles.Options.Search
         case States.Pursue:
           if (ModOwner.isSearching)
           {
-            dest = Target.Center + currentAngle.ToRotationVector2();
-            projectile.Center = ComputeTargetOffset(Target.Center, dest, PursueDistance);
-            currentAngle += MathHelper.ToRadians(rotateSpeed);
-            rotateSpeed += RotateAccel * rotateDirection;
-            rotateSpeed = Math.Min(Math.Abs(rotateSpeed), MaxRotateSpeed) * rotateDirection;
-
             if (Vector2.Distance(Owner.Center, Target.Center) > SeekDistance + PursueDistance)
             {
               SetReturnVariables();
+            }
+            else if ((!Target.active || Target.life <= 0)) if (!IsAbleToSeek()) SetReturnVariables();
+            else
+            {
+              dest = Target.Center + currentAngle.ToRotationVector2();
+              projectile.Center = ComputeTargetOffset(Target.Center, dest, PursueDistance);
+              currentAngle += MathHelper.ToRadians(rotateSpeed);
+              rotateSpeed += RotateAccel * rotateDirection;
+              rotateSpeed = Math.Min(Math.Abs(rotateSpeed), MaxRotateSpeed) * rotateDirection;
             }
           }
           else SetReturnVariables();
