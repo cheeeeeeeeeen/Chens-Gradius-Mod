@@ -41,12 +41,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionOne");
+      recipe.AddIngredient(ItemID.HornetStaff);
+      recipe.AddIngredient(ItemID.Radar);
       recipe.AddIngredient(ItemID.Gel, 50);
       recipe.AddIngredient(ItemID.Bone, 75);
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
       recipe.AddIngredient(ItemID.Wire, 150);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      // recipe.AddTile(TileID.IceMachine);
+      recipe.AddTile(TileID.HeavyWorkBench);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

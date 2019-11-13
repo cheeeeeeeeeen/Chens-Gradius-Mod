@@ -8,6 +8,8 @@ Current features:
 5. Needle Force
 6. Option Seed
 7. Charge Multiple
+8. Aim Option
+9. Search Option
 
 For more information about these features, visit the homepage.
 

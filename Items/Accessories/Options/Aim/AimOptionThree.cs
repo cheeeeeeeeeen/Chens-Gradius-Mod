@@ -42,7 +42,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 50);
       recipe.AddIngredient(ItemID.Wire, 250);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.HeavyWorkBench);
+      recipe.AddTile(TileID.AmmoBox);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

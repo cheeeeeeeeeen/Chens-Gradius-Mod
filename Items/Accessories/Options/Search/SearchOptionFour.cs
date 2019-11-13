@@ -36,12 +36,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionFour");
+      recipe.AddIngredient(ItemID.PygmyStaff);
+      recipe.AddIngredient(ItemID.MetalDetector);
       recipe.AddIngredient(ItemID.Ectoplasm, 15);
       recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
       recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
       recipe.AddIngredient(ItemID.Wire, 300);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      // recipe.AddTile(TileID.IceMachine);
+      recipe.AddTile(TileID.HeavyWorkBench);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

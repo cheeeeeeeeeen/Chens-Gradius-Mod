@@ -36,8 +36,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionThree");
-      recipe.AddIngredient(ItemID.IceBlock, 270);
-      recipe.AddIngredient(ItemID.SnowBlock, 30);
+      recipe.AddIngredient(ItemID.IceBlock, 300);
+      recipe.AddIngredient(ItemID.SnowBlock, 240);
       recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 8);
       recipe.AddIngredient(ItemID.HallowedBar, 12);
       recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 50);

@@ -43,7 +43,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
       recipe.AddIngredient(ItemID.Wire, 300);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.IceMachine);
+      recipe.AddTile(TileID.AmmoBox);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

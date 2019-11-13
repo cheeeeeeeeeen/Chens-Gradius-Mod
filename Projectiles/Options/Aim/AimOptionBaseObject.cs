@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
 
       if (ModOwner.isAiming)
       {
-        Vector2 pPosition = ComputeOffset(Main.player[p.owner], p.Center);
+        Vector2 pPosition = ComputeOffset(Main.player[p.owner].Center, p.Center);
         Vector2 offsetVelocity = ComputeVelocityOffset(p, pPosition, Main.MouseWorld);
         pInd = Projectile.NewProjectile(pPosition, offsetVelocity, p.type, p.damage,
                                         p.knockBack, projectile.owner, 0f, 0f);

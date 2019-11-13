@@ -101,7 +101,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     {
       int result = -1;
 
-      switch(mode)
+      switch (mode)
       {
         case States.Follow:
           result = base.SpawnDuplicateProjectile(p);

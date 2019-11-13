@@ -36,8 +36,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionTwo");
-      recipe.AddIngredient(ItemID.IceBlock, 180);
-      recipe.AddIngredient(ItemID.SnowBlock, 20);
+      recipe.AddIngredient(ItemID.IceBlock, 200);
+      recipe.AddIngredient(ItemID.SnowBlock, 160);
       recipe.AddIngredient(ItemID.SoulofLight, 5);
       recipe.AddIngredient(ItemID.SoulofNight, 3);
       recipe.AddRecipeGroup("ChensGradiusMod:CobaltTierBar", 10);

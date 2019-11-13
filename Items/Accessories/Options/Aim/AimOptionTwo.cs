@@ -43,7 +43,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 40);
       recipe.AddIngredient(ItemID.Wire, 200);
       recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.HeavyWorkBench);
+      recipe.AddTile(TileID.AmmoBox);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

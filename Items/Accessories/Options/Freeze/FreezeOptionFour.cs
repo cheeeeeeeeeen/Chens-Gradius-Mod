@@ -36,8 +36,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(mod, "OptionFour");
-      recipe.AddIngredient(ItemID.IceBlock, 360);
-      recipe.AddIngredient(ItemID.SnowBlock, 40);
+      recipe.AddIngredient(ItemID.IceBlock, 400);
+      recipe.AddIngredient(ItemID.SnowBlock, 320);
       recipe.AddIngredient(ItemID.Ectoplasm, 15);
       recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
       recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
