@@ -15,6 +15,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     private const float ReturnToFollowThreshold = .25f;
     private const float RotateAccel = .02f;
     private const float MaxRotateSpeed = 4f;
+    private const float ExtraPursueDistance = 5f;
 
     private States mode = States.Follow;
     private int fireCounter = 0;
@@ -65,13 +66,20 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           break;
 
         case States.Pursue:
-          dest = Target.Center + currentAngle.ToRotationVector2();
-          projectile.position = ComputeTargetOffset(Target.Center, dest, PursueDistance);
-          currentAngle += MathHelper.ToRadians(rotateSpeed);
-          rotateSpeed += RotateAccel;
-          rotateSpeed = Math.Min(rotateSpeed, MaxRotateSpeed);
+          if (ModOwner.isSearching)
+          {
+            dest = Target.Center + currentAngle.ToRotationVector2();
+            projectile.position = ComputeTargetOffset(Target.Center, dest, PursueDistance);
+            currentAngle += MathHelper.ToRadians(rotateSpeed);
+            rotateSpeed += RotateAccel;
+            rotateSpeed = Math.Min(rotateSpeed, MaxRotateSpeed);
 
-          // if (Vector2.Distance(Owner.Center, Target.Center)) continue here
+            if (Vector2.Distance(Owner.Center, Target.Center) > SeekDistance + PursueDistance)
+            {
+              SetReturnVariables();
+            }
+          }
+          else SetReturnVariables();
           break;
 
         case States.Return:
@@ -152,6 +160,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       target = -1;
       mode = States.Return;
       reseekTick = 0;
+      fireCounter = 0;
     }
   }
 }
