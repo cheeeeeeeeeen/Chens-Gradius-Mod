@@ -1,9 +1,9 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Aim
+namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
-  public abstract class TwoAimOptionsBase : AimOptionBase
+  public abstract class TwoSearchOptionsBase : SearchOptionBase
   {
     public override void SetStaticDefaults()
     {
@@ -21,7 +21,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
 
     public override void PostUpdate()
     {
-      Lighting.AddLight(item.Center, 1.5f, .3f, .3f);
+      Lighting.AddLight(item.Center, 1.5f, 1.2647f, 0f);
     }
 
     public override string Texture => $"ChensGradiusMod/Sprites/Two{ProjectileType}" +
@@ -50,9 +50,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     protected new virtual int[] OptionPosition { get; } = { 1, 2 };
 
     protected override string OptionTooltip =>
-      "Deploys two Options type Aim.\n" +
+      "Deploys two Options type Search.\n" +
       "Some projectiles you create are copied by the drones.\n" +
       "The drones will follow your flight path.\n" +
-      "Hold the Option Action Key to allow the options to shoot towards cursor position!";
+      "Hold the Option Action Key to perform a different movement behavior!";
   }
 }

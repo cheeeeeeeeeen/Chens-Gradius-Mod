@@ -22,8 +22,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       Lighting.AddLight(item.Center, .498f, 1f, 0f);
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/RotateInv{OptionPosition}";
-
     protected override string ProjectileType => "Rotate";
 
     protected override string OptionTooltip =>
@@ -40,7 +38,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption;
+             !ModPlayer(player).aimOption &&
+             !ModPlayer(player).searchOption;
     }
   }
 }

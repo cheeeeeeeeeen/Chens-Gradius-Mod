@@ -16,8 +16,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       Lighting.AddLight(item.Center, 1f, .2f, .2f);
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/AimInv{OptionPosition}";
-
     protected override string ProjectileType => "Aim";
 
     protected override string OptionTooltip =>
@@ -34,7 +32,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple;
+             !ModPlayer(player).chargeMultiple &&
+             !ModPlayer(player).searchOption;
     }
   }
 }
