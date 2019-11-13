@@ -1,3 +1,4 @@
+using ChensGradiusMod.Projectiles.Options.Aim;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -6,16 +7,15 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 {
   public abstract class SearchOptionBaseObject : OptionBaseObject
   {
-    private const int FireRate = 3;
+    private const int FireRate = 2;
     private const float SeekDistance = 700f;
-    private const float InterpolateValue = .01f;
+    private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
     private const float NearerPercentage = .95f;
-    private const float ReturnToFollowThreshold = .25f;
-    private const float RotateAccel = .02f;
-    private const float MaxRotateSpeed = 4f;
-    private const float ExtraPursueDistance = 5f;
+    private const float ReturnToFollowThreshold = 5f;
+    private const float RotateAccel = .15f;
+    private const float MaxRotateSpeed = 7f;
 
     private States mode = States.Follow;
     private int fireCounter = 0;
@@ -37,6 +37,8 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       }
       return initialized && base.PreAI();
     }
+
+    public override string Texture => "ChensGradiusMod/Sprites/SearchSheet";
 
     protected override void OptionMovement()
     {
@@ -69,10 +71,10 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           if (ModOwner.isSearching)
           {
             dest = Target.Center + currentAngle.ToRotationVector2();
-            projectile.position = ComputeTargetOffset(Target.Center, dest, PursueDistance);
+            projectile.Center = ComputeTargetOffset(Target.Center, dest, PursueDistance);
             currentAngle += MathHelper.ToRadians(rotateSpeed);
-            rotateSpeed += RotateAccel;
-            rotateSpeed = Math.Min(rotateSpeed, MaxRotateSpeed);
+            rotateSpeed += RotateAccel * rotateDirection;
+            rotateSpeed = Math.Min(Math.Abs(rotateSpeed), MaxRotateSpeed) * rotateDirection;
 
             if (Vector2.Distance(Owner.Center, Target.Center) > SeekDistance + PursueDistance)
             {
@@ -84,12 +86,10 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
         case States.Return:
           dest = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
-          dest = ComputeTargetOffset(projectile.Center, dest, PursueDistance, NearerPercentage);
           projectile.Center = Vector2.Lerp(projectile.Center, dest, InterpolateValue);
 
           if (!IsAbleToSeek() &&
-              GradiusHelper.IsEqualWithThreshold(projectile.Center, dest,
-                                                 ReturnToFollowThreshold))
+              Vector2.Distance(dest, projectile.Center) <= ReturnToFollowThreshold)
           {
             mode = States.Follow;
           }
@@ -112,7 +112,15 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           break;
         case States.Pursue:
           if (++fireCounter < FireRate) goto case States.Seek;
-          else goto case States.Follow;
+          else
+          {
+            fireCounter = 0;
+            Vector2 pos = ComputeOffset(Main.player[p.owner].Center, p.Center);
+            Vector2 vel = AimOptionBaseObject.ComputeVelocityOffset(p, pos, Target.Center);
+            result = Projectile.NewProjectile(pos, vel, p.type, p.damage,
+                                              p.knockBack, projectile.owner, 0f, 0f);
+          }
+          break;
       }
 
       return result;
@@ -126,7 +134,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       currentAngle = GradiusHelper.GetBearing(origin, destination, false);
       currentAngle = MathHelper.ToRadians(currentAngle);
 
-      return Target.Center + currentAngle.ToRotationVector2() * (offDistance * nearPercent);
+      return origin + currentAngle.ToRotationVector2() * (offDistance * nearPercent);
     }
 
     private bool IsInRange() => Vector2.Distance(projectile.Center, Target.Center) <= PursueDistance;
@@ -161,6 +169,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       mode = States.Return;
       reseekTick = 0;
       fireCounter = 0;
+      rotateSpeed = 0;
     }
   }
 }
