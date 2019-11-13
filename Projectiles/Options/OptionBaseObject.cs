@@ -77,16 +77,17 @@ namespace ChensGradiusMod.Projectiles.Options
             playerAlreadyProducedProjectiles.Add(prog_ind);
 
             int new_p_ind = SpawnDuplicateProjectile(p);
-            ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
-            Main.projectile[new_p_ind].noDropItem = true;
+            if (new_p_ind >= 0)
+            {
+              ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
+              SetDuplicateDefaults(Main.projectile[new_p_ind]);
+            }
           }
         }
       }
 
       OptionAnimate();
-
-      projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
-
+      OptionMovement();
       OptionSpawnSoundEffect();
     }
 
@@ -121,9 +122,20 @@ namespace ChensGradiusMod.Projectiles.Options
                                       projectile.owner, 0f, 0f);
     }
 
+    protected virtual void SetDuplicateDefaults(Projectile p) => p.noDropItem = true;
+
+    protected virtual void OptionMovement()
+    {
+      projectile.Center = ModOwner.optionFlightPath[Math.Min(PathListSize - 1, FrameDistance)];
+    }
+
     protected Player Owner => Main.player[projectile.owner];
 
     protected GradiusModPlayer ModOwner => Owner.GetModPlayer<GradiusModPlayer>();
+
+    protected int FrameDistance => (DistanceInterval * Position) - 1;
+
+    protected int PathListSize => ModOwner.optionFlightPath.Count;
 
     protected void OptionAnimate()
     {
@@ -154,10 +166,6 @@ namespace ChensGradiusMod.Projectiles.Options
 
       return projectileSpawn;
     }
-
-    private int FrameDistance => (DistanceInterval * Position) - 1;
-
-    private int PathListSize => ModOwner.optionFlightPath.Count;
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 

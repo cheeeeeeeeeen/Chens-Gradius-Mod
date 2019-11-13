@@ -18,8 +18,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       Lighting.AddLight(item.Center, 0.8667f, 0.6275f, 0.8667f);
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/ChargeInv{OptionPosition}";
-
     protected override string ProjectileType => "Charge";
 
     protected override string ProjectileName => "MultipleObject";
@@ -41,7 +39,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
-             !ModPlayer(player).aimOption;
+             !ModPlayer(player).aimOption &&
+             !ModPlayer(player).searchOption;
     }
   }
 }

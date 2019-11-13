@@ -27,6 +27,7 @@ namespace ChensGradiusMod
     public bool wasHolding;
     public bool isFreezing;
     public bool isAiming;
+    public bool isSearching;
     public bool forceBase;
     public bool needleForce;
     public Projectile forceProjectile;
@@ -38,6 +39,7 @@ namespace ChensGradiusMod
     public bool freezeOption;
     public bool aimOption;
     public bool rotateOption;
+    public bool searchOption;
     public bool chargeMultiple;
     public int chargeMode;
     public bool optionSeed;
@@ -61,6 +63,7 @@ namespace ChensGradiusMod
       freezeOption = false;
       aimOption = false;
       rotateOption = false;
+      searchOption = false;
       chargeMultiple = false;
       optionSeed = false;
     }
@@ -79,6 +82,7 @@ namespace ChensGradiusMod
       clone.rotateMode = rotateMode;
       clone.seedRotateDirection = seedRotateDirection;
       clone.chargeMode = chargeMode;
+      clone.isSearching = isSearching;
     }
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -106,6 +110,8 @@ namespace ChensGradiusMod
       packet.Write(chargeMultiple);
       packet.Write(chargeMode);
       packet.Write(aimOption);
+      packet.Write(searchOption);
+      packet.Write(isSearching);
       packet.Send(toWho, fromWho);
     }
 
@@ -151,6 +157,16 @@ namespace ChensGradiusMod
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesChargeMultiple);
           packet.Write((byte)player.whoAmI);
           packet.Write(chargeMode);
+          packet.Write(wasHolding);
+          packet.Send();
+        }
+
+        if (clone.isSearching != isSearching)
+        {
+          packet = mod.GetPacket();
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSearchOption);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(isSearching);
           packet.Write(wasHolding);
           packet.Send();
         }
@@ -204,6 +220,11 @@ namespace ChensGradiusMod
           rotateMode = (int)RotateOptionBase.States.Recovering;
           revolveDirection = -revolveDirection;
         }
+      }
+      else if (searchOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isSearching = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isSearching = false;
       }
       else if (chargeMultiple && HasAnyChargeMultipleAccessory())
       {
@@ -299,6 +320,7 @@ namespace ChensGradiusMod
       revolveDirection = 1;
       wasHolding = false;
       chargeMode = (int)ChargeMultipleBase.States.Following;
+      isSearching = false;
     }
 
     private void ResetOtherVariables()

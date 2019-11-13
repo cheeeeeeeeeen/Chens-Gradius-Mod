@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       item.height = 52;
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/OptionInv{OptionPosition}";
+    public override string Texture => $"ChensGradiusMod/Sprites/{ProjectileType}Inv{OptionPosition}";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

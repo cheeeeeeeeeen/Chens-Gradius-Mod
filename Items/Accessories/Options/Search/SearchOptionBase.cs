@@ -1,47 +1,39 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Freeze
+namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
-  public abstract class FreezeOptionBase : OptionBase
+  public abstract class SearchOptionBase : OptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(6, 6));
-    }
-
-    public override void SetDefaults()
-    {
-      base.SetDefaults();
-
-      item.width = 48;
-      item.height = 60;
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
     }
 
     public override void PostUpdate()
     {
-      Lighting.AddLight(item.Center, 0f, .749f, 1f);
+      Lighting.AddLight(item.Center, 1f, .8431f, 0f);
     }
 
-    protected override string ProjectileType => "Freeze";
+    protected override string ProjectileType => "Search";
 
     protected override string OptionTooltip =>
-      "Deploys an Option type Freeze.\n" +
+      "Deploys an Option type Search.\n" +
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
-      "Hold the Option Action Key to perform a different movement behavior!";
+      "Hold the Option Action Key to have the Options seek and pursue nearby targets!";
 
     protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
       bool result = true;
-      if (includeSelf) result &= ModPlayer(player).freezeOption;
+      if (includeSelf) result &= ModPlayer(player).searchOption;
       return result &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
              !ModPlayer(player).aimOption &&
-             !ModPlayer(player).searchOption;
+             !ModPlayer(player).freezeOption;
     }
   }
 }

@@ -19,7 +19,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       item.height = 30;
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/TwoRotateOptions{OptionPosition[0]}{OptionPosition[1]}";
+    public override string Texture => $"ChensGradiusMod/Sprites/Two{ProjectileType}" +
+                                      $"Options{OptionPosition[0]}{OptionPosition[1]}";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

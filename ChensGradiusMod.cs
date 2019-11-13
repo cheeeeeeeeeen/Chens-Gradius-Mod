@@ -243,6 +243,8 @@ namespace ChensGradiusMod
           modPlayer.chargeMultiple = reader.ReadBoolean();
           modPlayer.chargeMode = reader.ReadInt32();
           modPlayer.aimOption = reader.ReadBoolean();
+          modPlayer.searchOption = reader.ReadBoolean();
+          modPlayer.isSearching = reader.ReadBoolean();
           break;
 
         case PacketMessageType.ClientChangesFreezeOption:
@@ -331,6 +333,24 @@ namespace ChensGradiusMod
           }
 
           break;
+
+        case PacketMessageType.ClientChangesSearchOption:
+          playerNumber = reader.ReadByte();
+          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
+
+          modPlayer.isSearching = reader.ReadBoolean();
+          modPlayer.wasHolding = reader.ReadBoolean();
+
+          if (GradiusHelper.IsServer())
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.ClientChangesSearchOption);
+            packet.Write(playerNumber);
+            packet.Write(modPlayer.isSearching);
+            packet.Write(modPlayer.wasHolding);
+            packet.Send(-1, playerNumber);
+          }
+          break;
       }
     }
 
@@ -341,7 +361,8 @@ namespace ChensGradiusMod
       ClientChangesRotateOption,
       ClientChangesSeedDirection,
       ClientChangesChargeMultiple,
-      SpawnRetaliationBullet
+      SpawnRetaliationBullet,
+      ClientChangesSearchOption
     }
   }
 }

@@ -2,15 +2,15 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Aim
+namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
-  public class AimOptionThreeFour : TwoAimOptionsBase
+  public class SearchOptionThreeFour : TwoSearchOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Options type Aim (3rd & 4th)");
+      DisplayName.SetDefault("Options type Search (3rd & 4th)");
     }
 
     public override void SetDefaults()
@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).aimOption = true;
+      ModPlayer(player).searchOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -37,8 +37,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "FreezeOptionThree");
-      recipe.AddIngredient(mod, "FreezeOptionFour");
+      recipe.AddIngredient(mod, "SearchOptionThree");
+      recipe.AddIngredient(mod, "SearchOptionFour");
       recipe.AddIngredient(ItemID.BeetleHusk, 5);
       recipe.AddTile(TileID.TinkerersWorkbench);
       recipe.SetResult(this);

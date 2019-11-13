@@ -5,6 +5,17 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
 {
   public abstract class AimOptionBaseObject : OptionBaseObject
   {
+    public static Vector2 ComputeVelocityOffset(Projectile p, Vector2 offsetPos, Vector2 toward)
+    {
+      float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
+      float dAng = GradiusHelper.GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
+      float pAng = GradiusHelper.GetBearing(Vector2.Zero, p.velocity, false);
+      float offAng = MathHelper.ToRadians(pAng - dAng);
+      float aimDAng = MathHelper.ToRadians(GradiusHelper.GetBearing(offsetPos, toward, false));
+
+      return GradiusHelper.MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/AimSheet";
 
     protected override int SpawnDuplicateProjectile(Projectile p)
@@ -13,25 +24,14 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
 
       if (ModOwner.isAiming)
       {
-        Vector2 pPosition = ComputeOffset(Main.player[p.owner].Center, p.Center);
-        Vector2 offsetVelocity = ComputeVelocityOffset(p, pPosition);
+        Vector2 pPosition = ComputeOffset(Main.player[p.owner], p.Center);
+        Vector2 offsetVelocity = ComputeVelocityOffset(p, pPosition, Main.MouseWorld);
         pInd = Projectile.NewProjectile(pPosition, offsetVelocity, p.type, p.damage,
                                         p.knockBack, projectile.owner, 0f, 0f);
       }
       else pInd = base.SpawnDuplicateProjectile(p);
 
       return pInd;
-    }
-
-    private Vector2 ComputeVelocityOffset(Projectile p, Vector2 offsetPos)
-    {
-      float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
-      float dAng = GradiusHelper.GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
-      float pAng = GradiusHelper.GetBearing(Vector2.Zero, p.velocity, false);
-      float offAng = MathHelper.ToRadians(pAng - dAng);
-      float aimDAng = MathHelper.ToRadians(GradiusHelper.GetBearing(offsetPos, Main.MouseWorld, false));
-
-      return GradiusHelper.MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
     }
   }
 }

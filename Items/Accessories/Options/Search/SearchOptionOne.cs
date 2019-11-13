@@ -2,29 +2,28 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Aim
+namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
-  public class AimOptionOneTwo : TwoAimOptionsBase
+  public class SearchOptionOne : SearchOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Options type Aim (1st & 2nd)");
+      DisplayName.SetDefault("Option type Search (First)");
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      item.rare = 7;
+      item.rare = 3;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).optionTwo = true;
-      ModPlayer(player).aimOption = true;
+      ModPlayer(player).searchOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -34,18 +33,20 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       return ModeChecks(player, false);
     }
 
-    protected override string[] ProjectileName { get; } = { "OptionOneObject",
-                                                            "OptionTwoObject" };
+    protected override string ProjectileName => "OptionOneObject";
 
-    protected override int[] OptionPosition { get; } = { 1, 2 };
+    protected override int OptionPosition => 1;
 
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "AimOptionOne");
-      recipe.AddIngredient(mod, "AimOptionTwo");
-      recipe.AddIngredient(ItemID.ChlorophyteOre, 5);
+      recipe.AddIngredient(mod, "OptionOne");
+      recipe.AddIngredient(ItemID.Gel, 50);
+      recipe.AddIngredient(ItemID.Bone, 75);
+      recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
+      recipe.AddIngredient(ItemID.Wire, 150);
       recipe.AddTile(TileID.TinkerersWorkbench);
+      // recipe.AddTile(TileID.IceMachine);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

@@ -24,7 +24,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       Lighting.AddLight(item.Center, 0f, 1.1235f, 1.5f);
     }
 
-    public override string Texture => $"ChensGradiusMod/Sprites/TwoFreezeOptions{OptionPosition[0]}{OptionPosition[1]}";
+    public override string Texture => $"ChensGradiusMod/Sprites/Two{ProjectileType}" +
+                                      $"Options{OptionPosition[0]}{OptionPosition[1]}";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

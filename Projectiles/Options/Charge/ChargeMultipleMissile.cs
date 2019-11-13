@@ -110,23 +110,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     private void SeekEnemy()
     {
-      Player owner = Main.player[projectile.owner];
-      float shortestDistance = DetectionRange;
-      enemyTarget = -1;
-
-      for (int i = 0; i < Main.maxNPCs; i++)
-      {
-        NPC selectNpc = Main.npc[i];
-        float distance = Vector2.Distance(projectile.Center, selectNpc.Center);
-        float enemyDistance = Vector2.Distance(owner.Center, selectNpc.Center);
-
-        if (enemyDistance <= DetectionRange && distance < shortestDistance &&
-            !selectNpc.friendly && selectNpc.active)
-        {
-          shortestDistance = distance;
-          enemyTarget = i;
-        }
-      }
+      Vector2 ownerPosition = Main.player[projectile.owner].Center;
+      enemyTarget = GradiusHelper.FindTarget(projectile.Center, ownerPosition, DetectionRange);
 
       if (oldEnemyTarget != enemyTarget)
       {
