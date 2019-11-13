@@ -122,8 +122,8 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
           fireTick = 0;
 
           Item weapon = Owner.HeldItem;
-          int dmg = GradiusHelper.RoundOffToWhole((SpawnProjectileDamage + weapon.damage) * .5f);
-          float kb = (SpawnProjectileKnockback + weapon.knockBack) * .5f;
+          int dmg = GradiusHelper.RoundOffToWhole((SpawnProjectileDamage + weapon.damage));
+          float kb = (SpawnProjectileKnockback + weapon.knockBack);
           float spd = SpawnProjectileSpeed + weapon.shootSpeed;
           Vector2 shootToward = GradiusHelper.MoveToward(projectile.Center,
                                                          Main.MouseWorld, spd);

@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.9.0
+[B][U][SIZE=6]Mod Version: 0.9.4
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -208,6 +208,7 @@ Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/proje
   - Further optimize Option codes and recipe layout to get rid of bad recipes
   - Fix 1st Charge Multiple crafting station to the correct one
   - Increase Freeze Options required snow blocks and ice blocks
+  - Increase Option Seed damage output
   - Some sprites related to the new option types are still placeholders
 
 0.9.0
