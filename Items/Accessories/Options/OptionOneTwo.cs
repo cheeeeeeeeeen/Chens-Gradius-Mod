@@ -1,6 +1,4 @@
 ﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -38,16 +36,5 @@ namespace ChensGradiusMod.Items.Accessories.Options
                                                             "OptionTwoObject" };
 
     protected override int[] OptionPosition { get; } = { 1, 2 };
-
-    public override void AddRecipes()
-    {
-      ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionOne");
-      recipe.AddIngredient(mod, "OptionTwo");
-      recipe.AddIngredient(ItemID.ChlorophyteOre, 5);
-      recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.SetResult(this);
-      recipe.AddRecipe();
-    }
   }
 }

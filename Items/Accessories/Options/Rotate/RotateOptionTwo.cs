@@ -35,15 +35,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionTwo");
       recipe.AddIngredient(ItemID.HelFire);
-      recipe.AddIngredient(ItemID.SoulofLight, 5);
-      recipe.AddIngredient(ItemID.SoulofNight, 3);
-      recipe.AddRecipeGroup("ChensGradiusMod:CobaltTierBar", 10);
-      recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 40);
-      recipe.AddIngredient(ItemID.Wire, 200);
-      recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.Loom);
+      UpgradeUsualRecipe(recipe);
+      UpgradeUsualStations(recipe);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

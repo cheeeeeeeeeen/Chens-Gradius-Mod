@@ -1,5 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
@@ -42,6 +44,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
              !ModPlayer(player).chargeMultiple &&
              !ModPlayer(player).aimOption &&
              !ModPlayer(player).searchOption;
+    }
+
+    protected override void UpgradeUsualStations(ModRecipe recipe)
+    {
+      recipe.AddTile(TileID.IceMachine);
     }
   }
 }

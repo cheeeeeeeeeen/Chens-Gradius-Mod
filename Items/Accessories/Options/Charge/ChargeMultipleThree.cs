@@ -35,14 +35,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionThree");
       recipe.AddIngredient(ItemID.LightningBug, 3);
-      recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 8);
-      recipe.AddIngredient(ItemID.HallowedBar, 12);
-      recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 50);
-      recipe.AddIngredient(ItemID.Wire, 250);
-      recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.BewitchingTable);
+      UpgradeUsualRecipe(recipe);
+      UpgradeUsualStations(recipe);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

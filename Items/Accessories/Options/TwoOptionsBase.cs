@@ -1,5 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -45,6 +47,28 @@ namespace ChensGradiusMod.Items.Accessories.Options
                                                          OptionPosition[0]);
     }
 
+    protected override void UpgradeUsualRecipe(ModRecipe recipe)
+    {
+      switch (OptionPosition[0])
+      {
+        case 1:
+        case 2:
+          recipe.AddIngredient(mod, $"{ProjectileType}OptionOne");
+          recipe.AddIngredient(mod, $"{ProjectileType}OptionTwo");
+          recipe.AddIngredient(ItemID.ChlorophyteOre, 5);
+          goto case -1;
+        case 3:
+        case 4:
+          recipe.AddIngredient(mod, $"{ProjectileType}OptionThree");
+          recipe.AddIngredient(mod, $"{ProjectileType}OptionFour");
+          recipe.AddIngredient(ItemID.BeetleHusk, 5);
+          goto case -1;
+        case -1:
+          recipe.AddTile(TileID.TinkerersWorkbench);
+          break;
+      }
+    }
+
     protected new virtual string[] ProjectileName { get; } = { "1", "2" };
 
     protected new virtual int[] OptionPosition { get; } = { 1, 2 };
@@ -55,5 +79,13 @@ namespace ChensGradiusMod.Items.Accessories.Options
       "The drones will follow your flight path.\n" +
       "These advanced drones uses Wreek technology,\n" +
       "infusing both technology and psychic elements together.";
+
+    public override void AddRecipes()
+    {
+      ModRecipe recipe = new ModRecipe(mod);
+      UpgradeUsualRecipe(recipe);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
+    }
   }
 }

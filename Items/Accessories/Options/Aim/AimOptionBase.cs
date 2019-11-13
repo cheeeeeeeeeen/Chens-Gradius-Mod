@@ -1,5 +1,7 @@
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
@@ -34,6 +36,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
              !ModPlayer(player).searchOption;
+    }
+
+    protected override void UpgradeUsualStations(ModRecipe recipe)
+    {
+      recipe.AddTile(TileID.AmmoBox);
     }
   }
 }

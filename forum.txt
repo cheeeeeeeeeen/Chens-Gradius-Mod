@@ -205,7 +205,7 @@ Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/proje
 0.9.4
   - Implement Aim Options
   - Implement Search Options
-  - Further optimize Option codes
+  - Further optimize Option codes and recipe layout to get rid of bad recipes
   - Fix 1st Charge Multiple crafting station to the correct one
   - Increase Freeze Options required snow blocks and ice blocks
   - Some sprites related to the new option types are still placeholders

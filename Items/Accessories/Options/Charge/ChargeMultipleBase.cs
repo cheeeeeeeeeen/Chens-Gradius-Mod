@@ -1,5 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Charge
 {
@@ -41,6 +43,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).aimOption &&
              !ModPlayer(player).searchOption;
+    }
+
+    protected override void UpgradeUsualStations(ModRecipe recipe)
+    {
+      recipe.AddTile(TileID.BewitchingTable);
     }
   }
 }

@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -73,6 +74,47 @@ namespace ChensGradiusMod.Items.Accessories.Options
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).chargeMultiple &&
              !ModPlayer(player).aimOption;
+    }
+
+    protected virtual void UpgradeUsualStations(ModRecipe recipe) { }
+
+    protected virtual void UpgradeUsualRecipe(ModRecipe recipe)
+    {
+      switch (OptionPosition)
+      {
+        case 1:
+          recipe.AddIngredient(mod, "OptionOne");
+          recipe.AddIngredient(ItemID.Gel, 50);
+          recipe.AddIngredient(ItemID.Bone, 75);
+          recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
+          recipe.AddIngredient(ItemID.Wire, 150);
+          goto case -1;
+        case 2:
+          recipe.AddIngredient(mod, "OptionTwo");
+          recipe.AddIngredient(ItemID.SoulofLight, 5);
+          recipe.AddIngredient(ItemID.SoulofNight, 3);
+          recipe.AddRecipeGroup("ChensGradiusMod:CobaltTierBar", 10);
+          recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 40);
+          recipe.AddIngredient(ItemID.Wire, 200);
+          goto case -1;
+        case 3:
+          recipe.AddIngredient(mod, "OptionThree");
+          recipe.AddRecipeGroup("ChensGradiusMod:MechSoul", 8);
+          recipe.AddIngredient(ItemID.HallowedBar, 12);
+          recipe.AddRecipeGroup("ChensGradiusMod:SilverTierBar", 50);
+          recipe.AddIngredient(ItemID.Wire, 250);
+          goto case -1;
+        case 4:
+          recipe.AddIngredient(mod, "OptionFour");
+          recipe.AddIngredient(ItemID.Ectoplasm, 15);
+          recipe.AddIngredient(ItemID.LunarTabletFragment, 15);
+          recipe.AddIngredient(ItemID.ChlorophyteBar, 20);
+          recipe.AddIngredient(ItemID.Wire, 300);
+          goto case -1;
+        case -1:
+          recipe.AddTile(TileID.TinkerersWorkbench);
+          break;
+      }
     }
 
     protected void CreateOption(Player player, int optionPosition, string projectileName)

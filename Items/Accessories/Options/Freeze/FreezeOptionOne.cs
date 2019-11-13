@@ -40,15 +40,10 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(mod, "OptionOne");
       recipe.AddIngredient(ItemID.IceBlock, 100);
       recipe.AddIngredient(ItemID.SnowBlock, 80);
-      recipe.AddIngredient(ItemID.Gel, 50);
-      recipe.AddIngredient(ItemID.Bone, 75);
-      recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 10);
-      recipe.AddIngredient(ItemID.Wire, 150);
-      recipe.AddTile(TileID.TinkerersWorkbench);
-      recipe.AddTile(TileID.IceMachine);
+      UpgradeUsualRecipe(recipe);
+      UpgradeUsualStations(recipe);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

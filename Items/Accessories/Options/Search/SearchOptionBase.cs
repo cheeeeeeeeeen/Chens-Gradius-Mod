@@ -1,5 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
@@ -34,6 +36,11 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
              !ModPlayer(player).chargeMultiple &&
              !ModPlayer(player).aimOption &&
              !ModPlayer(player).freezeOption;
+    }
+
+    protected override void UpgradeUsualStations(ModRecipe recipe)
+    {
+      recipe.AddTile(TileID.HeavyWorkBench);
     }
   }
 }
