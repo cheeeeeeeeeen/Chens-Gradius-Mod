@@ -3,3 +3,5 @@ obj/
 bin/
 .vscode/
 *.csproj.user
+Thumb.db
+.DS_Store
