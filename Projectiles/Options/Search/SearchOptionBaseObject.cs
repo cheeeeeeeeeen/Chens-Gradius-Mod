@@ -60,7 +60,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
             if (Vector2.Distance(projectile.Center, Owner.Center) > SeekDistance)
             {
-              SetReturnVariables();
+              SetReturnVariables(false);
             }
             else if (IsInRange()) mode = States.Pursue;
           }
@@ -72,9 +72,12 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           {
             if (Vector2.Distance(Owner.Center, Target.Center) > SeekDistance + PursueDistance)
             {
-              SetReturnVariables();
+              SetReturnVariables(false);
             }
-            else if ((!Target.active || Target.life <= 0)) if (!IsAbleToSeek()) SetReturnVariables();
+            else if ((!Target.active || Target.life <= 0))
+            {
+              if (!IsAbleToSeek()) SetReturnVariables(false);
+            }
             else
             {
               dest = Target.Center + currentAngle.ToRotationVector2();
@@ -166,11 +169,11 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       return result;
     }
 
-    private void SetReturnVariables()
+    private void SetReturnVariables(bool enterCooldown = true)
     {
       target = -1;
       mode = States.Return;
-      reseekTick = 0;
+      if (enterCooldown) reseekTick = 0;
       fireCounter = 0;
       rotateSpeed = 0;
     }
