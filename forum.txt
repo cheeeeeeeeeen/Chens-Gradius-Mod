@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.9.4
+[B][U][SIZE=6]Mod Version: 0.9.4.1
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -202,6 +202,12 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.9.4.1
+  - Adjust Search option variables for a faster and crisper movement
+  - Allow Search Options to find a new target after their old target is dead
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.9.4
   - Implement Aim Options
   - Implement Search Options
