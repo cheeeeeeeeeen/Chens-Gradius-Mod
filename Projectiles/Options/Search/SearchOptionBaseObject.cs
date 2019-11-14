@@ -12,7 +12,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
-    private const float NearerPercentage = .9f;
+    private const float NearerPercentage = .8f;
     private const float ReturnToFollowThreshold = 5f;
     private const float RotateAccel = .15f;
     private const float MaxRotateSpeed = 7f;
@@ -55,7 +55,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           if (ModOwner.isSearching)
           {
             dest = ComputeTargetOffset(Target.Center, projectile.Center,
-                                       PursueDistance, NearerPercentage);
+                                       PursueDistance * NearerPercentage);
             projectile.Center = Vector2.Lerp(projectile.Center, dest, InterpolateValue);
 
             if (Vector2.Distance(projectile.Center, Owner.Center) > SeekDistance)
@@ -134,13 +134,12 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
     private NPC Target => Main.npc[target];
 
-    private Vector2 ComputeTargetOffset(Vector2 origin, Vector2 destination,
-                                        float offDistance, float nearPercent = 1f)
+    private Vector2 ComputeTargetOffset(Vector2 origin, Vector2 destination, float offDistance)
     {
       currentAngle = GradiusHelper.GetBearing(origin, destination, false);
       currentAngle = MathHelper.ToRadians(currentAngle);
 
-      return origin + currentAngle.ToRotationVector2() * (offDistance * nearPercent);
+      return origin + currentAngle.ToRotationVector2() * offDistance;
     }
 
     private bool IsInRange() => Vector2.Distance(projectile.Center, Target.Center) <= PursueDistance;
