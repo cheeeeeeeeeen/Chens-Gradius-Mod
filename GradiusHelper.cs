@@ -331,8 +331,8 @@ namespace ChensGradiusMod
         float distance = Vector2.Distance(projPosition, selectNpc.Center);
         float enemyDistance = Vector2.Distance(ownPosition, selectNpc.Center);
 
-        if (enemyDistance <= range && distance < shortestDistance && selectNpc.active
-            && !selectNpc.friendly && !IsCritter(selectNpc))
+        if (enemyDistance <= range && distance < shortestDistance && !selectNpc.friendly &&
+            (selectNpc.active || selectNpc.life > 0) && !IsCritter(selectNpc))
         {
           shortestDistance = distance;
           target = i;
