@@ -46,6 +46,7 @@ namespace ChensGradiusMod
       new AlienProjectile("CalamityMod", "SerpentineBody"), new AlienProjectile("CalamityMod", "SerpentineTail"),
       new AlienProjectile("CalamityMod", "Flash"), new AlienProjectile("CalamityMod", "TerraBulletSplit"),
       new AlienProjectile("CalamityMod", "TerraArrow2"), new AlienProjectile("CalamityMod", "VanquisherArrow2"),
+      new AlienProjectile("CalamityMod", "TinyCrystal"),
 
       new AlienProjectile("Bluemagic", "PuriumArrowTrail"),
 
@@ -75,6 +76,9 @@ namespace ChensGradiusMod
       new AlienProjectile("ThoriumMod", "JunglesWrathPro2"), new AlienProjectile("ThoriumMod", "GorganGaze"),
       new AlienProjectile("ThoriumMod", "Spud2"), new AlienProjectile("ThoriumMod", "OmniBoom"),
       new AlienProjectile("ThoriumMod", "OmniBurst"), new AlienProjectile("ThoriumMod", "OmniBurstDamage"),
+      new AlienProjectile("ThoriumMod", "LaunchJumperPro2"), new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro2"),
+      new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro3"), new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro4"),
+      new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro00"), new AlienProjectile("ThoriumMod", "ShadowPurgeCaltropPro2"),
 
       new AlienProjectile("SpiritMod", "FieryAura"), new AlienProjectile("SpiritMod", "DuskAura"),
       new AlienProjectile("SpiritMod", "FireBolt"), new AlienProjectile("SpiritMod", "GeodeStaveProjectile"),
