@@ -9,10 +9,10 @@ namespace ChensGradiusMod.Projectiles.Options
   public abstract class OptionBaseObject : ModProjectile
   {
     public const int DistanceInterval = 15;
+    public const int MaxBuffer = 150;
 
     protected const int KeepAlive = 2;
 
-    private const int MaxBuffer = 150;
     private List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
     private bool isSpawning = true;
