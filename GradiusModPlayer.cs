@@ -2,6 +2,7 @@
 using ChensGradiusMod.Items.Accessories.Options.Charge;
 using ChensGradiusMod.Items.Accessories.Options.Rotate;
 using ChensGradiusMod.Projectiles.Forces;
+using ChensGradiusMod.Projectiles.Options;
 using ChensGradiusMod.Projectiles.Options.Miscellaneous;
 using Microsoft.Xna.Framework;
 using System;
@@ -15,7 +16,6 @@ namespace ChensGradiusMod
   public class GradiusModPlayer : ModPlayer
   {
     private const int MaxFlightPathCount = 60;
-    private const int MaxProducedProjectileBuffer = 300;
     private const float EquiAngle = GradiusHelper.FullAngle / MaxFlightPathCount;
 
     private Vector2 baitPoint;
@@ -291,7 +291,7 @@ namespace ChensGradiusMod
 
     public override void PostUpdate()
     {
-      if (HasAnyOptions()) GradiusHelper.FreeListData(ref optionAlreadyProducedProjectiles, MaxProducedProjectileBuffer);
+      if (HasAnyOptions()) GradiusHelper.FreeListData(ref optionAlreadyProducedProjectiles, OptionBaseObject.MaxBuffer);
       if (GradiusGlobalItem.meleeHitbox[player.whoAmI].HasValue) GradiusGlobalItem.meleeHitbox[player.whoAmI] = null;
     }
 

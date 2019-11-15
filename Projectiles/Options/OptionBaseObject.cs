@@ -12,7 +12,7 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected const int KeepAlive = 2;
 
-    private const int MaxBuffer = 300;
+    private const int MaxBuffer = 150;
     private List<int> playerAlreadyProducedProjectiles = new List<int>();
     private List<int> projectilesToProduce = new List<int>();
     private bool isSpawning = true;
