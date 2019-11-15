@@ -7,13 +7,19 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
   {
     public static Vector2 ComputeVelocityOffset(Projectile p, Vector2 offsetPos, Vector2 toward)
     {
-      float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
-      float dAng = GradiusHelper.GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
-      float pAng = GradiusHelper.GetBearing(Vector2.Zero, p.velocity, false);
-      float offAng = MathHelper.ToRadians(pAng - dAng);
-      float aimDAng = MathHelper.ToRadians(GradiusHelper.GetBearing(offsetPos, toward, false));
+      Vector2 retVal = Vector2.Zero;
 
-      return GradiusHelper.MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
+      if (p.velocity != Vector2.Zero)
+      {
+        float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
+        float dAng = GradiusHelper.GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
+        float pAng = GradiusHelper.GetBearing(Vector2.Zero, p.velocity, false);
+        float offAng = MathHelper.ToRadians(pAng - dAng);
+        float aimDAng = MathHelper.ToRadians(GradiusHelper.GetBearing(offsetPos, toward, false));
+        retVal = GradiusHelper.MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
+      }
+
+      return retVal;
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/AimSheet";
