@@ -37,10 +37,10 @@ namespace ChensGradiusMod.NPCs
       npc.width = 80;
       npc.height = 122;
       npc.damage = 100;
-      npc.lifeMax = 10;
+      npc.lifeMax = 15;
       npc.value = 5000f;
       npc.knockBackResist = 0f;
-      npc.defense = 50;
+      npc.defense = 0;
       npc.behindTiles = true;
       ImmuneToBuffs();
     }

@@ -10,6 +10,8 @@ namespace ChensGradiusMod.NPCs
 {
   public abstract class GradiusEnemy : ModNPC
   {
+    private const float IncomingDamageMultiplier = .05f;
+
     public enum Types { Small, Large, Boss };
 
     public override void SetDefaults()
@@ -119,7 +121,7 @@ namespace ChensGradiusMod.NPCs
 
     protected void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {
-      damage = GradiusHelper.RoundOffToWhole(damage * .02f);
+      damage = GradiusHelper.RoundOffToWhole(damage * IncomingDamageMultiplier);
       crit = false;
       knockback = 0f;
     }
