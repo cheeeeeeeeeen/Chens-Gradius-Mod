@@ -74,7 +74,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
             {
               SetReturnVariables(false);
             }
-            else if ((!Target.active || Target.life <= 0))
+            else if (!Target.active || Target.life <= 0)
             {
               if (!IsAbleToSeek()) SetReturnVariables(false);
             }
@@ -146,7 +146,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
     private bool Retarget()
     {
-      if (target < 0)
+      if (target < 0 || !Target.active || Target.life <= 0)
       {
         target = GradiusHelper.FindTarget(projectile.Center, Owner.position, SeekDistance);
       }
@@ -161,6 +161,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       if (++reseekTick >= ReseekCooldown && ModOwner.isSearching && Retarget())
       {
         mode = States.Seek;
+        AlwaysResetVariables();
         result = true;
       }
 
@@ -173,6 +174,11 @@ namespace ChensGradiusMod.Projectiles.Options.Search
       target = -1;
       mode = States.Return;
       if (enterCooldown) reseekTick = 0;
+      AlwaysResetVariables();
+    }
+
+    private void AlwaysResetVariables()
+    {
       fireCounter = 0;
       rotateSpeed = 0;
     }
