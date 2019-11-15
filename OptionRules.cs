@@ -19,7 +19,7 @@ namespace ChensGradiusMod
       ProjectileID.MonkStaffT3_Alt, ProjectileID.Electrosphere, ProjectileID.Xenopopper, ProjectileID.MolotovFire,
       ProjectileID.MolotovFire2, ProjectileID.MolotovFire3, ProjectileID.NettleBurstLeft, ProjectileID.NettleBurstEnd,
       ProjectileID.StyngerShrapnel, ProjectileID.SeedlerThorn, ProjectileID.DD2BetsyArrow, ProjectileID.PhantasmArrow,
-      ProjectileID.Phantasm, ProjectileID.VortexLightning
+      ProjectileID.Phantasm, ProjectileID.VortexLightning, ProjectileID.LightDisc
     };
 
     private static readonly List<AlienProjectile> ModRules = new List<AlienProjectile>()
@@ -46,7 +46,10 @@ namespace ChensGradiusMod
       new AlienProjectile("CalamityMod", "SerpentineBody"), new AlienProjectile("CalamityMod", "SerpentineTail"),
       new AlienProjectile("CalamityMod", "Flash"), new AlienProjectile("CalamityMod", "TerraBulletSplit"),
       new AlienProjectile("CalamityMod", "TerraArrow2"), new AlienProjectile("CalamityMod", "VanquisherArrow2"),
-      new AlienProjectile("CalamityMod", "TinyCrystal"),
+      new AlienProjectile("CalamityMod", "TinyCrystal"), new AlienProjectile("CalamityMod", "Needler"),
+      new AlienProjectile("CalamityMod", "SpatialSpear2"), new AlienProjectile("CalamityMod", "SpatialSpear4"),
+      new AlienProjectile("CalamityMod", "SpatialSpear3"), new AlienProjectile("CalamityMod", "Celestus2"),
+      new AlienProjectile("CalamityMod", "Brimblade2"),
 
       new AlienProjectile("Bluemagic", "PuriumArrowTrail"),
 
@@ -79,6 +82,9 @@ namespace ChensGradiusMod
       new AlienProjectile("ThoriumMod", "LaunchJumperPro2"), new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro2"),
       new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro3"), new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro4"),
       new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro00"), new AlienProjectile("ThoriumMod", "ShadowPurgeCaltropPro2"),
+      new AlienProjectile("ThoriumMod", "OmniArrow3"), new AlienProjectile("ThoriumMod", "AncientFireExplosion"),
+      new AlienProjectile("ThoriumMod", "BudBombPro2"), new AlienProjectile("ThoriumMod", "BudBombPro3"),
+      new AlienProjectile("ThoriumMod", "PharaohsSlabPro2"),
 
       new AlienProjectile("SpiritMod", "FieryAura"), new AlienProjectile("SpiritMod", "DuskAura"),
       new AlienProjectile("SpiritMod", "FireBolt"), new AlienProjectile("SpiritMod", "GeodeStaveProjectile"),
@@ -98,7 +104,8 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "Fae"), new AlienProjectile("SpiritMod", "SadBeam"),
       new AlienProjectile("SpiritMod", "StarTrail1"),  new AlienProjectile("SpiritMod", "GraniteShard1"),
       new AlienProjectile("SpiritMod", "CoilMine"), new AlienProjectile("SpiritMod", "AbyssalSludge"),
-      new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather")
+      new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather"),
+      new AlienProjectile("SpiritMod", "AmberSlasher"), new AlienProjectile("SpiritMod", "QuicksilverBolt")
     };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
