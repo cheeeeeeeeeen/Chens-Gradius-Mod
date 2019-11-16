@@ -21,6 +21,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       base.SetDefaults();
       item.width = 44;
       item.height = 52;
+      item.value = ComputeItemValue(OptionPosition);
     }
 
     public override string Texture => $"ChensGradiusMod/Sprites/{ProjectileType}Inv{OptionPosition}";
@@ -115,6 +116,14 @@ namespace ChensGradiusMod.Items.Accessories.Options
           recipe.AddTile(TileID.TinkerersWorkbench);
           break;
       }
+    }
+
+    protected virtual int ComputeItemValue(int multiplier)
+    {
+      int value = Item.buyPrice(gold: 5) * multiplier;
+      if (ProjectileType != "") value += GradiusHelper.RoundOffToWhole(item.value * .25f);
+
+      return value;
     }
 
     protected void CreateOption(Player player, int optionPosition, string projectileName)
