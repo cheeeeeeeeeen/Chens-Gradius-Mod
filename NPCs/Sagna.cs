@@ -160,7 +160,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 0.9f;
 
-    protected override int RetaliationSpreadBulletNumber => 10;
+    protected override int RetaliationSpreadBulletNumber => 24;
 
     protected override float RetaliationSpreadAngleDifference => 180f;
 
@@ -237,12 +237,12 @@ namespace ChensGradiusMod.NPCs
       if (GradiusHelper.IsNotMultiplayerClient())
       {
         float radianAngle = 0f;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 24; i++)
         {
           Projectile.NewProjectile(npc.Center, radianAngle.ToRotationVector2() * GradiusEnemyBullet.Spd,
                                    ModContent.ProjectileType<GradiusEnemyBullet>(),
                                    GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
-          radianAngle += MathHelper.PiOver4;
+          radianAngle = MathHelper.ToRadians(MathHelper.ToDegrees(radianAngle) + 15f);
         }
         npc.netUpdate = true;
       }

@@ -126,8 +126,6 @@ namespace ChensGradiusMod.NPCs
       yDirection = reader.ReadSByte();
     }
 
-    protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2f;
-
     protected override int RetaliationSpreadBulletNumber => 3;
 
     protected override float RetaliationSpreadAngleDifference => 3f;
