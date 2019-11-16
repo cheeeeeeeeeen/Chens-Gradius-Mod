@@ -23,7 +23,7 @@ namespace ChensGradiusMod
     private float baitAngle;
 
     public int rotateMode;
-    public int revolveDirection;
+    public sbyte revolveDirection;
     public bool wasHolding;
     public bool isFreezing;
     public bool isAiming;
@@ -44,7 +44,7 @@ namespace ChensGradiusMod
     public int chargeMode;
     public bool optionSeed;
     public Projectile seedProjectile;
-    public int seedRotateDirection;
+    public sbyte seedRotateDirection;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -89,7 +89,6 @@ namespace ChensGradiusMod
     {
       ModPacket packet = mod.GetPacket();
       packet.Write((byte)ChensGradiusMod.PacketMessageType.GradiusModSyncPlayer);
-      packet.Write((byte)player.whoAmI);
       packet.Write(isFreezing);
       packet.Write(rotateMode);
       packet.Write(revolveDirection);
@@ -103,8 +102,6 @@ namespace ChensGradiusMod
       packet.Write(normalOption);
       packet.Write(freezeOption);
       packet.Write(rotateOption);
-      packet.Write(optionFlightPath.Count);
-      for (int i = 0; i < optionFlightPath.Count; i++) packet.WriteVector2(optionFlightPath[i]);
       packet.Write(optionSeed);
       packet.Write(seedRotateDirection);
       packet.Write(chargeMultiple);
@@ -125,7 +122,6 @@ namespace ChensGradiusMod
         {
           packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesFreezeOption);
-          packet.Write((byte)player.whoAmI);
           packet.Write(isFreezing);
           packet.Write(wasHolding);
           packet.Send();
@@ -135,7 +131,6 @@ namespace ChensGradiusMod
         {
           packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesRotateOption);
-          packet.Write((byte)player.whoAmI);
           packet.Write(rotateMode);
           packet.Write(revolveDirection);
           packet.Write(wasHolding);
@@ -146,7 +141,6 @@ namespace ChensGradiusMod
         {
           packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSeedDirection);
-          packet.Write((byte)player.whoAmI);
           packet.Write(seedRotateDirection);
           packet.Send();
         }
@@ -155,7 +149,6 @@ namespace ChensGradiusMod
         {
           packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesChargeMultiple);
-          packet.Write((byte)player.whoAmI);
           packet.Write(chargeMode);
           packet.Write(wasHolding);
           packet.Send();
@@ -165,7 +158,6 @@ namespace ChensGradiusMod
         {
           packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSearchOption);
-          packet.Write((byte)player.whoAmI);
           packet.Write(isSearching);
           packet.Write(wasHolding);
           packet.Send();
@@ -218,7 +210,7 @@ namespace ChensGradiusMod
         {
           wasHolding = false;
           rotateMode = (int)RotateOptionBase.States.Recovering;
-          revolveDirection = -revolveDirection;
+          revolveDirection = (sbyte)-revolveDirection;
         }
       }
       else if (searchOption)

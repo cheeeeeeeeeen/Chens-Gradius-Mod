@@ -214,108 +214,88 @@ namespace ChensGradiusMod
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)
     {
-      byte playerNumber;
-      GradiusModPlayer modPlayer;
       PacketMessageType msgType = (PacketMessageType)reader.ReadByte();
 
       switch (msgType)
       {
         case PacketMessageType.GradiusModSyncPlayer:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-          modPlayer.isFreezing = reader.ReadBoolean();
-          modPlayer.rotateMode = reader.ReadInt32();
-          modPlayer.revolveDirection = reader.ReadInt32();
-          modPlayer.wasHolding = reader.ReadBoolean();
-          modPlayer.forceBase = reader.ReadBoolean();
-          modPlayer.needleForce = reader.ReadBoolean();
-          modPlayer.optionOne = reader.ReadBoolean();
-          modPlayer.optionTwo = reader.ReadBoolean();
-          modPlayer.optionThree = reader.ReadBoolean();
-          modPlayer.optionFour = reader.ReadBoolean();
-          modPlayer.normalOption = reader.ReadBoolean();
-          modPlayer.freezeOption = reader.ReadBoolean();
-          modPlayer.rotateOption = reader.ReadBoolean();
-          int listCount = reader.ReadInt32();
-          for (int i = 0; i < listCount; i++) modPlayer.optionFlightPath.Add(reader.ReadVector2());
-          modPlayer.optionSeed = reader.ReadBoolean();
-          modPlayer.seedRotateDirection = reader.ReadInt32();
-          modPlayer.chargeMultiple = reader.ReadBoolean();
-          modPlayer.chargeMode = reader.ReadInt32();
-          modPlayer.aimOption = reader.ReadBoolean();
-          modPlayer.searchOption = reader.ReadBoolean();
-          modPlayer.isSearching = reader.ReadBoolean();
-          break;
+          {
+            GradiusPlayer(whoAmI).isFreezing = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).rotateMode = reader.ReadInt32();
+            GradiusPlayer(whoAmI).revolveDirection = reader.ReadSByte();
+            GradiusPlayer(whoAmI).wasHolding = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).forceBase = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).needleForce = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).optionOne = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).optionTwo = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).optionThree = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).optionFour = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).normalOption = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).freezeOption = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).rotateOption = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).optionSeed = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).seedRotateDirection = reader.ReadSByte();
+            GradiusPlayer(whoAmI).chargeMultiple = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).chargeMode = reader.ReadInt32();
+            GradiusPlayer(whoAmI).aimOption = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).searchOption = reader.ReadBoolean();
+            GradiusPlayer(whoAmI).isSearching = reader.ReadBoolean();
+            break;
+          }
 
         case PacketMessageType.ClientChangesFreezeOption:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-
-          modPlayer.isFreezing = reader.ReadBoolean();
-          modPlayer.wasHolding = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).isFreezing = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).wasHolding = reader.ReadBoolean();
 
           if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
-            packet.Write(playerNumber);
-            packet.Write(modPlayer.isFreezing);
-            packet.Write(modPlayer.wasHolding);
-            packet.Send(-1, playerNumber);
+            packet.Write(GradiusPlayer(whoAmI).isFreezing);
+            packet.Write(GradiusPlayer(whoAmI).wasHolding);
+            packet.Send(-1, whoAmI);
           }
           break;
 
         case PacketMessageType.ClientChangesRotateOption:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-
-          modPlayer.rotateMode = reader.ReadInt32();
-          modPlayer.revolveDirection = reader.ReadInt32();
-          modPlayer.wasHolding = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).rotateMode = reader.ReadInt32();
+          GradiusPlayer(whoAmI).revolveDirection = reader.ReadSByte();
+          GradiusPlayer(whoAmI).wasHolding = reader.ReadBoolean();
 
           if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesRotateOption);
-            packet.Write(playerNumber);
-            packet.Write(modPlayer.rotateMode);
-            packet.Write(modPlayer.revolveDirection);
-            packet.Write(modPlayer.wasHolding);
-            packet.Send(-1, playerNumber);
+            packet.Write(GradiusPlayer(whoAmI).rotateMode);
+            packet.Write(GradiusPlayer(whoAmI).revolveDirection);
+            packet.Write(GradiusPlayer(whoAmI).wasHolding);
+            packet.Send(-1, whoAmI);
           }
           break;
 
         case PacketMessageType.ClientChangesSeedDirection:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-
-          modPlayer.seedRotateDirection = reader.ReadInt32();
+          GradiusPlayer(whoAmI).seedRotateDirection = reader.ReadSByte();
 
           if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesSeedDirection);
-            packet.Write(playerNumber);
-            packet.Write(modPlayer.seedRotateDirection);
-            packet.Send(-1, playerNumber);
+            packet.Write(GradiusPlayer(whoAmI).seedRotateDirection);
+            packet.Send(-1, whoAmI);
           }
           break;
 
         case PacketMessageType.ClientChangesChargeMultiple:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-
-          modPlayer.chargeMode = reader.ReadInt32();
-          modPlayer.wasHolding = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).chargeMode = reader.ReadInt32();
+          GradiusPlayer(whoAmI).wasHolding = reader.ReadBoolean();
 
           if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesChargeMultiple);
-            packet.Write(playerNumber);
-            packet.Write(modPlayer.chargeMode);
-            packet.Write(modPlayer.wasHolding);
-            packet.Send(-1, playerNumber);
+            packet.Write(GradiusPlayer(whoAmI).chargeMode);
+            packet.Write(GradiusPlayer(whoAmI).wasHolding);
+            packet.Send(-1, whoAmI);
           }
           break;
 
@@ -331,28 +311,25 @@ namespace ChensGradiusMod
                                      ModContent.ProjectileType<GradiusEnemyBullet>(),
                                      dmg, kb, Main.myPlayer);
           }
-
           break;
 
         case PacketMessageType.ClientChangesSearchOption:
-          playerNumber = reader.ReadByte();
-          modPlayer = Main.player[playerNumber].GetModPlayer<GradiusModPlayer>();
-
-          modPlayer.isSearching = reader.ReadBoolean();
-          modPlayer.wasHolding = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).isSearching = reader.ReadBoolean();
+          GradiusPlayer(whoAmI).wasHolding = reader.ReadBoolean();
 
           if (GradiusHelper.IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.ClientChangesSearchOption);
-            packet.Write(playerNumber);
-            packet.Write(modPlayer.isSearching);
-            packet.Write(modPlayer.wasHolding);
-            packet.Send(-1, playerNumber);
+            packet.Write(GradiusPlayer(whoAmI).isSearching);
+            packet.Write(GradiusPlayer(whoAmI).wasHolding);
+            packet.Send(-1, whoAmI);
           }
           break;
       }
     }
+
+    private GradiusModPlayer GradiusPlayer(int whoAmI) => Main.player[whoAmI].GetModPlayer<GradiusModPlayer>();
 
     internal enum PacketMessageType : byte
     {

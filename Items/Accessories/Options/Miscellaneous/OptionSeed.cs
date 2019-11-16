@@ -43,7 +43,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
           ModOwner(player).seedProjectile = Main.projectile[pInd];
         }
 
-        ModOwner(player).seedRotateDirection = -hideVisual.ToDirectionInt();
+        ModOwner(player).seedRotateDirection = (sbyte)-hideVisual.ToDirectionInt();
       }
     }
 
