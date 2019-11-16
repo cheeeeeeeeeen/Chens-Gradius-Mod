@@ -228,8 +228,8 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    protected int DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
-                                bool forceSpawn = false, int fallbackValue = 0)
+    protected sbyte DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
+                                  bool forceSpawn = false, sbyte fallbackValue = 0)
     {
       Vector2 savedPosition = npc.position,
               upwardV = new Vector2(0, -yLength),

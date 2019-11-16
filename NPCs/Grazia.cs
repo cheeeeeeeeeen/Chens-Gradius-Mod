@@ -9,9 +9,9 @@ namespace ChensGradiusMod.NPCs
   public class Grazia : GradiusEnemy
   {
     private const float DetectionRange = 800f;
-    private const int PersistDirection = -1;
+    private const sbyte PersistDirection = -1;
     private const float CustomGravity = 5f;
-    private const int FireRate = 50;
+    private const int FireRate = 33;
     private const int CancelDeployThreshold = 500;
     private const int SyncRate = 300;
 
@@ -22,7 +22,7 @@ namespace ChensGradiusMod.NPCs
     private readonly int[] inverseHigherAngleAim = { 200, 220, 240, 260, 279, 299, 319, 339, 360 };
     private readonly int[] inverseFrameAngleAim = { 17, 16, 15, 14, 13, 12, 11, 10, 9 };
 
-    private int yDirection = 0;
+    private sbyte yDirection = 0;
     private int fireTick = 0;
     private int syncTick = 0;
 
@@ -123,7 +123,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      yDirection = reader.ReadInt32();
+      yDirection = reader.ReadSByte();
     }
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 2f;

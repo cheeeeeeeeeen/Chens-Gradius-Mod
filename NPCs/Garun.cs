@@ -16,7 +16,7 @@ namespace ChensGradiusMod.NPCs
     private const int FireRate = 20;
     private const int SyncRate = 120;
 
-    private int timerTick = 0;
+    private ushort timerTick = 0;
     private bool targetDetermined = false;
     private int persistDirection = 0;
     private int fireTick = 0;
@@ -90,7 +90,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      timerTick = reader.ReadInt32();
+      timerTick = reader.ReadUInt16();
     }
 
     protected override int FrameSpeed { get; set; } = 4;

@@ -22,8 +22,8 @@ namespace ChensGradiusMod.NPCs
     private States mode = States.Run;
     private States oldMode = States.Run;
     private bool initialized = false;
-    private int persistDirection = 0;
-    private int yDirection = 0;
+    private sbyte persistDirection = 0;
+    private sbyte yDirection = 0;
     private bool hasJumped = false;
     private Vector2 targetLastSeen = Vector2.Zero;
     private int syncTick = 0;
@@ -214,7 +214,7 @@ namespace ChensGradiusMod.NPCs
             oldV = npc.velocity;
             if ((oldP == npc.position || oldV == npc.velocity) && WillHitWall())
             {
-              persistDirection = -persistDirection;
+              persistDirection = (sbyte)-persistDirection;
             }
             npc.velocity.X = 0f;
           }
@@ -282,8 +282,8 @@ namespace ChensGradiusMod.NPCs
     {
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
-      persistDirection = reader.ReadInt32();
-      yDirection = reader.ReadInt32();
+      persistDirection = reader.ReadSByte();
+      yDirection = reader.ReadSByte();
       hasJumped = reader.ReadBoolean();
       targetLastSeen = reader.ReadVector2();
     }

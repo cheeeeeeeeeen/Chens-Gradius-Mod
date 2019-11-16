@@ -20,16 +20,18 @@ namespace ChensGradiusMod.NPCs
     private const int OpenCoreTime = 1200;
     private const int MaxFrameIndex = 4;
     private const int FireRate = 25;
+    private const int SyncRate = 45;
 
     private bool openCore = false;
     private States mode = States.RegularAssault;
     private int fireTick = 0;
     private int existenceTick = 0;
     private int frameCounterX = 7;
+    private int syncTick = 0;
 
     private float regularAssaultXCurrentSpeed = 0f;
     private float regularAssaultYCurrentSpeed = 0f;
-    private int regularAssaultDirection = 0;
+    private sbyte regularAssaultDirection = 0;
 
     private readonly Vector2 exitVelocity = new Vector2(.1f, 0);
 
@@ -87,6 +89,12 @@ namespace ChensGradiusMod.NPCs
       }
 
       PerformAttack();
+    }
+
+    public override void PostAI()
+    {
+      base.PostAI();
+      ConstantSync(ref syncTick, SyncRate);
     }
 
     public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
@@ -153,7 +161,7 @@ namespace ChensGradiusMod.NPCs
     {
       mode = (States)reader.ReadByte();
       npc.target = reader.ReadInt32();
-      regularAssaultDirection = reader.ReadInt32();
+      regularAssaultDirection = reader.ReadSByte();
       regularAssaultYCurrentSpeed = reader.ReadSingle();
     }
 
@@ -191,7 +199,7 @@ namespace ChensGradiusMod.NPCs
           else if (target.Center.X < npc.Center.X) regularAssaultDirection = -1;
           else if (GradiusHelper.IsNotMultiplayerClient())
           {
-            regularAssaultDirection = Main.rand.NextBool().ToDirectionInt();
+            regularAssaultDirection = (sbyte)Main.rand.NextBool().ToDirectionInt();
             npc.netUpdate = true;
           }
           else regularAssaultDirection = 0;
@@ -211,11 +219,6 @@ namespace ChensGradiusMod.NPCs
         regularAssaultYCurrentSpeed = Math.Max(regularAssaultYCurrentSpeed, -RegularAssaultMaxSpeed);
       }
       npc.position.Y += regularAssaultYCurrentSpeed;
-      if (GradiusHelper.IsNotMultiplayerClient() &&
-          GradiusHelper.IsEqualWithThreshold(regularAssaultYCurrentSpeed, 0f, 3f))
-      {
-        npc.netUpdate = true;
-      }
 
       float destinationX = target.Center.X + RegularAssaultHorizontalGap * -regularAssaultDirection;
       regularAssaultXCurrentSpeed += RegularAssaultAcceleration;

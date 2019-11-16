@@ -13,9 +13,9 @@ namespace ChensGradiusMod.NPCs
     private const float DetectionRange = 1400f;
     private const int AttackTickDelay = 5;
     private const int RestingTime = 40;
-    private const int VulnerableTime = 20;
+    private const int VulnerableTime = 10;
 
-    private int persistDirection = 0;
+    private sbyte persistDirection = 0;
     private int mode = (int)States.Dormant;
     private int currentProjNumber = 0;
     private int attackTick = 0;
@@ -58,7 +58,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient() && persistDirection == 0)
       {
-        persistDirection = Main.rand.NextBool().ToDirectionInt();
+        persistDirection = (sbyte)Main.rand.NextBool().ToDirectionInt();
         npc.netUpdate = true;
       }
 
@@ -166,7 +166,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      persistDirection = reader.ReadInt32();
+      persistDirection = reader.ReadSByte();
     }
 
     protected override Types EnemyType => Types.Large;

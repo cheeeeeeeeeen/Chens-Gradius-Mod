@@ -14,7 +14,7 @@ namespace ChensGradiusMod.NPCs
     private const float XDistanceSeries = 60f;
     private const int FireRate = 57;
     private const float AttackDistance = 1200;
-    private const int RandomFireInterval = 30;
+    private const int RandomFireInterval = 15;
 
     private bool targetDetermined = false;
     private int persistDirection = 0;

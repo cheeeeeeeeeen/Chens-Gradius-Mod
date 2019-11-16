@@ -17,16 +17,16 @@ namespace ChensGradiusMod.NPCs
     private const int SyncRate = 60;
 
     private bool initialized = false;
-    private int persistDirection = 0;
-    private int animateDirection = 1;
+    private sbyte persistDirection = 0;
+    private sbyte animateDirection = 1;
     private States mode = States.Fall;
     private States oldMode = States.Fall;
-    private int xDirection = 0;
-    private int yDirection = 0;
-    private int jumpCount = 0;
-    private int startFrame = 0;
-    private int endFrame = 4;
-    private int maxFrame = 8;
+    private sbyte xDirection = 0;
+    private sbyte yDirection = 0;
+    private byte jumpCount = 0;
+    private byte startFrame = 0;
+    private byte endFrame = 4;
+    private byte maxFrame = 8;
     private int syncTick = 0;
 
     public enum States { Hop, Fall, Spray };
@@ -72,7 +72,7 @@ namespace ChensGradiusMod.NPCs
         {
           startFrame = 8;
           endFrame = 12;
-          maxFrame = Main.npcFrameCount[npc.type];
+          maxFrame = (byte)Main.npcFrameCount[npc.type];
           FrameCounter = startFrame;
         }
       }
@@ -147,15 +147,15 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      animateDirection = reader.ReadInt32();
+      animateDirection = reader.ReadSByte();
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
-      xDirection = reader.ReadInt32();
-      yDirection = reader.ReadInt32();
-      jumpCount = reader.ReadInt32();
-      startFrame = reader.ReadInt32();
-      endFrame = reader.ReadInt32();
-      maxFrame = reader.ReadInt32();
+      xDirection = reader.ReadSByte();
+      yDirection = reader.ReadSByte();
+      jumpCount = reader.ReadByte();
+      startFrame = reader.ReadByte();
+      endFrame = reader.ReadByte();
+      maxFrame = reader.ReadByte();
     }
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 0.9f;
@@ -205,7 +205,7 @@ namespace ChensGradiusMod.NPCs
       Vector2 beforeVelocity = npc.velocity;
       npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
 
-      if (beforeVelocity.X != npc.velocity.X) xDirection = -xDirection;
+      if (beforeVelocity.X != npc.velocity.X) xDirection = (sbyte)-xDirection;
 
       switch (mode)
       {
