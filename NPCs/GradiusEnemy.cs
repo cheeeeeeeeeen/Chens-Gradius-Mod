@@ -18,19 +18,22 @@ namespace ChensGradiusMod.NPCs
     {
       npc.friendly = false;
 
-      switch (EnemyType)
+      switch ((sbyte)EnemyType)
       {
-        case Types.Small:
+        case (sbyte)Types.Small:
           npc.HitSound = SoundID.NPCHit4;
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death");
           break;
-        case Types.Large:
+        case (sbyte)Types.Large:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
-          break;
-        case Types.Boss:
+          goto case -1;
+        case (sbyte)Types.Boss:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreHit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BossDeath");
+          goto case -1;
+        case -1:
+          ImmuneToBuffs();
           break;
       }
 

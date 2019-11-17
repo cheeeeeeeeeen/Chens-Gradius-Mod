@@ -42,7 +42,6 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 0;
       npc.behindTiles = true;
-      ImmuneToBuffs();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

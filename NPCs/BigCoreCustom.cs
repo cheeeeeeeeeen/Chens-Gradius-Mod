@@ -58,8 +58,6 @@ namespace ChensGradiusMod.NPCs
       npc.npcSlots = 1;
       npc.boss = true;
       music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/AircraftCarrier");
-
-      ImmuneToBuffs();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
