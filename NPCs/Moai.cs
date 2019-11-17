@@ -152,12 +152,6 @@ namespace ChensGradiusMod.NPCs
       return false;
     }
 
-    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
-
-    public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
-
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(persistDirection);

@@ -124,12 +124,6 @@ namespace ChensGradiusMod.NPCs
       else return false;
     }
 
-    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
-
-    public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
-
     public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
     {
       scale = 1.5f;
@@ -138,7 +132,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void BossLoot(ref string name, ref int potionType)
     {
-      potionType = ItemID.GreaterHealingPotion;
+      potionType = ItemID.SuperHealingPotion;
     }
 
     public override bool CheckDead()

@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using ChensGradiusMod.Projectiles.Enemies;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -14,7 +18,7 @@ namespace ChensGradiusMod.NPCs
 
     private States mode = States.Standby;
 
-    public enum States { Standby, Deploy };
+    public enum States { Standby, Open, Deploy, Close };
 
     public override void SetStaticDefaults()
     {
@@ -67,6 +71,36 @@ namespace ChensGradiusMod.NPCs
     public override void AI()
     {
       npc.spriteDirection = npc.direction = PersistDirection;
+      npc.velocity.Y = CustomGravity * yDirection;
+      npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
     }
+
+    public override void FindFrame(int frameHeight)
+    {
+      switch (mode)
+      {
+        case States.Standby:
+        case States.Deploy:
+          break;
+      }
+    }
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(yDirection);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      yDirection = reader.ReadSByte();
+    }
+
+    protected override Action<Vector2> RetaliationOverride => RetaliationExplode;
+
+    protected override int RetaliationExplodeBulletLayers => 2;
+
+    protected override int RetaliationExplodeBulletNumberPerLayer => 8;
+
+    protected override float RetaliationExplodeBulletAcceleration => -(GradiusEnemyBullet.Spd * .5f);
   }
 }
