@@ -12,6 +12,8 @@ namespace ChensGradiusMod.NPCs
     private const float AttackDistance = 800f;
     private const int CanGoHorizontalTime = 60;
 
+    private readonly bool[] frameSwitcher = new bool[2] { true, true };
+
     private int persistDirection = 0;
     private int yDirection = 0;
     private bool initialized = false;
@@ -38,6 +40,7 @@ namespace ChensGradiusMod.NPCs
       npc.value = 0f;
       npc.knockBackResist = 0f;
       npc.defense = 17;
+      npc.noGravity = true;
     }
 
     public override bool PreAI()
@@ -77,9 +80,50 @@ namespace ChensGradiusMod.NPCs
       PerformAttack();
     }
 
+    public override void FindFrame(int frameHeight)
+    {
+      if (++FrameTick >= FrameSpeed)
+      {
+        FrameTick = 0;
+        if (++FrameCounter >= Main.npcFrameCount[npc.type]) FrameCounter = 0;
+        int actualFrame = FrameCounter;
+
+        if (FrameCounter <= 5 && FrameCounter >= 4)
+        {
+          if (frameSwitcher[0])
+          {
+            actualFrame = 4;
+            frameSwitcher[0] = false;
+          }
+          else
+          {
+            actualFrame = 5;
+            frameSwitcher[0] = true;
+          }
+          FrameCounter = 5;
+        }
+        else if (FrameCounter >= 9 || FrameCounter <= 0)
+        {
+          if (frameSwitcher[1])
+          {
+            actualFrame = 0;
+            frameSwitcher[1] = false;
+          }
+          else
+          {
+            actualFrame = 9;
+            frameSwitcher[1] = true;
+          }
+          FrameCounter = 0;
+        }
+
+        npc.frame.Y = frameHeight * actualFrame;
+      }
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/Rush";
 
-    protected override int FrameSpeed { get; set; } = 4;
+    protected override int FrameSpeed { get; set; } = 3;
 
     protected override Types EnemyType => Types.Small;
 
