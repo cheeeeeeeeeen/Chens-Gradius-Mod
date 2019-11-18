@@ -6,15 +6,16 @@ namespace ChensGradiusMod.NPCs
 {
   public class Rush : GradiusEnemy
   {
-    private const float VerticalSpeed = .23f;
-    private const float HorizontalSpeed = .71f;
-    private const int FireRate = 51;
+    private const float VerticalSpeed = 4f;
+    private const float HorizontalSpeed = 7f;
+    private const int FireRate = 43;
     private const float AttackDistance = 800f;
     private const int CanGoHorizontalTime = 60;
 
     private readonly bool[] frameSwitcher = new bool[2] { true, true };
 
     private int persistDirection = 0;
+    private int xDirection = 0;
     private int yDirection = 0;
     private bool initialized = false;
     private States mode = States.Vertical;
@@ -41,6 +42,7 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 17;
       npc.noGravity = true;
+      npc.noTileCollide = true;
     }
 
     public override bool PreAI()
@@ -137,9 +139,6 @@ namespace ChensGradiusMod.NPCs
 
     private void MoveHorizontally()
     {
-      int xDirection = Math.Sign(Target.Center.X - npc.Center.X);
-      if (xDirection == 0) xDirection = yDirection;
-
       npc.velocity = new Vector2(HorizontalSpeed * xDirection, 0);
     }
 
@@ -152,6 +151,8 @@ namespace ChensGradiusMod.NPCs
         if ((yDirection > 0 && npc.Center.Y >= Target.Center.Y) ||
             (yDirection < 0 && npc.Center.Y <= Target.Center.Y))
         {
+          xDirection = Math.Sign(Target.Center.X - npc.Center.X);
+          if (xDirection == 0) xDirection = yDirection;
           mode = States.Horizontal;
         }
       }

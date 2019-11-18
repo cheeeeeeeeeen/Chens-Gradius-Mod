@@ -1,7 +1,7 @@
-using System;
-using System.IO;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
+using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -43,6 +43,8 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 0;
       npc.behindTiles = true;
+      npc.noGravity = true;
+      npc.noTileCollide = false;
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -55,7 +57,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (initialized)
+      if (!initialized)
       {
         initialized = true;
         if (yDirection == 0)
@@ -91,6 +93,7 @@ namespace ChensGradiusMod.NPCs
         case States.Deploy:
           if (++deployTick >= DeployRate)
           {
+            deployTick = 0;
             SpawnRush();
             if (++rushCount >= TotalRushCount)
             {
@@ -104,13 +107,20 @@ namespace ChensGradiusMod.NPCs
 
     public override void FindFrame(int frameHeight)
     {
-      switch (mode)
+      if (++FrameTick >= FrameSpeed)
       {
-        case States.Standby:
-        case States.Open:
-        case States.Deploy:
-        case States.Close:
-          break;
+        switch (mode)
+        {
+          case States.Open:
+            if (++FrameCounter >= Main.npcFrameCount[npc.type] - 1) mode = States.Deploy;
+            break;
+          case States.Close:
+            if (--FrameCounter <= 0) mode = States.Standby;
+            break;
+        }
+
+        npc.frame.Y = FrameCounter * frameHeight;
+        FrameTick = 0;
       }
     }
 
@@ -123,6 +133,8 @@ namespace ChensGradiusMod.NPCs
     {
       yDirection = reader.ReadSByte();
     }
+
+    protected override int FrameSpeed { get; set; } = 9;
 
     protected override Action<Vector2> RetaliationOverride => RetaliationExplode;
 
@@ -139,14 +151,22 @@ namespace ChensGradiusMod.NPCs
         int count = 2;
         if (Main.hardMode) count += 2;
         if (Main.expertMode) count += 3;
-        
+
         return count;
       }
-    } 
+    }
+
+    private Player Target => Main.player[npc.target];
 
     private void SpawnRush()
     {
-      // NPC.NewNPC()
+      if (GradiusHelper.IsNotMultiplayerClient())
+      {
+        npc.TargetClosest(false);
+        int xDirection = Math.Sign(Target.Center.X - npc.Center.X);
+        GradiusHelper.NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
+                             ai0: xDirection, ai1: -yDirection, ai3: npc.target);
+      }
     }
   }
 }
