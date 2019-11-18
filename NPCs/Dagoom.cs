@@ -12,9 +12,14 @@ namespace ChensGradiusMod.NPCs
     private const int PersistDirection = 1;
     private const int CancelDeployThreshold = 400;
     private const float CustomGravity = 5f;
+    private const int RedeployRate = 180;
+    private const int DeployRate = 15;
 
     private bool initialized = false;
     private int yDirection = 0;
+    private int redeployTick = 0;
+    private int deployTick = 0;
+    private int rushCount = 0;
 
     private States mode = States.Standby;
 
@@ -73,6 +78,28 @@ namespace ChensGradiusMod.NPCs
       npc.spriteDirection = npc.direction = PersistDirection;
       npc.velocity.Y = CustomGravity * yDirection;
       npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
+
+      switch (mode)
+      {
+        case States.Standby:
+          if (++redeployTick >= RedeployRate)
+          {
+            redeployTick = 0;
+            mode = States.Open;
+          }
+          break;
+        case States.Deploy:
+          if (++deployTick >= DeployRate)
+          {
+            SpawnRush();
+            if (++rushCount >= TotalRushCount)
+            {
+              rushCount = 0;
+              mode = States.Close;
+            }
+          }
+          break;
+      }
     }
 
     public override void FindFrame(int frameHeight)
@@ -80,7 +107,9 @@ namespace ChensGradiusMod.NPCs
       switch (mode)
       {
         case States.Standby:
+        case States.Open:
         case States.Deploy:
+        case States.Close:
           break;
       }
     }
@@ -102,5 +131,22 @@ namespace ChensGradiusMod.NPCs
     protected override int RetaliationExplodeBulletNumberPerLayer => 8;
 
     protected override float RetaliationExplodeBulletAcceleration => -(GradiusEnemyBullet.Spd * .5f);
+
+    private int TotalRushCount
+    {
+      get
+      {
+        int count = 2;
+        if (Main.hardMode) count += 2;
+        if (Main.expertMode) count += 3;
+        
+        return count;
+      }
+    } 
+
+    private void SpawnRush()
+    {
+      
+    }
   }
 }

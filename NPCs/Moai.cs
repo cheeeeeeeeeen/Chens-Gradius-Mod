@@ -83,7 +83,7 @@ namespace ChensGradiusMod.NPCs
           {
             attackTick = 0;
             PerformAttack();
-            if (++currentProjNumber >= ProjectileNumber())
+            if (++currentProjNumber >= ProjectileNumber)
             {
               currentProjNumber = 0;
               mode = (int)States.Vulnerable;
@@ -241,13 +241,16 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    private int ProjectileNumber()
+    private int ProjectileNumber
     {
-      int projNumber = 1;
-      if (Main.expertMode) projNumber += 1;
-      if (Main.hardMode) projNumber += 1;
+      get
+      {
+        int projNumber = 1;
+        if (Main.expertMode) projNumber += 1;
+        if (Main.hardMode) projNumber += 1;
 
-      return projNumber;
+        return projNumber;
+      }
     }
 
     private void PerformAttack()
