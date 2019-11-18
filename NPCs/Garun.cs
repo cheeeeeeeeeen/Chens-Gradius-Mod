@@ -28,8 +28,8 @@ namespace ChensGradiusMod.NPCs
       if (GradiusHelper.IsNotMultiplayerClient() &&
           Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= atkDistance)
       {
-        if ((npc.direction >= 0 && npc.Center.X <= Main.player[npc.target].Center.X) ||
-           (npc.direction <= 0 && npc.Center.X >= Main.player[npc.target].Center.X))
+        if ((npc.direction >= 0 && npc.Center.X >= Main.player[npc.target].Center.X) ||
+           (npc.direction <= 0 && npc.Center.X <= Main.player[npc.target].Center.X))
         {
           if (++fireTick >= fireRate)
           {
@@ -84,7 +84,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-      npc.spriteDirection = npc.direction = -persistDirection;
+      npc.spriteDirection = npc.direction = persistDirection;
 
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
@@ -128,7 +128,7 @@ namespace ChensGradiusMod.NPCs
     {
       float degreeAngle;
 
-      if (npc.direction > 0) degreeAngle = 180f;
+      if (npc.direction < 0) degreeAngle = 180f;
       else degreeAngle = 0f;
 
       return MathHelper.ToRadians(degreeAngle);
