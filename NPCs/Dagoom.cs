@@ -146,7 +146,7 @@ namespace ChensGradiusMod.NPCs
 
     private void SpawnRush()
     {
-      
+      // NPC.NewNPC()
     }
   }
 }

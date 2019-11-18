@@ -263,7 +263,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      return GradiusHelper.NPCSpawnRate("Sagna", spawnInfo);
+      return Sagna.SpawnCondition(spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Ducker";

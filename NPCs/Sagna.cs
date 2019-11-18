@@ -31,6 +31,16 @@ namespace ChensGradiusMod.NPCs
 
     public enum States { Hop, Fall, Spray };
 
+    public static float SpawnCondition(NPCSpawnInfo spawnInfo)
+    {
+      if (Main.hardMode && spawnInfo.spawnTileY < GradiusHelper.UnderworldTilesYLocation &&
+          spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
+      {
+        return .075f;
+      }
+      else return 0f;
+    }
+
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Sagna");
@@ -53,7 +63,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      return GradiusHelper.NPCSpawnRate(Name, spawnInfo);
+      return SpawnCondition(spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Sagna";

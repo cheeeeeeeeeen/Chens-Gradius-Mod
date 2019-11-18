@@ -270,22 +270,6 @@ namespace ChensGradiusMod
       }
     }
 
-    public static float NPCSpawnRate(string npcName, NPCSpawnInfo spawnInfo)
-    {
-      switch (npcName)
-      {
-        case "Sagna":
-          if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
-            spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
-          {
-            return .075f;
-          }
-          else return 0f;
-        default:
-          return 0f;
-      }
-    }
-
     public static int ToTileCoordinate(float coordinate)
     {
       return (int)(coordinate / 16f);
