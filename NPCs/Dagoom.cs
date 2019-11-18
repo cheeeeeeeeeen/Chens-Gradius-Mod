@@ -28,15 +28,15 @@ namespace ChensGradiusMod.NPCs
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Dagoom");
-      // Main.npcFrameCount[npc.type] = 0;
+      Main.npcFrameCount[npc.type] = 4;
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      // npc.width = 80;
-      // npc.height = 122;
+      npc.width = 64;
+      npc.height = 56;
       npc.damage = 100;
       npc.lifeMax = 50;
       npc.value = 4000;
