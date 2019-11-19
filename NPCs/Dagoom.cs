@@ -197,7 +197,7 @@ namespace ChensGradiusMod.NPCs
         GradiusHelper.NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
                              ai0: xDirection, ai1: -yDirection, ai3: npc.target,
                              center: true);
-        
+
         if (++rushCount >= TotalRushCount)
         {
           rushCount = 0;
