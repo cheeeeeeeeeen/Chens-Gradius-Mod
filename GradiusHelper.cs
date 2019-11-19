@@ -286,26 +286,6 @@ namespace ChensGradiusMod
       };
     }
 
-    public static bool VanillaStepUpTileComputationCatcher(Vector2 p, Vector2 v, float w)
-    {
-      int direction = 0;
-      if (v.X < 0f) direction = -1;
-      else if (v.X > 0f) direction = 1;
-      Vector2 destination = p;
-      destination.X += v.X;
-
-      int tileX = (int)((destination.X + (w / 2) + ((w / 2 + 1) * direction)) / 16f);
-      int tileY = (int)((destination.Y + 0.1) / 16.0);
-
-      if (tileX >= Main.tile.GetLength(0) || tileY >= Main.tile.GetLength(1)
-          || tileX < 0 || tileY < 0)
-      {
-        return true;
-      }
-
-      return false;
-    }
-
     public static int FindTarget(Vector2 projPosition, Vector2 ownPosition, float range)
     {
       float shortestDistance = range;

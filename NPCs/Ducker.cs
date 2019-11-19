@@ -18,6 +18,7 @@ namespace ChensGradiusMod.NPCs
     private const float FallSpeedXAccel = .1f;
     private const float TargetDistance = 800f;
     private const int SyncRate = 30;
+    private const byte MaxJumps = 3;
 
     private States mode = States.Run;
     private States oldMode = States.Run;
@@ -27,6 +28,7 @@ namespace ChensGradiusMod.NPCs
     private bool hasJumped = false;
     private Vector2 targetLastSeen = Vector2.Zero;
     private int syncTick = 0;
+    private byte numJumps = 0;
 
     public enum States { Run, Target, Fire, Recompose, Jump, Fall, Land };
 
@@ -61,14 +63,6 @@ namespace ChensGradiusMod.NPCs
             if (++FrameCounter > 5) FrameCounter = 0;
           }
           break;
-        //case States.Fall:
-        //  if (++FrameTick >= FrameSpeed)
-        //  {
-        //    FrameTick = 0;
-        //    FrameCounter--;
-        //    if (FrameCounter <= 9 && FrameCounter > 6) FrameCounter = 10;
-        //  }
-        //  break;
         case States.Land:
           if (++FrameTick >= FrameSpeed)
           {
@@ -158,8 +152,6 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-      Vector2 oldP, oldV;
-
       switch (mode)
       {
         case States.Run:
@@ -173,25 +165,17 @@ namespace ChensGradiusMod.NPCs
           }
           else
           {
-            if (GradiusHelper.VanillaStepUpTileComputationCatcher(npc.position, npc.velocity, npc.width))
-            {
-              npc.life = 0;
-              npc.active = false;
-              return;
-            }
-
             UsualMovement();
-            oldP = npc.position;
-            oldV = npc.velocity;
-            Collision.StepUp(ref npc.position, ref npc.velocity, npc.width, npc.height,
-                             ref npc.stepSpeed, ref npc.gfxOffY, yDirection);
-            if ((oldP == npc.position || oldV == npc.velocity) && WillHitWall())
+
+            if (WillHitWall())
             {
               mode = States.Jump;
               FrameCounter = 6;
               FrameTick = 0;
               HaltMovement();
+              numJumps++;
             }
+            else numJumps = 0;
           }
           break;
 
@@ -210,9 +194,7 @@ namespace ChensGradiusMod.NPCs
           {
             mode = States.Land;
             UsualMovement();
-            oldP = npc.position;
-            oldV = npc.velocity;
-            if ((oldP == npc.position || oldV == npc.velocity) && WillHitWall())
+            if (WillHitWall() && numJumps >= MaxJumps)
             {
               persistDirection = (sbyte)-persistDirection;
             }
@@ -225,7 +207,7 @@ namespace ChensGradiusMod.NPCs
           {
             if (!hasJumped && GradiusHelper.IsEqualWithThreshold(npc.velocity, Vector2.Zero, .01f))
             {
-              npc.velocity = new Vector2(0, 20f * -yDirection);
+              npc.velocity = new Vector2(0, 10f * -yDirection);
               hasJumped = true;
             }
             else npc.velocity += new Vector2(FallSpeedXAccel * persistDirection, FallSpeedYAccel * yDirection);
@@ -276,6 +258,7 @@ namespace ChensGradiusMod.NPCs
       writer.Write(yDirection);
       writer.Write(hasJumped);
       writer.WriteVector2(targetLastSeen);
+      writer.Write(numJumps);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -286,6 +269,7 @@ namespace ChensGradiusMod.NPCs
       yDirection = reader.ReadSByte();
       hasJumped = reader.ReadBoolean();
       targetLastSeen = reader.ReadVector2();
+      numJumps = reader.ReadByte();
     }
 
     protected override int FrameSpeed { get; set; } = 5;
@@ -314,8 +298,8 @@ namespace ChensGradiusMod.NPCs
     private bool WillHitWall()
     {
 
-      return Collision.SolidCollision(npc.position + new Vector2(npc.velocity.X, 0),
-                                      npc.width, npc.height);
+      return Collision.SolidCollision(npc.position + new Vector2(16f * Math.Sign(npc.velocity.X), 2f),
+                                      npc.width, npc.height - 4);
     }
 
     private void UsualMovement()
