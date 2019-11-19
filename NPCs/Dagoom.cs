@@ -12,8 +12,9 @@ namespace ChensGradiusMod.NPCs
     private const int PersistDirection = 1;
     private const int CancelDeployThreshold = 400;
     private const float CustomGravity = 5f;
-    private const int RedeployRate = 180;
+    private const int RedeployRate = 300;
     private const int DeployRate = 15;
+    private const float DetectionRange = 700;
 
     private bool initialized = false;
     private int yDirection = 0;
@@ -84,11 +85,14 @@ namespace ChensGradiusMod.NPCs
       switch (mode)
       {
         case States.Standby:
-          if (++redeployTick >= RedeployRate)
+          npc.TargetClosest();
+          if (++redeployTick >= RedeployRate &&
+              Vector2.Distance(Target.Center, npc.Center) <= DetectionRange)
           {
             redeployTick = 0;
             mode = States.Open;
           }
+          redeployTick = Math.Min(redeployTick, RedeployRate);
           break;
         case States.Deploy:
           if (++deployTick >= DeployRate)
@@ -134,13 +138,15 @@ namespace ChensGradiusMod.NPCs
       yDirection = reader.ReadSByte();
     }
 
+    protected override Types EnemyType => Types.Large;
+
     protected override int FrameSpeed { get; set; } = 9;
 
     protected override Action<Vector2> RetaliationOverride => RetaliationExplode;
 
     protected override int RetaliationExplodeBulletLayers => 2;
 
-    protected override int RetaliationExplodeBulletNumberPerLayer => 8;
+    protected override int RetaliationExplodeBulletNumberPerLayer => 16;
 
     protected override float RetaliationExplodeBulletAcceleration => -(GradiusEnemyBullet.Spd * .5f);
 

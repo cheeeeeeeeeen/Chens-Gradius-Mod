@@ -8,10 +8,10 @@ namespace ChensGradiusMod.NPCs
 {
   public class Grazia : GradiusEnemy
   {
-    private const float DetectionRange = 800f;
+    private const float DetectionRange = 1000f;
     private const sbyte PersistDirection = -1;
     private const float CustomGravity = 5f;
-    private const int FireRate = 33;
+    private const int FireRate = 43;
     private const int CancelDeployThreshold = 500;
     private const int SyncRate = 300;
 

@@ -1,15 +1,16 @@
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 
 namespace ChensGradiusMod.NPCs
 {
   public class Rush : GradiusEnemy
   {
-    private const float VerticalSpeed = 4f;
-    private const float HorizontalSpeed = 7f;
-    private const int FireRate = 43;
-    private const float AttackDistance = 800f;
+    private const float VerticalSpeed = 1f;
+    private const float HorizontalSpeed = 4f;
+    private const int FireRate = 30;
+    private const float AttackDistance = 700f;
     private const int CanGoHorizontalTime = 60;
 
     private readonly bool[] frameSwitcher = new bool[2] { true, true };
@@ -124,6 +125,16 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Rush";
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      
+    }
 
     protected override int FrameSpeed { get; set; } = 3;
 
