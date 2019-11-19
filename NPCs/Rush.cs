@@ -20,6 +20,7 @@ namespace ChensGradiusMod.NPCs
     private int yDirection = 0;
     private bool initialized = false;
     private States mode = States.Vertical;
+    private States oldMode = States.Vertical;
     private int fireTick = 0;
     private int canGoHorizontalTick = 0;
 
@@ -81,6 +82,12 @@ namespace ChensGradiusMod.NPCs
       }
 
       PerformAttack();
+
+      if (oldMode != mode)
+      {
+        oldMode = mode;
+        npc.netUpdate = true;
+      }
     }
 
     public override void FindFrame(int frameHeight)
@@ -128,12 +135,14 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
-
+      writer.Write((byte)mode);
+      writer.Write((byte)oldMode);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-      
+      mode = (States)reader.ReadByte();
+      oldMode = (States)reader.ReadByte();
     }
 
     protected override int FrameSpeed { get; set; } = 3;

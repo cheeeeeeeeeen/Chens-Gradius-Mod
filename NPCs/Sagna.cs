@@ -97,8 +97,6 @@ namespace ChensGradiusMod.NPCs
       MoveHorizontally();
       MoveVertically();
       if (mode != States.Spray) AdjustMovementBehavior();
-
-
     }
 
     public override void PostAI()

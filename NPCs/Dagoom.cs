@@ -15,13 +15,15 @@ namespace ChensGradiusMod.NPCs
     private const int RedeployRate = 300;
     private const int DeployRate = 15;
     private const float DetectionRange = 700;
+    private const int SyncRate = 300;
 
     private bool initialized = false;
     private int yDirection = 0;
     private int redeployTick = 0;
     private int deployTick = 0;
     private int rushCount = 0;
-
+    private int syncTick = 0;
+    private States oldMode = States.Standby;
     private States mode = States.Standby;
 
     public enum States { Standby, Open, Deploy, Close };
@@ -99,13 +101,20 @@ namespace ChensGradiusMod.NPCs
           {
             deployTick = 0;
             SpawnRush();
-            if (++rushCount >= TotalRushCount)
-            {
-              rushCount = 0;
-              mode = States.Close;
-            }
           }
           break;
+      }
+
+      ConstantSync(ref syncTick, SyncRate);
+    }
+
+    public override void PostAI()
+    {
+      base.PostAI();
+      if (!ConstantSync(ref syncTick, SyncRate) && oldMode != mode)
+      {
+        npc.netUpdate = true;
+        oldMode = mode;
       }
     }
 
@@ -131,11 +140,15 @@ namespace ChensGradiusMod.NPCs
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write(yDirection);
+      writer.Write((byte)mode);
+      writer.Write((byte)oldMode);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
       yDirection = reader.ReadSByte();
+      mode = (States)reader.ReadByte();
+      oldMode = (States)reader.ReadByte();
     }
 
     protected override Types EnemyType => Types.Large;
@@ -172,6 +185,12 @@ namespace ChensGradiusMod.NPCs
         int xDirection = Math.Sign(Target.Center.X - npc.Center.X);
         GradiusHelper.NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
                              ai0: xDirection, ai1: -yDirection, ai3: npc.target);
+        
+        if (++rushCount >= TotalRushCount)
+        {
+          rushCount = 0;
+          mode = States.Close;
+        }
       }
     }
   }

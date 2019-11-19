@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -18,6 +19,7 @@ namespace ChensGradiusMod.NPCs
 
     private bool targetDetermined = false;
     private int persistDirection = 0;
+    private States oldMode = States.Attack;
     private States mode = States.Attack;
     private bool initializedAction = false;
     private int fireTick = 0;
@@ -103,6 +105,12 @@ namespace ChensGradiusMod.NPCs
           }
           break;
       }
+
+      if (oldMode != mode)
+      {
+        npc.netUpdate = true;
+        oldMode = mode;
+      }
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -111,6 +119,18 @@ namespace ChensGradiusMod.NPCs
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Zalk";
+
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write((byte)mode);
+      writer.Write((byte)oldMode);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      mode = (States)reader.ReadByte();
+      oldMode = (States)reader.ReadByte();
+    }
 
     protected override int FrameSpeed { get; set; } = 3;
 
