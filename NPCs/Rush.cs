@@ -7,8 +7,8 @@ namespace ChensGradiusMod.NPCs
 {
   public class Rush : GradiusEnemy
   {
-    private const float VerticalSpeed = 1f;
-    private const float HorizontalSpeed = 4f;
+    private const float VerticalSpeed = 3f;
+    private const float HorizontalSpeed = 6f;
     private const int FireRate = 30;
     private const float AttackDistance = 700f;
     private const int CanGoHorizontalTime = 60;
@@ -36,8 +36,8 @@ namespace ChensGradiusMod.NPCs
     {
       base.SetDefaults();
 
-      npc.width = 32;
-      npc.height = 34;
+      npc.width = 28;
+      npc.height = 28;
       npc.damage = 100;
       npc.lifeMax = 150;
       npc.value = 0f;

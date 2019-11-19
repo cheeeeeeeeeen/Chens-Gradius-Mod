@@ -31,15 +31,15 @@ namespace ChensGradiusMod.NPCs
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Dagoom");
-      Main.npcFrameCount[npc.type] = 4;
+      Main.npcFrameCount[npc.type] = 8;
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
 
-      npc.width = 64;
-      npc.height = 56;
+      npc.width = 60;
+      npc.height = 50;
       npc.damage = 100;
       npc.lifeMax = 50;
       npc.value = 4000;
@@ -65,12 +65,17 @@ namespace ChensGradiusMod.NPCs
         initialized = true;
         if (yDirection == 0)
         {
-          yDirection = DecideYDeploy(npc.height * .5f, CancelDeployThreshold);
+          yDirection = DecideYDeploy(npc.height * .3f, CancelDeployThreshold);
           if (yDirection == 0)
           {
             npc.active = false;
             npc.life = 0;
             return false;
+          }
+          else if (yDirection < 0)
+          {
+            npc.frame.Y = 224;
+            FrameCounter = 4;
           }
         }
       }
@@ -122,13 +127,19 @@ namespace ChensGradiusMod.NPCs
     {
       if (++FrameTick >= FrameSpeed)
       {
+        int limit;
+
         switch (mode)
         {
           case States.Open:
-            if (++FrameCounter >= Main.npcFrameCount[npc.type] - 1) mode = States.Deploy;
+            if (yDirection > 0) limit = 4;
+            else limit = Main.npcFrameCount[npc.type];
+            if (++FrameCounter >= limit - 1) mode = States.Deploy;
             break;
           case States.Close:
-            if (--FrameCounter <= 0) mode = States.Standby;
+            if (yDirection > 0) limit = 0;
+            else limit = 4;
+            if (--FrameCounter <= limit) mode = States.Standby;
             break;
         }
 
@@ -184,7 +195,8 @@ namespace ChensGradiusMod.NPCs
         npc.TargetClosest(false);
         int xDirection = Math.Sign(Target.Center.X - npc.Center.X);
         GradiusHelper.NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
-                             ai0: xDirection, ai1: -yDirection, ai3: npc.target);
+                             ai0: xDirection, ai1: -yDirection, ai3: npc.target,
+                             center: true);
         
         if (++rushCount >= TotalRushCount)
         {
