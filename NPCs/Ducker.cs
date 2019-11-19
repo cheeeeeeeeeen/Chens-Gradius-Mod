@@ -12,11 +12,11 @@ namespace ChensGradiusMod.NPCs
   {
     private const float CustomGravity = 8f;
     private const int CancelThreshold = 500;
-    private const float AttackAngleDifference = 13f;
+    private const float AttackAngleDifference = 7f;
     private const float RunSpeed = 4f;
     private const float FallSpeedYAccel = .5f;
     private const float FallSpeedXAccel = .1f;
-    private const float TargetDistance = 500f;
+    private const float TargetDistance = 800f;
     private const int SyncRate = 30;
 
     private States mode = States.Run;
@@ -263,7 +263,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      return GradiusHelper.NPCSpawnRate("Sagna", spawnInfo);
+      return Sagna.SpawnCondition(spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Ducker";

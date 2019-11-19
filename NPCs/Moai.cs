@@ -42,7 +42,6 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 0;
       npc.behindTiles = true;
-      ImmuneToBuffs();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -84,7 +83,7 @@ namespace ChensGradiusMod.NPCs
           {
             attackTick = 0;
             PerformAttack();
-            if (++currentProjNumber >= ProjectileNumber())
+            if (++currentProjNumber >= ProjectileNumber)
             {
               currentProjNumber = 0;
               mode = (int)States.Vulnerable;
@@ -152,12 +151,6 @@ namespace ChensGradiusMod.NPCs
 
       return false;
     }
-
-    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
-
-    public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
-      => ReduceDamage(ref damage, ref knockback, ref crit);
 
     public override void SendExtraAI(BinaryWriter writer)
     {
@@ -248,13 +241,16 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    private int ProjectileNumber()
+    private int ProjectileNumber
     {
-      int projNumber = 1;
-      if (Main.expertMode) projNumber += 1;
-      if (Main.hardMode) projNumber += 1;
+      get
+      {
+        int projNumber = 1;
+        if (Main.expertMode) projNumber += 1;
+        if (Main.hardMode) projNumber += 1;
 
-      return projNumber;
+        return projNumber;
+      }
     }
 
     private void PerformAttack()

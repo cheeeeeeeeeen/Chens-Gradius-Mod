@@ -18,19 +18,22 @@ namespace ChensGradiusMod.NPCs
     {
       npc.friendly = false;
 
-      switch (EnemyType)
+      switch ((sbyte)EnemyType)
       {
-        case Types.Small:
+        case (sbyte)Types.Small:
           npc.HitSound = SoundID.NPCHit4;
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death");
           break;
-        case Types.Large:
+        case (sbyte)Types.Large:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
-          break;
-        case Types.Boss:
+          goto case -1;
+        case (sbyte)Types.Boss:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreHit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BossDeath");
+          goto case -1;
+        case -1:
+          ImmuneToBuffs();
           break;
       }
 
@@ -48,16 +51,20 @@ namespace ChensGradiusMod.NPCs
                             mod.GetGoreSlot("Gores/GradiusExplode"));
         if (Main.expertMode)
         {
-          switch (EnemyType)
+          if (RetaliationOverride == null)
           {
-            case Types.Small:
-            case Types.Large:
-              RetaliationSpread(npc.Center);
-              break;
-            case Types.Boss:
-              RetaliationExplode(npc.Center);
-              break;
+            switch (EnemyType)
+            {
+              case Types.Small:
+              case Types.Large:
+                RetaliationSpread(npc.Center);
+                break;
+              case Types.Boss:
+                RetaliationExplode(npc.Center);
+                break;
+            }
           }
+          else RetaliationOverride(npc.Center);
         }
       }
     }
@@ -92,6 +99,18 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
+    public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback,
+                                               ref bool crit, ref int hitDirection)
+    {
+      ReduceDamage(ref damage, ref knockback, ref crit);
+    }
+
+    public override void ModifyHitByItem(Player player, Item item, ref int damage,
+                                         ref float knockback, ref bool crit)
+    {
+      ReduceDamage(ref damage, ref knockback, ref crit);
+    }
+
     protected virtual int FrameTick { get; set; } = 0;
 
     protected virtual int FrameSpeed { get; set; } = 0;
@@ -114,17 +133,12 @@ namespace ChensGradiusMod.NPCs
 
     protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
 
+    protected virtual Action<Vector2> RetaliationOverride => null;
+
     //protected virtual Rectangle[] InvulnerableHitboxes
     //{
     //  get { return new Rectangle[0]; }
     //}
-
-    protected void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
-    {
-      damage = GradiusHelper.RoundOffToWhole(damage * IncomingDamageMultiplier);
-      crit = false;
-      knockback = 0f;
-    }
 
     protected void ImmuneToBuffs()
     {
@@ -281,6 +295,19 @@ namespace ChensGradiusMod.NPCs
       }
 
       return false;
+    }
+
+    private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
+    {
+      switch (EnemyType)
+      {
+        case Types.Boss:
+        case Types.Large:
+          damage = GradiusHelper.RoundOffToWhole(damage * IncomingDamageMultiplier);
+          crit = false;
+          knockback = 0f;
+          break;
+      }
     }
   }
 }

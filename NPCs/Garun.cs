@@ -22,6 +22,27 @@ namespace ChensGradiusMod.NPCs
     private int fireTick = 0;
     private int syncTick = 0;
 
+    public static void PerformAttack(NPC npc, ref int fireTick, int fireRate = FireRate,
+                                     float atkDistance = AttackDistance)
+    {
+      if (GradiusHelper.IsNotMultiplayerClient() &&
+          Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= atkDistance)
+      {
+        if ((npc.direction >= 0 && npc.Center.X >= Main.player[npc.target].Center.X) ||
+           (npc.direction <= 0 && npc.Center.X <= Main.player[npc.target].Center.X))
+        {
+          if (++fireTick >= fireRate)
+          {
+            fireTick = 0;
+            Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
+            Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                     GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+          }
+        }
+        else fireTick = 0;
+      }
+    }
+
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Garun");
@@ -63,7 +84,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-      npc.spriteDirection = npc.direction = -persistDirection;
+      npc.spriteDirection = npc.direction = persistDirection;
 
       float xTo = (float)Math.Cos(GetDirection());
       float yTo = (float)Math.Sin(GetDirection());
@@ -71,7 +92,7 @@ namespace ChensGradiusMod.NPCs
       npc.velocity.X += xTo * TravelSpeed - yTo * wobble;
       npc.velocity.Y += -yTo * TravelSpeed + xTo * wobble;
 
-      PerformAttack();
+      PerformAttack(npc, ref fireTick);
 
       ConstantSync(ref syncTick, SyncRate);
     }
@@ -107,30 +128,10 @@ namespace ChensGradiusMod.NPCs
     {
       float degreeAngle;
 
-      if (npc.direction > 0) degreeAngle = 180f;
+      if (npc.direction < 0) degreeAngle = 180f;
       else degreeAngle = 0f;
 
       return MathHelper.ToRadians(degreeAngle);
-    }
-
-    private void PerformAttack()
-    {
-      if (GradiusHelper.IsNotMultiplayerClient() &&
-          Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= AttackDistance)
-      {
-        if ((npc.direction >= 0 && npc.Center.X <= Main.player[npc.target].Center.X) ||
-           (npc.direction <= 0 && npc.Center.X >= Main.player[npc.target].Center.X))
-        {
-          if (++fireTick >= FireRate)
-          {
-            fireTick = 0;
-            Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
-            Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                     GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
-          }
-        }
-        else fireTick = 0;
-      }
     }
   }
 }
