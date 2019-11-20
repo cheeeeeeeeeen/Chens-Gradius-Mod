@@ -49,7 +49,10 @@ namespace ChensGradiusMod
       new AlienProjectile("CalamityMod", "TinyCrystal"), new AlienProjectile("CalamityMod", "Needler"),
       new AlienProjectile("CalamityMod", "SpatialSpear2"), new AlienProjectile("CalamityMod", "SpatialSpear4"),
       new AlienProjectile("CalamityMod", "SpatialSpear3"), new AlienProjectile("CalamityMod", "Celestus2"),
-      new AlienProjectile("CalamityMod", "Brimblade2"),
+      new AlienProjectile("CalamityMod", "Brimblade2"), new AlienProjectile("CalamityMod", "IceBombFriendly"),
+      new AlienProjectile("CalamityMod", "HolyExplosionSupreme"), new AlienProjectile("CalamityMod", "PlagueBee"),
+      new AlienProjectile("CalamityMod", "ShatteredExplosion"), new AlienProjectile("CalamityMod", "ShatteredSun2"),
+      new AlienProjectile("CalamityMod", "ShatteredSun3"),
 
       new AlienProjectile("Bluemagic", "PuriumArrowTrail"),
 
@@ -84,7 +87,7 @@ namespace ChensGradiusMod
       new AlienProjectile("ThoriumMod", "SuperPlasmaCannonPro00"), new AlienProjectile("ThoriumMod", "ShadowPurgeCaltropPro2"),
       new AlienProjectile("ThoriumMod", "OmniArrow3"), new AlienProjectile("ThoriumMod", "AncientFireExplosion"),
       new AlienProjectile("ThoriumMod", "BudBombPro2"), new AlienProjectile("ThoriumMod", "BudBombPro3"),
-      new AlienProjectile("ThoriumMod", "PharaohsSlabPro2"),
+      new AlienProjectile("ThoriumMod", "PharaohsSlabPro2"), new AlienProjectile("ThoriumMod", "HarbingerAfterimage"),
 
       new AlienProjectile("SpiritMod", "FieryAura"), new AlienProjectile("SpiritMod", "DuskAura"),
       new AlienProjectile("SpiritMod", "FireBolt"), new AlienProjectile("SpiritMod", "GeodeStaveProjectile"),
@@ -105,7 +108,8 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "StarTrail1"),  new AlienProjectile("SpiritMod", "GraniteShard1"),
       new AlienProjectile("SpiritMod", "CoilMine"), new AlienProjectile("SpiritMod", "AbyssalSludge"),
       new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather"),
-      new AlienProjectile("SpiritMod", "AmberSlasher"), new AlienProjectile("SpiritMod", "QuicksilverBolt")
+      new AlienProjectile("SpiritMod", "AmberSlasher"), new AlienProjectile("SpiritMod", "QuicksilverBolt"),
+      new AlienProjectile("SpiritMod", "FrostRune")
     };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()

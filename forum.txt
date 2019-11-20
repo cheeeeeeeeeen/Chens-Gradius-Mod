@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
-[B][U][SIZE=6]Mod Version: 0.9.4.2
+[B][U][SIZE=6]Mod Version: 0.9.6
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -176,6 +176,16 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]They have the same spawn parameters as Sagna.
 [*][SPOILER="Ducker Showcase"][IMG]https://lh3.googleusercontent.com/3kwDTuHR-qkbIEUc6DZsjlBxct-3r1bgUog5mXwMt85AGEwViDnR6dWsKi_tSEd1FsLhFqC83X86mAfxKosJBkUdx82SJ4GXBgOEMC6UOH1OPVWwkBX8b78jsZQnOd7DFnzqkCmrCoHqMRs1juZEC81Mx2jtlCoVq7sf_AR_-ujp6sbveMbnxtfUmvPq_3yS2MAb0gx6WxS5AjZtrBF8n2-W28RjCkRfUMjJof5dyvmkgZXmfEjmh9PASS2CZtbeeu8RSxWtC3DpKiGQMS8t6pgvKQy7pqNjd23AxADjhJqAy0aK4_tzoO7WK8my0TJEP_Lxpuh2GwWQ0eNIdGRYyUODDhYhTsQ0knF1yweqfKR81C8qU8I1Ts6fPSTpNS-UdteASo2IkE-H64_hU1LpaLiSVkyQ3ZVh3a7GhJVx9r34nrkLvxD1H-3sM3Sn5T9MteGEjqCtWP691zcOJjxz_FZLIOAR9RNSzKMx-ijCaAZRfdO2Nx2VDyxZOP7onRtTvHgthCtOD20_72tWyFQouwBPZvyNvA6OaRuO9TGhkjxIH_-mx9Ah5PoN3C-7lUAkYBsadx-XeCxT0Q4smYu0yRRoeQ9xf092dG92NCYMV3GM1DIteQXvlvFAPikx_xphX1kCj1yMWCDTFjDBcH_zp0bkqHPYtJ6I52nn0zW-_2J5MVuv1_GmplCwANXK1Iw6VG1g1HoNme3HRPSz-gEwyUUPsdY8anNJfxyxbT3KbRtH3k8Z=w777-h398-no[/IMG][/SPOILER]
 [/LIST]
+[*]Dagoom & Rush
+[LIST]
+[*]For reference: [URL='https://gradius.fandom.com/wiki/Hatches']Hatches[/URL], [URL='https://gradius.fandom.com/wiki/Rush']Rush[/URL]
+[*]Pretty common enemies from the Gradius series, but in different names and variations.
+[*]Dagoom are hatches or hangars for Bacterion fighters.
+[*]Rush is one such fighter that can be deployed from it.
+[*]Dagoom has an upside down version of itself.
+[*]Dagoom spawns anywhere, and Rush only spawns from Dagoom.
+[*][SPOILER="Dagoom & Rush Showcase"][IMG]https://lh3.googleusercontent.com/wBd4_nHMj0VJ0wbkXkzKoZz35r12Vbn7p6nI3gxh_ZpU6WwT7804ApmvoNNcWRYk75dw3kwlk7wryhszGVGy3of0f1NPb3Ktm4taZfBThcXmctDTi9KNubNcA-6MrcmNaYOOxFIU7zbDKOJ_PEVQlw-hMwoQ4Au5BJRk7qg_aYtnUtGuYBS8A6-BFalJxjufegMY0Cd6laYBKrfwbCNy_zCmIWKjexIGDiWSABpBAmvmtI1qMsFYY75n-baOOWju-owMbDx6aCD6GVULHe5KgR9UnfQk8Qvp0FcxK9FJCNFFoRbWsFRAorwVriTXlbl365j6m1MBo4E-Py_msKcgPqTgjxJehFG-e4QnDJXNXPBgmCZRdZ307aATXj1OBeymHz9_WMZxdxAnbdTP_fUUe_Di6U26XURqVe934A-Q7u8AgYt1-cEAEt7t2KLqcT2Y4c7HFIv10XF7znDaCI9e65ZxxXHWDJQ6SrgVpaSyG6eUrhXLLigG5U9V6qxpuYEUEBNDYtXS5UWpNRu4Bw5NOtH8gsIYWfD0Jme5YbWnMTggzE0GkTVe9aZG1MiOkejwfkFh6spkNLXEhViMdokR2_8ElgzpKXNvqAsv2Po1-aXrKIZ83Nwic6ZY2C3nsgY8LoqUfC6ZzIAeG8Xpo8oJ8JBd0ZPUgqqLp1RORgAs0r_NM9hbZcJVD9eIyz6MgjGO8h9jLD7quBsWGDolrbTB1X_qytZNQn5lvqzo6Iq23tXBHOW6=w379-h413-no[/IMG][/SPOILER]
+[/LIST]
 [/LIST]
 
 These enemies will only [B]spawn in Hard mode[/B].
@@ -202,6 +212,20 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.9.6
+  - Implement Dagoom and Rush
+  - Optimize and generalized some codes while implementing new enemies
+  - Optimize sending of packets and minimized their sizes
+  - Improve the Ducker AI: Lower jump height and simplify behavior
+  - Increase Sagna's number of bullets when attacking
+  - Increase Ducker range and narrow down spread attack
+  - Increase Grazia's attack rate and range
+  - Lower spawn rate of Big Core Custom
+  - Add reforge cost and sell values to all Options
+  - Decrease Seek range of Search Options
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+
 0.9.4.2
   - Reduce damage reduction of large enemies, currently Moai and Big Core and future enemies
   - Reduce defense to 0 of large enemies

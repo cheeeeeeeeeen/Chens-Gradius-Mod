@@ -37,7 +37,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 80;
       npc.height = 122;
       npc.damage = 100;
-      npc.lifeMax = 15;
+      npc.lifeMax = 20;
       npc.value = 4000;
       npc.knockBackResist = 0f;
       npc.defense = 0;

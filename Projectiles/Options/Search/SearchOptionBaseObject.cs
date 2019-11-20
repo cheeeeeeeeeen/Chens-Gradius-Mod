@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
   public abstract class SearchOptionBaseObject : OptionBaseObject
   {
     private const int FireRate = 2;
-    private const float SeekDistance = 700f;
+    private const float SeekDistance = 650f;
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
