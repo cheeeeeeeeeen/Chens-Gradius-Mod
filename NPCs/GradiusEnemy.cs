@@ -250,8 +250,8 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    protected sbyte DecideYDeploy2(float yLength, int checkLimit, sbyte direction,
-                                   bool moveNpc = true)
+    protected sbyte DecideYDeploy(float yLength, int checkLimit, sbyte direction,
+                                  bool moveNpc = true)
     {
       Vector2 savedP = npc.position,
               movedV = new Vector2(0, yLength * direction),
@@ -273,46 +273,6 @@ namespace ChensGradiusMod.NPCs
       return 0;
     }
 
-    protected sbyte DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
-                                  bool forceSpawn = false, sbyte fallbackValue = 0)
-    {
-      Vector2 savedPosition = npc.position,
-              upwardV = new Vector2(0, -yLength),
-              downwardV = new Vector2(0, yLength),
-              upwardP = npc.position,
-              downwardP = npc.position,
-              velocityOnCollide;
-
-      for (int i = 0; i < checkLimit; i++)
-      {
-        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
-        if (downwardV != velocityOnCollide)
-        {
-          npc.position = moveNpc ? downwardP : savedPosition;
-          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
-          return 1;
-        }
-        else downwardP += downwardV;
-
-        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
-        if (upwardV != velocityOnCollide)
-        {
-          npc.position = moveNpc ? upwardP : savedPosition;
-          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
-          return -1;
-        }
-        else upwardP += upwardV;
-      }
-
-      if (!forceSpawn)
-      {
-        npc.friendly = true;
-        npc.active = false;
-        npc.life = 0;
-      }
-      return fallbackValue;
-    }
-
     protected bool ConstantSync(ref int tick, int rate)
     {
       if (GradiusHelper.IsServer())
@@ -326,6 +286,13 @@ namespace ChensGradiusMod.NPCs
       }
 
       return false;
+    }
+
+    protected void Deactivate()
+    {
+      npc.netUpdate = true;
+      npc.active = false;
+      npc.life = 0;
     }
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)

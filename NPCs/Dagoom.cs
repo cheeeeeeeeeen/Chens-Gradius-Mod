@@ -63,12 +63,11 @@ namespace ChensGradiusMod.NPCs
       if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
         npc.netUpdate = initialized = true;
-        yDirection = DecideYDeploy2(npc.height * .3f, CancelDeployThreshold,
-                                    (sbyte)Main.rand.NextBool().ToDirectionInt());
+        yDirection = DecideYDeploy(npc.height * .3f, CancelDeployThreshold,
+                                   (sbyte)Main.rand.NextBool().ToDirectionInt());
         if (yDirection == 0)
         {
-          npc.active = false;
-          npc.life = 0;
+          Deactivate();
           return false;
         }
         else if (yDirection < 0)
@@ -125,6 +124,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (++FrameTick >= FrameSpeed)
       {
+        FrameTick = 0;
         int limit;
 
         switch (mode)
@@ -140,10 +140,9 @@ namespace ChensGradiusMod.NPCs
             if (--FrameCounter <= limit) mode = States.Standby;
             break;
         }
-
-        npc.frame.Y = FrameCounter * frameHeight;
-        FrameTick = 0;
       }
+
+      npc.frame.Y = FrameCounter * frameHeight;
     }
 
     public override void SendExtraAI(BinaryWriter writer)
@@ -152,6 +151,7 @@ namespace ChensGradiusMod.NPCs
       writer.Write(yDirection);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
+      writer.Write(initialized);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -160,6 +160,7 @@ namespace ChensGradiusMod.NPCs
       yDirection = reader.ReadSByte();
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
+      initialized = reader.ReadBoolean();
     }
 
     protected override Types EnemyType => Types.Large;

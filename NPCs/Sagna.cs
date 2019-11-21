@@ -15,6 +15,7 @@ namespace ChensGradiusMod.NPCs
     private const float MaxYSpeed = 5f;
     private const int JumpCountForSpray = 1;
     private const int SyncRate = 60;
+    private const int UnstuckTime = 30;
 
     private bool initialized = false;
     private sbyte persistDirection = 0;
@@ -28,6 +29,7 @@ namespace ChensGradiusMod.NPCs
     private byte endFrame = 4;
     private byte maxFrame = 8;
     private int syncTick = 0;
+    private int unstuckTick = 0;
 
     public enum States { Hop, Fall, Spray };
 
@@ -70,21 +72,27 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (!initialized)
+      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
-        initialized = true;
-        npc.TargetClosest(false);
-        if (npc.Center.X > Main.player[npc.target].Center.X) persistDirection = -1;
-        else persistDirection = 1;
-        xDirection = persistDirection;
-        yDirection = DecideYDeploy(npc.height, CancelDeployThreshold, false, true, 1);
-        if (yDirection < 0)
+        npc.netUpdate = initialized = true;
+        yDirection = DecideYDeploy(npc.height * .5f, CancelDeployThreshold,
+                                   (sbyte)Main.rand.NextBool().ToDirectionInt());
+        if (yDirection == 0)
+        {
+          Deactivate();
+          return false;
+        }
+        else if (yDirection < 0)
         {
           startFrame = 8;
           endFrame = 12;
           maxFrame = (byte)Main.npcFrameCount[npc.type];
           FrameCounter = startFrame;
         }
+        npc.TargetClosest(false);
+        if (npc.Center.X > Main.player[npc.target].Center.X) persistDirection = -1;
+        else persistDirection = 1;
+        xDirection = persistDirection;
       }
 
       return initialized;
@@ -93,6 +101,16 @@ namespace ChensGradiusMod.NPCs
     public override void AI()
     {
       npc.spriteDirection = npc.direction = persistDirection;
+
+      if (npc.position == npc.oldPosition)
+      {
+        if (++unstuckTick >= UnstuckTime)
+        {
+          unstuckTick = 0;
+          xDirection = (sbyte)-xDirection;
+          mode = States.Spray;
+        }
+      }
 
       MoveHorizontally();
       MoveVertically();
@@ -152,6 +170,8 @@ namespace ChensGradiusMod.NPCs
       writer.Write(startFrame);
       writer.Write(endFrame);
       writer.Write(maxFrame);
+      writer.Write(persistDirection);
+      writer.Write(initialized);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -166,6 +186,8 @@ namespace ChensGradiusMod.NPCs
       startFrame = reader.ReadByte();
       endFrame = reader.ReadByte();
       maxFrame = reader.ReadByte();
+      persistDirection = reader.ReadSByte();
+      initialized = reader.ReadBoolean();
     }
 
     protected override float RetaliationBulletSpeed => base.RetaliationBulletSpeed * 0.9f;
@@ -213,7 +235,7 @@ namespace ChensGradiusMod.NPCs
     private void AdjustMovementBehavior()
     {
       Vector2 beforeVelocity = npc.velocity;
-      npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
+      npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height, false, false, yDirection);
 
       if (beforeVelocity.X != npc.velocity.X) xDirection = (sbyte)-xDirection;
 

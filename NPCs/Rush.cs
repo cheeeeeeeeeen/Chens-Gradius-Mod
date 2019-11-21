@@ -57,9 +57,8 @@ namespace ChensGradiusMod.NPCs
 
         if (persistDirection == 0)
         {
+          Deactivate();
           initialized = false;
-          npc.active = false;
-          npc.life = 0;
         }
         else initialized = true;
       }
