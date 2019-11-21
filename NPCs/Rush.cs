@@ -145,7 +145,7 @@ namespace ChensGradiusMod.NPCs
       oldMode = (States)reader.ReadByte();
     }
 
-    protected override int FrameSpeed { get; set; } = 3;
+    protected override int FrameSpeed => 3;
 
     protected override Types EnemyType => Types.Small;
 

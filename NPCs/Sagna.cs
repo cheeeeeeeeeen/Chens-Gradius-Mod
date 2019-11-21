@@ -142,6 +142,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write(animateDirection);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
@@ -155,6 +156,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       animateDirection = reader.ReadSByte();
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
@@ -172,7 +174,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override float RetaliationSpreadAngleDifference => 180f;
 
-    protected override int FrameSpeed { get; set; } = 6;
+    protected override int FrameSpeed => 6;
 
     private void MoveHorizontally()
     {

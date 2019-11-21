@@ -252,6 +252,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
       writer.Write(persistDirection);
@@ -263,6 +264,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
       persistDirection = reader.ReadSByte();
@@ -272,7 +274,7 @@ namespace ChensGradiusMod.NPCs
       numJumps = reader.ReadByte();
     }
 
-    protected override int FrameSpeed { get; set; } = 5;
+    protected override int FrameSpeed => 5;
 
     protected override int FrameCounter { get; set; } = 6;
 

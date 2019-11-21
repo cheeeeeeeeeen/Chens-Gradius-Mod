@@ -143,6 +143,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write((byte)mode);
       writer.Write(npc.target);
       writer.Write(regularAssaultDirection);
@@ -151,6 +152,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       mode = (States)reader.ReadByte();
       npc.target = reader.ReadInt32();
       regularAssaultDirection = reader.ReadSByte();
@@ -159,7 +161,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override Types EnemyType => Types.Boss;
 
-    protected override int FrameSpeed { get; set; } = 30;
+    protected override int FrameSpeed => 30;
 
     protected override float RetaliationBulletSpeed => 12;
 

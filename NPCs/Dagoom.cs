@@ -18,7 +18,7 @@ namespace ChensGradiusMod.NPCs
     private const int SyncRate = 300;
 
     private bool initialized = false;
-    private int yDirection = 0;
+    private sbyte yDirection = 0;
     private int redeployTick = 0;
     private int deployTick = 0;
     private int rushCount = 0;
@@ -60,23 +60,21 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (!initialized)
+      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
-        initialized = true;
+        npc.netUpdate = initialized = true;
+        yDirection = DecideYDeploy2(npc.height * .3f, CancelDeployThreshold,
+                                    (sbyte)Main.rand.NextBool().ToDirectionInt());
         if (yDirection == 0)
         {
-          yDirection = DecideYDeploy(npc.height * .3f, CancelDeployThreshold);
-          if (yDirection == 0)
-          {
-            npc.active = false;
-            npc.life = 0;
-            return false;
-          }
-          else if (yDirection < 0)
-          {
-            npc.frame.Y = 224;
-            FrameCounter = 4;
-          }
+          npc.active = false;
+          npc.life = 0;
+          return false;
+        }
+        else if (yDirection < 0)
+        {
+          npc.frame.Y = 224;
+          FrameCounter = 4;
         }
       }
 
@@ -150,6 +148,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write(yDirection);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
@@ -157,6 +156,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       yDirection = reader.ReadSByte();
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
@@ -164,7 +164,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override Types EnemyType => Types.Large;
 
-    protected override int FrameSpeed { get; set; } = 9;
+    protected override int FrameSpeed => 9;
 
     protected override Action<Vector2> RetaliationOverride => RetaliationExplode;
 

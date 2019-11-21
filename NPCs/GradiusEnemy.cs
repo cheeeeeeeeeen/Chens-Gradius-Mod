@@ -2,6 +2,7 @@
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -111,9 +112,21 @@ namespace ChensGradiusMod.NPCs
       ReduceDamage(ref damage, ref knockback, ref crit);
     }
 
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write((byte)FrameTick);
+      writer.Write((byte)FrameCounter);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      FrameTick = reader.ReadByte();
+      FrameCounter = reader.ReadByte();
+    }
+
     protected virtual int FrameTick { get; set; } = 0;
 
-    protected virtual int FrameSpeed { get; set; } = 0;
+    protected virtual int FrameSpeed => 0;
 
     protected virtual int FrameCounter { get; set; } = 0;
 
@@ -134,11 +147,6 @@ namespace ChensGradiusMod.NPCs
     protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
 
     protected virtual Action<Vector2> RetaliationOverride => null;
-
-    //protected virtual Rectangle[] InvulnerableHitboxes
-    //{
-    //  get { return new Rectangle[0]; }
-    //}
 
     protected void ImmuneToBuffs()
     {
@@ -240,6 +248,29 @@ namespace ChensGradiusMod.NPCs
           else currentVelocity -= RetaliationExplodeBulletAcceleration;
         }
       }
+    }
+
+    protected sbyte DecideYDeploy2(float yLength, int checkLimit, sbyte direction,
+                                   bool moveNpc = true)
+    {
+      Vector2 savedP = npc.position,
+              movedV = new Vector2(0, yLength * direction),
+              movedP = savedP,
+              vOnCollide;
+
+      for (int i = 0; i < checkLimit; i++)
+      {
+        vOnCollide = Collision.TileCollision(movedP, movedV, npc.width, npc.height);
+        if (movedV != vOnCollide)
+        {
+          npc.position = moveNpc ? movedP : savedP;
+          npc.velocity = moveNpc ? vOnCollide : Vector2.Zero;
+          return direction;
+        }
+        else movedP += movedV;
+      }
+
+      return 0;
     }
 
     protected sbyte DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
