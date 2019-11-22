@@ -141,17 +141,24 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
+        int chosenYDir = Main.rand.NextBool().ToDirectionInt();
+        Vector2 spawnPos = npc.position;
+
         npc.netUpdate = initialized = true;
-        npc.TargetClosest(false);
-        if (persistDirection == 0) FaceTarget(Target.Center);
-        yDirection = DecideYDeploy(npc.height * .5f, CancelThreshold,
-                                   (sbyte)Main.rand.NextBool().ToDirectionInt());
-        if (yDirection == 0)
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .5f,
+                            CancelThreshold, DecideYDeploy);
+        if (yDirection == 0 &&
+            !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, -chosenYDir,
+                                 npc.height * .3f, CancelThreshold, DecideYDeploy))
         {
           Deactivate();
           return false;
         }
+
+        npc.TargetClosest(false);
+        if (persistDirection == 0) FaceTarget(Target.Center);
       }
+
       return initialized;
     }
 

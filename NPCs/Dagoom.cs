@@ -28,6 +28,16 @@ namespace ChensGradiusMod.NPCs
 
     public enum States { Standby, Open, Deploy, Close };
 
+    public static bool GroundDeploy(NPC npc, ref sbyte yDirection, Vector2 spawnPos,
+                                    int chosenYDir, float yLength, int cancelDeployThreshold,
+                                    Func<float, int, sbyte, bool, sbyte> DecideYDeploy)
+    {
+      npc.position = spawnPos;
+      yDirection = DecideYDeploy(yLength, cancelDeployThreshold, (sbyte)chosenYDir, true);
+
+      return yDirection != 0;
+    }
+
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Dagoom");
@@ -62,19 +72,20 @@ namespace ChensGradiusMod.NPCs
     {
       if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
+        int chosenYDir = Main.rand.NextBool().ToDirectionInt();
+        Vector2 spawnPos = npc.position;
+
         npc.netUpdate = initialized = true;
-        yDirection = DecideYDeploy(npc.height * .3f, CancelDeployThreshold,
-                                   (sbyte)Main.rand.NextBool().ToDirectionInt());
-        if (yDirection == 0)
+        GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .3f,
+                     CancelDeployThreshold, DecideYDeploy);
+        if (yDirection == 0 &&
+            !GroundDeploy(npc, ref yDirection, spawnPos, -chosenYDir, npc.height * .3f,
+                          CancelDeployThreshold, DecideYDeploy))
         {
           Deactivate();
           return false;
         }
-        else if (yDirection < 0)
-        {
-          npc.frame.Y = 224;
-          FrameCounter = 4;
-        }
+        else if (yDirection < 0) FrameCounter = 4;
       }
 
       return initialized;
