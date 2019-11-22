@@ -26,7 +26,7 @@ namespace ChensGradiusMod.NPCs
     private States mode = States.RegularAssault;
     private int fireTick = 0;
     private int existenceTick = 0;
-    private int frameCounterX = 7;
+    private byte frameCounterX = 7;
     private int syncTick = 0;
 
     private float regularAssaultXCurrentSpeed = 0f;
@@ -49,7 +49,7 @@ namespace ChensGradiusMod.NPCs
       npc.width = 188;
       npc.height = 124;
       npc.damage = 200;
-      npc.lifeMax = 1900;
+      npc.lifeMax = 2900;
       npc.value = 20000f;
       npc.knockBackResist = 0f;
       npc.defense = 0;
@@ -152,6 +152,8 @@ namespace ChensGradiusMod.NPCs
       writer.Write(npc.target);
       writer.Write(regularAssaultDirection);
       writer.Write(regularAssaultYCurrentSpeed);
+      writer.Write(frameCounterX);
+      writer.Write(openCore);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -161,6 +163,8 @@ namespace ChensGradiusMod.NPCs
       npc.target = reader.ReadInt32();
       regularAssaultDirection = reader.ReadSByte();
       regularAssaultYCurrentSpeed = reader.ReadSingle();
+      frameCounterX = reader.ReadByte();
+      openCore = reader.ReadBoolean();
     }
 
     protected override Types EnemyType => Types.Boss;

@@ -34,6 +34,9 @@ namespace ChensGradiusMod
         AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Tabidachi"),
                     ModContent.ItemType<TabidachiMusicBox>(),
                     ModContent.TileType<TabidachiMusicBoxTile>());
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Intermezzo"),
+                    ModContent.ItemType<IntermezzoMusicBox>(),
+                    ModContent.TileType<IntermezzoMusicBoxTile>());
       }
 
       //Mod achievementLib = ModLoader.GetMod("AchievementLib");

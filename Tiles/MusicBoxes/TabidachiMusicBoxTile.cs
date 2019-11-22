@@ -6,7 +6,7 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
 {
   public class TabidachiMusicBoxTile : GradiusMusicBoxTile
   {
-    protected override Color MinimapColor => new Color(200, 200, 200);
+    protected override Color MinimapColor => new Color(50, 50, 50);
 
     protected override string MusicName => "Tabidachi";
 
