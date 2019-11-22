@@ -1,6 +1,6 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
-[ATTACH type="full" alt="ChensGradiusModBannerCropped.png"]228045[/ATTACH]
+[IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
 [B][U][SIZE=6]Mod Version: 0.9.6
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
@@ -22,10 +22,10 @@ If you want to help making sprites for this mod, then you are welcome to join us
 [*]Deploy one, and the Option drone will copy some of your projectiles.
 [*]It is an accessory in the game, for now.
 [*]The accessories can be combined.
-[*][SPOILER="Movement Showcase"][ATTACH type="full" width="283px" alt="Normal_Option_Movement_v2.gif"]227873[/ATTACH]
+[*][SPOILER="Movement Showcase"][IMG]https://i.imgur.com/yGLYa6H.gif[/IMG]
 It follows your movement pathing!
 [/SPOILER]
-[*][SPOILER="Attack Pattern Showcase"][ATTACH type="full" width="481px" alt="Option_Projectiles.gif"]227874[/ATTACH]
+[*][SPOILER="Attack Pattern Showcase"][IMG]https://i.imgur.com/7Bvm7s4.gif[/IMG]
 It copies your projectiles!
 [/SPOILER]
 [/LIST]
@@ -43,7 +43,7 @@ It copies your projectiles!
 [*]Functions the same as the normal one, except it has an added action.
 [*]Hold The Option Action hotkey, and these options will behave differently.
 [*]Allow your options to be more controllable.
-[*][SPOILER="Freeze Showcase"][ATTACH type="full" width="240px" alt="Freeze_Option.gif"]227876[/ATTACH]
+[*][SPOILER="Freeze Showcase"][IMG]https://i.imgur.com/W9Tfm7S.gif[/IMG]
 While hotkey is held down, their positions are paused even if you're moving!
 [/SPOILER]
 [/LIST]
@@ -53,7 +53,7 @@ While hotkey is held down, their positions are paused even if you're moving!
 [*]Implementation is inspired from Gradius V.
 [*]Hold The Option Action hotkey, and these options will revolve around the owner.
 [*]Switchable rotation directions by toggling the hotkey again.
-[*][SPOILER="Rotate Showcase"][ATTACH type="full" width="271px" alt="Rotate_Option.gif"]227877[/ATTACH]
+[*][SPOILER="Rotate Showcase"][IMG]https://i.imgur.com/x6FMwgI.gif[/IMG]
 Hold hotkey to let them revolve around you! Rotation direction can be toggled by pressing the hotkey again.
 [/SPOILER]
 [/LIST]
@@ -71,7 +71,7 @@ Hold hotkey to let them revolve around you! Rotation direction can be toggled by
 [*]Their attacks are based on the ammos found in the Ammo slots.
 [*]They can only copy Bullets and Arrows.
 [*]They can be upgraded to regular options!
-[*][SPOILER="Option Seed Showcase"][IMG]https://lh3.googleusercontent.com/yLkArMyJRvi-nceGbstxUTff-0ArFzCcFIa-3a8r-P5asMZ_VTH1OP7Tn9Y6y3w4m8lgNHHF5qsDaDherEg0IUsXvlrwOtKABrfojL5PD1OmXC5D59C8lolTyizEsTL-UkNRfqH6WiP0S2M_yo7MxLbQUpA1hsUu3ybtvkXHqvRDj26cBmhi5FT599ek-krub1heu477UJUBbgZcFgUVz2fsVjWA6k6sD36FH9Y1sjKMslf8wKxoEMslQiWgBJgpoLtirk4sdWy1vdY3GwUVJRKZhw8_N0wXQ9wpuEZ4-PL9h6rk737KsRUBew60Y2H-0jSXXDcvK7MTEQDXP2Tbb0UbwA9FeqyiO9MozVtPeadUBaPBU86sBFD5AHkOXBw4XPvCBxLzPKkErT_zbd9hWw1GN2OxkMW0sgEwDgWxc6UW6tyhU8aLnY8OwT-W3nFRNBY3TKwHbWyM3UM15_7qB736UpRspZhT_MtDEGo_k76tuDOnqFIyjrVzIXrjZDC8hFT33iUlyKkxcFvIpUjCc75ZUQQqhpSwSUUQYitzhEUpXLo2dlhGDbTy5hMEy-swrb56rWI8VkzqnizXz-YZO1OfhT8L0Q8BVFj4NWb8y7NdObppcC-iEQPp8oh9uKZxoll7ATI6j4cgLQ3UIq9roWYM1vsgGPj_yTer9eeYCbUh6kjkkOatjd1cRwIl3B97Yj2yY_0eTLM0dSsTfUOeG8n5EERlE28ZMAiutJzdgpbH7vEd=w415-h368-no[/IMG]
+[*][SPOILER="Option Seed Showcase"][IMG]https://i.imgur.com/VjYLN3C.gif[/IMG]
 They have weaker firepower, but they behave differently.[/SPOILER]
 [/LIST]
 [*]Charge Multiples
@@ -83,7 +83,7 @@ They have weaker firepower, but they behave differently.[/SPOILER]
 [*]The longer the Multiples charge energy, the longer the duration of the special attack.
 [*]Be warned that the Multiples will be lost from your inventory.
 [*]They can later be retrieved again after the special attack.
-[*][SPOILER="Charge Multiple Showcase"][IMG]https://lh3.googleusercontent.com/X0LunPT07YTx2GDElRaZNL9NuNFHv7FsnbRRTcYKA8GFBjrx87CTGW722CnVGnizUPceQikvNyZLWLffgSb9ky7rG5HxA-z6OvLThl8jHLBSa0ybE4O5glsdrjcVo-GpM4fS-I_Hlox0Af321bpKxMdSoXGpgdKKwL19IPRbH5gYNdlhCrCuhJH8XkdjC8_vTkNYXn7x5v3CIAg8nxznTxiI8ROZapE04GdOS7799efi93PXKjwJcuq4Yye7i4v3eFFXEItZrWV1K-zPWAeOfXarUVp2R088YuglG0l8dLhULU_g-PX817xl2Deqp931WehQwhkVKzbxycHo7aV10d0xINaFWIciF_GqlxMBLQh3MQil_GNXhhsOS8IV2bPYiYdur-FBMunglpv40cwBjAiuXF6vaiJiDv9Kc6bN-gPJYNCWrWSRt7tDlMLEr1dteTfA_1GvtUwHAiPk5FlFk0IAjojYWnilqKdqoabA8rOfxvr_R3tNc4HinGs8ItPGZdHwR1MQ10iff78zMtveZKwFIQB-jSTMjyzXTHwxztmTkVDdoTAcPJs9gmGtd8OZ5NhgG8gS6Z42TwFhueoAHLcdYHXBZ41VnlYLDSH5LWQWrMnkxi73gy4EWBCjIz_DS_CxOtl3FM3zNDzT8-kt-JgT-GmQ04ve0YmMbu_NnbCzY7eNK7PCkn_SK2N4zX62jt5YUgWM47DwqHVkut9jQOIHLYhusJ45ja42FxDq3fWJTDYt=w611-h341-no[/IMG]
+[*][SPOILER="Charge Multiple Showcase"][IMG]https://i.imgur.com/0zDHPUf.gif[/IMG]
 They can unleash a power special attack, but be advised that the accessory will be left on the world. Retrieve it if possible![/SPOILER]
 [/LIST]
 [*]Aim Options
@@ -91,7 +91,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Since Direction Options from Gradius V are not really applicable in Terraria, Aim Options are based from them.
 [*]It functions normally as the Standard Options, but with added functionality.
 [*]Hold down the Option Action Key to allow the Options to shoot towards the Mouse Cursor!
-[*][SPOILER="Aim Option Showcase"][IMG]https://lh3.googleusercontent.com/9g4sh10cl9h02xsrykEecg0jM8NaxTC3nCRXWgDwW_ArhaO4Y0bTGCFY2ClImCrM7DXS0kSAwVKpAdIJ_AAwwC_qT6gQM34dDihWW191aeU8fgAObCkR2DBI4UdA3W2WERJ8LZd6TGU5V8c3kI5j7QungS0VWb4R-23kzE1ZY50400VXCS9X9wmdszRNpN-nwWYbC8mx-DxrtbPgZ1k_BFMpKkkzJD2iNMSRPSQPAbb9P1ZMvSRKJb75glpNbZPNnO2O7ZXACpSk-rCnd9KqszgJPmZqkxJ8Mh-XjyqrOIMjU7UFUptIwztnDeIvSzApVTqyH5oWUnf6hJDA5AcvQm3Zw0AE7Q0MuNqcD2SfVZ_FaXIn7fwkS5fzXPApH97OfQc9xTUq_Zk3mnwsqroU0RwbFMp17ss-fGhYxHq915ecSxDqWgVU1yf8cBGcsZhkMX6I_LywPb7iLkf0YFKvMqI1hwdMq61ks_YJYpCu-cDj_Zita_Am99ojWvduOmKWuUQe8ZyUZV5A7m2q140JDHThgnhTQBq9CKMCC5BtuaVn4cayb1uDaRRF5gyMPCYmGhJUXthiAKbKishNEFGxvSN08RbFIYiaDZUiygXlRjZsxYgfCi50lEzNds2OVcDMSahFmmai6anFZ82j__3SYPxLFIowdfwBJY-JwphQjDCJRNxKLnDNjmvn8IYFdYyJpE50uRnD74XvkpSJdAu3_S38XUaX0-ZQLY7M0l_ujC1mB6aa=w355-h422-no[/IMG][/SPOILER]
+[*][SPOILER="Aim Option Showcase"][IMG]https://i.imgur.com/WwPoi97.gif[/IMG][/SPOILER]
 [/LIST]
 [*]Search Options
 [LIST]
@@ -99,7 +99,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]They can function as regular Options, but they have an advanced feature.
 [*]Hold down the Option Action Key to allow the Search Options to seek and pursue hostiles!
 [*]During their special ability, they produce less projectiles.
-[*][SPOILER="Search Option Showcase"][IMG]https://lh3.googleusercontent.com/WBsEyG5ha9fUBYWexTuMydBD9vOTR242vYX-uyaMIbDIeLtgncppQSINdd1RUb1Wdf-Olw_uKXK4T8NhQBs9sEoIDFxwtlkP22N1JzD25jTFDAhVJsLQ85brtFpu1AyqSjiucO6rHuSueZo10RNPoRzOFCy2Ny_2G68XeS3B0R5EvWNHD5bO-Yw4dHKFwsN9btD0N_WttkjhK82Fq3eNLGC2LZH6BRunYMq5rW_5bcc4cO-NcyEKgL0d2QjZ6iQJXHQs_DSMgPps1KASEfHgIJN6MEVfP3fGEsM8kpTomfNIYhyvs_9b80c4Dx5AClTgz9nFNe3MlGBLQ5v1Djpd1Vni75dYyDt2PRYutkP1suV06SoIaZPtIRhknkhDG3DWOK1GK7yCr5ZHDjovfgAAqf9kXHMlc5BNFm3Tl8O-ylbrceRK7gzWXC-36YWA5oF0ORT2Oe_sWiLF4FN7HF6m6qND92W0cRM_Mh1VqwUuyi6VZb_gTXQcS5Dkznrm_URlt0Zf0JDuz_CBzov9n9k0DOr2dvE91AKZNRtO_umb1_3BItxQOrzm3FQdyPsP99QTXbNdIimCH9NuAzRgU2Gv2FxBImeQlI3W9AjsyyLv5VddGSBPGuRqDIXOXFy5kjAYkzKTg23eLjFXeGcRT3BISsRQBhRSg0d5NTwFcSmkrdYzVBmIR7DEODfGfMfJ9l3NrZSqXb0hmRX9jL2EkZmmcjXdWLAO_pDqwhz9Zws8Kj8L3Kkb=w295-h568-no[/IMG][/SPOILER]
+[*][SPOILER="Search Option Showcase"][IMG]https://i.imgur.com/AXClUc8.gif[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 [B][S]Additional Content[/S][/B]
@@ -164,7 +164,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]They have an upside-down version, in which they have reversed gravity.
 [*]They can be found in the first Gradius game, but the behavior is inspired from Gradius III.
 [*]It will spawn by a random chance in surface and underground caverns.
-[*][SPOILER="Sagna Showcase"][IMG]https://lh3.googleusercontent.com/zRi5CRtYJ2doo3fsAWsCZvdyMtYDGCjb38EI8x9lD6IkcHf861xasw141hLJCiWubiYWMB5j2xWAKKqLbLzASXHk6vr5xk6DSslrRFHN_wJsmy03YCZWIh6aG-UN9cY08lIKBmxAp8hdWAnC0emfeCwkHxrHsegS3YjlOa4FaaWyF-3PO-ckQm6_EbT-Nb8JnR7qa7qlCus9jIRq74q1oxOh_st9kgpbPIYLXR0vVQeDIE6trnIAlfRBilk7wKBmVcJ1aS-mszO65n9dkT490R6vVI11MTPbTKceYC_hU9z5bcj8JXuidVx3RX0hQNFvMy2GUKXmn9tP9_-87eyiZ0k47ZjyjPfECkKrCBBDNezjZDq-_aHYTTnvaQPI7xoP7zcGHF3aMaYRqnWphcRZ2ocBQmXkgHu_fZHqcArgOqgkY1NK19FMWVvyeUVZ7QYMCX7HEkvfcLf6tv10FKZsi5Jq6q9wMulhYzkkdb1kmCD7SsHxloL0zHjzekCWb0-WCnIhWsf8fRWsqtEo2hZkwgQjddwLG0nrQAj53Pq8WOoGxOCHh72nvEw81X4QVcjQCPipsV0PP-bBxEH4KiTkToiIYYZaqkwwqq9UZa1SuSxCN9nT2a0cauxvIIOmg9up_ykcw0mhIn1_eJpqI_2rYFA1EwZ6dEwX-rdJlE4CNWq6c3NlloXdTbg=w335-h257-no[/IMG][/SPOILER]
+[*][SPOILER="Sagna Showcase"][IMG]https://i.imgur.com/R6hNM1d.gif[/IMG][/SPOILER]
 [/LIST]
 [*]Ducker
 [LIST]
@@ -174,7 +174,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Their implementation in this mod is a hybrid of Gradius I, III and V.
 [*]Like Sagna and Grazia, they have an upside-down version.
 [*]They have the same spawn parameters as Sagna.
-[*][SPOILER="Ducker Showcase"][IMG]https://lh3.googleusercontent.com/3kwDTuHR-qkbIEUc6DZsjlBxct-3r1bgUog5mXwMt85AGEwViDnR6dWsKi_tSEd1FsLhFqC83X86mAfxKosJBkUdx82SJ4GXBgOEMC6UOH1OPVWwkBX8b78jsZQnOd7DFnzqkCmrCoHqMRs1juZEC81Mx2jtlCoVq7sf_AR_-ujp6sbveMbnxtfUmvPq_3yS2MAb0gx6WxS5AjZtrBF8n2-W28RjCkRfUMjJof5dyvmkgZXmfEjmh9PASS2CZtbeeu8RSxWtC3DpKiGQMS8t6pgvKQy7pqNjd23AxADjhJqAy0aK4_tzoO7WK8my0TJEP_Lxpuh2GwWQ0eNIdGRYyUODDhYhTsQ0knF1yweqfKR81C8qU8I1Ts6fPSTpNS-UdteASo2IkE-H64_hU1LpaLiSVkyQ3ZVh3a7GhJVx9r34nrkLvxD1H-3sM3Sn5T9MteGEjqCtWP691zcOJjxz_FZLIOAR9RNSzKMx-ijCaAZRfdO2Nx2VDyxZOP7onRtTvHgthCtOD20_72tWyFQouwBPZvyNvA6OaRuO9TGhkjxIH_-mx9Ah5PoN3C-7lUAkYBsadx-XeCxT0Q4smYu0yRRoeQ9xf092dG92NCYMV3GM1DIteQXvlvFAPikx_xphX1kCj1yMWCDTFjDBcH_zp0bkqHPYtJ6I52nn0zW-_2J5MVuv1_GmplCwANXK1Iw6VG1g1HoNme3HRPSz-gEwyUUPsdY8anNJfxyxbT3KbRtH3k8Z=w777-h398-no[/IMG][/SPOILER]
+[*][SPOILER="Ducker Showcase"][IMG]https://i.imgur.com/x6et8Zl.gif[/IMG][/SPOILER]
 [/LIST]
 [*]Dagoom & Rush
 [LIST]
@@ -184,7 +184,7 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Rush is one such fighter that can be deployed from it.
 [*]Dagoom has an upside down version of itself.
 [*]Dagoom spawns anywhere, and Rush only spawns from Dagoom.
-[*][SPOILER="Dagoom & Rush Showcase"][IMG]https://lh3.googleusercontent.com/wBd4_nHMj0VJ0wbkXkzKoZz35r12Vbn7p6nI3gxh_ZpU6WwT7804ApmvoNNcWRYk75dw3kwlk7wryhszGVGy3of0f1NPb3Ktm4taZfBThcXmctDTi9KNubNcA-6MrcmNaYOOxFIU7zbDKOJ_PEVQlw-hMwoQ4Au5BJRk7qg_aYtnUtGuYBS8A6-BFalJxjufegMY0Cd6laYBKrfwbCNy_zCmIWKjexIGDiWSABpBAmvmtI1qMsFYY75n-baOOWju-owMbDx6aCD6GVULHe5KgR9UnfQk8Qvp0FcxK9FJCNFFoRbWsFRAorwVriTXlbl365j6m1MBo4E-Py_msKcgPqTgjxJehFG-e4QnDJXNXPBgmCZRdZ307aATXj1OBeymHz9_WMZxdxAnbdTP_fUUe_Di6U26XURqVe934A-Q7u8AgYt1-cEAEt7t2KLqcT2Y4c7HFIv10XF7znDaCI9e65ZxxXHWDJQ6SrgVpaSyG6eUrhXLLigG5U9V6qxpuYEUEBNDYtXS5UWpNRu4Bw5NOtH8gsIYWfD0Jme5YbWnMTggzE0GkTVe9aZG1MiOkejwfkFh6spkNLXEhViMdokR2_8ElgzpKXNvqAsv2Po1-aXrKIZ83Nwic6ZY2C3nsgY8LoqUfC6ZzIAeG8Xpo8oJ8JBd0ZPUgqqLp1RORgAs0r_NM9hbZcJVD9eIyz6MgjGO8h9jLD7quBsWGDolrbTB1X_qytZNQn5lvqzo6Iq23tXBHOW6=w379-h413-no[/IMG][/SPOILER]
+[*][SPOILER="Dagoom & Rush Showcase"][IMG]https://i.imgur.com/xMaQ2eA.gif[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 
