@@ -52,7 +52,8 @@ namespace ChensGradiusMod
       new AlienProjectile("CalamityMod", "Brimblade2"), new AlienProjectile("CalamityMod", "IceBombFriendly"),
       new AlienProjectile("CalamityMod", "HolyExplosionSupreme"), new AlienProjectile("CalamityMod", "PlagueBee"),
       new AlienProjectile("CalamityMod", "ShatteredExplosion"), new AlienProjectile("CalamityMod", "ShatteredSun2"),
-      new AlienProjectile("CalamityMod", "ShatteredSun3"),
+      new AlienProjectile("CalamityMod", "ShatteredSun3"), new AlienProjectile("CalamityMod", "DragonDust"),
+      new AlienProjectile("CalamityMod", "WaterSpout"), new AlienProjectile("CalamityMod", "Brimlash2"),
 
       new AlienProjectile("Bluemagic", "PuriumArrowTrail"),
 
@@ -109,7 +110,9 @@ namespace ChensGradiusMod
       new AlienProjectile("SpiritMod", "CoilMine"), new AlienProjectile("SpiritMod", "AbyssalSludge"),
       new AlienProjectile("SpiritMod", "WitherShard3"), new AlienProjectile("SpiritMod", "HarpyFeather"),
       new AlienProjectile("SpiritMod", "AmberSlasher"), new AlienProjectile("SpiritMod", "QuicksilverBolt"),
-      new AlienProjectile("SpiritMod", "FrostRune")
+      new AlienProjectile("SpiritMod", "FrostRune"), new AlienProjectile("SpiritMod", "FireChain3"),
+      new AlienProjectile("SpiritMod", "FireChain2"), new AlienProjectile("SpiritMod", "StarSoul"),
+      new AlienProjectile("SpiritMod", "CursedFlames"), new AlienProjectile("SpiritMod", "NightSpit")
     };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
