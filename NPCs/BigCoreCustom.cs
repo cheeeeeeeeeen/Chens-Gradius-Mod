@@ -62,7 +62,11 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && NPC.downedGolemBoss && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation) return .005f;
+      if (!spawnInfo.playerSafe && Main.hardMode && NPC.downedGolemBoss
+          && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation)
+      {
+        return .005f;
+      }
       else return 0f;
     }
 
