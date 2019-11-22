@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 0.9.6
+[B][U][SIZE=6]Mod Version: 0.9.7
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -10,6 +10,11 @@ The mod will also focus to be [B][U]playable on multiplayer[/U][/B], so please f
 
 This mod is on the Mod Browser, so download it from there.
 If the Mod Browser is down, then you can refer to this link to download the latest release: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/releases']Gradius Mod Releases[/URL]
+
+We have an ongoing Wiki project for this mod where it will contain all the information about the mod.
+It is still [I]incomplete[/I], so for now, you need to use this main post if you want to browse for content, or use Recipe Browser, Cheat Sheet or Hero's Mod in-game.
+If you know how to write in Markdown, you may help us contribute to the Wiki!
+Here is the Wiki link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki']Chen's Gradius Mod Wiki[/URL]
 
 If you want to help making sprites for this mod, then you are welcome to join us. Check the Discord Link below in [I]Contact Us [/I]section.
 
@@ -201,6 +206,7 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [*]The Position Light (Gradius ReBirth version, originally from Nemesis 3)
 [*]Departure For Space (Gradius III From Myth to Legend version)
 [*]Tabidachi (Gradius II Gofer no Yabou Version)
+[*]Intermezzo (Gradius V)
 [/LIST]
 [B]Added Music without music box[/B]
 [LIST=1]
@@ -212,6 +218,13 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.9.7
+  - Fix an issue where the enemies won't spawn as their vertically inversed versions
+  - Improve spawn checks for Big Core where in he will never spawn when the player is inside a house or near a town
+  - Add more Option rules to support weapons from other mods (still incomplete)
+  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
+  - Add Intermezzo, a Gradius V song, as music box
+
 0.9.6
   - Implement Dagoom and Rush
   - Optimize and generalized some codes while implementing new enemies
@@ -503,7 +516,7 @@ Using this method as a means to remove the problem of duplication is the [B]most
 [*][B]"AddOptionRule"[/B]
 [LIST]
 [*]This function will add an Option Rule in the lists that will be checked for Options Projectile Duplication ability. Adding a rule in the list [U]will ban that projectile from being duplicated[/U].
-[*][I]When to use:[/I] Use this function to add projectiles that are:
+[*][I]When to use:[/I]Use this function to add projectiles that are:
 [LIST]
 [*]Misbehaving in function (e.g. the Projectile has a limit on how much can exist in the world)
 [*]Produced by another projectile (e.g. Bees from the Beenade, and Bees from the Bee Arrow, not the arrow itself)
