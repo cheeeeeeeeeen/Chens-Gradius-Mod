@@ -9,7 +9,6 @@ namespace ChensGradiusMod.NPCs
 {
   public class Sagna : GradiusEnemy
   {
-    private const int CancelDeployThreshold = 500;
     private const float XSpeed = 3f;
     private const float YGravity = .1f;
     private const float MaxYSpeed = 5f;
@@ -78,11 +77,9 @@ namespace ChensGradiusMod.NPCs
         Vector2 spawnPos = npc.position;
 
         npc.netUpdate = initialized = true;
-        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .5f,
-                            CancelDeployThreshold, DecideYDeploy);
-        if (yDirection == 0 && 
-            !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .5f,
-                                 CancelDeployThreshold, DecideYDeploy))
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos,
+                                                    -chosenYDir, DecideYDeploy))
         {
           Deactivate();
           return false;
@@ -108,7 +105,7 @@ namespace ChensGradiusMod.NPCs
     {
       npc.spriteDirection = npc.direction = persistDirection;
 
-      if (npc.position == npc.oldPosition)
+      if (npc.position == npc.oldPosition && mode != States.Spray)
       {
         if (++unstuckTick >= UnstuckTime)
         {

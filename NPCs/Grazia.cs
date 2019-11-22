@@ -12,7 +12,6 @@ namespace ChensGradiusMod.NPCs
     private const sbyte PersistDirection = -1;
     private const float CustomGravity = 5f;
     private const int FireRate = 43;
-    private const int CancelDeployThreshold = 500;
     private const int SyncRate = 300;
 
     private readonly int[] directLowerAngleAim = { 0, 21, 41, 61, 81, 100, 120, 140, 160 };
@@ -68,11 +67,9 @@ namespace ChensGradiusMod.NPCs
         Vector2 spawnPos = npc.position;
 
         npc.netUpdate = initialized = true;
-        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .5f,
-                            CancelDeployThreshold, DecideYDeploy);
-        if (yDirection == 0 &&
-            !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, -chosenYDir, npc.height * .5f,
-                                 CancelDeployThreshold, DecideYDeploy))
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos,
+                                                    -chosenYDir, DecideYDeploy))
         {
           Deactivate();
           return false;

@@ -10,7 +10,6 @@ namespace ChensGradiusMod.NPCs
   public class Dagoom : GradiusEnemy
   {
     private const int PersistDirection = 1;
-    private const int CancelDeployThreshold = 400;
     private const float CustomGravity = 5f;
     private const int RedeployRate = 300;
     private const int DeployRate = 15;
@@ -28,9 +27,9 @@ namespace ChensGradiusMod.NPCs
 
     public enum States { Standby, Open, Deploy, Close };
 
-    public static bool GroundDeploy(NPC npc, ref sbyte yDirection, Vector2 spawnPos,
-                                    int chosenYDir, float yLength, int cancelDeployThreshold,
-                                    Func<float, int, sbyte, bool, sbyte> DecideYDeploy)
+    public static bool GroundDeploy(NPC npc, ref sbyte yDirection, Vector2 spawnPos, int chosenYDir,
+                                    Func<float, int, sbyte, bool, sbyte> DecideYDeploy,
+                                    float yLength = 2f, int cancelDeployThreshold = 500)
     {
       npc.position = spawnPos;
       yDirection = DecideYDeploy(yLength, cancelDeployThreshold, (sbyte)chosenYDir, true);
@@ -76,11 +75,9 @@ namespace ChensGradiusMod.NPCs
         Vector2 spawnPos = npc.position;
 
         npc.netUpdate = initialized = true;
-        GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .3f,
-                     CancelDeployThreshold, DecideYDeploy);
-        if (yDirection == 0 &&
-            !GroundDeploy(npc, ref yDirection, spawnPos, -chosenYDir, npc.height * .3f,
-                          CancelDeployThreshold, DecideYDeploy))
+        GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !GroundDeploy(npc, ref yDirection, spawnPos,
+                                             -chosenYDir, DecideYDeploy))
         {
           Deactivate();
           return false;

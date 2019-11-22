@@ -11,7 +11,6 @@ namespace ChensGradiusMod.NPCs
   public class Ducker : GradiusEnemy
   {
     private const float CustomGravity = 8f;
-    private const int CancelThreshold = 500;
     private const float AttackAngleDifference = 7f;
     private const float RunSpeed = 4f;
     private const float FallSpeedYAccel = .5f;
@@ -145,11 +144,9 @@ namespace ChensGradiusMod.NPCs
         Vector2 spawnPos = npc.position;
 
         npc.netUpdate = initialized = true;
-        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, npc.height * .5f,
-                            CancelThreshold, DecideYDeploy);
-        if (yDirection == 0 &&
-            !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, -chosenYDir,
-                                 npc.height * .3f, CancelThreshold, DecideYDeploy))
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos,
+                                                    -chosenYDir, DecideYDeploy))
         {
           Deactivate();
           return false;
