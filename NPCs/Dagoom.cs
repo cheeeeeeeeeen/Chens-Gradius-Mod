@@ -10,7 +10,6 @@ namespace ChensGradiusMod.NPCs
   public class Dagoom : GradiusEnemy
   {
     private const int PersistDirection = 1;
-    private const int CancelDeployThreshold = 400;
     private const float CustomGravity = 5f;
     private const int RedeployRate = 300;
     private const int DeployRate = 15;
@@ -18,7 +17,7 @@ namespace ChensGradiusMod.NPCs
     private const int SyncRate = 300;
 
     private bool initialized = false;
-    private int yDirection = 0;
+    private sbyte yDirection = 0;
     private int redeployTick = 0;
     private int deployTick = 0;
     private int rushCount = 0;
@@ -27,6 +26,16 @@ namespace ChensGradiusMod.NPCs
     private States mode = States.Standby;
 
     public enum States { Standby, Open, Deploy, Close };
+
+    public static bool GroundDeploy(NPC npc, ref sbyte yDirection, Vector2 spawnPos, int chosenYDir,
+                                    Func<float, int, sbyte, bool, sbyte> DecideYDeploy,
+                                    float yLength = 2f, int cancelDeployThreshold = 500)
+    {
+      npc.position = spawnPos;
+      yDirection = DecideYDeploy(yLength, cancelDeployThreshold, (sbyte)chosenYDir, true);
+
+      return yDirection != 0;
+    }
 
     public override void SetStaticDefaults()
     {
@@ -60,24 +69,20 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (!initialized)
+      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
-        initialized = true;
-        if (yDirection == 0)
+        int chosenYDir = Main.rand.NextBool().ToDirectionInt();
+        Vector2 spawnPos = npc.position;
+
+        npc.netUpdate = initialized = true;
+        GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !GroundDeploy(npc, ref yDirection, spawnPos,
+                                             -chosenYDir, DecideYDeploy))
         {
-          yDirection = DecideYDeploy(npc.height * .3f, CancelDeployThreshold);
-          if (yDirection == 0)
-          {
-            npc.active = false;
-            npc.life = 0;
-            return false;
-          }
-          else if (yDirection < 0)
-          {
-            npc.frame.Y = 224;
-            FrameCounter = 4;
-          }
+          Deactivate();
+          return false;
         }
+        else if (yDirection < 0) FrameCounter = 4;
       }
 
       return initialized;
@@ -127,6 +132,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (++FrameTick >= FrameSpeed)
       {
+        FrameTick = 0;
         int limit;
 
         switch (mode)
@@ -142,29 +148,32 @@ namespace ChensGradiusMod.NPCs
             if (--FrameCounter <= limit) mode = States.Standby;
             break;
         }
-
-        npc.frame.Y = FrameCounter * frameHeight;
-        FrameTick = 0;
       }
+
+      npc.frame.Y = FrameCounter * frameHeight;
     }
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write(yDirection);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
+      writer.Write(initialized);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       yDirection = reader.ReadSByte();
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
+      initialized = reader.ReadBoolean();
     }
 
     protected override Types EnemyType => Types.Large;
 
-    protected override int FrameSpeed { get; set; } = 9;
+    protected override int FrameSpeed => 9;
 
     protected override Action<Vector2> RetaliationOverride => RetaliationExplode;
 

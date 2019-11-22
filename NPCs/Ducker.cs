@@ -11,7 +11,6 @@ namespace ChensGradiusMod.NPCs
   public class Ducker : GradiusEnemy
   {
     private const float CustomGravity = 8f;
-    private const int CancelThreshold = 500;
     private const float AttackAngleDifference = 7f;
     private const float RunSpeed = 4f;
     private const float FallSpeedYAccel = .5f;
@@ -139,19 +138,31 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (!initialized)
+      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
       {
-        initialized = true;
+        int chosenYDir = Main.rand.NextBool().ToDirectionInt();
+        Vector2 spawnPos = npc.position;
+
+        npc.netUpdate = initialized = true;
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos,
+                                                    -chosenYDir, DecideYDeploy))
+        {
+          Deactivate();
+          return false;
+        }
+
         npc.TargetClosest(false);
         if (persistDirection == 0) FaceTarget(Target.Center);
-        yDirection = DecideYDeploy(npc.height * .5f, CancelThreshold, false, true, 1);
-        npc.oldPosition = npc.position;
       }
+
       return initialized;
     }
 
     public override void AI()
     {
+
+
       switch (mode)
       {
         case States.Run:
@@ -205,21 +216,24 @@ namespace ChensGradiusMod.NPCs
         case States.Jump:
           if (FrameCounter >= 13)
           {
-            if (!hasJumped && GradiusHelper.IsEqualWithThreshold(npc.velocity, Vector2.Zero, .01f))
+            if (!hasJumped)
             {
               npc.velocity = new Vector2(0, 10f * -yDirection);
               hasJumped = true;
             }
-            else npc.velocity += new Vector2(FallSpeedXAccel * persistDirection, FallSpeedYAccel * yDirection);
-
-            if (hasJumped && ((yDirection > 0 && npc.velocity.Y >= 0) ||
-                              (yDirection < 0 && npc.velocity.Y <= 0)))
+            else
             {
-              mode = States.Fall;
-              FrameTick = 0;
-              hasJumped = false;
+              npc.velocity += new Vector2(FallSpeedXAccel * persistDirection, FallSpeedYAccel * yDirection);
+              if ((yDirection > 0 && npc.velocity.Y >= 0) ||
+                  (yDirection < 0 && npc.velocity.Y <= 0))
+              {
+                mode = States.Fall;
+                FrameTick = 0;
+                hasJumped = false;
+              }
             }
           }
+          else HaltMovement();
           break;
         case States.Fire:
         case States.Land:
@@ -252,6 +266,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write((byte)mode);
       writer.Write((byte)oldMode);
       writer.Write(persistDirection);
@@ -259,10 +274,12 @@ namespace ChensGradiusMod.NPCs
       writer.Write(hasJumped);
       writer.WriteVector2(targetLastSeen);
       writer.Write(numJumps);
+      writer.Write(initialized);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       mode = (States)reader.ReadByte();
       oldMode = (States)reader.ReadByte();
       persistDirection = reader.ReadSByte();
@@ -270,9 +287,10 @@ namespace ChensGradiusMod.NPCs
       hasJumped = reader.ReadBoolean();
       targetLastSeen = reader.ReadVector2();
       numJumps = reader.ReadByte();
+      initialized = reader.ReadBoolean();
     }
 
-    protected override int FrameSpeed { get; set; } = 5;
+    protected override int FrameSpeed => 5;
 
     protected override int FrameCounter { get; set; } = 6;
 

@@ -57,9 +57,8 @@ namespace ChensGradiusMod.NPCs
 
         if (persistDirection == 0)
         {
+          Deactivate();
           initialized = false;
-          npc.active = false;
-          npc.life = 0;
         }
         else initialized = true;
       }
@@ -145,7 +144,7 @@ namespace ChensGradiusMod.NPCs
       oldMode = (States)reader.ReadByte();
     }
 
-    protected override int FrameSpeed { get; set; } = 3;
+    protected override int FrameSpeed => 3;
 
     protected override Types EnemyType => Types.Small;
 

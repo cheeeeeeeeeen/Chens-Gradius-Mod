@@ -2,6 +2,7 @@
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -111,9 +112,21 @@ namespace ChensGradiusMod.NPCs
       ReduceDamage(ref damage, ref knockback, ref crit);
     }
 
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write((byte)FrameTick);
+      writer.Write((byte)FrameCounter);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      FrameTick = reader.ReadByte();
+      FrameCounter = reader.ReadByte();
+    }
+
     protected virtual int FrameTick { get; set; } = 0;
 
-    protected virtual int FrameSpeed { get; set; } = 0;
+    protected virtual int FrameSpeed => 0;
 
     protected virtual int FrameCounter { get; set; } = 0;
 
@@ -134,11 +147,6 @@ namespace ChensGradiusMod.NPCs
     protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
 
     protected virtual Action<Vector2> RetaliationOverride => null;
-
-    //protected virtual Rectangle[] InvulnerableHitboxes
-    //{
-    //  get { return new Rectangle[0]; }
-    //}
 
     protected void ImmuneToBuffs()
     {
@@ -242,44 +250,27 @@ namespace ChensGradiusMod.NPCs
       }
     }
 
-    protected sbyte DecideYDeploy(float yLength, int checkLimit, bool moveNpc = true,
-                                  bool forceSpawn = false, sbyte fallbackValue = 0)
+    protected sbyte DecideYDeploy(float yLength, int checkLimit, sbyte direction,
+                                  bool moveNpc = true)
     {
-      Vector2 savedPosition = npc.position,
-              upwardV = new Vector2(0, -yLength),
-              downwardV = new Vector2(0, yLength),
-              upwardP = npc.position,
-              downwardP = npc.position,
-              velocityOnCollide;
+      Vector2 savedP = npc.position,
+              movedV = new Vector2(0, yLength * direction),
+              movedP = savedP,
+              vOnCollide;
 
       for (int i = 0; i < checkLimit; i++)
       {
-        velocityOnCollide = Collision.TileCollision(downwardP, downwardV, npc.width, npc.height);
-        if (downwardV != velocityOnCollide)
+        vOnCollide = Collision.TileCollision(movedP, movedV, npc.width, npc.height);
+        if (movedV != vOnCollide)
         {
-          npc.position = moveNpc ? downwardP : savedPosition;
-          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
-          return 1;
+          npc.position = moveNpc ? movedP : savedP;
+          npc.velocity = moveNpc ? vOnCollide : Vector2.Zero;
+          return direction;
         }
-        else downwardP += downwardV;
-
-        velocityOnCollide = Collision.TileCollision(upwardP, upwardV, npc.width, npc.height);
-        if (upwardV != velocityOnCollide)
-        {
-          npc.position = moveNpc ? upwardP : savedPosition;
-          npc.velocity = moveNpc ? velocityOnCollide : Vector2.Zero;
-          return -1;
-        }
-        else upwardP += upwardV;
+        else movedP += movedV;
       }
 
-      if (!forceSpawn)
-      {
-        npc.friendly = true;
-        npc.active = false;
-        npc.life = 0;
-      }
-      return fallbackValue;
+      return 0;
     }
 
     protected bool ConstantSync(ref int tick, int rate)
@@ -295,6 +286,13 @@ namespace ChensGradiusMod.NPCs
       }
 
       return false;
+    }
+
+    protected void Deactivate()
+    {
+      npc.netUpdate = true;
+      npc.active = false;
+      npc.life = 0;
     }
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)

@@ -12,7 +12,6 @@ namespace ChensGradiusMod.NPCs
     private const sbyte PersistDirection = -1;
     private const float CustomGravity = 5f;
     private const int FireRate = 43;
-    private const int CancelDeployThreshold = 500;
     private const int SyncRate = 300;
 
     private readonly int[] directLowerAngleAim = { 0, 21, 41, 61, 81, 100, 120, 140, 160 };
@@ -25,6 +24,7 @@ namespace ChensGradiusMod.NPCs
     private sbyte yDirection = 0;
     private int fireTick = 0;
     private int syncTick = 0;
+    private bool initialized = false;
 
     public override void SetStaticDefaults()
     {
@@ -45,7 +45,6 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 50;
       npc.noGravity = true;
       npc.behindTiles = true;
-      npc.frame.Y = 0;
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -60,21 +59,37 @@ namespace ChensGradiusMod.NPCs
 
     public override string Texture => "ChensGradiusMod/Sprites/Grazia";
 
+    public override bool PreAI()
+    {
+      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
+      {
+        int chosenYDir = Main.rand.NextBool().ToDirectionInt();
+        Vector2 spawnPos = npc.position;
+
+        npc.netUpdate = initialized = true;
+        Dagoom.GroundDeploy(npc, ref yDirection, spawnPos, chosenYDir, DecideYDeploy);
+        if (yDirection == 0 && !Dagoom.GroundDeploy(npc, ref yDirection, spawnPos,
+                                                    -chosenYDir, DecideYDeploy))
+        {
+          Deactivate();
+          return false;
+        }
+        else if (yDirection < 0)
+        {
+          npc.frame.Y = 442;
+          FrameCounter = 13;
+        }
+      }
+
+      return initialized;
+    }
+
     public override void AI()
     {
       npc.direction = npc.spriteDirection = PersistDirection;
 
-      if (yDirection == 0)
-      {
-        yDirection = DecideYDeploy(npc.height * .5f, CancelDeployThreshold);
-        if (yDirection == 0) return;
-        if (yDirection < 0) npc.frame.Y = 416;
-      }
-      else
-      {
-        npc.velocity.Y = CustomGravity * yDirection;
-        npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
-      }
+      npc.velocity.Y = CustomGravity * yDirection;
+      npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
 
       if (GradiusHelper.IsNotMultiplayerClient())
       {
@@ -118,12 +133,18 @@ namespace ChensGradiusMod.NPCs
 
     public override void SendExtraAI(BinaryWriter writer)
     {
+      base.SendExtraAI(writer);
       writer.Write(yDirection);
+      writer.Write(initialized);
+      writer.Write((ushort)npc.frame.Y);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
     {
+      base.ReceiveExtraAI(reader);
       yDirection = reader.ReadSByte();
+      initialized = reader.ReadBoolean();
+      npc.frame.Y = reader.ReadUInt16();
     }
 
     protected override int RetaliationSpreadBulletNumber => 3;

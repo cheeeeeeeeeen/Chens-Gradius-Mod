@@ -114,7 +114,7 @@ namespace ChensGradiusMod.NPCs
       timerTick = reader.ReadUInt16();
     }
 
-    protected override int FrameSpeed { get; set; } = 4;
+    protected override int FrameSpeed => 4;
 
     protected override Types EnemyType => Types.Small;
 
