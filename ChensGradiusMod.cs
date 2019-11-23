@@ -350,6 +350,23 @@ namespace ChensGradiusMod
             }
             break;
           }
+
+        case PacketMessageType.BroadcastSound:
+          ushort soundType = reader.ReadUInt16();
+          Vector2 soundPosition = reader.ReadVector2();
+          byte soundStyle = reader.ReadByte();
+
+          if (GradiusHelper.IsServer())
+          {
+            ModPacket packet = GetPacket();
+            packet.Write((byte)PacketMessageType.BroadcastSound);
+            packet.Write(soundType);
+            packet.WriteVector2(soundPosition);
+            packet.Write(soundStyle);
+            packet.Send(-1, whoAmI);
+          }
+          else Main.PlaySound(soundType, soundPosition, soundStyle);
+          break;
       }
     }
 
@@ -363,7 +380,8 @@ namespace ChensGradiusMod
       ClientChangesSeedDirection,
       ClientChangesChargeMultiple,
       SpawnRetaliationBullet,
-      ClientChangesSearchOption
+      ClientChangesSearchOption,
+      BroadcastSound
     }
   }
 }

@@ -62,12 +62,14 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (!spawnInfo.playerSafe && Main.hardMode && NPC.downedGolemBoss
-          && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation)
-      {
-        return .005f;
-      }
-      else return 0f;
+      //if (!spawnInfo.playerSafe && Main.hardMode && NPC.downedGolemBoss
+      //    && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation)
+      //{
+      //  return .005f;
+      //}
+      //else return 0f;
+
+      return 0f;
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustom";

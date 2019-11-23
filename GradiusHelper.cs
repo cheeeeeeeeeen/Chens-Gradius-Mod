@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
+using static ChensGradiusMod.ChensGradiusMod;
 
 namespace ChensGradiusMod
 {
@@ -143,6 +145,8 @@ namespace ChensGradiusMod
     }
 
     public static bool IsSameClientOwner(Projectile proj) => Main.myPlayer == proj.owner;
+
+    public static bool IsSameClientOwner(Item item) => Main.myPlayer == item.owner;
 
     public static bool IsSameClientOwner(Player player) => Main.myPlayer == player.whoAmI;
 
@@ -312,6 +316,30 @@ namespace ChensGradiusMod
     public static bool IsCritter(NPC npc)
     {
       return npc.damage <= 0 && npc.lifeMax <= 5;
+    }
+
+    public static bool SummonBoss(Mod mod, Vector2 initialPosition, int npcType, float tileDistance = 0)
+    {
+      float randomAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
+      Vector2 offset = randomAngle.ToRotationVector2() * tileDistance * 16f;
+      Vector2 target = new Vector2(initialPosition.X + offset.X, initialPosition.Y + offset.Y);
+      int npcIndex = NewNPC(target.X, target.Y, npcType, center: true);
+      NPC npc = Main.npc[npcIndex];
+
+      Main.NewText(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName), 175, 75, 255);
+
+      Main.PlaySound(SoundID.Roar, initialPosition, 0);
+      if (!IsSinglePlayer())
+      {
+        ModPacket packet = mod.GetPacket();
+        packet.Write((byte)PacketMessageType.BroadcastSound);
+        packet.Write((ushort)SoundID.Roar);
+        packet.WriteVector2(initialPosition);
+        packet.Write((byte)0);
+        packet.Send();
+      }
+
+      return npc.active;
     }
   }
 }
