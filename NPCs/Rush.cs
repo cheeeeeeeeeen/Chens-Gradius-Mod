@@ -82,7 +82,7 @@ namespace ChensGradiusMod.NPCs
 
       PerformAttack();
 
-      if (oldMode != mode)
+      if (GradiusHelper.IsServer() && oldMode != mode)
       {
         oldMode = mode;
         npc.netUpdate = true;

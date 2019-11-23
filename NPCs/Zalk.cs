@@ -106,7 +106,7 @@ namespace ChensGradiusMod.NPCs
           break;
       }
 
-      if (oldMode != mode)
+      if (GradiusHelper.IsServer() && oldMode != mode)
       {
         npc.netUpdate = true;
         oldMode = mode;

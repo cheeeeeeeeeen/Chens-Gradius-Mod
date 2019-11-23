@@ -249,8 +249,7 @@ namespace ChensGradiusMod.NPCs
     public override void PostAI()
     {
       base.PostAI();
-      if (!ConstantSync(ref syncTick, SyncRate) && GradiusHelper.IsNotMultiplayerClient()
-          && oldMode != mode)
+      if (!ConstantSync(ref syncTick, SyncRate) && oldMode != mode)
       {
         npc.netUpdate = true;
         oldMode = mode;

@@ -180,6 +180,7 @@ namespace ChensGradiusMod
       int npcIndex = NPC.NewNPC((int)X, (int)Y, Type, Start, ai0, ai1, ai2, ai3, Target);
       if (center) Main.npc[npcIndex].Center = new Vector2(X, Y);
       else Main.npc[npcIndex].Bottom = new Vector2(X, Y);
+      Main.npc[npcIndex].netUpdate = true;
       return npcIndex;
     }
 
