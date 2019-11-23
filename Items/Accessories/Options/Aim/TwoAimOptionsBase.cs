@@ -15,9 +15,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void SetDefaults()
     {
       base.SetDefaults();
-
-      item.width = 38;
-      item.height = 30;
+      TwoOptionsMethods.SetDefaults(item);
     }
 
     public override void PostUpdate()

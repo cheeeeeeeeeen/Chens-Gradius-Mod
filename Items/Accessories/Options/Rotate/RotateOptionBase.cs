@@ -19,6 +19,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
       Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 6));
     }
 
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.width = 40;
+      item.height = 50;
+    }
+
     public override void PostUpdate()
     {
       Lighting.AddLight(item.Center, .498f, 1f, 0f);

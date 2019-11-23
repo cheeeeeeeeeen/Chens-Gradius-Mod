@@ -17,8 +17,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       base.SetDefaults();
 
-      item.width = 48;
-      item.height = 60;
+      item.width = 44;
+      item.height = 58;
     }
 
     public override void PostUpdate()

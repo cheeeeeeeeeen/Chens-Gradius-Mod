@@ -19,8 +19,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void SetDefaults()
     {
       base.SetDefaults();
-      item.width = 44;
-      item.height = 52;
+      item.width = 40;
+      item.height = 50;
       item.value = ComputeItemValue(OptionPosition);
     }
 

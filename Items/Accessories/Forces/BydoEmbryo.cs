@@ -22,8 +22,8 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     {
       base.SetDefaults();
 
-      item.width = 28;
-      item.height = 28;
+      item.width = 24;
+      item.height = 24;
       item.rare = -12;
     }
 

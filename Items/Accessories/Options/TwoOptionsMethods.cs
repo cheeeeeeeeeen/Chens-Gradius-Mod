@@ -63,5 +63,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
       }
       ResetProjectileCounts(player);
     }
+
+    public static void SetDefaults(Item item)
+    {
+      item.width = 44;
+      item.height = 36;
+    }
   }
 }
