@@ -14,5 +14,7 @@ namespace ChensGradiusMod.Tiles.Banners
     protected override string MapName => "Big Core Custom Banner";
 
     protected override Color MinimapColor => new Color(8, 96, 192);
+
+    protected override string Texture => "ChensGradiusMod/Sprites/BigCoreCustomBannerTile";
   }
 }

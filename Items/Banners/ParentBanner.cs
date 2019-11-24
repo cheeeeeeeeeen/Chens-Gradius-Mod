@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Banners
       item.placeStyle = PlaceStyle;
     }
 
-    public override string Texture => "ChensGradiusMod/Sprites/PlaceholderBanner";
+    public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustomBanner";
 
     protected virtual int PartnerTile => 0;
 
