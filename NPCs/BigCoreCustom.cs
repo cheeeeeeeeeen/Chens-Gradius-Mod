@@ -141,12 +141,6 @@ namespace ChensGradiusMod.NPCs
       potionType = ItemID.SuperHealingPotion;
     }
 
-    public override bool CheckDead()
-    {
-      // GradiusHelper.AchievementLibUnlock("From Myth To Legend");
-      return base.CheckDead();
-    }
-
     public override void SendExtraAI(BinaryWriter writer)
     {
       base.SendExtraAI(writer);

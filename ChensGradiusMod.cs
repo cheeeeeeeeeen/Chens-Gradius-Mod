@@ -38,23 +38,6 @@ namespace ChensGradiusMod
                     ModContent.ItemType<IntermezzoMusicBox>(),
                     ModContent.TileType<IntermezzoMusicBoxTile>());
       }
-
-      //Mod achievementLib = ModLoader.GetMod("AchievementLib");
-      //if (achievementLib != null)
-      //{
-      //  achievementLib.Call("AddAchievement", this, "Bydo Technology",
-      //                      "Create an indestructible weapon made of alien flesh.",
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-      //  achievementLib.Call("AddAchievement", this, "Wreek Weapon",
-      //                      "Create an Option, an invulnerable drone which copies the host's attacks.",
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-      //  achievementLib.Call("AddAchievement", this, "From Myth To Legend",
-      //                      "Create your own legend by destroying a Big Core.",
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: true),
-      //                      GradiusAchievement.TextureString("PlaceholderAchievement", locked: false));
-      //}
     }
 
     public override void Unload()

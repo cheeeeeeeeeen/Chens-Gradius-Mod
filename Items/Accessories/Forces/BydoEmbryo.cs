@@ -70,11 +70,6 @@ namespace ChensGradiusMod.Items.Accessories.Forces
       recipe.AddRecipe();
     }
 
-    public override void OnCraft(Recipe recipe)
-    {
-      // GradiusHelper.AchievementLibUnlock("Bydo Technology", Main.LocalPlayer);
-    }
-
     protected void DeployForce(Player player)
     {
       if (GradiusHelper.IsSameClientOwner(player) && !IsForceAlreadyDeployed(player))

@@ -107,17 +107,6 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*][SPOILER="Search Option Showcase"][IMG]https://i.imgur.com/AXClUc8.gif[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
-[B][S]Additional Content[/S][/B]
-[S]The following are additional contents thanks to other mods. They are not required, but recommended.[/S]
-[LIST]
-[*][S][B][U]AchievementLib[/U][/B]- Thanks to this mod, it is possible to create Gradius-related achievements! [URL='https://forums.terraria.org/index.php?threads/achievementlib.83635/']tModLoader - AchievementLib[/URL][/S]
-[LIST]
-[*][S]Bydo Technology - Create an indestructible weapon made of alien flesh.[/S]
-[*][S]Wreek Weapon - Create an Option, an invulnerable drone which copies the host's attacks.[/S]
-[*][S]From Myth To Legend - Create your own legend by destroying a Big Core.[/S]
-[/LIST]
-[/LIST]
-[I]AchievementLib[/I] is still being developed upon, but my code is ready to add these achievements. Stay tuned!
 
 [B]New Enemies[/B]
 [LIST=1]

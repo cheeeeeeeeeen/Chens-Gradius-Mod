@@ -236,20 +236,6 @@ namespace ChensGradiusMod
       catch { proj.active = false; }
     }
 
-    //public static bool AchievementLibUnlock(string achievement, Player player = null)
-    //{
-    //  Mod achievementLib = ModLoader.GetMod("AchievementLib");
-    //  if (achievementLib != null)
-    //  {
-    //    if (player == null) achievementLib.Call("UnlockGLobal", InternalModName, achievement);
-    //    else achievementLib.Call("UnlockLocal", InternalModName, achievement, player);
-
-    //    return true;
-    //  }
-
-    //  return false;
-    //}
-
     public static int? FindEquippedAccessory(Player player, int accType)
     {
       for (int i = LowerAccessorySlot; i <= HigherAccessorySlot; i++)
