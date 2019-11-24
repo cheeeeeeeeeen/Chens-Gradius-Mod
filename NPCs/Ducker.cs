@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -49,6 +50,7 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 50;
       npc.noGravity = true;
+      bannerItem = ModContent.ItemType<DuckerBanner>();
     }
 
     public override void FindFrame(int frameHeight)

@@ -1,3 +1,4 @@
+using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
@@ -62,6 +63,7 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 30;
       npc.noGravity = true;
       npc.noTileCollide = true;
+      bannerItem = ModContent.ItemType<GarunBanner>();
     }
 
     public override bool PreAI()

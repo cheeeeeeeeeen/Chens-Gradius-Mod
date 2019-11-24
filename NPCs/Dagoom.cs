@@ -1,3 +1,4 @@
+using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
@@ -57,6 +58,7 @@ namespace ChensGradiusMod.NPCs
       npc.behindTiles = true;
       npc.noGravity = true;
       npc.noTileCollide = false;
+      bannerItem = ModContent.ItemType<DagoomBanner>();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

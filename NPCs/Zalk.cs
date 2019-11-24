@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -46,6 +47,7 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 40;
       npc.noGravity = true;
       npc.noTileCollide = true;
+      bannerItem = ModContent.ItemType<ZalkBanner>();
     }
 
     public override bool PreAI()

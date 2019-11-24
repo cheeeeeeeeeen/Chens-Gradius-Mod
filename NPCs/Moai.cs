@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.Items;
+using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
@@ -42,6 +43,7 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 0;
       npc.behindTiles = true;
+      bannerItem = ModContent.ItemType<MoaiBanner>();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

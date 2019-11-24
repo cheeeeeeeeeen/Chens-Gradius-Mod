@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -58,6 +59,7 @@ namespace ChensGradiusMod.NPCs
       npc.npcSlots = 1;
       npc.boss = true;
       music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/AircraftCarrier");
+      bannerItem = ModContent.ItemType<BigCoreCustomBanner>();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

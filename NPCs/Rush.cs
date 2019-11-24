@@ -1,7 +1,9 @@
+using ChensGradiusMod.Items.Banners;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -45,6 +47,7 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 17;
       npc.noGravity = true;
       npc.noTileCollide = true;
+      bannerItem = ModContent.ItemType<RushBanner>();
     }
 
     public override bool PreAI()

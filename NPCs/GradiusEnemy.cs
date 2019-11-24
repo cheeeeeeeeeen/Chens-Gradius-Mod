@@ -40,6 +40,7 @@ namespace ChensGradiusMod.NPCs
 
       npc.aiStyle = -1;
       aiType = 0;
+      banner = npc.type;
     }
 
     public override void PostAI() => ForceDefaults();

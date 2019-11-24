@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -45,6 +46,7 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 50;
       npc.noGravity = true;
       npc.behindTiles = true;
+      bannerItem = ModContent.ItemType<GraziaBanner>();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

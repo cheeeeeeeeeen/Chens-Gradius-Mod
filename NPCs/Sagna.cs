@@ -1,4 +1,5 @@
-﻿using ChensGradiusMod.Projectiles.Enemies;
+﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -60,6 +61,7 @@ namespace ChensGradiusMod.NPCs
       npc.knockBackResist = 0f;
       npc.defense = 50;
       npc.noGravity = true;
+      bannerItem = ModContent.ItemType<SagnaBanner>();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
