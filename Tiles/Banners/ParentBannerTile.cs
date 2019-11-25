@@ -46,6 +46,6 @@ namespace ChensGradiusMod.Tiles.Banners
       if (i % 2 == 1) spriteEffects = SpriteEffects.FlipHorizontally;
     }
 
-    protected override string Texture => $"ChensGradiusMod/Sprites/{Name}";
+    protected override string Texture => $"ChensGradiusMod/Sprites/{GetType().Name}";
   }
 }
