@@ -25,6 +25,7 @@ namespace ChensGradiusMod.NPCs
           npc.HitSound = SoundID.NPCHit4;
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death");
           break;
+
         case (sbyte)Types.Large:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
@@ -61,6 +62,7 @@ namespace ChensGradiusMod.NPCs
               case Types.Large:
                 RetaliationSpread(npc.Center);
                 break;
+
               case Types.Boss:
                 RetaliationExplode(npc.Center);
                 break;

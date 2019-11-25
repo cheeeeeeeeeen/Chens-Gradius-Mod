@@ -210,6 +210,7 @@ namespace ChensGradiusMod.NPCs
         case States.Fall:
           npc.velocity.X = XSpeed * xDirection;
           break;
+
         case States.Spray:
           npc.velocity.X = 0f;
           break;
@@ -225,11 +226,13 @@ namespace ChensGradiusMod.NPCs
           if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, 0f);
           else npc.velocity.Y = Math.Max(npc.velocity.Y, 0f);
           break;
+
         case States.Fall:
           npc.velocity.Y += YGravity * yDirection;
           if (yDirection > 0) npc.velocity.Y = Math.Min(npc.velocity.Y, MaxYSpeed);
           else npc.velocity.Y = Math.Max(npc.velocity.Y, -MaxYSpeed);
           break;
+
         case States.Spray:
           npc.velocity.Y = 0f;
           break;
@@ -258,6 +261,7 @@ namespace ChensGradiusMod.NPCs
             else mode = States.Fall;
           }
           break;
+
         case States.Fall:
           if (beforeVelocity.Y != npc.velocity.Y)
           {

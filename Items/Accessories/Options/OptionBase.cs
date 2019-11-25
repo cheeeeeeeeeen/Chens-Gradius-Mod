@@ -72,7 +72,9 @@ namespace ChensGradiusMod.Items.Accessories.Options
              !ModPlayer(player).aimOption;
     }
 
-    protected virtual void UpgradeUsualStations(ModRecipe recipe) { }
+    protected virtual void UpgradeUsualStations(ModRecipe recipe)
+    {
+    }
 
     protected virtual void UpgradeUsualRecipe(ModRecipe recipe)
     {

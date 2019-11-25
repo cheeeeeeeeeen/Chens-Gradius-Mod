@@ -89,6 +89,7 @@ namespace ChensGradiusMod.NPCs
           existenceTick++;
           RegularAssaultBehavior();
           break;
+
         case States.Exit:
           ExitBehavior();
           break;
@@ -118,7 +119,9 @@ namespace ChensGradiusMod.NPCs
       return false;
     }
 
-    public override void FindFrame(int frameHeight) { }
+    public override void FindFrame(int frameHeight)
+    {
+    }
 
     public override bool? CanBeHitByItem(Player player, Item item)
     {

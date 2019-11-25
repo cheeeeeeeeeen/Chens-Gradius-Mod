@@ -78,6 +78,7 @@ namespace ChensGradiusMod.NPCs
         case States.Vertical:
           MoveVertically();
           break;
+
         case States.Horizontal:
           MoveHorizontally();
           break;

@@ -69,7 +69,9 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
       OptionSpawnSoundEffect();
     }
 
-    public override void PostAI() { }
+    public override void PostAI()
+    {
+    }
 
     public override string Texture => "ChensGradiusMod/Sprites/OptionSeedSheet";
 

@@ -184,11 +184,13 @@ namespace ChensGradiusMod
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceOut"),
                            forceProjectile.Center);
             break;
+
           case (int)ForceBase.States.Detached:
             forceProjectile.tileCollide = false;
             forceProjectile.velocity = new Vector2();
             fbProj.mode = (int)ForceBase.States.Pulled;
             break;
+
           case (int)ForceBase.States.Launched:
           case (int)ForceBase.States.Pulled:
             break;
@@ -271,9 +273,11 @@ namespace ChensGradiusMod
                   }
                   RotateBehaviorGrouping();
                   break;
+
                 case (int)RotateOptionBase.States.Rotating:
                   RotateBehaviorRevolving();
                   break;
+
                 case (int)RotateOptionBase.States.Recovering:
                   RotateBehaviorRecovering();
                   break;

@@ -80,6 +80,7 @@ namespace ChensGradiusMod.NPCs
             goto case (int)States.Aggressive;
           }
           break;
+
         case (int)States.Aggressive:
           if (++attackTick >= AttackTickDelay)
           {
@@ -92,6 +93,7 @@ namespace ChensGradiusMod.NPCs
             }
           }
           break;
+
         case (int)States.Vulnerable:
           if (++vulnerableTick >= VulnerableTime)
           {
@@ -99,6 +101,7 @@ namespace ChensGradiusMod.NPCs
             mode = (int)States.Resting;
           }
           break;
+
         case (int)States.Resting:
           if (++restTick >= RestingTime)
           {
@@ -117,6 +120,7 @@ namespace ChensGradiusMod.NPCs
         case (int)States.Resting:
           npc.frame.Y = 0;
           break;
+
         case (int)States.Aggressive:
         case (int)States.Vulnerable:
           npc.frame.Y = frameHeight;

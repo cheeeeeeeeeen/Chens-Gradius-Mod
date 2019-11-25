@@ -1,11 +1,11 @@
-﻿using Terraria.ID;
-using Terraria.ModLoader;
+﻿using ChensGradiusMod.NPCs;
 using Terraria;
-using ChensGradiusMod.NPCs;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Spawners
 {
-  public class BigBlueBizarreLens: ModItem
+  public class BigBlueBizarreLens : ModItem
   {
     public override void SetStaticDefaults()
     {
@@ -31,12 +31,7 @@ namespace ChensGradiusMod.Items.Spawners
 
     public override bool CanUseItem(Player player)
     {
-      if (!CanSpawnAnother && NPC.AnyNPCs(BossType))
-      {
-        return false;
-      }
-
-      return true;
+      return CanSpawnAnother || !NPC.AnyNPCs(BossType);
     }
 
     public override bool UseItem(Player player)

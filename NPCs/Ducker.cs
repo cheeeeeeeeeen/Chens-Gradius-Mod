@@ -64,6 +64,7 @@ namespace ChensGradiusMod.NPCs
             if (++FrameCounter > 5) FrameCounter = 0;
           }
           break;
+
         case States.Land:
           if (++FrameTick >= FrameSpeed)
           {
@@ -72,6 +73,7 @@ namespace ChensGradiusMod.NPCs
             if (FrameCounter <= 9 && FrameCounter > 5) SwitchRunMode();
           }
           break;
+
         case States.Jump:
           if (FrameCounter < 13)
           {
@@ -82,6 +84,7 @@ namespace ChensGradiusMod.NPCs
             }
           }
           break;
+
         case States.Target:
           if (++FrameTick >= FrameSpeed)
           {
@@ -89,6 +92,7 @@ namespace ChensGradiusMod.NPCs
             if (TurretManagement()) mode = States.Fire;
           }
           break;
+
         case States.Fire:
           if (++FrameTick >= FrameSpeed)
           {
@@ -97,6 +101,7 @@ namespace ChensGradiusMod.NPCs
             mode = States.Recompose;
           }
           break;
+
         case States.Recompose:
           if (++FrameTick >= FrameSpeed)
           {
@@ -163,8 +168,6 @@ namespace ChensGradiusMod.NPCs
 
     public override void AI()
     {
-
-
       switch (mode)
       {
         case States.Run:
@@ -237,6 +240,7 @@ namespace ChensGradiusMod.NPCs
           }
           else HaltMovement();
           break;
+
         case States.Fire:
         case States.Land:
         case States.Recompose:
@@ -316,7 +320,6 @@ namespace ChensGradiusMod.NPCs
 
     private bool WillHitWall()
     {
-
       return Collision.SolidCollision(npc.position + new Vector2(16f * Math.Sign(npc.velocity.X), 2f),
                                       npc.width, npc.height - 4);
     }

@@ -140,14 +140,17 @@ namespace ChensGradiusMod.Projectiles.Forces
               vX = 0f;
               vY = 1f;
               break;
+
             case 1:
               vX = 0f;
               vY = -1f;
               break;
+
             case 2:
               vX = (float)Math.Cos(MathHelper.ToRadians(15f)) * projectile.spriteDirection;
               vY = (float)-Math.Sin(MathHelper.ToRadians(15f));
               break;
+
             case 3:
               vX = (float)Math.Cos(MathHelper.ToRadians(15f)) * projectile.spriteDirection;
               vY = (float)Math.Sin(MathHelper.ToRadians(15f));
@@ -168,6 +171,7 @@ namespace ChensGradiusMod.Projectiles.Forces
             case 0:
               vY = 5f;
               break;
+
             case 1:
               vY = -5f;
               break;
@@ -183,7 +187,9 @@ namespace ChensGradiusMod.Projectiles.Forces
                          projectile.Center);
     }
 
-    public virtual void SpecialDetachActions() { }
+    public virtual void SpecialDetachActions()
+    {
+    }
 
     public void BattleMode()
     {

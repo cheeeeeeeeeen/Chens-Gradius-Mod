@@ -81,6 +81,7 @@ namespace ChensGradiusMod.NPCs
             initializedAction = false;
           }
           break;
+
         case States.Intercept:
           if (!initializedAction) initializedAction = InterceptBehavior();
           if (InterceptToRetreat())

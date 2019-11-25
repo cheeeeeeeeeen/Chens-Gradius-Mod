@@ -16,7 +16,9 @@ namespace ChensGradiusMod
     public static ModHotKey forceActionKey;
     public static ModHotKey optionActionKey;
 
-    public ChensGradiusMod() { }
+    public ChensGradiusMod()
+    {
+    }
 
     public override void Load()
     {

@@ -108,6 +108,7 @@ namespace ChensGradiusMod.NPCs
           }
           redeployTick = Math.Min(redeployTick, RedeployRate);
           break;
+
         case States.Deploy:
           if (++deployTick >= DeployRate)
           {
@@ -144,6 +145,7 @@ namespace ChensGradiusMod.NPCs
             else limit = Main.npcFrameCount[npc.type];
             if (++FrameCounter >= limit - 1) mode = States.Deploy;
             break;
+
           case States.Close:
             if (yDirection > 0) limit = 0;
             else limit = 4;

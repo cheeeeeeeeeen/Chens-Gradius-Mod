@@ -112,10 +112,12 @@ namespace ChensGradiusMod.Projectiles.Options.Search
         case States.Follow:
           result = base.SpawnDuplicateProjectile(p);
           break;
+
         case States.Seek:
         case States.Return:
           result = -1;
           break;
+
         case States.Pursue:
           if (++fireCounter < FireRate) goto case States.Seek;
           else
