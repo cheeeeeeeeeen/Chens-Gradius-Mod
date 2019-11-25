@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<RushBanner>();
 
-    protected override string MapName => "Rush Banner";
-
     protected override Color MinimapColor => new Color(136, 64, 176);
   }
 }

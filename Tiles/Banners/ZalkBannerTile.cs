@@ -11,10 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<ZalkBanner>();
 
-    protected override string MapName => "Zalk Banner";
-
     protected override Color MinimapColor => new Color(160, 208, 192);
-
-    protected override string Texture => "ChensGradiusMod/Sprites/ZalkBannerTile";
   }
 }

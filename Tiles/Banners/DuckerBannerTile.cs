@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<DuckerBanner>();
 
-    protected override string MapName => "Ducker Banner";
-
     protected override Color MinimapColor => new Color(224, 104, 72);
   }
 }

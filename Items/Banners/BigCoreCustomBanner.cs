@@ -12,8 +12,6 @@ namespace ChensGradiusMod.Items.Banners
       item.rare = 2;
     }
 
-    public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustomBanner";
-
     protected override int PartnerTile => ModContent.TileType<BigCoreCustomBannerTile>();
   }
 }

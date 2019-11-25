@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<DagoomBanner>();
 
-    protected override string MapName => "Dagoom Banner";
-
     protected override Color MinimapColor => new Color(64, 176, 176);
   }
 }

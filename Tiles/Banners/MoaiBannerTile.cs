@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<MoaiBanner>();
 
-    protected override string MapName => "Moai Banner";
-
     protected override Color MinimapColor => new Color(120, 72, 0);
   }
 }

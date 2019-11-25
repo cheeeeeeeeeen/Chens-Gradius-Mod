@@ -11,10 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<GraziaBanner>();
 
-    protected override string MapName => "Grazia Banner";
-
     protected override Color MinimapColor => new Color(216, 176, 0);
-
-    protected override string Texture => "ChensGradiusMod/Sprites/GraziaBannerTile";
   }
 }

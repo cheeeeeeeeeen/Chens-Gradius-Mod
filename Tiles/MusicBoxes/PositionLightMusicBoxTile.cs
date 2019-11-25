@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
   {
     protected override Color MinimapColor => new Color(200, 200, 200);
 
-    protected override string MusicName => "The Position Light";
+    protected override string MusicName => $"The {base.MusicName}";
 
     protected override int ItemType => ModContent.ItemType<PositionLightMusicBox>();
   }

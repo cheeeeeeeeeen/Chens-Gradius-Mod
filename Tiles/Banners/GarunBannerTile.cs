@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<GarunBanner>();
 
-    protected override string MapName => "Garun Banner";
-
     protected override Color MinimapColor => new Color(32, 80, 64);
   }
 }

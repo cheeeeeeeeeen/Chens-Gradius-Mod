@@ -10,6 +10,8 @@ namespace ChensGradiusMod.Tiles.Banners
   {
     protected virtual int NPCType => 0;
 
+    protected override string MapName => GradiusHelper.SplitCamelCase(Name.Substring(0, Name.Length - 4));
+
     public override void SetDefaults()
     {
       Main.tileFrameImportant[Type] = true;
@@ -44,6 +46,6 @@ namespace ChensGradiusMod.Tiles.Banners
       if (i % 2 == 1) spriteEffects = SpriteEffects.FlipHorizontally;
     }
 
-    protected override string Texture => "ChensGradiusMod/Sprites/BigCoreCustomBannerTile";
+    protected override string Texture => $"ChensGradiusMod/Sprites/{Name}";
   }
 }

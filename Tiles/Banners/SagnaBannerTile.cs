@@ -11,8 +11,6 @@ namespace ChensGradiusMod.Tiles.Banners
 
     protected override int ItemType => ModContent.ItemType<SagnaBanner>();
 
-    protected override string MapName => "Sagna Banner";
-
     protected override Color MinimapColor => new Color(128, 176, 160);
   }
 }

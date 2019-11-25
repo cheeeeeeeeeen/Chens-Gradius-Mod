@@ -8,8 +8,6 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
   {
     protected override Color MinimapColor => new Color(50, 50, 50);
 
-    protected override string MusicName => "Tabidachi";
-
     protected override int ItemType => ModContent.ItemType<TabidachiMusicBox>();
   }
 }
