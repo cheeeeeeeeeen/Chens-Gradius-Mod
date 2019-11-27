@@ -7,6 +7,9 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
   public abstract class RecurveOptionBase : OptionBase
   {
+    public const float AdjustSpeed = 2f;
+    public const float FixedAxisDistance = 64f;
+
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();

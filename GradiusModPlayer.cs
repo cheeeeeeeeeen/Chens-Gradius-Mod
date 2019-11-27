@@ -1,5 +1,6 @@
 ﻿using ChensGradiusMod.Items;
 using ChensGradiusMod.Items.Accessories.Options.Charge;
+using ChensGradiusMod.Items.Accessories.Options.Recurve;
 using ChensGradiusMod.Items.Accessories.Options.Rotate;
 using ChensGradiusMod.Projectiles.Forces;
 using ChensGradiusMod.Projectiles.Options;
@@ -46,9 +47,10 @@ namespace ChensGradiusMod
     public Projectile seedProjectile;
     public sbyte seedRotateDirection;
     public bool recurveOption;
-    public sbyte recurveSide;
+    public bool recurveSide;
     public bool recurveActionMode;
     public bool isRecurving;
+    public float recurveDistance;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -339,12 +341,13 @@ namespace ChensGradiusMod
       chargeMode = (int)ChargeMultipleBase.States.Following;
       isSearching = false;
       recurveActionMode = false;
+      recurveDistance = 128f;
     }
 
     private void ResetOtherVariables()
     {
       seedRotateDirection = 0;
-      recurveSide = 0;
+      recurveSide = false;
     }
 
     private bool HasAnyOptions()
@@ -439,7 +442,52 @@ namespace ChensGradiusMod
 
     private void RecurveBehavior()
     {
-      
+      if (GradiusHelper.IsSameClientOwner(player))
+      {
+        while (optionFlightPath.Count < MaxFlightPathCount)
+        {
+          optionFlightPath.Add(player.Center);
+        }
+
+        if (isRecurving)
+        {
+          recurveDistance += RecurveOptionBase.AdjustSpeed * recurveActionMode.ToDirectionInt();
+        }
+
+        int distance = OptionBaseObject.DistanceInterval;
+        double direction = GetDirection(Main.MouseWorld) - MathHelper.Pi;
+        float offsetY = recurveDistance * recurveSide.ToDirectionInt();
+        optionFlightPath[1 * distance - 1] = player.Center + new Vector2
+        {
+          X = (float)Math.Cos(direction) * RecurveOptionBase.FixedAxisDistance +
+              (float)Math.Cos(direction + MathHelper.PiOver2) * offsetY,
+          Y = (float)Math.Sin(direction) * RecurveOptionBase.FixedAxisDistance +
+              (float)Math.Sin(direction + MathHelper.PiOver2) * offsetY
+        };
+        optionFlightPath[2 * distance - 1] = player.Center + new Vector2
+        {
+          X = (float)Math.Cos(direction) * RecurveOptionBase.FixedAxisDistance +
+              (float)Math.Cos(direction + MathHelper.PiOver2) * -offsetY,
+          Y = (float)Math.Sin(direction) * RecurveOptionBase.FixedAxisDistance +
+              (float)Math.Sin(direction + MathHelper.PiOver2) * -offsetY
+        };
+        optionFlightPath[3 * distance - 1] = player.Center + new Vector2
+        {
+          X = (float)Math.Cos(direction) * RecurveOptionBase.FixedAxisDistance * 2 +
+              (float)Math.Cos(direction + MathHelper.PiOver2) * offsetY * 2,
+          Y = (float)Math.Sin(direction) * RecurveOptionBase.FixedAxisDistance * 2 +
+              (float)Math.Sin(direction + MathHelper.PiOver2) * offsetY * 2
+        };
+        optionFlightPath[4 * distance - 1] = player.Center + new Vector2
+        {
+          X = (float)Math.Cos(direction) * RecurveOptionBase.FixedAxisDistance * 2 +
+              (float)Math.Cos(direction + MathHelper.PiOver2) * -offsetY * 2,
+          Y = (float)Math.Sin(direction) * RecurveOptionBase.FixedAxisDistance * 2 +
+              (float)Math.Sin(direction + MathHelper.PiOver2) * -offsetY * 2
+        };
+      }
     }
+
+    private double GetDirection(Vector2 secondPoint) => (secondPoint - player.Center).ToRotation();
   }
 }
