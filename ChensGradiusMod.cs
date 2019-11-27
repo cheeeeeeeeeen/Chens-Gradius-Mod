@@ -1,5 +1,6 @@
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Projectiles.Enemies;
+using ChensGradiusMod.Projectiles.Options;
 using ChensGradiusMod.Tiles.MusicBoxes;
 using Microsoft.Xna.Framework;
 using System;
@@ -229,6 +230,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).aimOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).searchOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).recurveOption = reader.ReadBoolean();
             break;
           }
 
@@ -352,6 +354,41 @@ namespace ChensGradiusMod
           }
           else Main.PlaySound(soundType, soundPosition, soundStyle);
           break;
+
+        case PacketMessageType.RecurveUpdatePositions:
+          {
+            byte playerIndex = reader.ReadByte();
+            GradiusPlayer(playerIndex).PopulateOptionFlight();
+            GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval - 1] =
+              reader.ReadVector2();
+            GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 2 - 1] =
+              reader.ReadVector2();
+            GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 3 - 1] =
+              reader.ReadVector2();
+            GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 4 - 1] =
+              reader.ReadVector2();
+
+            if (GradiusHelper.IsServer())
+            {
+              ModPacket packet = GetPacket();
+              packet.Write((byte)PacketMessageType.RecurveUpdatePositions);
+              packet.Write(playerIndex);
+              packet.WriteVector2(
+                GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval - 1]
+              );
+              packet.WriteVector2(
+                GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 2 - 1]
+              );
+              packet.WriteVector2(
+                GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 3 - 1]
+              );
+              packet.WriteVector2(
+                GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 4 - 1]
+              );
+              packet.Send(-1, playerIndex);
+            }
+            break;
+          }
       }
     }
 
@@ -366,7 +403,8 @@ namespace ChensGradiusMod
       ClientChangesChargeMultiple,
       SpawnRetaliationBullet,
       ClientChangesSearchOption,
-      BroadcastSound
+      BroadcastSound,
+      RecurveUpdatePositions
     }
   }
 }

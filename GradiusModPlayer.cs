@@ -117,6 +117,7 @@ namespace ChensGradiusMod
       packet.Write(aimOption);
       packet.Write(searchOption);
       packet.Write(isSearching);
+      packet.Write(recurveOption);
       packet.Send(toWho, fromWho);
     }
 
@@ -270,8 +271,8 @@ namespace ChensGradiusMod
           }
 
           bool isRotateButNotFollowing = rotateMode != (int)RotateOptionBase.States.Following;
-          if (!GradiusHelper.IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f) ||
-              isRotateButNotFollowing)
+          if (!recurveOption && (!GradiusHelper.IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f)
+                                 || isRotateButNotFollowing))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
 
@@ -299,9 +300,9 @@ namespace ChensGradiusMod
                   break;
               }
             }
-            else if (recurveOption) RecurveBehavior();
             else optionFlightPath.Insert(0, player.Center);
           }
+          else if (recurveOption) RecurveBehavior();
         }
         else optionFlightPath.Insert(0, player.Center);
       }
@@ -324,6 +325,14 @@ namespace ChensGradiusMod
     {
       MakeForceBattle();
       MakeOptionSeedBattle();
+    }
+
+    public void PopulateOptionFlight()
+    {
+      while (optionFlightPath.Count < MaxFlightPathCount)
+      {
+        optionFlightPath.Add(player.Center);
+      }
     }
 
     private void ResetOptionVariables()
@@ -442,21 +451,22 @@ namespace ChensGradiusMod
 
     private void RecurveBehavior()
     {
+      PopulateOptionFlight();
+
       if (GradiusHelper.IsSameClientOwner(player))
       {
-        while (optionFlightPath.Count < MaxFlightPathCount)
-        {
-          optionFlightPath.Add(player.Center);
-        }
-
         if (isRecurving)
         {
           recurveDistance += RecurveOptionBase.AdjustSpeed * recurveActionMode.ToDirectionInt();
+          recurveDistance = Math.Max(recurveDistance, RecurveOptionBase.LeastAdjustment);
+          recurveDistance = Math.Min(recurveDistance, RecurveOptionBase.CapAdjustment);
         }
 
         int distance = OptionBaseObject.DistanceInterval;
         double direction = GetDirection(Main.MouseWorld) - MathHelper.Pi;
         float offsetY = recurveDistance * recurveSide.ToDirectionInt();
+        Vector2 oldPath = optionFlightPath[distance - 1];
+
         optionFlightPath[1 * distance - 1] = player.Center + new Vector2
         {
           X = (float)Math.Cos(direction) * RecurveOptionBase.FixedAxisDistance +
@@ -485,6 +495,19 @@ namespace ChensGradiusMod
           Y = (float)Math.Sin(direction) * RecurveOptionBase.FixedAxisDistance * 2 +
               (float)Math.Sin(direction + MathHelper.PiOver2) * -offsetY * 2
         };
+
+        if (GradiusHelper.IsNotSinglePlayer() &&
+            !GradiusHelper.IsEqualWithThreshold(optionFlightPath[distance - 1], oldPath, .05f))
+        {
+          ModPacket packet = mod.GetPacket();
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.RecurveUpdatePositions);
+          packet.Write((byte)player.whoAmI);
+          packet.WriteVector2(optionFlightPath[OptionBaseObject.DistanceInterval - 1]);
+          packet.WriteVector2(optionFlightPath[OptionBaseObject.DistanceInterval * 2 - 1]);
+          packet.WriteVector2(optionFlightPath[OptionBaseObject.DistanceInterval * 3 - 1]);
+          packet.WriteVector2(optionFlightPath[OptionBaseObject.DistanceInterval * 4 - 1]);
+          packet.Send();
+        }
       }
     }
 
