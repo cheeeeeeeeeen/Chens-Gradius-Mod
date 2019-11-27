@@ -3,9 +3,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Aim
+namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
-  public abstract class AimOptionBase : OptionBase
+  public abstract class RecurveOptionBase : OptionBase
   {
     public override void SetStaticDefaults()
     {
@@ -15,33 +15,33 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
 
     public override void PostUpdate()
     {
-      Lighting.AddLight(item.Center, 1f, .2f, .2f);
+      Lighting.AddLight(item.Center, 0f, 1f, 1f);
     }
 
-    protected override string ProjectileType => "Aim";
+    protected override string ProjectileType => "Recurve";
 
     protected override string OptionTooltip =>
-      "Deploys an Option type Aim.\n" +
+      "Deploys an Option type Recurve.\n" +
       "Some projectiles you create are copied by the drone.\n" +
-      "The drone will follow your flight path.\n" +
-      "Hold the Option Action Key to allow the option to shoot towards cursor position!";
+      "The drone will stay fixed in position depending on where your cursor is.\n" +
+      "Hold the Option Action Key to spread or suppress its distance from you!";
 
     protected override bool ModeChecks(Player player, bool includeSelf = true)
     {
       bool result = true;
-      if (includeSelf) result &= ModPlayer(player).aimOption;
+      if (includeSelf) result &= ModPlayer(player).recurveOption;
       return result &&
-             !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).searchOption;
+             !ModPlayer(player).aimOption &&
+             !ModPlayer(player).searchOption &&
+             !ModPlayer(player).freezeOption;
     }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
-      recipe.AddTile(TileID.AmmoBox);
+      recipe.AddTile(TileID.SkyMill);
     }
   }
 }

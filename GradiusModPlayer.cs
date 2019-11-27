@@ -45,6 +45,10 @@ namespace ChensGradiusMod
     public bool optionSeed;
     public Projectile seedProjectile;
     public sbyte seedRotateDirection;
+    public bool recurveOption;
+    public sbyte recurveSide;
+    public bool recurveActionMode;
+    public bool isRecurving;
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -66,6 +70,7 @@ namespace ChensGradiusMod
       searchOption = false;
       chargeMultiple = false;
       optionSeed = false;
+      recurveOption = false;
     }
 
     public override void UpdateDead()
@@ -239,6 +244,15 @@ namespace ChensGradiusMod
           chargeMode = (int)ChargeMultipleBase.States.Dying;
         }
       }
+      else if (recurveOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isRecurving = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding)
+        {
+          wasHolding = isRecurving = false;
+          recurveActionMode = !recurveActionMode;
+        }
+      }
     }
 
     public override void PreUpdate()
@@ -254,7 +268,7 @@ namespace ChensGradiusMod
           }
 
           bool isRotateButNotFollowing = rotateMode != (int)RotateOptionBase.States.Following;
-          if (!(optionFlightPath[0].X == player.Center.X && optionFlightPath[0].Y == player.Center.Y) ||
+          if (!GradiusHelper.IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f) ||
               isRotateButNotFollowing)
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
@@ -283,6 +297,7 @@ namespace ChensGradiusMod
                   break;
               }
             }
+            else if (recurveOption) RecurveBehavior();
             else optionFlightPath.Insert(0, player.Center);
           }
         }
@@ -323,11 +338,13 @@ namespace ChensGradiusMod
       wasHolding = false;
       chargeMode = (int)ChargeMultipleBase.States.Following;
       isSearching = false;
+      recurveActionMode = false;
     }
 
     private void ResetOtherVariables()
     {
       seedRotateDirection = 0;
+      recurveSide = 0;
     }
 
     private bool HasAnyOptions()
@@ -418,6 +435,11 @@ namespace ChensGradiusMod
       {
         rotateMode = (int)RotateOptionBase.States.Following;
       }
+    }
+
+    private void RecurveBehavior()
+    {
+      
     }
   }
 }

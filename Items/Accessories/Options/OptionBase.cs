@@ -69,7 +69,9 @@ namespace ChensGradiusMod.Items.Accessories.Options
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption;
+             !ModPlayer(player).aimOption &&
+             !ModPlayer(player).recurveOption &&
+             !ModPlayer(player).searchOption;
     }
 
     protected virtual void UpgradeUsualStations(ModRecipe recipe)
