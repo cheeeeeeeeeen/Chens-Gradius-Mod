@@ -94,18 +94,28 @@ namespace ChensGradiusMod
           case "AddCustomDamage":
             {
               // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Internal class name of the GlobalProjectile containing the custom damage type. e.g. "MyGlobalProjectile"
-              // args[3]: Internal boolean variable name of your custom damage.
+              // args[2]: Either "ModProjectile" or "GlobalProjectile"
+              // args[3]: Internal class name of the ModProjectile or GlobalProjectile
+              //          containing the custom damage type. e.g. "MyGlobalProjectile"
+              // args[4]: Internal boolean variable name of your custom damage.
 
-              if (args.Length > 4)
+              if (args.Length > 5)
               {
                 Logger.Error($"ChensGradiusMod {functionName} Error:" +
                              "Wrong number of arguments.");
                 throw new Exception($"ChensGradiusMod {functionName} Error:" +
                                     "Wrong number of arguments.");
               }
+              if (args[2] as string != "ModProjectile" && args[2] as string != "GlobalProjectile")
+              {
+                Logger.Error($"ChensGradiusMod {functionName} Error:" +
+                             "3rd argument is not \"ModProjectile\" or \"GlobalProjectile\".");
+                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                                    "3rd argument is not \"ModProjectile\" or \"GlobalProjectile\".");
+              }
 
-              bool result = OptionRules.ImportDamageType(args[1] as string, args[2] as string, args[3] as string);
+              bool result = OptionRules.ImportDamageType(args[1] as string, args[2] as string,
+                                                         args[3] as string, args[4] as string);
               return result;
             }
 
