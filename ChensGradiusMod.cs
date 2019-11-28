@@ -199,6 +199,13 @@ namespace ChensGradiusMod
         ItemID.ViciousMushroom
       });
       RecipeGroup.RegisterGroup("ChensGradiusMod:EvilMushroom", group);
+
+      group = new RecipeGroup(() => Language.GetTextValue("Any Evil Bow"), new int[]
+      {
+        ItemID.TendonBow,
+        ItemID.DemonBow
+      });
+      RecipeGroup.RegisterGroup("ChensGradiusMod:EvilBow", group);
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)

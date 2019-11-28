@@ -35,6 +35,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
+      recipe.AddIngredient(ItemID.PulseBow);
+      recipe.AddIngredient(ItemID.Bananarang);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

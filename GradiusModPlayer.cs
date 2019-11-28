@@ -350,7 +350,7 @@ namespace ChensGradiusMod
       chargeMode = (int)ChargeMultipleBase.States.Following;
       isSearching = false;
       recurveActionMode = false;
-      recurveDistance = 128f;
+      recurveDistance = 96f;
     }
 
     private void ResetOtherVariables()
