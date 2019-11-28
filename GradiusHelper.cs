@@ -159,6 +159,8 @@ namespace ChensGradiusMod
 
     public static bool IsSinglePlayer() => Main.netMode == NetmodeID.SinglePlayer;
 
+    public static bool IsNotSinglePlayer() => Main.netMode != NetmodeID.SinglePlayer;
+
     public static bool IsServer() => Main.netMode == NetmodeID.Server;
 
     public static bool IsBydoAccessory(ModItem modItem)

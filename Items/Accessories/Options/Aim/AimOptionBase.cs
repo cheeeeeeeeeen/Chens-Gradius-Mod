@@ -35,6 +35,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
              !ModPlayer(player).rotateOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).chargeMultiple &&
+             !ModPlayer(player).recurveOption &&
              !ModPlayer(player).searchOption;
     }
 

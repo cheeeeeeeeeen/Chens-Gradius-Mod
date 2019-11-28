@@ -42,6 +42,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
              !ModPlayer(player).freezeOption &&
              !ModPlayer(player).normalOption &&
              !ModPlayer(player).aimOption &&
+             !ModPlayer(player).recurveOption &&
              !ModPlayer(player).searchOption;
     }
 
