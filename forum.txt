@@ -540,13 +540,14 @@ Using this method as a means to remove the problem of duplication is the [B]most
 [*][I]Invoke #1:[/I]   mod.Call("AddOptionRule", ProjectileID.Bee);
 [LIST]
 [*]Use this for adding a [I]vanilla[/I] projectile in the rule list.
+[*]Use this also for modded projectiles as long as the projectile integer type is known.
 [/LIST]
 [*][I]Invoke #2:[/I]   mod.Call("AddOptionRule", "Bluemagic", "PuriumArrowTrail");
 [LIST]
 [*]Use this for adding a [I]mod[/I] projectile in the rule list.
 [*]Make sure to use internal names and not the display names.
 [/LIST]
-[*][I]Where to put:[/I] In your Mod's Load() override.
+[*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and projectile integer types are known.
 [*][I]Returns:[/I] [B]True[/B] (Rule was added) or [B]False[/B] (Rule already existing)
 [/LIST]
 [*][B]"AddCustomDamage"[/B]
