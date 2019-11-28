@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 0.9.8
+[B][U][SIZE=6]Mod Version: 0.10.0
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -105,6 +105,14 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Hold down the Option Action Key to allow the Search Options to seek and pursue hostiles!
 [*]During their special ability, they produce less projectiles.
 [*][SPOILER="Search Option Showcase"][IMG]https://i.imgur.com/AXClUc8.gif[/IMG][/SPOILER]
+[/LIST]
+[*]Recurve Options
+[LIST]
+[*]Derived from Spacing Options along with its functionalities.
+[*]Their flight path behavior is slightly different from standard Options.
+[*]They stay fixed on their positions relative to the cursor direction from the player.
+[*]Hold down the Option Action Key to adjust the Options' distances from one another!
+[*][SPOILER="Recurve Option Showcase"][IMG]https://i.imgur.com/FZjsAAB.gif[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 
@@ -210,6 +218,12 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.10.0
+  - Implement Recurve Options
+  - Add new Cross Mod Content API for adding a custom damage type that is found on ModProjectile
+  - Change Option Seed crafting station to Work benches instead of Heavy work bench
+  - Add more Option rules for Calamity weapons
+
 0.9.8
   - Fix Rush desync issues and other enemies that might have a similar problem
   - Add an item which spawns Big Core
@@ -539,7 +553,14 @@ Using this method as a means to remove the problem of duplication is the [B]most
 [LIST]
 [*]This function will add [U]your mod's custom damage type[/U] so that the Options may copy those projectiles as well!
 [*][I]When to use:[/I] Use this function if you want to allow the Options to duplicate your projectiles with custom damage type.
-[*][I]Invoke:[/I]   mod.Call("AddCustomDamage", "CalamityMod", "CalamityGlobalProjectile", "rogue");
+[*][I]Invoke #1:[/I]   mod.Call("AddCustomDamage", "CalamityMod", "CalamityGlobalProjectile", "rogue");
+[LIST]
+[*]Use this if your projectile's custom damage type is in [I]GlobalProjectile[/I].
+[/LIST]
+[*][I]Invoke #2:[/I]   mod.Call("AddCustomDamage", "ChensGradiusMod", "laser");
+[LIST]
+[*]Use this if your projectile's custom damage type is in [I]ModProjectile[/I].
+[/LIST]
 [*][I]Where to put:[/I] In your Mod's Load() override.
 [*][I]Returns:[/I] [B]True[/B] (Custom Damage added for support) or [B]False[/B] (Custom Damage is already supported)
 [/LIST]

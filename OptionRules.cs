@@ -54,6 +54,10 @@ namespace ChensGradiusMod
       new AlienProjectile("CalamityMod", "ShatteredExplosion"), new AlienProjectile("CalamityMod", "ShatteredSun2"),
       new AlienProjectile("CalamityMod", "ShatteredSun3"), new AlienProjectile("CalamityMod", "DragonDust"),
       new AlienProjectile("CalamityMod", "WaterSpout"), new AlienProjectile("CalamityMod", "Brimlash2"),
+      new AlienProjectile("CalamityMod", "ScarletDevilBullet"), new AlienProjectile("CalamityMod", "ScarletBlast"),
+      new AlienProjectile("CalamityMod", "DraconicSpark"), new AlienProjectile("CalamityMod", "AMR2"),
+      new AlienProjectile("CalamityMod", "ThePackMinissile"), new AlienProjectile("CalamityMod", "AtaraxiaSplit"),
+      new AlienProjectile("CalamityMod", "ContagionBall"),
 
       new AlienProjectile("Bluemagic", "PuriumArrowTrail"),
 
