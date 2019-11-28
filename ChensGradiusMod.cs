@@ -68,9 +68,9 @@ namespace ChensGradiusMod
 
               if (args.Length > 3 && args.Length < 2)
               {
-                Logger.Error($"ChensGradiusMod {functionName} Error:" +
+                Logger.Error($"ChensGradiusMod {functionName} Error: " +
                              "Wrong number of arguments.");
-                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
               }
 
@@ -93,29 +93,32 @@ namespace ChensGradiusMod
 
           case "AddCustomDamage":
             {
+              // Global Projectile Way
               // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Either "ModProjectile" or "GlobalProjectile"
-              // args[3]: Internal class name of the ModProjectile or GlobalProjectile
-              //          containing the custom damage type. e.g. "MyGlobalProjectile"
-              // args[4]: Internal boolean variable name of your custom damage.
+              // args[2]: Internal class name of GlobalProjectile containing
+              //          the custom damage type. e.g. "MyGlobalProjectile"
+              // args[3]: Internal boolean variable name of your custom damage.
+              // ... or Mod Projectile Way
+              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              // args[2]: Internal boolean variable name of your custom damage
+              //          found in your ModProjectile.
 
-              if (args.Length > 5)
+              if (!(args.Length == 4 || args.Length == 2))
               {
-                Logger.Error($"ChensGradiusMod {functionName} Error:" +
-                             "Wrong number of arguments.");
-                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
               }
-              if (args[2] as string != "ModProjectile" && args[2] as string != "GlobalProjectile")
-              {
-                Logger.Error($"ChensGradiusMod {functionName} Error:" +
-                             "3rd argument is not \"ModProjectile\" or \"GlobalProjectile\".");
-                throw new Exception($"ChensGradiusMod {functionName} Error:" +
-                                    "3rd argument is not \"ModProjectile\" or \"GlobalProjectile\".");
-              }
 
-              bool result = OptionRules.ImportDamageType(args[1] as string, args[2] as string,
-                                                         args[3] as string, args[4] as string);
+              bool result = false;
+              if (args.Length == 4)
+              {
+                result = OptionRules.ImportDamageType(args[1] as string, args[2] as string,
+                                                      args[3] as string);
+              }
+              else if (args.Length == 3)
+              {
+                result = OptionRules.ImportDamageType(args[1] as string, args[2] as string);
+              }
               return result;
             }
 
@@ -125,9 +128,7 @@ namespace ChensGradiusMod
 
               if (args.Length > 2)
               {
-                Logger.Error($"ChensGradiusMod {functionName} Error:" +
-                             "Wrong number of arguments.");
-                throw new Exception($"ChensGradiusMod {functionName} Error:" +
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
               }
 
@@ -135,7 +136,7 @@ namespace ChensGradiusMod
               if (args[1] == null)
               {
                 result = null;
-                Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
+                Logger.Warn($"ChensGradiusMod {functionName} Warning: " +
                             "Given projectile type is null.");
               }
               else result = OptionRules.IsBanned(Convert.ToInt32(args[1]));
@@ -145,7 +146,7 @@ namespace ChensGradiusMod
       }
       catch (Exception e)
       {
-        Logger.Error("ChensGradiusMod Call Error: " + e.StackTrace + e.Message);
+        Logger.Error("ChensGradiusMod Call Error: " + e.Message + e.StackTrace);
       }
 
       return null;

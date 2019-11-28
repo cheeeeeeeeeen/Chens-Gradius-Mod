@@ -2,16 +2,11 @@
 {
   public class AlienProjectile : GeneralAlien
   {
-    public string projectileName;
+    public readonly string projectileName;
 
     public AlienProjectile(string mod, string proj) : base(mod)
     {
       projectileName = proj;
-    }
-
-    public AlienProjectile() : base("")
-    {
-      projectileName = "";
     }
 
     public bool CheckType(int projType)

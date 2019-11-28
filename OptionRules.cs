@@ -149,13 +149,26 @@ namespace ChensGradiusMod
       return false;
     }
 
-    public static bool ImportDamageType(string modName, string baseClass, string internalName, string damageType)
+    public static bool ImportDamageType(string modName, string internalName, string damageType)
     {
       if (!SupportedDamageTypes.Exists(sdt => modName == sdt.modName
                                               && internalName == sdt.internalName
                                               && damageType == sdt.damageType))
       {
-        AlienDamageType alienDamageType = new AlienDamageType(modName, baseClass, internalName, damageType);
+        AlienDamageType alienDamageType = new AlienDamageType(modName, internalName, damageType);
+        SupportedDamageTypes.Add(alienDamageType);
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool ImportDamageType(string modName, string damageType)
+    {
+      if (!SupportedDamageTypes.Exists(sdt => modName == sdt.modName
+                                              && damageType == sdt.damageType))
+      {
+        AlienDamageType alienDamageType = new AlienDamageType(modName, damageType);
         SupportedDamageTypes.Add(alienDamageType);
         return true;
       }
