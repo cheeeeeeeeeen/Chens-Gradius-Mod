@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).normalOption = true;
+      ModPlayer(player).normalOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -40,8 +40,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddIngredient(ItemID.ChlorophyteBar, 40);
       recipe.AddIngredient(ItemID.Wire, 600);
       recipe.AddIngredient(ItemID.Ruby, 24);
-      recipe.AddTile(TileID.Furnaces);
-      recipe.AddTile(TileID.Anvils);
+      recipe.AddTile(TileID.MythrilAnvil);
       recipe.SetResult(this);
       recipe.AddRecipe();
 
@@ -52,8 +51,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddIngredient(ItemID.ChlorophyteBar, 28);
       recipe.AddIngredient(ItemID.Wire, 420);
       recipe.AddIngredient(ItemID.Ruby, 16);
-      recipe.AddTile(TileID.Furnaces);
-      recipe.AddTile(TileID.Anvils);
+      recipe.AddTile(TileID.MythrilAnvil);
       recipe.SetResult(this);
       recipe.AddRecipe();
     }

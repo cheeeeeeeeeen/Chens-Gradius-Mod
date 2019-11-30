@@ -2,6 +2,7 @@
 using System;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Forces
 {
@@ -43,7 +44,7 @@ namespace ChensGradiusMod.Projectiles.Forces
     public override void SpecialDetachActions()
     {
       shootAngle = 0f;
-      GradiusHelper.FlipAngleDirection(ref shootAngle, projectile.spriteDirection);
+      FlipAngleDirection(ref shootAngle, projectile.spriteDirection);
     }
 
     protected override bool ForceCheck() => ModOwner.needleForce;
@@ -76,7 +77,7 @@ namespace ChensGradiusMod.Projectiles.Forces
     {
       base.UpdateDamage();
 
-      projectile.damage = Math.Max(Dmg, GradiusHelper.RoundOffToWhole(projectile.damage * StatReduction));
+      projectile.damage = Math.Max(Dmg, RoundOffToWhole(projectile.damage * StatReduction));
       projectile.knockBack *= StatReduction;
     }
 

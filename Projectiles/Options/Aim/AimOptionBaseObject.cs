@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Aim
 {
@@ -12,11 +13,11 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
       if (p.velocity != Vector2.Zero)
       {
         float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
-        float dAng = GradiusHelper.GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
-        float pAng = GradiusHelper.GetBearing(Vector2.Zero, p.velocity, false);
+        float dAng = GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
+        float pAng = GetBearing(Vector2.Zero, p.velocity, false);
         float offAng = MathHelper.ToRadians(pAng - dAng);
-        float aimDAng = MathHelper.ToRadians(GradiusHelper.GetBearing(offsetPos, toward, false));
-        retVal = GradiusHelper.MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
+        float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward, false));
+        retVal = MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
       }
 
       return retVal;

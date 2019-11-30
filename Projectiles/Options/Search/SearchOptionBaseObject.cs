@@ -2,6 +2,7 @@ using ChensGradiusMod.Projectiles.Options.Aim;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Search
 {
@@ -12,8 +13,8 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
-    private const float NearerPercentage = .8f;
-    private const float ReturnToFollowThreshold = 8f;
+    private const float NearerPercentage = .25f;
+    private const float ReturnToFollowThreshold = 4f;
     private const float RotateAccel = .15f;
     private const float MaxRotateSpeed = 7f;
 
@@ -138,7 +139,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
     private Vector2 ComputeTargetOffset(Vector2 origin, Vector2 destination, float offDistance)
     {
-      currentAngle = GradiusHelper.GetBearing(origin, destination, false);
+      currentAngle = GetBearing(origin, destination, false);
       currentAngle = MathHelper.ToRadians(currentAngle);
 
       return origin + currentAngle.ToRotationVector2() * offDistance;
@@ -150,7 +151,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     {
       if (target < 0 || !Target.active || Target.life <= 0)
       {
-        target = GradiusHelper.FindTarget(projectile.Center, Owner.position, SeekDistance);
+        target = FindTarget(projectile.Center, Owner.position, SeekDistance);
       }
 
       return target >= 0;

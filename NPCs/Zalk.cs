@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -94,14 +95,14 @@ namespace ChensGradiusMod.NPCs
           if (!initializedAction) initializedAction = RetreatBehavior();
           goto case States.Fire;
         case States.Fire:
-          if (GradiusHelper.IsNotMultiplayerClient())
+          if (IsNotMultiplayerClient())
           {
             if (Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= AttackDistance)
             {
               int adjustRate = FireRate;
               if (fireTick <= 0) setFireInterval = Main.rand.Next(0, RandomFireInterval + 1);
               adjustRate += setFireInterval;
-              if (mode == States.Retreat) adjustRate = GradiusHelper.RoundOffToWhole(adjustRate * .5f);
+              if (mode == States.Retreat) adjustRate = RoundOffToWhole(adjustRate * .5f);
               PerformAttack(adjustRate);
             }
             else fireTick = 0;
@@ -109,7 +110,7 @@ namespace ChensGradiusMod.NPCs
           break;
       }
 
-      if (GradiusHelper.IsServer() && oldMode != mode)
+      if (IsServer() && oldMode != mode)
       {
         npc.netUpdate = true;
         oldMode = mode;
@@ -189,7 +190,7 @@ namespace ChensGradiusMod.NPCs
 
     private bool InterceptToRetreat()
     {
-      return GradiusHelper.IsEqualWithThreshold(npc.Center.Y,
+      return IsEqualWithThreshold(npc.Center.Y,
                                                 TargetPlayer.Center.Y,
                                                 TravelSpeed + YThresholdToRetreat);
     }
@@ -202,11 +203,11 @@ namespace ChensGradiusMod.NPCs
 
     private void CreateSeries()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && npc.ai[0] < 1)
+      if (IsNotMultiplayerClient() && npc.ai[0] < 1)
       {
         for (int i = 1; i <= SeriesCount; i++)
         {
-          GradiusHelper.NewNPC(npc.Bottom.X + (XDistanceSeries * i * -persistDirection),
+          NewNPC(npc.Bottom.X + (XDistanceSeries * i * -persistDirection),
                                npc.Bottom.Y, ModContent.NPCType<Zalk>(), 0, 1);
         }
       }
@@ -217,7 +218,7 @@ namespace ChensGradiusMod.NPCs
       if (++fireTick >= conditionRate)
       {
         fireTick = 0;
-        Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
+        Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                  GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }

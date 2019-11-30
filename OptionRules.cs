@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
 {
@@ -127,7 +128,7 @@ namespace ChensGradiusMod
     public static bool CompleteRuleCheck(Projectile p)
     {
       return p.active && IsAllowed(p.type) && IsNotAYoyo(p) && !p.hostile && p.friendly &&
-             !p.npcProj && GradiusHelper.CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap;
+             !p.npcProj && CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap;
     }
 
     public static bool? ImportOptionRule(string modName, string projName)

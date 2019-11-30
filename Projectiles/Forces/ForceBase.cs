@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Forces
 {
@@ -258,14 +259,14 @@ namespace ChensGradiusMod.Projectiles.Forces
       if (!Main.mouseItem.IsAir) basis = Main.mouseItem;
       else if (!Owner.HeldItem.IsAir) basis = Owner.HeldItem;
 
-      if (basis == null || !GradiusHelper.CanDamage(basis) || GradiusHelper.IsBydoAccessory(basis.modItem))
+      if (basis == null || !GradiusHelper.CanDamage(basis) || IsBydoAccessory(basis.modItem))
       {
         projectile.damage = Dmg;
         projectile.knockBack = Kb;
       }
       else
       {
-        projectile.damage = GradiusHelper.RoundOffToWhole(basis.damage * BasisMultiplier);
+        projectile.damage = RoundOffToWhole(basis.damage * BasisMultiplier);
         projectile.knockBack = basis.knockBack * BasisMultiplier;
       }
     }
@@ -340,7 +341,7 @@ namespace ChensGradiusMod.Projectiles.Forces
 
     protected void PulledMovement()
     {
-      projectile.Center += GradiusHelper.MoveToward(projectile.Center, Owner.Center, PullSpeed);
+      projectile.Center += MoveToward(projectile.Center, Owner.Center, PullSpeed);
       projectile.spriteDirection = projectile.direction = UpdateDirection(projectile.direction);
     }
 
@@ -352,7 +353,7 @@ namespace ChensGradiusMod.Projectiles.Forces
         if (selectProj.active && selectProj.hostile && GradiusHelper.CanDamage(selectProj) &&
             projectile.Hitbox.Intersects(selectProj.Hitbox))
         {
-          GradiusHelper.ProjectileDestroy(selectProj);
+          ProjectileDestroy(selectProj);
         }
       }
     }

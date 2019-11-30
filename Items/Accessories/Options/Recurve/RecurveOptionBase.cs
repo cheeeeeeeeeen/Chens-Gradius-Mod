@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
@@ -11,6 +12,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public const float FixedAxisDistance = 32f;
     public const float LeastAdjustment = 8f;
     public const float CapAdjustment = 240f;
+
+    public override OptionTypes OptionType => OptionTypes.Recurve;
 
     public override void SetStaticDefaults()
     {
@@ -30,19 +33,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will stay fixed in position depending on where your cursor is.\n" +
       "Hold the Option Action Key to spread or suppress its distance from you!";
-
-    protected override bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).recurveOption;
-      return result &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption &&
-             !ModPlayer(player).searchOption &&
-             !ModPlayer(player).freezeOption;
-    }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {

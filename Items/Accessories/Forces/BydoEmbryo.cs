@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Forces
 {
@@ -50,7 +51,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
         TooltipLine newtip = new TooltipLine(mod, "ForceDamage", tooltipText);
         tooltips.Insert(1, newtip);
 
-        tooltipText = GradiusHelper.KnockbackTooltip(ModPlayer(clientPlayer).forceProjectile.knockBack);
+        tooltipText = KnockbackTooltip(ModPlayer(clientPlayer).forceProjectile.knockBack);
         newtip = new TooltipLine(mod, "ForceKnockback", tooltipText);
         tooltips.Insert(2, newtip);
       }
@@ -72,7 +73,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
     protected void DeployForce(Player player)
     {
-      if (GradiusHelper.IsSameClientOwner(player) && !IsForceAlreadyDeployed(player))
+      if (IsSameClientOwner(player) && !IsForceAlreadyDeployed(player))
       {
         float xSpawn;
         if (player.direction == 1) xSpawn = Main.screenPosition.X - 36;

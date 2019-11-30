@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Charge
 {
@@ -55,7 +56,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       {
         initialized = true;
         oldCurrentAngle = currentAngle = projectile.ai[0];
-        projectile.timeLeft = GradiusHelper.RoundOffToWhole(projectile.ai[1]);
+        projectile.timeLeft = RoundOffToWhole(projectile.ai[1]);
       }
 
       return initialized;
@@ -72,9 +73,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     public override void Kill(int timeLeft)
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
+      if (IsSameClientOwner(projectile))
       {
-        GradiusHelper.SpawnClonedItem(clonedAccessory, projectile.Center, projectile.velocity);
+        SpawnClonedItem(clonedAccessory, projectile.Center, projectile.velocity);
       }
     }
 
@@ -92,7 +93,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     private void CreateTrail()
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
+      if (IsSameClientOwner(projectile))
       {
         Projectile.NewProjectile(projectile.Center, Vector2.Zero, trailType, projectile.damage,
                                  projectile.knockBack, projectile.owner, projectile.rotation);
@@ -111,7 +112,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     private void SeekEnemy()
     {
       Vector2 ownerPosition = Main.player[projectile.owner].Center;
-      enemyTarget = GradiusHelper.FindTarget(projectile.Center, ownerPosition, DetectionRange);
+      enemyTarget = FindTarget(projectile.Center, ownerPosition, DetectionRange);
 
       if (oldEnemyTarget != enemyTarget)
       {
@@ -137,20 +138,20 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
           targetVector = playerTarget.Center;
         }
 
-        targetAngle = GradiusHelper.GetBearing(projectile.Center, targetVector);
-        if (GradiusHelper.IsSameClientOwner(projectile))
+        targetAngle = GetBearing(projectile.Center, targetVector);
+        if (IsSameClientOwner(projectile))
         {
           float chosenVariant = Main.rand.NextFloat(AngleVariation);
-          currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
-                                                     GradiusHelper.MaxRotate, AngleSpeed - chosenVariant);
+          currentAngle = AngularRotate(currentAngle, targetAngle, MinRotate,
+                                                     MaxRotate, AngleSpeed - chosenVariant);
           if (oldCurrentAngle != currentAngle)
           {
             oldCurrentAngle = currentAngle;
             projectile.netUpdate = true;
           }
         }
-        else currentAngle = GradiusHelper.AngularRotate(currentAngle, targetAngle, GradiusHelper.MinRotate,
-                                                        GradiusHelper.MaxRotate, AngleSpeed);
+        else currentAngle = AngularRotate(currentAngle, targetAngle, MinRotate,
+                                                        MaxRotate, AngleSpeed);
         projectile.rotation = MathHelper.ToRadians(currentAngle);
 
         projectile.velocity = Spd * new Vector2

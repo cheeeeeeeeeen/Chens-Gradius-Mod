@@ -7,6 +7,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -62,17 +63,7 @@ namespace ChensGradiusMod.NPCs
       bannerItem = ModContent.ItemType<BigCoreCustomBanner>();
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-      //if (!spawnInfo.playerSafe && Main.hardMode && NPC.downedGolemBoss
-      //    && spawnInfo.spawnTileY < GradiusHelper.SkyTilesYLocation)
-      //{
-      //  return .005f;
-      //}
-      //else return 0f;
-
-      return 0f;
-    }
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) => 0f;
 
     public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustom";
 
@@ -186,7 +177,7 @@ namespace ChensGradiusMod.NPCs
       {
         npc.TargetClosest(false);
         target = Main.player[npc.target];
-        if (GradiusHelper.IsNotMultiplayerClient()) npc.netUpdate = true;
+        if (IsNotMultiplayerClient()) npc.netUpdate = true;
 
         if (target.dead || !target.active)
         {
@@ -200,7 +191,7 @@ namespace ChensGradiusMod.NPCs
         {
           if (target.Center.X > npc.Center.X) regularAssaultDirection = 1;
           else if (target.Center.X < npc.Center.X) regularAssaultDirection = -1;
-          else if (GradiusHelper.IsNotMultiplayerClient())
+          else if (IsNotMultiplayerClient())
           {
             regularAssaultDirection = (sbyte)Main.rand.NextBool().ToDirectionInt();
             npc.netUpdate = true;
@@ -226,14 +217,14 @@ namespace ChensGradiusMod.NPCs
       float destinationX = target.Center.X + RegularAssaultHorizontalGap * -regularAssaultDirection;
       regularAssaultXCurrentSpeed += RegularAssaultAcceleration;
       regularAssaultXCurrentSpeed = Math.Min(regularAssaultXCurrentSpeed, RegularAssaultMaxSpeed);
-      float newX = GradiusHelper.ApproachValue(npc.Center.X, destinationX, regularAssaultXCurrentSpeed);
+      float newX = ApproachValue(npc.Center.X, destinationX, regularAssaultXCurrentSpeed);
       if (newX == destinationX) regularAssaultXCurrentSpeed = 0f;
       npc.Center = new Vector2(newX, npc.Center.Y);
     }
 
     private void PerformAttack()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && mode != States.Exit)
+      if (IsNotMultiplayerClient() && mode != States.Exit)
       {
         if (++fireTick >= FireRate)
         {
@@ -307,13 +298,13 @@ namespace ChensGradiusMod.NPCs
 
     private void BarrierStatus()
     {
-      if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .875f)) frameCounterX = 7;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .75f)) frameCounterX = 6;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .625f)) frameCounterX = 5;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .5f)) frameCounterX = 4;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .375f)) frameCounterX = 3;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .25f)) frameCounterX = 2;
-      else if (npc.life >= GradiusHelper.RoundOffToWhole(npc.lifeMax * .125f)) frameCounterX = 1;
+      if (npc.life >= RoundOffToWhole(npc.lifeMax * .875f)) frameCounterX = 7;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .75f)) frameCounterX = 6;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .625f)) frameCounterX = 5;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .5f)) frameCounterX = 4;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .375f)) frameCounterX = 3;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .25f)) frameCounterX = 2;
+      else if (npc.life >= RoundOffToWhole(npc.lifeMax * .125f)) frameCounterX = 1;
       else frameCounterX = 0;
     }
   }

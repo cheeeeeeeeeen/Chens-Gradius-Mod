@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -26,7 +27,7 @@ namespace ChensGradiusMod.NPCs
     public static void PerformAttack(NPC npc, ref int fireTick, int fireRate = FireRate,
                                      float atkDistance = AttackDistance)
     {
-      if (GradiusHelper.IsNotMultiplayerClient() &&
+      if (IsNotMultiplayerClient() &&
           Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= atkDistance)
       {
         if ((npc.direction >= 0 && npc.Center.X >= Main.player[npc.target].Center.X) ||
@@ -35,7 +36,7 @@ namespace ChensGradiusMod.NPCs
           if (++fireTick >= fireRate)
           {
             fireTick = 0;
-            Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
+            Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
             Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                      GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
           }

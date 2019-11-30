@@ -2,12 +2,15 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
   public abstract class OptionBase : ParentGradiusAccessory
   {
     private readonly int[] cloneProjectileCounts = new int[4] { 0, 0, 0, 0 };
+
+    public virtual OptionTypes OptionType => OptionTypes.Normal;
 
     public override void SetStaticDefaults()
     {
@@ -41,9 +44,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player) &&
-             GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player),
-                                                         OptionPosition);
+      return ModeChecks(ModPlayer(player)) &&
+             OptionsPredecessorRequirement(ModPlayer(player), OptionPosition);
     }
 
     protected virtual string ProjectileType => "";
@@ -60,19 +62,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       "The drone will follow your flight path.\n" +
       "This advanced drone uses Wreek technology,\n" +
       "infusing both technology and psychic elements together.";
-
-    protected virtual bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).normalOption;
-      return result &&
-             !ModPlayer(player).freezeOption &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).searchOption;
-    }
 
     protected virtual void UpgradeUsualStations(ModRecipe recipe)
     {
@@ -112,7 +101,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
           recipe.AddIngredient(ItemID.Wire, 300);
           goto case -1;
         case -1:
-          recipe.AddTile(TileID.TinkerersWorkbench);
           break;
       }
     }
@@ -120,15 +108,28 @@ namespace ChensGradiusMod.Items.Accessories.Options
     protected virtual int ComputeItemValue(int multiplier)
     {
       int value = Item.buyPrice(gold: 5) * multiplier;
-      if (ProjectileType != "") value += GradiusHelper.RoundOffToWhole(item.value * .25f);
+      if (ProjectileType != "") value += RoundOffToWhole(item.value * .25f);
 
       return value;
     }
 
+    protected bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      for (byte i = 0; i < gmPlayer.optionFlags.Length; i++)
+      {
+        if ((byte)OptionType == i) { if (includeSelf) result &= gmPlayer.optionFlags[i].Value; }
+        else result &= !gmPlayer.optionFlags[i].Value;
+
+        if (!result) break;
+      }
+      return result;
+    }
+
     protected void CreateOption(Player player, int optionPosition, string projectileName)
     {
-      if (GradiusHelper.OptionCheckSelfAndPredecessors(ModPlayer(player), optionPosition) &&
-          ModeChecks(player) && IsOptionNotDeployed(player, projectileName))
+      if (OptionCheckSelfAndPredecessors(ModPlayer(player), optionPosition) &&
+          ModeChecks(ModPlayer(player)) && IsOptionNotDeployed(player, projectileName))
       {
         Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f,
                                  mod.ProjectileType(projectileName), 0, 0f,
@@ -148,8 +149,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
           CreateOption(player, 3, ProjectileType + OptionName + "ThreeObject");
           goto case 3;
         case 3:
-          if (ModPlayer(player).optionFour)
-            CreateOption(player, 4, ProjectileType + OptionName + "FourObject");
+          CreateOption(player, 4, ProjectileType + OptionName + "FourObject");
           goto case 4;
         case 4:
           break;
@@ -183,9 +183,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     private bool IsOptionNotDeployed(Player player, string projectileName)
     {
       return player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0 &&
-             GradiusHelper.IsSameClientOwner(player);
+             IsSameClientOwner(player);
     }
-
-    internal enum Types : byte { Normal, Freeze, Rotate, Charge, Aim, Search, Recurve }
   }
 }

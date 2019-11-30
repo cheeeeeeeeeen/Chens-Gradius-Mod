@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).aimOption = true;
+      ModPlayer(player).aimOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -35,7 +35,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.SuspiciousLookingEye, 10);
+      recipe.AddIngredient(ItemID.SuspiciousLookingEye, 5);
+      recipe.AddIngredient(ItemID.MechanicalLens);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

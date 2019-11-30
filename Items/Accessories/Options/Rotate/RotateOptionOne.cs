@@ -23,14 +23,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).rotateOption = true;
+      ModPlayer(player).rotateOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, false);
+      return ModeChecks(ModPlayer(player), false);
     }
 
     protected override string ProjectileName => "OptionOneObject";

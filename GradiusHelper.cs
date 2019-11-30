@@ -23,6 +23,8 @@ namespace ChensGradiusMod
     public const int LowerAccessorySlot = 3;
     public const int HigherAccessorySlot = 9;
 
+    public enum OptionTypes : byte { Normal, Freeze, Rotate, Charge, Aim, Search, Recurve };
+
     public static void FreeListData(ref List<int> list, int buffer)
     {
       if (list.Count > buffer)

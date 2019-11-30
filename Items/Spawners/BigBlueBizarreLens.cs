@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Spawners
 {
@@ -36,9 +37,9 @@ namespace ChensGradiusMod.Items.Spawners
 
     public override bool UseItem(Player player)
     {
-      if (GradiusHelper.IsSameClientOwner(player))
+      if (IsSameClientOwner(player))
       {
-        GradiusHelper.SummonBoss(mod, player.Center, BossType, 100);
+        SummonBoss(mod, player.Center, BossType, 100);
         return true;
       }
 

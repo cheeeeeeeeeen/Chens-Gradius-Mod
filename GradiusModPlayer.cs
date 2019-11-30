@@ -11,13 +11,14 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
 {
   public class GradiusModPlayer : ModPlayer
   {
     private const int MaxFlightPathCount = 60;
-    private const float EquiAngle = GradiusHelper.FullAngle / MaxFlightPathCount;
+    private const float EquiAngle = FullAngle / MaxFlightPathCount;
 
     private Vector2 baitPoint;
     private int baitDirection;
@@ -36,26 +37,31 @@ namespace ChensGradiusMod
     public bool optionTwo;
     public bool optionThree;
     public bool optionFour;
-    public bool normalOption;
-    public bool freezeOption;
-    public bool aimOption;
-    public bool rotateOption;
-    public bool searchOption;
-    public bool chargeMultiple;
+    public Ref<bool> normalOption;
+    public Ref<bool> freezeOption;
+    public Ref<bool> aimOption;
+    public Ref<bool> rotateOption;
+    public Ref<bool> searchOption;
+    public Ref<bool> chargeMultiple;
     public int chargeMode;
     public bool optionSeed;
     public Projectile seedProjectile;
     public sbyte seedRotateDirection;
-    public bool recurveOption;
+    public Ref<bool> recurveOption;
     public bool recurveSide;
     public bool recurveActionMode;
     public bool isRecurving;
     public float recurveDistance;
+    public Ref<bool>[] optionFlags = new Ref<bool>[Enum.GetNames(typeof(OptionTypes)).Length];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
 
-    public GradiusModPlayer() => UpdateDead();
+    public GradiusModPlayer()
+    {
+      InitializationOnly();
+      UpdateDead();
+    }
 
     public override void ResetEffects()
     {
@@ -65,14 +71,14 @@ namespace ChensGradiusMod
       optionTwo = false;
       optionThree = false;
       optionFour = false;
-      normalOption = false;
-      freezeOption = false;
-      aimOption = false;
-      rotateOption = false;
-      searchOption = false;
-      chargeMultiple = false;
+      normalOption.Value = false;
+      freezeOption.Value = false;
+      aimOption.Value = false;
+      rotateOption.Value = false;
+      searchOption.Value = false;
+      chargeMultiple.Value = false;
       optionSeed = false;
-      recurveOption = false;
+      recurveOption.Value = false;
     }
 
     public override void UpdateDead()
@@ -107,17 +113,17 @@ namespace ChensGradiusMod
       packet.Write(optionTwo);
       packet.Write(optionThree);
       packet.Write(optionFour);
-      packet.Write(normalOption);
-      packet.Write(freezeOption);
-      packet.Write(rotateOption);
+      packet.Write(normalOption.Value);
+      packet.Write(freezeOption.Value);
+      packet.Write(rotateOption.Value);
       packet.Write(optionSeed);
       packet.Write(seedRotateDirection);
-      packet.Write(chargeMultiple);
+      packet.Write(chargeMultiple.Value);
       packet.Write(chargeMode);
-      packet.Write(aimOption);
-      packet.Write(searchOption);
+      packet.Write(aimOption.Value);
+      packet.Write(searchOption.Value);
       packet.Write(isSearching);
-      packet.Write(recurveOption);
+      packet.Write(recurveOption.Value);
       packet.Send(toWho, fromWho);
     }
 
@@ -205,17 +211,17 @@ namespace ChensGradiusMod
         }
       }
 
-      if (freezeOption)
+      if (freezeOption.Value)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isFreezing = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isFreezing = false;
       }
-      else if (aimOption)
+      else if (aimOption.Value)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isAiming = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isAiming = false;
       }
-      else if (rotateOption)
+      else if (rotateOption.Value)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed)
         {
@@ -229,12 +235,12 @@ namespace ChensGradiusMod
           revolveDirection = (sbyte)-revolveDirection;
         }
       }
-      else if (searchOption)
+      else if (searchOption.Value)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isSearching = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isSearching = false;
       }
-      else if (chargeMultiple && HasAnyChargeMultipleAccessory())
+      else if (chargeMultiple.Value && HasAnyChargeMultipleAccessory())
       {
         if (ChensGradiusMod.optionActionKey.JustPressed)
         {
@@ -247,7 +253,7 @@ namespace ChensGradiusMod
           chargeMode = (int)ChargeMultipleBase.States.Dying;
         }
       }
-      else if (recurveOption)
+      else if (recurveOption.Value)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isRecurving = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding)
@@ -271,13 +277,13 @@ namespace ChensGradiusMod
           }
 
           bool isRotateButNotFollowing = rotateMode != (int)RotateOptionBase.States.Following;
-          if (!recurveOption && (!GradiusHelper.IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f)
+          if (!recurveOption.Value && (!IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f)
                                  || isRotateButNotFollowing))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
 
-            if (freezeOption && isFreezing) FreezeBehavior();
-            else if (rotateOption && isRotateButNotFollowing)
+            if (freezeOption.Value && isFreezing) FreezeBehavior();
+            else if (rotateOption.Value && isRotateButNotFollowing)
             {
               switch (rotateMode)
               {
@@ -302,7 +308,7 @@ namespace ChensGradiusMod
             }
             else optionFlightPath.Insert(0, player.Center);
           }
-          else if (recurveOption) RecurveBehavior();
+          else if (recurveOption.Value) RecurveBehavior();
         }
         else optionFlightPath.Insert(0, player.Center);
       }
@@ -311,7 +317,7 @@ namespace ChensGradiusMod
 
     public override void PostUpdate()
     {
-      if (HasAnyOptions()) GradiusHelper.FreeListData(ref optionAlreadyProducedProjectiles, OptionBaseObject.MaxBuffer);
+      if (HasAnyOptions()) FreeListData(ref optionAlreadyProducedProjectiles, OptionBaseObject.MaxBuffer);
       if (GradiusGlobalItem.meleeHitbox[player.whoAmI].HasValue) GradiusGlobalItem.meleeHitbox[player.whoAmI] = null;
     }
 
@@ -359,22 +365,40 @@ namespace ChensGradiusMod
       recurveSide = false;
     }
 
+    private void InitializationOnly()
+    {
+      normalOption = new Ref<bool>(false);
+      rotateOption = new Ref<bool>(false);
+      freezeOption = new Ref<bool>(false);
+      chargeMultiple = new Ref<bool>(false);
+      aimOption = new Ref<bool>(false);
+      searchOption = new Ref<bool>(false);
+      recurveOption = new Ref<bool>(false);
+      optionFlags[(byte)OptionTypes.Normal] = normalOption;
+      optionFlags[(byte)OptionTypes.Rotate] = rotateOption;
+      optionFlags[(byte)OptionTypes.Freeze] = freezeOption;
+      optionFlags[(byte)OptionTypes.Aim] = aimOption;
+      optionFlags[(byte)OptionTypes.Charge] = chargeMultiple;
+      optionFlags[(byte)OptionTypes.Recurve] = recurveOption;
+      optionFlags[(byte)OptionTypes.Search] = searchOption;
+    }
+
     private bool HasAnyOptions()
     {
       return optionOne ||
-             (optionTwo && GradiusHelper.OptionsPredecessorRequirement(this, 2)) ||
-             (optionThree && GradiusHelper.OptionsPredecessorRequirement(this, 3)) ||
-             (optionFour && GradiusHelper.OptionsPredecessorRequirement(this, 4));
+             (optionTwo && OptionsPredecessorRequirement(this, 2)) ||
+             (optionThree && OptionsPredecessorRequirement(this, 3)) ||
+             (optionFour && OptionsPredecessorRequirement(this, 4));
     }
 
     private bool HasAnyChargeMultipleAccessory()
     {
-      return GradiusHelper.FindEquippedAccessory(player, ModContent.ItemType<ChargeMultipleOne>()) != null;
+      return FindEquippedAccessory(player, ModContent.ItemType<ChargeMultipleOne>()) != null;
     }
 
     private void MakeForceBattle()
     {
-      if (HasAForce() && GradiusHelper.IsSameClientOwner(forceProjectile) &&
+      if (HasAForce() && IsSameClientOwner(forceProjectile) &&
           forceProjectile.modProjectile is ForceBase fbProj)
       {
         fbProj.BattleMode();
@@ -383,7 +407,7 @@ namespace ChensGradiusMod
 
     private void MakeOptionSeedBattle()
     {
-      if (optionSeed && GradiusHelper.IsSameClientOwner(seedProjectile) &&
+      if (optionSeed && IsSameClientOwner(seedProjectile) &&
           seedProjectile.modProjectile is OptionSeedObject opSeed)
       {
         opSeed.BattleMode();
@@ -428,7 +452,7 @@ namespace ChensGradiusMod
     {
       FreezeBehavior(rotateActually: true);
 
-      GradiusHelper.NormalizeAngleDegrees(ref baitAngle);
+      NormalizeAngleDegrees(ref baitAngle);
       baitAngle += EquiAngle * revolveDirection;
 
       baitPoint.X = player.Center.X + ((float)Math.Cos(MathHelper.ToRadians(baitAngle)) * RotateOptionBase.Radius);
@@ -440,10 +464,10 @@ namespace ChensGradiusMod
     private void RotateBehaviorRecovering()
     {
       float recoverSpeed = Math.Min(RotateOptionBase.Speed, Vector2.Distance(player.Center, baitPoint));
-      baitPoint += GradiusHelper.MoveToward(baitPoint, player.Center, recoverSpeed);
+      baitPoint += MoveToward(baitPoint, player.Center, recoverSpeed);
       optionFlightPath.Insert(0, baitPoint);
 
-      if (GradiusHelper.IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.AcceptedThreshold))
+      if (IsEqualWithThreshold(baitPoint, player.Center, RotateOptionBase.AcceptedThreshold))
       {
         rotateMode = (int)RotateOptionBase.States.Following;
       }
@@ -453,7 +477,7 @@ namespace ChensGradiusMod
     {
       PopulateOptionFlight();
 
-      if (GradiusHelper.IsSameClientOwner(player))
+      if (IsSameClientOwner(player))
       {
         if (isRecurving)
         {
@@ -496,8 +520,8 @@ namespace ChensGradiusMod
               (float)Math.Sin(direction + MathHelper.PiOver2) * -offsetY * 2
         };
 
-        if (GradiusHelper.IsNotSinglePlayer() &&
-            !GradiusHelper.IsEqualWithThreshold(optionFlightPath[distance - 1], oldPath, .05f))
+        if (IsNotSinglePlayer() &&
+            !IsEqualWithThreshold(optionFlightPath[distance - 1], oldPath, .05f))
         {
           ModPacket packet = mod.GetPacket();
           packet.Write((byte)ChensGradiusMod.PacketMessageType.RecurveUpdatePositions);

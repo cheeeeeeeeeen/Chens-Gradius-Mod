@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Charge
 {
@@ -29,9 +30,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       {
         if (chargeTime > MinCharge)
         {
-          if (GradiusHelper.IsSameClientOwner(projectile))
+          if (IsSameClientOwner(projectile))
           {
-            float direction = GradiusHelper.GetBearing(projectile.Center, Main.MouseWorld);
+            float direction = GetBearing(projectile.Center, Main.MouseWorld);
             Vector2 vel = ChargeMultipleMissile.Spd * new Vector2
             {
               X = (float)Math.Cos(MathHelper.ToRadians(direction)),
@@ -50,7 +51,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
             if (Main.projectile[pInd].modProjectile is ChargeMultipleMissile cMM)
             {
-              Item accessory = Owner.armor[(int)GradiusHelper.FindEquippedAccessory(Owner, OptionAccessoryType)];
+              Item accessory = Owner.armor[(int)FindEquippedAccessory(Owner, OptionAccessoryType)];
               cMM.clonedAccessory = accessory.Clone();
 
               accessory.TurnToAir();

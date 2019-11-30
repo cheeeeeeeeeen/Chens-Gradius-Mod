@@ -6,6 +6,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -171,19 +172,19 @@ namespace ChensGradiusMod.NPCs
       npc.TargetClosest(false);
       Player retaliationTarget = Main.player[npc.target];
 
-      float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
+      float direction = MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
       direction = MathHelper.ToDegrees(direction);
       direction = Main.rand.NextFloat(direction - RetaliationSprayRandomAngleDifference,
                                       direction + RetaliationSprayRandomAngleDifference + .0001f);
       direction = MathHelper.ToRadians((float)Math.Round(direction, 4, MidpointRounding.AwayFromZero));
       Vector2 spawnVelocity = direction.ToRotationVector2() * RetaliationBulletSpeed;
 
-      if (GradiusHelper.IsSinglePlayer())
+      if (IsSinglePlayer())
       {
         Projectile.NewProjectile(spawnPoint, spawnVelocity, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                  GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }
-      else if (GradiusHelper.IsMultiplayerClient())
+      else if (IsMultiplayerClient())
       {
         ModPacket packet = mod.GetPacket();
 
@@ -200,13 +201,13 @@ namespace ChensGradiusMod.NPCs
 
     protected void RetaliationSpread(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
         int targetIndex = npc.target;
         npc.TargetClosest(false);
         Player retaliationTarget = Main.player[npc.target];
 
-        float direction = GradiusHelper.MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
+        float direction = MoveToward(npc.Center, retaliationTarget.Center).ToRotation();
         direction = MathHelper.ToDegrees(direction);
         float higherAngleBound = direction + RetaliationSpreadAngleDifference;
         float lowerAngleBound = direction - RetaliationSpreadAngleDifference;
@@ -228,11 +229,11 @@ namespace ChensGradiusMod.NPCs
 
     protected void RetaliationExplode(Vector2 spawnPoint)
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
-        float angleLength = GradiusHelper.FullAngle / RetaliationExplodeBulletNumberPerLayer;
+        float angleLength = FullAngle / RetaliationExplodeBulletNumberPerLayer;
         float currentVelocity = GradiusEnemyBullet.Spd;
-        int halfCounter = GradiusHelper.RoundOffToWhole(RetaliationExplodeBulletLayers * .5f);
+        int halfCounter = RoundOffToWhole(RetaliationExplodeBulletLayers * .5f);
 
         for (int i = 0; i < RetaliationExplodeBulletLayers; i++)
         {
@@ -278,7 +279,7 @@ namespace ChensGradiusMod.NPCs
 
     protected bool ConstantSync(ref int tick, int rate)
     {
-      if (GradiusHelper.IsServer())
+      if (IsServer())
       {
         if (++tick >= rate)
         {
@@ -304,7 +305,7 @@ namespace ChensGradiusMod.NPCs
       {
         case Types.Boss:
         case Types.Large:
-          damage = GradiusHelper.RoundOffToWhole(damage * IncomingDamageMultiplier);
+          damage = RoundOffToWhole(damage * IncomingDamageMultiplier);
           crit = false;
           knockback = 0f;
           break;

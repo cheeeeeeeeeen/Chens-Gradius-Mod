@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).freezeOption = true;
+      ModPlayer(player).freezeOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -35,8 +35,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.IceBlock, 400);
-      recipe.AddIngredient(ItemID.SnowBlock, 320);
+      recipe.AddIngredient(ItemID.FrozenTurtleShell);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

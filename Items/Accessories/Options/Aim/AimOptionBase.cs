@@ -2,11 +2,14 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
   public abstract class AimOptionBase : OptionBase
   {
+    public override OptionTypes OptionType => OptionTypes.Freeze;
+
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -25,19 +28,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to allow the option to shoot towards cursor position!";
-
-    protected override bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).aimOption;
-      return result &&
-             !ModPlayer(player).freezeOption &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).searchOption;
-    }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {

@@ -23,14 +23,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).chargeMultiple = true;
+      ModPlayer(player).chargeMultiple.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, false);
+      return ModeChecks(ModPlayer(player), false);
     }
 
     protected override string ProjectileName => "MultipleOneObject";

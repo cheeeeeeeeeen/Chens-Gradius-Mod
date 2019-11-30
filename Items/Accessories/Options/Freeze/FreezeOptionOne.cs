@@ -23,14 +23,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).freezeOption = true;
+      ModPlayer(player).freezeOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, false);
+      return ModeChecks(ModPlayer(player), false);
     }
 
     protected override string ProjectileName => "OptionOneObject";
@@ -40,8 +40,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.IceBlock, 100);
-      recipe.AddIngredient(ItemID.SnowBlock, 80);
+      recipe.AddIngredient(ItemID.SnowBlock, 150);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

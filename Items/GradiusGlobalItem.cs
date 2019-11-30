@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items
 {
@@ -10,7 +11,7 @@ namespace ChensGradiusMod.Items
 
     public override void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
     {
-      if (item.melee && GradiusHelper.CanDamage(item) && !item.noMelee)
+      if (item.melee && CanDamage(item) && !item.noMelee)
       {
         meleeHitbox[player.whoAmI] = hitbox;
       }

@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).recurveOption = true;
+      ModPlayer(player).recurveOption.Value = true;
       ModPlayer(player).recurveSide = hideVisual;
 
       base.UpdateAccessory(player, hideVisual);
@@ -31,7 +31,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, false);
+      return ModeChecks(ModPlayer(player), false);
     }
 
     protected override string ProjectileName => "OptionOneObject";

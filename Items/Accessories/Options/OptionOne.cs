@@ -23,14 +23,14 @@ namespace ChensGradiusMod.Items.Accessories.Options
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).normalOption = true;
+      ModPlayer(player).normalOption.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player, false);
+      return ModeChecks(ModPlayer(player), false);
     }
 
     protected override string ProjectileName => "OptionOneObject";
@@ -45,7 +45,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 20);
       recipe.AddIngredient(ItemID.Wire, 300);
       recipe.AddIngredient(ItemID.Topaz, 8);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
@@ -57,7 +56,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 14);
       recipe.AddIngredient(ItemID.Wire, 210);
       recipe.AddIngredient(ItemID.Topaz, 5);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
