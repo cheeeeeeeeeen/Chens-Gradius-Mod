@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -86,7 +87,7 @@ namespace ChensGradiusMod.NPCs
 
       PerformAttack();
 
-      if (GradiusHelper.IsServer() && oldMode != mode)
+      if (IsServer() && oldMode != mode)
       {
         oldMode = mode;
         npc.netUpdate = true;

@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -57,7 +58,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && persistDirection == 0)
+      if (IsNotMultiplayerClient() && persistDirection == 0)
       {
         persistDirection = (sbyte)Main.rand.NextBool().ToDirectionInt();
         npc.netUpdate = true;
@@ -263,9 +264,9 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
-        Vector2 vel = GradiusHelper.MoveToward(MouthCenter, Main.player[npc.target].Center, MoaiBubble.Spd);
+        Vector2 vel = MoveToward(MouthCenter, Main.player[npc.target].Center, MoaiBubble.Spd);
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
                                  MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
       }

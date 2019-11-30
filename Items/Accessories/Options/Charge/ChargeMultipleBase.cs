@@ -2,12 +2,15 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Charge
 {
   public abstract class ChargeMultipleBase : OptionBase
   {
     public enum States : int { Following, Charging, Dying };
+
+    public override OptionTypes OptionType => OptionTypes.Charge;
 
     public override void SetStaticDefaults()
     {
@@ -32,19 +35,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to have the drone charge energy!\n" +
       "Release the key to activate the drone's special attack sequence!";
-
-    protected override bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).chargeMultiple;
-      return result &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).freezeOption &&
-             !ModPlayer(player).normalOption &&
-             !ModPlayer(player).aimOption &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).searchOption;
-    }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {

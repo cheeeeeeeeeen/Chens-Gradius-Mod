@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -71,7 +72,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
+      if (IsNotMultiplayerClient() && !initialized)
       {
         int chosenYDir = Main.rand.NextBool().ToDirectionInt();
         Vector2 spawnPos = npc.position;
@@ -203,13 +204,13 @@ namespace ChensGradiusMod.NPCs
 
     private void SpawnRush()
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
         npc.TargetClosest(false);
         int xDirection = Math.Sign(Target.Center.X - npc.Center.X);
-        GradiusHelper.NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
-                             ai0: xDirection, ai1: -yDirection, ai3: npc.target,
-                             center: true);
+        NewNPC(npc.Center.X, npc.Center.Y, ModContent.NPCType<Rush>(),
+               ai0: xDirection, ai1: -yDirection, ai3: npc.target,
+               center: true);
 
         if (++rushCount >= TotalRushCount)
         {

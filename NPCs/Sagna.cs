@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -35,7 +36,7 @@ namespace ChensGradiusMod.NPCs
 
     public static float SpawnCondition(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < GradiusHelper.UnderworldTilesYLocation &&
+      if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
           spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
       {
         return .075f;
@@ -73,7 +74,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
+      if (IsNotMultiplayerClient() && !initialized)
       {
         int chosenYDir = Main.rand.NextBool().ToDirectionInt();
         Vector2 spawnPos = npc.position;
@@ -274,7 +275,7 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
         float radianAngle = 0f;
         for (int i = 0; i < 24; i++)

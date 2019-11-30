@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
@@ -35,9 +36,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
 
     public override bool CanEquipAccessory(Player player, int slot)
     {
-      return ModeChecks(player) &&
-             GradiusHelper.OptionsPredecessorRequirement(ModPlayer(player),
-                                                         OptionPosition[0]);
+      return ModeChecks(ModPlayer(player)) &&
+             OptionsPredecessorRequirement(ModPlayer(player), OptionPosition[0]);
     }
 
     protected override void UpgradeUsualRecipe(ModRecipe recipe)

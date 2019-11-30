@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -145,7 +146,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
+      if (IsNotMultiplayerClient() && !initialized)
       {
         int chosenYDir = Main.rand.NextBool().ToDirectionInt();
         Vector2 spawnPos = npc.position;
@@ -357,7 +358,7 @@ namespace ChensGradiusMod.NPCs
 
     private bool TurretManagement()
     {
-      float angle = GradiusHelper.GetAngleRelativeXDirection(npc.Center, targetLastSeen);
+      float angle = GetAngleRelativeXDirection(npc.Center, targetLastSeen);
       switch (FrameCounter)
       {
         case 6 when angle < 15:
@@ -373,7 +374,7 @@ namespace ChensGradiusMod.NPCs
 
     private void PerformAttack()
     {
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
         float direction = (targetLastSeen - npc.Center).ToRotation();
         direction = MathHelper.ToDegrees(direction);

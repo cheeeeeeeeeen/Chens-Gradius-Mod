@@ -2,11 +2,14 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
   public abstract class SearchOptionBase : OptionBase
   {
+    public override OptionTypes OptionType => OptionTypes.Search;
+
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -25,19 +28,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to have the Options seek and pursue nearby targets!";
-
-    protected override bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).searchOption;
-      return result &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).freezeOption;
-    }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {

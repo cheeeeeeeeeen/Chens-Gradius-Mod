@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
 {
@@ -33,7 +34,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
     {
       ModPlayer(player).optionSeed = true;
 
-      if (GradiusHelper.IsSameClientOwner(player))
+      if (IsSameClientOwner(player))
       {
         if (player.ownedProjectileCounts[mod.ProjectileType(ProjectileName)] <= 0)
         {

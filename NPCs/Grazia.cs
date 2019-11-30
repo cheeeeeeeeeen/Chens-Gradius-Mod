@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
 {
@@ -51,8 +52,8 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < GradiusHelper.UnderworldTilesYLocation &&
-          spawnInfo.spawnTileY > (GradiusHelper.SkyTilesYLocation + Main.worldSurface) * .5f)
+      if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
+          spawnInfo.spawnTileY > (SkyTilesYLocation + Main.worldSurface) * .5f)
       {
         return .05f;
       }
@@ -63,7 +64,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool PreAI()
     {
-      if (GradiusHelper.IsNotMultiplayerClient() && !initialized)
+      if (IsNotMultiplayerClient() && !initialized)
       {
         int chosenYDir = Main.rand.NextBool().ToDirectionInt();
         Vector2 spawnPos = npc.position;
@@ -93,7 +94,7 @@ namespace ChensGradiusMod.NPCs
       npc.velocity.Y = CustomGravity * yDirection;
       npc.velocity = Collision.TileCollision(npc.position, npc.velocity, npc.width, npc.height);
 
-      if (GradiusHelper.IsNotMultiplayerClient())
+      if (IsNotMultiplayerClient())
       {
         if (npc.target >= 0) PerformAttack();
         else fireTick = 0;
@@ -106,7 +107,7 @@ namespace ChensGradiusMod.NPCs
     {
       if (TargetPlayer() != null)
       {
-        int direction = GradiusHelper.RoundOffToWhole(GradiusHelper.GetBearing(npc.Center, TargetPlayer().Center));
+        int direction = RoundOffToWhole(GetBearing(npc.Center, TargetPlayer().Center));
 
         if (yDirection > 0)
         {
@@ -191,7 +192,7 @@ namespace ChensGradiusMod.NPCs
       if (++fireTick >= FireRate)
       {
         fireTick = 0;
-        Vector2 vel = GradiusHelper.MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
+        Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
                                  GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
       }

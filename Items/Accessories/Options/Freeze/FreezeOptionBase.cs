@@ -2,11 +2,14 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
   public abstract class FreezeOptionBase : OptionBase
   {
+    public override OptionTypes OptionType => OptionTypes.Freeze;
+
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -33,19 +36,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
       "Some projectiles you create are copied by the drone.\n" +
       "The drone will follow your flight path.\n" +
       "Hold the Option Action Key to perform a different movement behavior!";
-
-    protected override bool ModeChecks(Player player, bool includeSelf = true)
-    {
-      bool result = true;
-      if (includeSelf) result &= ModPlayer(player).freezeOption;
-      return result &&
-             !ModPlayer(player).rotateOption &&
-             !ModPlayer(player).normalOption &&
-             !ModPlayer(player).chargeMultiple &&
-             !ModPlayer(player).aimOption &&
-             !ModPlayer(player).recurveOption &&
-             !ModPlayer(player).searchOption;
-    }
 
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {

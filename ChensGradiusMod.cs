@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
 {
@@ -238,17 +239,17 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).optionTwo = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionThree = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionFour = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).normalOption = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).freezeOption = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).rotateOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).normalOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).freezeOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).rotateOption.Value = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionSeed = reader.ReadBoolean();
             GradiusPlayer(playerIndex).seedRotateDirection = reader.ReadSByte();
-            GradiusPlayer(playerIndex).chargeMultiple = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).chargeMultiple.Value = reader.ReadBoolean();
             GradiusPlayer(playerIndex).chargeMode = reader.ReadInt32();
-            GradiusPlayer(playerIndex).aimOption = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).searchOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).aimOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).searchOption.Value = reader.ReadBoolean();
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).recurveOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).recurveOption.Value = reader.ReadBoolean();
             break;
           }
 
@@ -258,7 +259,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).isFreezing = reader.ReadBoolean();
             GradiusPlayer(playerIndex).wasHolding = reader.ReadBoolean();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
@@ -277,7 +278,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).revolveDirection = reader.ReadSByte();
             GradiusPlayer(playerIndex).wasHolding = reader.ReadBoolean();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.ClientChangesRotateOption);
@@ -295,7 +296,7 @@ namespace ChensGradiusMod
             byte playerIndex = reader.ReadByte();
             GradiusPlayer(playerIndex).seedRotateDirection = reader.ReadSByte();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.ClientChangesSeedDirection);
@@ -312,7 +313,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).chargeMode = reader.ReadInt32();
             GradiusPlayer(playerIndex).wasHolding = reader.ReadBoolean();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.ClientChangesChargeMultiple);
@@ -325,7 +326,7 @@ namespace ChensGradiusMod
           }
 
         case PacketMessageType.SpawnRetaliationBullet:
-          if (GradiusHelper.IsServer())
+          if (IsServer())
           {
             Vector2 spawnPoint = reader.ReadVector2();
             Vector2 spawnVelocity = reader.ReadVector2();
@@ -344,7 +345,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
             GradiusPlayer(playerIndex).wasHolding = reader.ReadBoolean();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.ClientChangesSearchOption);
@@ -361,7 +362,7 @@ namespace ChensGradiusMod
           Vector2 soundPosition = reader.ReadVector2();
           byte soundStyle = reader.ReadByte();
 
-          if (GradiusHelper.IsServer())
+          if (IsServer())
           {
             ModPacket packet = GetPacket();
             packet.Write((byte)PacketMessageType.BroadcastSound);
@@ -386,7 +387,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).optionFlightPath[OptionBaseObject.DistanceInterval * 4 - 1] =
               reader.ReadVector2();
 
-            if (GradiusHelper.IsServer())
+            if (IsServer())
             {
               ModPacket packet = GetPacket();
               packet.Write((byte)PacketMessageType.RecurveUpdatePositions);
@@ -423,6 +424,6 @@ namespace ChensGradiusMod
       ClientChangesSearchOption,
       BroadcastSound,
       RecurveUpdatePositions
-    }
+    };
   }
 }

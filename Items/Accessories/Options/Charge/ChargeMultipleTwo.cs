@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).chargeMultiple = true;
+      ModPlayer(player).chargeMultiple.Value = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

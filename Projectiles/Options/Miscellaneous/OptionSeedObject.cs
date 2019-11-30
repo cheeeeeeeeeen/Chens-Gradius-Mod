@@ -2,6 +2,7 @@
 using System;
 using Terraria;
 using Terraria.ID;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 {
@@ -43,7 +44,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
         if (isSpawning)
         {
           isSpawning = false;
-          if (Owner.direction < 0) currentAngle = GradiusHelper.HalfAngle;
+          if (Owner.direction < 0) currentAngle = HalfAngle;
         }
         projectile.timeLeft = KeepAlive;
         return true;
@@ -98,7 +99,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     private bool SetProjectileToSpawn()
     {
-      for (int i = GradiusHelper.LowerAmmoSlot; i <= GradiusHelper.HigherAmmoSlot; i++)
+      for (int i = LowerAmmoSlot; i <= HigherAmmoSlot; i++)
       {
         Item item = Owner.inventory[i];
 
@@ -117,17 +118,17 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     private void PerformAttack(bool fireNow = false)
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
+      if (IsSameClientOwner(projectile))
       {
         if (++fireTick >= FireRate || fireNow)
         {
           fireTick = 0;
 
           Item weapon = Owner.HeldItem;
-          int dmg = GradiusHelper.RoundOffToWhole((SpawnProjectileDamage + weapon.damage));
+          int dmg = RoundOffToWhole((SpawnProjectileDamage + weapon.damage));
           float kb = (SpawnProjectileKnockback + weapon.knockBack);
           float spd = SpawnProjectileSpeed + weapon.shootSpeed;
-          Vector2 shootToward = GradiusHelper.MoveToward(projectile.Center,
+          Vector2 shootToward = MoveToward(projectile.Center,
                                                          Main.MouseWorld, spd);
 
           int pInd = Projectile.NewProjectile(projectile.Center, shootToward, SpawnProjectileType,
@@ -151,7 +152,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
       projectile.velocity = Vector2.Zero;
       currentAngle += RotateSpeed * rotateDirection;
-      GradiusHelper.NormalizeAngleDegrees(ref currentAngle);
+      NormalizeAngleDegrees(ref currentAngle);
     }
   }
 }

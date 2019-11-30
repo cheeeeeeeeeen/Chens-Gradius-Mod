@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options
 {
@@ -37,7 +38,7 @@ namespace ChensGradiusMod.Projectiles.Options
     public override bool PreAI()
     {
       if (PlayerHasAccessory() &&
-          GradiusHelper.OptionsPredecessorRequirement(ModOwner, Position))
+          OptionsPredecessorRequirement(ModOwner, Position))
       {
         if (PathListSize <= 0) ModOwner.optionFlightPath.Add(Owner.Center);
         projectile.timeLeft = KeepAlive;
@@ -52,7 +53,7 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public override void AI()
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
+      if (IsSameClientOwner(projectile))
       {
         for (int h = 0; h < playerAlreadyProducedProjectiles.Count; h++)
         {
@@ -93,11 +94,11 @@ namespace ChensGradiusMod.Projectiles.Options
 
     public override void PostAI()
     {
-      if (GradiusHelper.IsSameClientOwner(projectile))
+      if (IsSameClientOwner(projectile))
       {
         projectilesToProduce.Clear();
         projectilesToProduce = new List<int>();
-        GradiusHelper.FreeListData(ref playerAlreadyProducedProjectiles, MaxBuffer);
+        FreeListData(ref playerAlreadyProducedProjectiles, MaxBuffer);
       }
     }
 
