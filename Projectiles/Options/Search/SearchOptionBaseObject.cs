@@ -13,8 +13,8 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
-    private const float NearerPercentage = .8f;
-    private const float ReturnToFollowThreshold = 8f;
+    private const float NearerPercentage = .25f;
+    private const float ReturnToFollowThreshold = 4f;
     private const float RotateAccel = .15f;
     private const float MaxRotateSpeed = 7f;
 
