@@ -35,8 +35,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.IceBlock, 300);
-      recipe.AddIngredient(ItemID.SnowBlock, 240);
+      recipe.AddIngredient(ItemID.FrostCore, 5);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

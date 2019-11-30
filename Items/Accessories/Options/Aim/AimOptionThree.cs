@@ -35,7 +35,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.MechanicalEye, 15);
+      recipe.AddIngredient(ItemID.MechanicalEye, 8);
+      recipe.AddIngredient(ItemID.MechanicalWorm, 7);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

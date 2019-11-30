@@ -36,7 +36,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     {
       ModRecipe recipe = new ModRecipe(mod);
       recipe.AddIngredient(ItemID.RifleScope);
-      recipe.AddIngredient(ItemID.MechanicalLens);
+      recipe.AddIngredient(ItemID.Binoculars);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);
