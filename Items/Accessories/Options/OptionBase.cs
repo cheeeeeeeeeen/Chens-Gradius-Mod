@@ -101,7 +101,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
           recipe.AddIngredient(ItemID.Wire, 300);
           goto case -1;
         case -1:
-          recipe.AddTile(TileID.TinkerersWorkbench);
           break;
       }
     }

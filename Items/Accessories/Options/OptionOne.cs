@@ -45,7 +45,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 20);
       recipe.AddIngredient(ItemID.Wire, 300);
       recipe.AddIngredient(ItemID.Topaz, 8);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
@@ -57,7 +56,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:GoldTierBar", 14);
       recipe.AddIngredient(ItemID.Wire, 210);
       recipe.AddIngredient(ItemID.Topaz, 5);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();

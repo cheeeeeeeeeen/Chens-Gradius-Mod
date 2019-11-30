@@ -41,7 +41,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 80);
       recipe.AddIngredient(ItemID.Wire, 400);
       recipe.AddIngredient(ItemID.Sapphire, 12);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
@@ -54,7 +53,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
       recipe.AddRecipeGroup("ChensGradiusMod:TinTierBar", 56);
       recipe.AddIngredient(ItemID.Wire, 280);
       recipe.AddIngredient(ItemID.Sapphire, 8);
-      recipe.AddTile(TileID.Furnaces);
       recipe.AddTile(TileID.Anvils);
       recipe.SetResult(this);
       recipe.AddRecipe();
