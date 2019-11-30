@@ -119,7 +119,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       bool result = true;
       for (byte i = 0; i < gmPlayer.optionFlags.Length; i++)
       {
-        if ((byte)OptionType == i && includeSelf) result &= gmPlayer.optionFlags[i].Value;
+        if ((byte)OptionType == i) { if (includeSelf) result &= gmPlayer.optionFlags[i].Value; }
         else result &= !gmPlayer.optionFlags[i].Value;
 
         if (!result) break;
@@ -150,8 +150,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
           CreateOption(player, 3, ProjectileType + OptionName + "ThreeObject");
           goto case 3;
         case 3:
-          if (ModPlayer(player).optionFour)
-            CreateOption(player, 4, ProjectileType + OptionName + "FourObject");
+          CreateOption(player, 4, ProjectileType + OptionName + "FourObject");
           goto case 4;
         case 4:
           break;
