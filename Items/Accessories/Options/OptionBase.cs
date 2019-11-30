@@ -185,5 +185,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
       return player.ownedProjectileCounts[mod.ProjectileType(projectileName)] <= 0 &&
              GradiusHelper.IsSameClientOwner(player);
     }
+
+    internal enum Types : byte { Normal, Freeze, Rotate, Charge, Aim, Search, Recurve }
   }
 }
