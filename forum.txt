@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 0.10.0
+[B][U][SIZE=6]Mod Version: 0.10.1
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -190,12 +190,12 @@ They can unleash a power special attack, but be advised that the accessory will 
 [/LIST]
 [/LIST]
 
-These enemies will only [B]spawn in Hard mode[/B].
+These enemies will only [B]spawn in Hard mode[/B]. They will also have their stats scale accordingly when [B]Plantera[/B] is defeated and when [B]Moon Lord[/B] is defeated.
 
 They also have [B]their own banners[/B].
 [IMG]https://i.imgur.com/eMljrLn.png[/IMG]
 
-All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
+All enemies in this mod also display a behavior of retaliation as commonly seen in the Gradius series if the world is in Expert mode.
 Retaliation behavior is an enemy trait where the enemy shoots hostile bullets upon taking damage. Currently, there are three kinds of behaviors implemented: Spray, Spread and Explode.
 Spray pattern is a single inaccurate bullet spawned towards the player. They are often faster than the normal attacks of the enemies.
 Spread pattern is a group of bullets fired in a single shot. All of the bullets have the same speed, only their directions differ.
@@ -218,6 +218,16 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+0.10.1
+  - Fix bugs where in Recurve Option can be mixed and matched rarely
+  - Optimize Search Options seek to pursue mode to majke it easier to lock on
+  - Reworked recipes of Aim Options and Freeze Options
+  - Remove Tinkerer's Workshop as crafting station when upgrading Options to a type
+  - Allow all enemies to scale when Plantera is defeated
+  - Allow all enemies to scale when Moon Lord is defeated
+  - Enemy projectiles will scale accordingly as well
+  - Add more Option rules for Calamity weapons
+
 0.10.0
   - Implement Recurve Options
   - Add new Cross Mod Content API for adding a custom damage type that is found on ModProjectile

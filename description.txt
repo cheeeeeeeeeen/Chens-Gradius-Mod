@@ -26,6 +26,7 @@ New Enemies:
 9. Rush
 
 These enemies will only spawn in Hard mode. They also have their own banners, including boss enemies.
+All enemies in this mod will scale accordingly when Plantera is defeated and when Moon Lord is defeated.
 All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
 For more information about these enemies and the behaviors, visit the homepage.
 
