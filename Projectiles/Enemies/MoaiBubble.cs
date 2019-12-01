@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Enemies
 {
@@ -11,10 +13,8 @@ namespace ChensGradiusMod.Projectiles.Enemies
     public const int Dmg = 100;
     public const float Kb = 20f;
 
-    private const int ExpertMaxLife = 2;
-    private const int NormalMaxLife = 1;
-
-    private int life = 3;
+    private byte life = 1;
+    private bool initialized = false;
 
     public override void SetStaticDefaults()
     {
@@ -35,13 +35,20 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override bool PreAI()
     {
-      if (life > ExpertMaxLife)
+      if (!initialized)
       {
-        if (Main.expertMode) life = ExpertMaxLife;
-        else life = NormalMaxLife;
+        initialized = true;
+        if (Main.expertMode)
+        {
+          life++;
+          if (NPC.downedPlantBoss) life++;
+        }
+        if (NPC.downedMoonlord) life++;
+
+        if (IsNotMultiplayerClient()) projectile.netUpdate = true;
       }
 
-      return true;
+      return initialized;
     }
 
     public override void AI()
@@ -64,6 +71,18 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override Color? GetAlpha(Color lightColor) => Color.White;
 
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+      writer.Write(life);
+      writer.Write(initialized);
+    }
+
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+      life = reader.ReadByte();
+      initialized = reader.ReadBoolean();
+    }
+
     private void SustainDamage()
     {
       for (int i = 0; i < Main.maxProjectiles; i++)
@@ -75,7 +94,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
           if (!selectProj.minion && !Main.projPet[selectProj.type] &&
               (selectProj.maxPenetrate <= life && selectProj.penetrate != -1))
           {
-            GradiusHelper.ProjectileDestroy(selectProj);
+            ProjectileDestroy(selectProj);
           }
           else selectProj.maxPenetrate--;
 

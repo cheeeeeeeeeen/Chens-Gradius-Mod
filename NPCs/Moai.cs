@@ -45,6 +45,8 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 0;
       npc.behindTiles = true;
       bannerItem = ModContent.ItemType<MoaiBanner>();
+
+      ScaleStats();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -255,8 +257,13 @@ namespace ChensGradiusMod.NPCs
       get
       {
         int projNumber = 1;
-        if (Main.expertMode) projNumber += 1;
+        if (Main.expertMode)
+        {
+          projNumber += 1;
+          if (NPC.downedPlantBoss) projNumber += 1;
+        }
         if (Main.hardMode) projNumber += 1;
+        if (NPC.downedMoonlord) projNumber += 1;
 
         return projNumber;
       }
@@ -268,7 +275,8 @@ namespace ChensGradiusMod.NPCs
       {
         Vector2 vel = MoveToward(MouthCenter, Main.player[npc.target].Center, MoaiBubble.Spd);
         Projectile.NewProjectile(MouthCenter, vel, ModContent.ProjectileType<MoaiBubble>(),
-                                 MoaiBubble.Dmg, MoaiBubble.Kb, Main.myPlayer);
+                                 BulletFinalDamage(MoaiBubble.Dmg), BulletFinalKnockback(MoaiBubble.Kb),
+                                 Main.myPlayer);
       }
     }
 
