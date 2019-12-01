@@ -53,13 +53,15 @@ namespace ChensGradiusMod.NPCs
       npc.height = 50;
       npc.damage = 100;
       npc.lifeMax = 50;
-      npc.value = 4000;
+      npc.value = 4000f;
       npc.knockBackResist = 0f;
       npc.defense = 0;
       npc.behindTiles = true;
       npc.noGravity = true;
       npc.noTileCollide = false;
       bannerItem = ModContent.ItemType<DagoomBanner>();
+
+      ScaleStats();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

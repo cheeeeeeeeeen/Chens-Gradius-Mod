@@ -12,8 +12,6 @@ namespace ChensGradiusMod.NPCs
 {
   public abstract class GradiusEnemy : ModNPC
   {
-    private const float IncomingDamageMultiplier = .05f;
-
     public enum Types { Small, Large, Boss };
 
     public override void SetDefaults()
@@ -116,6 +114,11 @@ namespace ChensGradiusMod.NPCs
       ReduceDamage(ref damage, ref knockback, ref crit);
     }
 
+    public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+    {
+      base.ScaleExpertStats(numPlayers, bossLifeScale);
+    }
+
     public override void SendExtraAI(BinaryWriter writer)
     {
       writer.Write((byte)FrameTick);
@@ -152,6 +155,73 @@ namespace ChensGradiusMod.NPCs
 
     protected virtual Action<Vector2> RetaliationOverride => null;
 
+    protected virtual float LifeMultiplier
+    {
+      get
+      {
+        float multiplier = 1f;
+        if (NPC.downedPlantBoss) multiplier = 1.4f;
+        if (NPC.downedMoonlord) multiplier = 2f;
+
+        return multiplier;
+      }
+    }
+
+    protected virtual float DamageMultiplier
+    {
+      get
+      {
+        float multiplier = 1f;
+        if (NPC.downedPlantBoss) multiplier = 1.3f;
+        if (NPC.downedMoonlord) multiplier = 1.7f;
+
+        return multiplier;
+      }
+    }
+
+    protected virtual float DefenseMultiplier
+    {
+      get
+      {
+        float multiplier = 1f;
+        if (NPC.downedPlantBoss) multiplier = 1.2f;
+        if (NPC.downedMoonlord) multiplier = 1.5f;
+
+        return multiplier;
+      }
+    }
+
+    protected virtual float IncomingDamageMultiplier
+    {
+      get
+      {
+        float multiplier = .08f;
+        if (NPC.downedPlantBoss) multiplier = .05f;
+        if (NPC.downedMoonlord) multiplier = .01f;
+
+        return multiplier;
+      }
+    }
+
+    protected virtual float KnockbackMultiplier
+    {
+      get
+      {
+        float multiplier = 1f;
+        if (NPC.downedPlantBoss) multiplier = 2f;
+        if (NPC.downedMoonlord) multiplier = 4f;
+
+        return multiplier;
+      }
+    }
+
+    protected void ScaleStats()
+    {
+      npc.lifeMax = RoundOffToWhole(npc.lifeMax * LifeMultiplier);
+      npc.damage = RoundOffToWhole(npc.damage * DamageMultiplier);
+      npc.defense = RoundOffToWhole(npc.defense * DefenseMultiplier);
+    }
+
     protected void ImmuneToBuffs()
     {
       for (int i = 0; i < npc.buffImmune.Length; i++)
@@ -182,7 +252,7 @@ namespace ChensGradiusMod.NPCs
       if (IsSinglePlayer())
       {
         Projectile.NewProjectile(spawnPoint, spawnVelocity, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                 BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
       else if (IsMultiplayerClient())
       {
@@ -191,8 +261,8 @@ namespace ChensGradiusMod.NPCs
         packet.Write((byte)ChensGradiusMod.PacketMessageType.SpawnRetaliationBullet);
         packet.WriteVector2(spawnPoint);
         packet.WriteVector2(spawnVelocity);
-        packet.Write(GradiusEnemyBullet.Dmg);
-        packet.Write(GradiusEnemyBullet.Kb);
+        packet.Write(BulletFinalDamage());
+        packet.Write(BulletFinalKnockback());
         packet.Send();
       }
 
@@ -219,7 +289,7 @@ namespace ChensGradiusMod.NPCs
         {
           Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * RetaliationBulletSpeed;
           Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                   GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                   BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
           currentAngle += angleLength;
         }
 
@@ -242,7 +312,7 @@ namespace ChensGradiusMod.NPCs
           {
             Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * currentVelocity;
             Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                     GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                     BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
             currentAngle += angleLength;
           }
 
@@ -297,6 +367,16 @@ namespace ChensGradiusMod.NPCs
       npc.netUpdate = true;
       npc.active = false;
       npc.life = 0;
+    }
+
+    protected int BulletFinalDamage(int dmg = GradiusEnemyBullet.Dmg)
+    {
+      return RoundOffToWhole(dmg * DamageMultiplier);
+    }
+
+    protected float BulletFinalKnockback(float kb = GradiusEnemyBullet.Kb)
+    {
+      return kb * KnockbackMultiplier;
     }
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)

@@ -49,6 +49,8 @@ namespace ChensGradiusMod.NPCs
       npc.noGravity = true;
       npc.noTileCollide = true;
       bannerItem = ModContent.ItemType<ZalkBanner>();
+
+      ScaleStats();
     }
 
     public override bool PreAI()
@@ -220,7 +222,7 @@ namespace ChensGradiusMod.NPCs
         fireTick = 0;
         Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                 BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
     }
   }

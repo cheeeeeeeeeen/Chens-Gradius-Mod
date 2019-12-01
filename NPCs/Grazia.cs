@@ -48,6 +48,8 @@ namespace ChensGradiusMod.NPCs
       npc.noGravity = true;
       npc.behindTiles = true;
       bannerItem = ModContent.ItemType<GraziaBanner>();
+
+      ScaleStats();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -194,7 +196,7 @@ namespace ChensGradiusMod.NPCs
         fireTick = 0;
         Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
         Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                 GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                 BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
     }
   }

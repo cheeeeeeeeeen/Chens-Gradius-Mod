@@ -63,6 +63,8 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 50;
       npc.noGravity = true;
       bannerItem = ModContent.ItemType<SagnaBanner>();
+
+      ScaleStats();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -282,7 +284,7 @@ namespace ChensGradiusMod.NPCs
         {
           Projectile.NewProjectile(npc.Center, radianAngle.ToRotationVector2() * GradiusEnemyBullet.Spd,
                                    ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                   GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                   BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
           radianAngle = MathHelper.ToRadians(MathHelper.ToDegrees(radianAngle) + 15f);
         }
         npc.netUpdate = true;

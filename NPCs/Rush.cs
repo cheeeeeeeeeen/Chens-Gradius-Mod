@@ -49,6 +49,8 @@ namespace ChensGradiusMod.NPCs
       npc.noGravity = true;
       npc.noTileCollide = true;
       bannerItem = ModContent.ItemType<RushBanner>();
+
+      ScaleStats();
     }
 
     public override bool PreAI()
@@ -183,6 +185,10 @@ namespace ChensGradiusMod.NPCs
       canGoHorizontalTick = Math.Min(canGoHorizontalTick, CanGoHorizontalTime);
     }
 
-    private void PerformAttack() => Garun.PerformAttack(npc, ref fireTick, FireRate, AttackDistance);
+    private void PerformAttack()
+    {
+      Garun.PerformAttack(npc, ref fireTick, BulletFinalDamage(),
+                          BulletFinalKnockback(), FireRate, AttackDistance);
+    }
   }
 }

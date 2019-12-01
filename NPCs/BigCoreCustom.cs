@@ -61,6 +61,8 @@ namespace ChensGradiusMod.NPCs
       npc.boss = true;
       music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/AircraftCarrier");
       bannerItem = ModContent.ItemType<BigCoreCustomBanner>();
+
+      ScaleStats();
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => 0f;
@@ -235,11 +237,12 @@ namespace ChensGradiusMod.NPCs
           for (int i = 0; i < AttackVectors.Length; i++)
           {
             Projectile.NewProjectile(AttackVectors[i], pVel, ModContent.ProjectileType<CoreLaser>(),
-                                     CoreLaser.Dmg, CoreLaser.Kb, Main.myPlayer);
+                                     BulletFinalDamage(CoreLaser.Dmg), BulletFinalKnockback(CoreLaser.Kb),
+                                     Main.myPlayer);
           }
 
           Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreShoot"),
-                          npc.Center);
+                         npc.Center);
         }
       }
     }

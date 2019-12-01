@@ -24,8 +24,8 @@ namespace ChensGradiusMod.NPCs
     private int fireTick = 0;
     private int syncTick = 0;
 
-    public static void PerformAttack(NPC npc, ref int fireTick, int fireRate = FireRate,
-                                     float atkDistance = AttackDistance)
+    public static void PerformAttack(NPC npc, ref int fireTick, int damage, float knockback,
+                                     int fireRate = FireRate, float atkDistance = AttackDistance)
     {
       if (IsNotMultiplayerClient() &&
           Vector2.Distance(npc.Center, Main.player[npc.target].Center) <= atkDistance)
@@ -38,7 +38,7 @@ namespace ChensGradiusMod.NPCs
             fireTick = 0;
             Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
             Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                     GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                     damage, knockback, Main.myPlayer);
           }
         }
         else fireTick = 0;
@@ -65,6 +65,8 @@ namespace ChensGradiusMod.NPCs
       npc.noGravity = true;
       npc.noTileCollide = true;
       bannerItem = ModContent.ItemType<GarunBanner>();
+
+      ScaleStats();
     }
 
     public override bool PreAI()
@@ -95,7 +97,7 @@ namespace ChensGradiusMod.NPCs
       npc.velocity.X += xTo * TravelSpeed - yTo * wobble;
       npc.velocity.Y += -yTo * TravelSpeed + xTo * wobble;
 
-      PerformAttack(npc, ref fireTick);
+      PerformAttack(npc, ref fireTick, BulletFinalDamage(), BulletFinalKnockback());
 
       ConstantSync(ref syncTick, SyncRate);
     }

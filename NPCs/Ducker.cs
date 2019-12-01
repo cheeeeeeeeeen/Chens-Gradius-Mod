@@ -52,6 +52,8 @@ namespace ChensGradiusMod.NPCs
       npc.defense = 50;
       npc.noGravity = true;
       bannerItem = ModContent.ItemType<DuckerBanner>();
+
+      ScaleStats();
     }
 
     public override void FindFrame(int frameHeight)
@@ -389,7 +391,7 @@ namespace ChensGradiusMod.NPCs
         {
           Projectile.NewProjectile(npc.Center, angles[i].ToRotationVector2() * GradiusEnemyBullet.Spd,
                                    ModContent.ProjectileType<GradiusEnemyBullet>(),
-                                   GradiusEnemyBullet.Dmg, GradiusEnemyBullet.Kb, Main.myPlayer);
+                                   BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
         }
         npc.netUpdate = true;
       }
