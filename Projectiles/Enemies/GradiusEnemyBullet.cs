@@ -7,7 +7,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
   public class GradiusEnemyBullet : ModProjectile
   {
     public const float Spd = 5f;
-    public const int Dmg = 70;
+    public const int Dmg = 60;
     public const float Kb = 0f;
 
     public override void SetStaticDefaults()
