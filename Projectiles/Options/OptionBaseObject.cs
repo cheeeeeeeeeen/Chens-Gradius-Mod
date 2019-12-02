@@ -66,7 +66,8 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (OptionRules.CompleteRuleCheck(p) && IsNotProducedYet(i) && IsSameOwner(p) && (Owner.HeldItem.shoot == p.type || ModOwner.optionRuleAmmoFilter[1].shoot == p.type))
+            if (IsNotProducedYet(i) && OptionRules.CompleteRuleCheck(p) && IsSameOwner(p) &&
+                (IsSameAsWeaponShoot(p)) || IsSameAsAmmoUsed(p))
             {
               projectilesToProduce.Add(i);
             }
@@ -169,6 +170,10 @@ namespace ChensGradiusMod.Projectiles.Options
     }
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
+
+    private bool IsSameAsWeaponShoot(Projectile p) => Owner.HeldItem.shoot == p.type;
+
+    private bool IsSameAsAmmoUsed(Projectile p) => ModOwner.optionRuleAmmoFilter[1].shoot == p.type;
 
     private bool IsNotProducedYet(int ind)
     {
