@@ -66,7 +66,7 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (OptionRules.CompleteRuleCheck(p) && IsNotProducedYet(i) && IsSameOwner(p))
+            if (OptionRules.CompleteRuleCheck(p) && IsNotProducedYet(i) && IsSameOwner(p) && (Owner.HeldItem.shoot == p.type || ModOwner.optionRuleAmmoFilter[1].shoot == p.type))
             {
               projectilesToProduce.Add(i);
             }

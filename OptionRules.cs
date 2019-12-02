@@ -129,7 +129,7 @@ namespace ChensGradiusMod
 
     public static bool CompleteRuleCheck(Projectile p)
     {
-      return p.active && IsAllowed(p.type) && IsNotAYoyo(p) && !p.hostile && p.friendly &&
+      return p.active && IsNotAYoyo(p) && !p.hostile && p.friendly &&
              !p.npcProj && CanDamage(p) && IsAbleToCrit(p) && !p.minion && !p.trap;
     }
 
