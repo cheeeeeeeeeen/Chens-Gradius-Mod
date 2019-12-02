@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
+using static ChensGradiusMod.OptionRules;
 
 namespace ChensGradiusMod.Projectiles.Options
 {
@@ -66,7 +67,7 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (IsNotProducedYet(i) && OptionRules.CompleteRuleCheck(p) && IsSameOwner(p) &&
+            if (IsNotProducedYet(i) && IsSameOwner(p) && StandardFilter(p) &&
                 (IsSameAsWeaponShoot(p)) || IsSameAsAmmoUsed(p))
             {
               projectilesToProduce.Add(i);
