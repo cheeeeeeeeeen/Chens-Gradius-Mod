@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -116,7 +116,7 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected virtual float[] LightValues { get; } = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
 
-    protected virtual bool AttackLimitation() => true;
+    protected virtual bool AttackLimitation() => Owner.itemAnimation > 0;
 
     protected virtual int SpawnDuplicateProjectile(Projectile p)
     {

@@ -107,12 +107,9 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     protected override bool AttackLimitation()
     {
-      if (ModOwner.chargeMode == (int)ChargeMultipleBase.States.Following)
-      {
-        return true;
-      }
+      bool result = ModOwner.chargeMode == (int)ChargeMultipleBase.States.Following;
 
-      return false;
+      return base.AttackLimitation() && result;
     }
 
     protected virtual int OptionAccessoryType => 0;
