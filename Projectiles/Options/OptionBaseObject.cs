@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -67,8 +67,8 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (IsNotProducedYet(i) && IsSameOwner(p) && StandardFilter(p) &&
-                (IsSameAsWeaponShoot(p)) || IsSameAsAmmoUsed(p))
+            if (IsAllowed(Owner.HeldItem, p) && IsNotProducedYet(i) && IsSameOwner(p)
+                && StandardFilter(p) && WeaponAndAmmoFilter(p))
             {
               projectilesToProduce.Add(i);
             }
@@ -175,6 +175,8 @@ namespace ChensGradiusMod.Projectiles.Options
     private bool IsSameAsWeaponShoot(Projectile p) => Owner.HeldItem.shoot == p.type;
 
     private bool IsSameAsAmmoUsed(Projectile p) => ModOwner.optionRuleAmmoFilter[1].shoot == p.type;
+
+    private bool WeaponAndAmmoFilter(Projectile p) => IsSameAsWeaponShoot(p) || IsSameAsAmmoUsed(p);
 
     private bool IsNotProducedYet(int ind)
     {

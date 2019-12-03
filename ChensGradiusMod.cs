@@ -121,7 +121,7 @@ namespace ChensGradiusMod
               return result;
             }
 
-          case "ProjectileBanCheck":
+          case "BanCheck":
             {
               // args[1]: integer Type of the weapon to check. (item.type)
               // args[2]: integer Type of the projectile to check. (projectile.type)
@@ -134,6 +134,21 @@ namespace ChensGradiusMod
 
               return OptionRules.IsBanned(Convert.ToInt32(args[1]),
                                           Convert.ToInt32(args[2]));
+            }
+
+          case "AllowCheck":
+            {
+              // args[1]: integer Type of the weapon to check. (item.type)
+              // args[2]: integer Type of the projectile to check. (projectile.type)
+
+              if (args.Length != 3)
+              {
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Wrong number of arguments.");
+              }
+
+              return OptionRules.IsAllowed(Convert.ToInt32(args[1]),
+                                           Convert.ToInt32(args[2]));
             }
         }
       }

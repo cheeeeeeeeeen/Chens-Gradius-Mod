@@ -71,6 +71,8 @@ namespace ChensGradiusMod
       return false;
     }
 
+    public static bool IsBanned(Item w, Projectile p) => IsBanned(w.type, p.type);
+
     public static bool IsBanned(int wType, int pType)
     {
       foreach (AlienProjectile ap in BannedTypes)
@@ -80,6 +82,8 @@ namespace ChensGradiusMod
 
       return false;
     }
+
+    public static bool IsAllowed(Item w, Projectile p) => !IsBanned(w, p);
 
     public static bool IsAllowed(int wType, int pType) => !IsBanned(wType, pType);
 
