@@ -15,10 +15,11 @@ namespace ChensGradiusMod.Projectiles.Forces
     protected const int KeepAlive = 5;
     protected const float AcceptedVerticalThreshold = .24f;
 
-    public enum States : int { Attached, Launched, Detached, Pulled };
-
     public int mode = (int)States.Detached;
     public int oldMode = (int)States.Detached;
+    public bool isSpawning = true;
+
+    public enum States : int { Attached, Launched, Detached, Pulled };
 
     public override void SetStaticDefaults()
     {
@@ -45,6 +46,13 @@ namespace ChensGradiusMod.Projectiles.Forces
     {
       if (ForceCheck())
       {
+        if (isSpawning)
+        {
+          isSpawning = false;
+          Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
+                         projectile.Center);
+        }
+
         if (oldMode != mode)
         {
           oldMode = mode;

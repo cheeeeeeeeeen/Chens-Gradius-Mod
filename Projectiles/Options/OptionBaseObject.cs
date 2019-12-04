@@ -41,6 +41,7 @@ namespace ChensGradiusMod.Projectiles.Options
       if (PlayerHasAccessory() &&
           OptionsPredecessorRequirement(ModOwner, Position))
       {
+        OptionSpawnSoundEffect();
         if (PathListSize <= 0) ModOwner.optionFlightPath.Add(Owner.Center);
         projectile.timeLeft = KeepAlive;
         return true;
@@ -91,7 +92,6 @@ namespace ChensGradiusMod.Projectiles.Options
 
       OptionAnimate();
       OptionMovement();
-      OptionSpawnSoundEffect();
     }
 
     public override void PostAI()
