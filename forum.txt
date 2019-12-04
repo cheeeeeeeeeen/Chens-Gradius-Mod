@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 0.10.1
+[B][U][SIZE=6]Mod Version: 1.0.0
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
@@ -218,6 +218,16 @@ If you are curious about what our current plans are, you can look them up on the
 Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
 
 [SPOILER="Changelogs"]
+1.0.0
+  - Rework Option Rules
+  - Option Rules are now optional
+  - Option Rules are not anymore a required fix
+  - Rework Option Filtering mechanics which lessens performance deterioration
+  - Rework Cross Mod Content API that is related to Option Rules
+  - API now includes weapons instead of being just projectiles
+  - See Documentation about API in the main post or wiki
+  - Duplication of projectiles spawned by another projectile will most likely be fixed now
+
 0.10.1
   - Fix bugs where in Recurve Option can be mixed and matched rarely
   - Optimize Search Options seek to pursue mode to majke it easier to lock on
@@ -523,17 +533,9 @@ If you want [U]your own mod's projectiles to be compatible with the Options[/U],
 [*]Make sure the projectile [B]is not a trap[/B]. ([I]projectile.trap[/I] is false)
 [*]Make sure the projectile [B]is owned by the same player who generated the projectile[/B].
 [/LIST]
-Following the list above, your projectiles will surely be copied by the Options. There is still, however, something that should be tackled.
-If [U]your projectile creates more projectiles, it is possible the Options may infinitely copy them, which can cause a severe lag and power output[/U].
-If you want to avoid this problem, please follow one of the items below to avoid infinite duplication.
-[LIST]
-[*]Set the newer projectiles [B]to be an NPC projectile[/B]. ([I]projectile.npcProj[/I] is true)
-[*]Set the newer projectiles [B]to be a trap projectile[/B]. ([I]projectile.trap[/I] is true)
-[*]Set the newer projectiles [B]to be unable to deal critical damage[/B]. ([I]projectile.melee[/I], [I]projectile.ranged[/I], etc is false)
-[/LIST]
-The most recommended way to avoid the duplication is to set the new projectiles to be an NPC projectile. However, using the ways above, there may be side effects.
-Thankfully, this mod [U]offers an API for other mod creators so that they can get rid of this problem in their modded projectiles through Mod.Call[/U].
-Using this method as a means to remove the problem of duplication is the [B]most recommended way[/B]. Head on over to [I]API[/I] Section just below for more details.
+
+If their modded projectiles have an advanced AI or feature and they are duplicating a lot of projectiles which causes lag with the Options,
+then this mod [U]offers an API for other mod creators through Mod.Call[/U]. Head on over to [I]API[/I] Section just below for more details.
 [/SPOILER]
 
 [SPOILER="Mod API for Cross Mod Content"]
@@ -544,21 +546,27 @@ Using this method as a means to remove the problem of duplication is the [B]most
 [*][I]When to use:[/I]Use this function to add projectiles that are:
 [LIST]
 [*]Misbehaving in function (e.g. the Projectile has a limit on how much can exist in the world)
-[*]Produced by another projectile (e.g. Bees from the Beenade, and Bees from the Bee Arrow, not the arrow itself)
 [*]Duplicating a lot that can cause lag or crash (e.g. Vilethorn causes infinite duplication due to the nature of how it works)
 [/LIST]
-[*][I]Invoke #1:[/I]   mod.Call("AddOptionRule", ProjectileID.Bee);
+[*][I]Invoke #1:[/I]   mod.Call("AddOptionRule", ItemID.BeesKnees, ProjectileID.BeeArrow);
 [LIST]
-[*]Use this for adding a [I]vanilla[/I] projectile in the rule list.
-[*]Use this also for modded projectiles as long as the projectile integer type is known.
+[*]Use this for adding a [I]vanilla[/I] weapon and projectile pair in the rule list.
+[*]Use this also for modded projectiles as long as the weapon and projectile integer type is known.
+[*][I]args[0][/I]: Method name in string
+[*][I]args[1][/I]: Weapon type in int
+[*][I]args[2][/I]: Projectile type in int
 [/LIST]
 [*][I]Invoke #2:[/I]   mod.Call("AddOptionRule", "Bluemagic", "PuriumArrowTrail");
 [LIST]
 [*]Use this for adding a [I]mod[/I] projectile in the rule list.
 [*]Make sure to use internal names and not the display names.
+[*][I]args[0][/I]: Method name in string
+[*][I]args[1][/I]: Your mod's Internal Name in string
+[*][I]args[2][/I]: Weapon type in string
+[*][I]args[3][/I]: Projectile type in string
 [/LIST]
-[*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and projectile integer types are known.
-[*][I]Returns:[/I] [B]True[/B] (Rule was added) or [B]False[/B] (Rule already existing)
+[*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and weapon/projectile integer types are known.
+[*][I]Returns:[/I] [B]True[/B] (Rule was added and will ban the weapon and projectile pair) or [B]False[/B] (Rule already existing and already banned)
 [/LIST]
 [*][B]"AddCustomDamage"[/B]
 [LIST]
@@ -567,21 +575,36 @@ Using this method as a means to remove the problem of duplication is the [B]most
 [*][I]Invoke #1:[/I]   mod.Call("AddCustomDamage", "CalamityMod", "CalamityGlobalProjectile", "rogue");
 [LIST]
 [*]Use this if your projectile's custom damage type is in [I]GlobalProjectile[/I].
+[*][I]args[0][/I]: Method name in string
+[*][I]args[1][/I]: Your mod's Internal Name in string
+[*][I]args[2][/I]: Your global projectile's Internal Name in string
+[*][I]args[3][/I]: Your boolean variable name which determines the custom damage type in string
 [/LIST]
 [*][I]Invoke #2:[/I]   mod.Call("AddCustomDamage", "ChensGradiusMod", "laser");
 [LIST]
 [*]Use this if your projectile's custom damage type is in [I]ModProjectile[/I].
+[*][I]args[0][/I]: Method name in string
+[*][I]args[1][/I]: Your mod's Internal Name in string
+[*][I]args[2][/I]: Your boolean variable name which determines the custom damage type in string
 [/LIST]
 [*][I]Where to put:[/I] In your Mod's Load() override.
 [*][I]Returns:[/I] [B]True[/B] (Custom Damage added for support) or [B]False[/B] (Custom Damage is already supported)
 [/LIST]
-[*][B]"ProjectileBanCheck"[/B]
+[*][B]"BanCheck"[/B]
 [LIST]
 [*]This function is for checking whether a projectile is in the rule list or not.
 [*][I]When to use:[/I] This function is not really necessary, but it might help for debugging something.
-[*][I]Invoke:[/I]   mod.Call("ProjectileBanCheck", projectile.type);
+[*][I]Invoke:[/I]   mod.Call("BanCheck", item.type, projectile.type);
 [*][I]Where to put:[/I] Anywhere
 [*][I]Returns:[/I] [B]True[/B] if banned, [B]False[/B] if not.
+[/LIST]
+[*][B]"AllowCheck"[/B]
+[LIST]
+[*]Same as BanCheck, but inversed returns.
+[*][I]When to use:[/I] This function is not really necessary, but it might help for debugging something.
+[*][I]Invoke:[/I]   mod.Call("AllowCheck", item.type, projectile.type);
+[*][I]Where to put:[/I] Anywhere
+[*][I]Returns:[/I] [B]True[/B] if not banned, [B]False[/B] if banned. It is worth noting that this will still return true even if the other filter checks should fail.
 [/LIST]
 [/LIST]
 [/SPOILER]
