@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
+using static ChensGradiusMod.OptionRules;
 
 namespace ChensGradiusMod.Projectiles.Options
 {
@@ -40,6 +41,7 @@ namespace ChensGradiusMod.Projectiles.Options
       if (PlayerHasAccessory() &&
           OptionsPredecessorRequirement(ModOwner, Position))
       {
+        OptionSpawnSoundEffect();
         if (PathListSize <= 0) ModOwner.optionFlightPath.Add(Owner.Center);
         projectile.timeLeft = KeepAlive;
         return true;
@@ -66,7 +68,8 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (OptionRules.CompleteRuleCheck(p) && IsNotProducedYet(i) && IsSameOwner(p))
+            if (IsAllowed(Owner.HeldItem, p) && IsNotProducedYet(i) && IsSameOwner(p)
+                && StandardFilter(p) && WeaponAndAmmoFilter(p))
             {
               projectilesToProduce.Add(i);
             }
@@ -89,7 +92,6 @@ namespace ChensGradiusMod.Projectiles.Options
 
       OptionAnimate();
       OptionMovement();
-      OptionSpawnSoundEffect();
     }
 
     public override void PostAI()
@@ -114,7 +116,7 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected virtual float[] LightValues { get; } = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
 
-    protected virtual bool AttackLimitation() => true;
+    protected virtual bool AttackLimitation() => Owner.itemAnimation > 0;
 
     protected virtual int SpawnDuplicateProjectile(Projectile p)
     {
@@ -169,6 +171,16 @@ namespace ChensGradiusMod.Projectiles.Options
     }
 
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
+
+    private bool IsSameAsWeaponShoot(Projectile p) => Owner.HeldItem.shoot == p.type;
+
+    private bool IsSameAsAmmoUsed(Projectile p)
+    {
+      return Owner.HeldItem.type == ModOwner.optionRuleAmmoFilter[0].type
+             && ModOwner.optionRuleAmmoFilter[1].shoot == p.type;
+    }
+
+    private bool WeaponAndAmmoFilter(Projectile p) => IsSameAsWeaponShoot(p) || IsSameAsAmmoUsed(p);
 
     private bool IsNotProducedYet(int ind)
     {

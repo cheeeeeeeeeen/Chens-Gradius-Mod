@@ -41,6 +41,8 @@ Added Music without music boxes yet:
 
 Cross Mod Content API is available already! Check the homepage for more info.
 
-The mod is quite young, so the mod will focus in implementing features rather than balance, for now. Contact us if you have any suggestions and bug reports.
+Contact us if you have any suggestions and bug reports.
 
-For changelogs, please visit the homepage. Complete information can be found in there. There are plenty of ways in the homepage that you can help us with!
+For changelogs, please visit the homepage. Complete information can be found in the mod's wiki. The link to the wiki is in the homepage as well.
+
+There are plenty of ways in the homepage that you can help us with!

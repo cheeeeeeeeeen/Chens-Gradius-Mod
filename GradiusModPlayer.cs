@@ -53,6 +53,7 @@ namespace ChensGradiusMod
     public bool isRecurving;
     public float recurveDistance;
     public Ref<bool>[] optionFlags = new Ref<bool>[Enum.GetNames(typeof(OptionTypes)).Length];
+    public Item[] optionRuleAmmoFilter = new Item[2];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
@@ -79,6 +80,8 @@ namespace ChensGradiusMod
       chargeMultiple.Value = false;
       optionSeed = false;
       recurveOption.Value = false;
+      optionRuleAmmoFilter[0] = new Item();
+      optionRuleAmmoFilter[1] = new Item();
     }
 
     public override void UpdateDead()
@@ -331,6 +334,12 @@ namespace ChensGradiusMod
     {
       MakeForceBattle();
       MakeOptionSeedBattle();
+    }
+
+    public override void OnConsumeAmmo(Item weapon, Item ammo)
+    {
+      optionRuleAmmoFilter[0] = weapon;
+      optionRuleAmmoFilter[1] = ammo;
     }
 
     public void PopulateOptionFlight()

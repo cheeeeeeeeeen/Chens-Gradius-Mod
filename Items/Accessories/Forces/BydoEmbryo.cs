@@ -25,7 +25,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
 
       item.width = 24;
       item.height = 24;
-      item.rare = -12;
+      item.rare = 2;
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/ForceBaseAccessory";
@@ -83,8 +83,6 @@ namespace ChensGradiusMod.Items.Accessories.Forces
                                             ThisProjectileType(),
                                             ForceBase.Dmg, ForceBase.Kb, player.whoAmI);
         ModPlayer(player).forceProjectile = Main.projectile[pInd];
-        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Forces/ForceSpawn"),
-                       Main.projectile[pInd].Center);
       }
     }
 

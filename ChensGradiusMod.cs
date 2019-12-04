@@ -62,33 +62,31 @@ namespace ChensGradiusMod
           case "AddOptionRule":
             {
               // Vanilla Projectile Rule
-              // args[1]: Vanilla Projectile Type. e.g. ProjectileID.Bee
+              // args[1]: Vanilla Weapon Type. e.g. ItemID.BeesKnees
+              // args[2]: Vanilla Projectile Type. e.g. ProjectileID.Bee
               // ... or Mod Projectile Rule
               // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
+              // args[2]: Your Weapon's Internal name. e.g. "NewBowWeapon"
+              // args[3]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
 
-              if (args.Length > 3 && args.Length < 2)
+              if (args.Length > 4 && args.Length < 3)
               {
-                Logger.Error($"ChensGradiusMod {functionName} Error: " +
-                             "Wrong number of arguments.");
                 throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
               }
 
-              bool? result;
-              if (args.Length == 2)
+              bool result = false;
+              if (args.Length == 3)
               {
-                if (args[1] == null) result = null;
-                else result = OptionRules.ImportOptionRule(Convert.ToInt32(args[1]));
+                result = OptionRules.ImportOptionRule(Convert.ToInt32(args[1]),
+                                                      Convert.ToInt32(args[2]));
               }
-              else result = OptionRules.ImportOptionRule(args[1] as string, args[2] as string);
+              else
+              {
+                result = OptionRules.ImportOptionRule(args[1] as string, args[2] as string,
+                                                      args[3] as string);
+              }
 
-              if (result == null)
-              {
-                Logger.Warn($"ChensGradiusMod {functionName} Warning:" +
-                            "Given projectile type is null. This projectile type is not added.");
-                result = false;
-              }
               return result;
             }
 
@@ -104,7 +102,7 @@ namespace ChensGradiusMod
               // args[2]: Internal boolean variable name of your custom damage
               //          found in your ModProjectile.
 
-              if (!(args.Length == 4 || args.Length == 2))
+              if (!(args.Length == 4 || args.Length == 3))
               {
                 throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
@@ -123,25 +121,34 @@ namespace ChensGradiusMod
               return result;
             }
 
-          case "ProjectileBanCheck":
+          case "BanCheck":
             {
-              // args[1]: integer Type of the projectile to check. (projectile.type)
+              // args[1]: integer Type of the weapon to check. (item.type)
+              // args[2]: integer Type of the projectile to check. (projectile.type)
 
-              if (args.Length > 2)
+              if (args.Length != 3)
               {
                 throw new Exception($"ChensGradiusMod {functionName} Error: " +
                                     "Wrong number of arguments.");
               }
 
-              bool? result;
-              if (args[1] == null)
+              return OptionRules.IsBanned(Convert.ToInt32(args[1]),
+                                          Convert.ToInt32(args[2]));
+            }
+
+          case "AllowCheck":
+            {
+              // args[1]: integer Type of the weapon to check. (item.type)
+              // args[2]: integer Type of the projectile to check. (projectile.type)
+
+              if (args.Length != 3)
               {
-                result = null;
-                Logger.Warn($"ChensGradiusMod {functionName} Warning: " +
-                            "Given projectile type is null.");
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Wrong number of arguments.");
               }
-              else result = OptionRules.IsBanned(Convert.ToInt32(args[1]));
-              return result;
+
+              return OptionRules.IsAllowed(Convert.ToInt32(args[1]),
+                                           Convert.ToInt32(args[2]));
             }
         }
       }

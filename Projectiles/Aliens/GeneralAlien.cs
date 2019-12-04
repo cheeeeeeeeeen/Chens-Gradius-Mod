@@ -4,7 +4,7 @@ namespace ChensGradiusMod.Projectiles.Aliens
 {
   public abstract class GeneralAlien
   {
-    public string modName;
+    public readonly string modName;
 
     protected readonly Mod modInstance;
 

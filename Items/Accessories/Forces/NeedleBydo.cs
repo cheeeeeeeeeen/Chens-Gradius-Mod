@@ -17,6 +17,13 @@ namespace ChensGradiusMod.Items.Accessories.Forces
                          "Modified Force to enhance offensive capabilties.");
     }
 
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.rare = 3;
+    }
+
     public override string Texture => "ChensGradiusMod/Sprites/NeedleForceAccessory";
 
     public override void UpdateAccessory(Player player, bool hideVisual)
