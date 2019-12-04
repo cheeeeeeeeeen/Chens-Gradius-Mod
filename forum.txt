@@ -556,14 +556,14 @@ then this mod [U]offers an API for other mod creators through Mod.Call[/U]. Head
 [*][I]args[1][/I]: Weapon type in int
 [*][I]args[2][/I]: Projectile type in int
 [/LIST]
-[*][I]Invoke #2:[/I]   mod.Call("AddOptionRule", "Bluemagic", "PuriumArrowTrail");
+[*][I]Invoke #2:[/I]   mod.Call("AddOptionRule", "ChensGradiusMod", "BeesKneesPlus", "BeeArrowPlus");
 [LIST]
 [*]Use this for adding a [I]mod[/I] projectile in the rule list.
 [*]Make sure to use internal names and not the display names.
 [*][I]args[0][/I]: Method name in string
 [*][I]args[1][/I]: Your mod's Internal Name in string
-[*][I]args[2][/I]: Weapon type in string
-[*][I]args[3][/I]: Projectile type in string
+[*][I]args[2][/I]: Weapon Internal Name in string
+[*][I]args[3][/I]: Projectile Internal Name string
 [/LIST]
 [*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and weapon/projectile integer types are known.
 [*][I]Returns:[/I] [B]True[/B] (Rule was added and will ban the weapon and projectile pair) or [B]False[/B] (Rule already existing and already banned)
