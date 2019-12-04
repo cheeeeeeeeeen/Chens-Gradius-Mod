@@ -20,7 +20,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     public override void SetDefaults()
     {
       base.SetDefaults();
-      
+
       item.rare = 3;
     }
 

@@ -174,7 +174,11 @@ namespace ChensGradiusMod.Projectiles.Options
 
     private bool IsSameAsWeaponShoot(Projectile p) => Owner.HeldItem.shoot == p.type;
 
-    private bool IsSameAsAmmoUsed(Projectile p) => ModOwner.optionRuleAmmoFilter[1].shoot == p.type;
+    private bool IsSameAsAmmoUsed(Projectile p)
+    {
+      return Owner.HeldItem.type == ModOwner.optionRuleAmmoFilter[0].type
+             && ModOwner.optionRuleAmmoFilter[1].shoot == p.type;
+    }
 
     private bool WeaponAndAmmoFilter(Projectile p) => IsSameAsWeaponShoot(p) || IsSameAsAmmoUsed(p);
 
