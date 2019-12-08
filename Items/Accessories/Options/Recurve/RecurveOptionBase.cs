@@ -18,7 +18,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(7, 6));
+    }
+
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.width = 32;
     }
 
     public override void PostUpdate()

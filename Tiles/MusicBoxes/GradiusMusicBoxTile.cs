@@ -6,8 +6,6 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
 {
   public abstract class GradiusMusicBoxTile : ParentGradiusTile
   {
-    protected virtual string MusicName => GradiusHelper.SplitCamelCase(Name.Substring(0, Name.Length - 12));
-
     public override void SetDefaults()
     {
       Main.tileFrameImportant[Type] = true;
@@ -33,5 +31,7 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
     protected override string MapName => $"Music Box ({ MusicName })";
 
     protected override string Texture => "ChensGradiusMod/Sprites/PlaceholderMusicBoxTile";
+
+    protected virtual string MusicName => GradiusHelper.SplitCamelCase(Name.Substring(0, Name.Length - 12));
   }
 }

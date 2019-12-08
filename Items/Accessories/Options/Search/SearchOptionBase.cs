@@ -13,7 +13,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(9, 6));
     }
 
     public override void PostUpdate()

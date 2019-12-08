@@ -1,6 +1,5 @@
 ﻿using ChensGradiusMod.Projectiles.Options.Miscellaneous;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
@@ -20,14 +19,15 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
                          "This incomplete drone can be upgraded into an Option,\n" +
                          "allowing it to be at its full potential.");
       ItemID.Sets.ItemNoGravity[item.type] = true;
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(30, 2));
     }
 
     public override void SetDefaults()
     {
       base.SetDefaults();
+
       item.width = 20;
-      item.height = 16;
+      item.height = 26;
+      item.rare = 1;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
@@ -53,7 +53,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
       Lighting.AddLight(item.Center, .5f, .249f, 0f);
     }
 
-    public override string Texture => "ChensGradiusMod/Sprites/OptionSeedSheet";
+    public override string Texture => "ChensGradiusMod/Sprites/SeedInv";
 
     public override void AddRecipes()
     {

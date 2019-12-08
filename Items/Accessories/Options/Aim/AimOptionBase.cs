@@ -13,7 +13,14 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 6));
+    }
+
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.width = 34;
     }
 
     public override void PostUpdate()

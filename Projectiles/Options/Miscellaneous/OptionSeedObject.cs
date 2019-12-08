@@ -24,7 +24,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
 
     public override void SetStaticDefaults()
     {
-      Main.projFrames[projectile.type] = 2;
+      Main.projFrames[projectile.type] = 6;
       Main.projPet[projectile.type] = true;
     }
 
@@ -32,9 +32,8 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
     {
       base.SetDefaults();
 
-      projectile.width = 20;
-      projectile.height = 16;
-      // projectile.light = .1f;
+      projectile.width = 16;
+      projectile.height = 10;
     }
 
     public override bool PreAI()
@@ -85,9 +84,7 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
       inBattle = true;
     }
 
-    protected override int FrameSpeed => 30;
-
-    protected override float[] LightValues { get; } = { .1f, .3f };
+    protected override float[] LightValues { get; } = { .02f, .03f, .04f, .04f, .03f, .02f };
 
     private int SpawnProjectileType { get; set; } = 0;
 

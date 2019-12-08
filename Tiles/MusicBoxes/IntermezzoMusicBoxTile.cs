@@ -8,6 +8,8 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
   {
     protected override Color MinimapColor => new Color(150, 150, 150);
 
+    protected override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBoxTile";
+
     protected override int ItemType => ModContent.ItemType<IntermezzoMusicBox>();
   }
 }
