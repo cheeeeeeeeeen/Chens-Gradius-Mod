@@ -8,6 +8,8 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
   {
     protected override Color MinimapColor => new Color(100, 100, 100);
 
+    protected override string Texture => "ChensGradiusMod/Sprites/DepartureForSpaceMusicBoxTile";
+
     protected override int ItemType => ModContent.ItemType<DepartureForSpaceMusicBox>();
   }
 }

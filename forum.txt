@@ -1,24 +1,21 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.0.0.1
+[B][U][SIZE=6]Mod Version: 1.0.1
 tModLoader: 0.11.5[/SIZE][/U][/B]
 
-I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well. It is still a small mod, so content is not abundant.
+I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
 The mod will also focus to be [B][U]playable on multiplayer[/U][/B], so please file in a bug if there is a desync issue that is detected.
 
 This mod is on the Mod Browser, so download it from there.
 If the Mod Browser is down, then you can refer to this link to download the latest release: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/releases']Gradius Mod Releases[/URL]
 
-We have an ongoing Wiki project for this mod where it will contain all the information about the mod.
-It is still [I]incomplete[/I], so for now, you need to use this main post if you want to browse for content, or use Recipe Browser, Cheat Sheet or Hero's Mod in-game.
-If you know how to write in Markdown, you may help us contribute to the Wiki!
-Here is the Wiki link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki']Chen's Gradius Mod Wiki[/URL]
+[B][URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki'][SIZE=5]Chen's Gradius Mod Wiki[/SIZE][/URL][SIZE=5] is a place where you can find detailed information about the added features the mod provides.[/SIZE][/B]
 
-If you want to help making sprites for this mod, then you are welcome to join us. Check the Discord Link below in [I]Contact Us [/I]section.
+Click the Spoiler below for a summary anyway if you're not eager to look at the wiki.
 
-[SPOILER="Mod Contents"]
+[SPOILER="Mod Contents (Summary)"]
 [B]Contents[/B]
 [LIST=1]
 [*]Options/Multiples
@@ -214,12 +211,9 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [/LIST]
 [/SPOILER]
 
-If you are curious about what our current plans are, you can look them up on the project board.
-Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/projects/1']Gradius Mod Project Board[/URL]
-
 [SPOILER="Changelogs"]
-1.0.0.1
-  - Update placeholder sprites
+1.0.1
+  - Update all placeholder sprites into the official ones
 
 1.0.0
   - Rework Option Rules
@@ -514,11 +508,6 @@ Here is the link: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/proje
 0.0.2
   - Initial release
 [/SPOILER]
-
-[B][U][SIZE=6]Highlighted Issue[/SIZE][/U][/B]
-The Options do copy even modded projectiles from other mods, which is great. This comes with a cost, however. Due to mod creator's unique way of coding projectile code, the options may not behave properly, [U]and may duplicate and copy generated projectiles created by another friendly projectile[/U].
-If you know a mod's projectile that does this, and you do not want this overpowered behavior, simply contact us about it! Check the [I]Contact Us[/I] section below, or you may simply comment here:
-[URL unfurl="true"]https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues/14[/URL]
 
 [SPOILER="Cross Mod Content Capabilities (For Other Modders)"]
 [B][U][SIZE=6]Option Compatibility[/SIZE][/U][/B]

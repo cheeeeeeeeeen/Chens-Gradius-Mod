@@ -16,5 +16,7 @@ namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 
       item.createTile = ModContent.TileType<IntermezzoMusicBoxTile>();
     }
+
+    public override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBox";
   }
 }

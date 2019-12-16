@@ -10,6 +10,8 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
 
     protected override string MusicName => $"The {base.MusicName}";
 
+    protected override string Texture => "ChensGradiusMod/Sprites/ThePositionLightMusicBoxTile";
+
     protected override int ItemType => ModContent.ItemType<PositionLightMusicBox>();
   }
 }

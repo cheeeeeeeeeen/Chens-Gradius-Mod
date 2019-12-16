@@ -15,7 +15,15 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
-      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 5));
+      Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(10, 6));
+    }
+
+    public override void SetDefaults()
+    {
+      base.SetDefaults();
+
+      item.width = 40;
+      item.height = 50;
     }
 
     public override void PostUpdate()

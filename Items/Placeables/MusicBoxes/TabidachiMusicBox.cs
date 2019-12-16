@@ -16,5 +16,7 @@ namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 
       item.createTile = ModContent.TileType<TabidachiMusicBoxTile>();
     }
+
+    public override string Texture => "ChensGradiusMod/Sprites/TabidachiMusicBox";
   }
 }

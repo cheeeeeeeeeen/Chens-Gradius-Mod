@@ -17,6 +17,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     private const float AngleSpeed = 20f;
     private const float AngleVariation = 5f;
     private const int DelayToRotate = 10;
+    private const int DustRate = 4;
 
     private readonly int[] dustIds = new int[2] { 55, 112 };
     private readonly int trailType = ModContent.ProjectileType<ChargeMultipleTrail>();
@@ -27,18 +28,20 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
     private int enemyTarget = -1;
     private bool initialized = false;
     private int delayTick = 0;
+    private int dustTick = 0;
+    private float trailRotation = 0;
 
     public override void SetStaticDefaults()
     {
       DisplayName.SetDefault("Charged Multiple");
-      Main.projFrames[projectile.type] = 1;
+      Main.projFrames[projectile.type] = 3;
     }
 
     public override void SetDefaults()
     {
       projectile.netImportant = true;
-      projectile.width = 32;
-      projectile.height = 32;
+      projectile.width = 42;
+      projectile.height = 44;
       projectile.light = 1f;
       projectile.friendly = true;
       projectile.hostile = false;
@@ -56,6 +59,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       {
         initialized = true;
         oldCurrentAngle = currentAngle = projectile.ai[0];
+        trailRotation = MathHelper.ToRadians(MaxRotate - currentAngle);
         projectile.timeLeft = RoundOffToWhole(projectile.ai[1]);
       }
 
@@ -69,6 +73,17 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       SeekEnemy();
       RotateTowardsTarget();
       SpecialEffects();
+    }
+
+    public override void ModifyDamageHitbox(ref Rectangle hitbox)
+    {
+      hitbox = new Rectangle
+      {
+        X = hitbox.X + 6,
+        Y = hitbox.Y + 6,
+        Width = hitbox.Width - 4,
+        Height = hitbox.Height - 4
+      };
     }
 
     public override void Kill(int timeLeft)
@@ -96,13 +111,13 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
       if (IsSameClientOwner(projectile))
       {
         Projectile.NewProjectile(projectile.Center, Vector2.Zero, trailType, projectile.damage,
-                                 projectile.knockBack, projectile.owner, projectile.rotation);
+                                 projectile.knockBack, projectile.owner, trailRotation);
       }
     }
 
     private void ProjectileAnimate()
     {
-      if (++projectile.frameCounter >= 5)
+      if (++projectile.frameCounter >= 4)
       {
         projectile.frameCounter = 0;
         if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
@@ -143,7 +158,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         {
           float chosenVariant = Main.rand.NextFloat(AngleVariation);
           currentAngle = AngularRotate(currentAngle, targetAngle, MinRotate,
-                                                     MaxRotate, AngleSpeed - chosenVariant);
+                                       MaxRotate, AngleSpeed - chosenVariant);
           if (oldCurrentAngle != currentAngle)
           {
             oldCurrentAngle = currentAngle;
@@ -151,8 +166,8 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
           }
         }
         else currentAngle = AngularRotate(currentAngle, targetAngle, MinRotate,
-                                                        MaxRotate, AngleSpeed);
-        projectile.rotation = MathHelper.ToRadians(currentAngle);
+                                          MaxRotate, AngleSpeed);
+        trailRotation = MathHelper.ToRadians(MaxRotate - currentAngle);
 
         projectile.velocity = Spd * new Vector2
         {
@@ -164,10 +179,14 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
 
     private void SpecialEffects()
     {
-      for (int i = 0; i < dustIds.Length; i++)
+      if (++dustTick >= DustRate)
       {
-        Dust.NewDust(projectile.position, projectile.width, projectile.height, dustIds[i],
-                     0, 0, 0, default, 2);
+        dustTick = 0;
+        for (int i = 0; i < dustIds.Length; i++)
+        {
+          Dust.NewDust(projectile.position, projectile.width, projectile.height, dustIds[i],
+                       0, 0, 0, default, 2);
+        }
       }
     }
   }
