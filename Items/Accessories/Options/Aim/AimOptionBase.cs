@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
   public abstract class AimOptionBase : OptionBase
   {
-    public override OptionTypes OptionType => OptionTypes.Freeze;
+    public override OptionTypes OptionType => OptionTypes.Aim;
 
     public override void SetStaticDefaults()
     {

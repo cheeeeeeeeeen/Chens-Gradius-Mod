@@ -212,6 +212,9 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [/SPOILER]
 
 [SPOILER="Changelogs"]
+1.0.2
+  - Fix Aim Options not spawning when the appropriate accessory is equipped
+
 1.0.1
   - Update all placeholder sprites into the official ones
 
