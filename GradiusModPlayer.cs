@@ -69,7 +69,7 @@ namespace ChensGradiusMod
       optionThree = false;
       optionFour = false;
       optionSeed = false;
-      InitializationOnly();
+      OptionFlagReset();
       optionRuleAmmoFilter[0] = new Item();
       optionRuleAmmoFilter[1] = new Item();
     }
@@ -364,7 +364,7 @@ namespace ChensGradiusMod
       recurveSide = false;
     }
 
-    private void InitializationOnly()
+    private void OptionFlagReset()
     {
       optionFlags[(byte)OptionTypes.Normal] = normalOption = false;
       optionFlags[(byte)OptionTypes.Rotate] = rotateOption = false;
