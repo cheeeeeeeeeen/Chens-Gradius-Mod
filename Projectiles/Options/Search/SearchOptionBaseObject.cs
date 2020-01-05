@@ -13,7 +13,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
     private const float InterpolateValue = .1f;
     private const float PursueDistance = 100f;
     private const int ReseekCooldown = 30;
-    private const float NearerPercentage = .25f;
+    private const float Percentage = .25f;
     private const float ReturnToFollowThreshold = 4f;
     private const float RotateAccel = .15f;
     private const float MaxRotateSpeed = 7f;
@@ -56,7 +56,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           if (ModOwner.isSearching)
           {
             dest = ComputeTargetOffset(Target.Center, projectile.Center,
-                                       PursueDistance * NearerPercentage);
+                                       PursueDistance * Percentage);
             projectile.Center = Vector2.Lerp(projectile.Center, dest, InterpolateValue);
 
             if (Vector2.Distance(projectile.Center, Owner.Center) > SeekDistance)

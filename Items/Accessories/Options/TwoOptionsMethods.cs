@@ -50,11 +50,13 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public static void UpdateAccessory(Player player, int[] OptionPosition,
                                        string ProjectileType, string[] ProjectileName,
+                                       Action<Player> UpdateOptionFlag,
                                        Action<Player> StoreProjectileCounts,
                                        Action<Player> ResetProjectileCounts,
                                        Action<Player, int, string> CreateOption,
                                        Action<Player, int> CreationOrderingBypass)
     {
+      UpdateOptionFlag(player);
       StoreProjectileCounts(player);
       for (int i = 0; i < OptionPosition.Length; i++)
       {

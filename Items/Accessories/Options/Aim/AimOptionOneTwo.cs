@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     {
       ModPlayer(player).optionOne = true;
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).aimOption.Value = true;
+      ModPlayer(player).aimOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

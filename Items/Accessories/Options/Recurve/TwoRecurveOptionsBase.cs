@@ -30,7 +30,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       TwoOptionsMethods.UpdateAccessory(player, OptionPosition, ProjectileType, ProjectileName,
-                                        StoreProjectileCounts, ResetProjectileCounts,
+                                        UpdateOptionFlag, StoreProjectileCounts, ResetProjectileCounts,
                                         CreateOption, CreationOrderingBypass);
     }
 

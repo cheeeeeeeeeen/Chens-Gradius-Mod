@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).searchOption.Value = true;
+      ModPlayer(player).searchOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

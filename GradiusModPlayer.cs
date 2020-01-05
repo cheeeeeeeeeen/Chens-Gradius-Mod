@@ -37,32 +37,28 @@ namespace ChensGradiusMod
     public bool optionTwo;
     public bool optionThree;
     public bool optionFour;
-    public Ref<bool> normalOption;
-    public Ref<bool> freezeOption;
-    public Ref<bool> aimOption;
-    public Ref<bool> rotateOption;
-    public Ref<bool> searchOption;
-    public Ref<bool> chargeMultiple;
+    public bool normalOption;
+    public bool freezeOption;
+    public bool aimOption;
+    public bool rotateOption;
+    public bool searchOption;
+    public bool chargeMultiple;
     public int chargeMode;
     public bool optionSeed;
     public Projectile seedProjectile;
     public sbyte seedRotateDirection;
-    public Ref<bool> recurveOption;
+    public bool recurveOption;
     public bool recurveSide;
     public bool recurveActionMode;
     public bool isRecurving;
     public float recurveDistance;
-    public Ref<bool>[] optionFlags = new Ref<bool>[Enum.GetNames(typeof(OptionTypes)).Length];
+    public bool[] optionFlags = new bool[Enum.GetNames(typeof(OptionTypes)).Length];
     public Item[] optionRuleAmmoFilter = new Item[2];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
     public List<int> optionAlreadyProducedProjectiles = new List<int>();
 
-    public GradiusModPlayer()
-    {
-      InitializationOnly();
-      UpdateDead();
-    }
+    public GradiusModPlayer() => UpdateDead();
 
     public override void ResetEffects()
     {
@@ -72,14 +68,8 @@ namespace ChensGradiusMod
       optionTwo = false;
       optionThree = false;
       optionFour = false;
-      normalOption.Value = false;
-      freezeOption.Value = false;
-      aimOption.Value = false;
-      rotateOption.Value = false;
-      searchOption.Value = false;
-      chargeMultiple.Value = false;
       optionSeed = false;
-      recurveOption.Value = false;
+      InitializationOnly();
       optionRuleAmmoFilter[0] = new Item();
       optionRuleAmmoFilter[1] = new Item();
     }
@@ -116,17 +106,17 @@ namespace ChensGradiusMod
       packet.Write(optionTwo);
       packet.Write(optionThree);
       packet.Write(optionFour);
-      packet.Write(normalOption.Value);
-      packet.Write(freezeOption.Value);
-      packet.Write(rotateOption.Value);
+      packet.Write(normalOption);
+      packet.Write(freezeOption);
+      packet.Write(rotateOption);
       packet.Write(optionSeed);
       packet.Write(seedRotateDirection);
-      packet.Write(chargeMultiple.Value);
+      packet.Write(chargeMultiple);
       packet.Write(chargeMode);
-      packet.Write(aimOption.Value);
-      packet.Write(searchOption.Value);
+      packet.Write(aimOption);
+      packet.Write(searchOption);
       packet.Write(isSearching);
-      packet.Write(recurveOption.Value);
+      packet.Write(recurveOption);
       packet.Send(toWho, fromWho);
     }
 
@@ -214,17 +204,17 @@ namespace ChensGradiusMod
         }
       }
 
-      if (freezeOption.Value)
+      if (freezeOption)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isFreezing = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isFreezing = false;
       }
-      else if (aimOption.Value)
+      else if (aimOption)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isAiming = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isAiming = false;
       }
-      else if (rotateOption.Value)
+      else if (rotateOption)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed)
         {
@@ -238,12 +228,12 @@ namespace ChensGradiusMod
           revolveDirection = (sbyte)-revolveDirection;
         }
       }
-      else if (searchOption.Value)
+      else if (searchOption)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isSearching = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isSearching = false;
       }
-      else if (chargeMultiple.Value && HasAnyChargeMultipleAccessory())
+      else if (chargeMultiple && HasAnyChargeMultipleAccessory())
       {
         if (ChensGradiusMod.optionActionKey.JustPressed)
         {
@@ -256,7 +246,7 @@ namespace ChensGradiusMod
           chargeMode = (int)ChargeMultipleBase.States.Dying;
         }
       }
-      else if (recurveOption.Value)
+      else if (recurveOption)
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isRecurving = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding)
@@ -280,13 +270,13 @@ namespace ChensGradiusMod
           }
 
           bool isRotateButNotFollowing = rotateMode != (int)RotateOptionBase.States.Following;
-          if (!recurveOption.Value && (!IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f)
+          if (!recurveOption && (!IsEqualWithThreshold(optionFlightPath[0], player.Center, .01f)
                                  || isRotateButNotFollowing))
           {
             if (optionFlightPath.Count >= MaxFlightPathCount) optionFlightPath.RemoveAt(optionFlightPath.Count - 1);
 
-            if (freezeOption.Value && isFreezing) FreezeBehavior();
-            else if (rotateOption.Value && isRotateButNotFollowing)
+            if (freezeOption && isFreezing) FreezeBehavior();
+            else if (rotateOption && isRotateButNotFollowing)
             {
               switch (rotateMode)
               {
@@ -311,7 +301,7 @@ namespace ChensGradiusMod
             }
             else optionFlightPath.Insert(0, player.Center);
           }
-          else if (recurveOption.Value) RecurveBehavior();
+          else if (recurveOption) RecurveBehavior();
         }
         else optionFlightPath.Insert(0, player.Center);
       }
@@ -376,20 +366,13 @@ namespace ChensGradiusMod
 
     private void InitializationOnly()
     {
-      normalOption = new Ref<bool>(false);
-      rotateOption = new Ref<bool>(false);
-      freezeOption = new Ref<bool>(false);
-      chargeMultiple = new Ref<bool>(false);
-      aimOption = new Ref<bool>(false);
-      searchOption = new Ref<bool>(false);
-      recurveOption = new Ref<bool>(false);
-      optionFlags[(byte)OptionTypes.Normal] = normalOption;
-      optionFlags[(byte)OptionTypes.Rotate] = rotateOption;
-      optionFlags[(byte)OptionTypes.Freeze] = freezeOption;
-      optionFlags[(byte)OptionTypes.Aim] = aimOption;
-      optionFlags[(byte)OptionTypes.Charge] = chargeMultiple;
-      optionFlags[(byte)OptionTypes.Recurve] = recurveOption;
-      optionFlags[(byte)OptionTypes.Search] = searchOption;
+      optionFlags[(byte)OptionTypes.Normal] = normalOption = false;
+      optionFlags[(byte)OptionTypes.Rotate] = rotateOption = false;
+      optionFlags[(byte)OptionTypes.Freeze] = freezeOption = false;
+      optionFlags[(byte)OptionTypes.Aim] = aimOption = false;
+      optionFlags[(byte)OptionTypes.Charge] = chargeMultiple = false;
+      optionFlags[(byte)OptionTypes.Recurve] = recurveOption = false;
+      optionFlags[(byte)OptionTypes.Search] = searchOption = false;
     }
 
     private bool HasAnyOptions()

@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).searchOption.Value = true;
+      ModPlayer(player).searchOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

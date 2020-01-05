@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).recurveOption.Value = true;
+      ModPlayer(player).recurveOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

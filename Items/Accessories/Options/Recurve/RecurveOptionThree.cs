@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionThree = true;
-      ModPlayer(player).recurveOption.Value = true;
+      ModPlayer(player).recurveOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

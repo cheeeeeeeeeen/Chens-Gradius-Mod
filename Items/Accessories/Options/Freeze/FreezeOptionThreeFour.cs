@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).freezeOption.Value = true;
+      ModPlayer(player).freezeOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

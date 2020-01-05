@@ -22,7 +22,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).rotateOption.Value = true;
+      ModPlayer(player).rotateOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

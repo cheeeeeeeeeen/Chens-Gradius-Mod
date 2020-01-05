@@ -246,17 +246,17 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).optionTwo = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionThree = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionFour = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).normalOption.Value = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).freezeOption.Value = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).rotateOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).normalOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).freezeOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).rotateOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).optionSeed = reader.ReadBoolean();
             GradiusPlayer(playerIndex).seedRotateDirection = reader.ReadSByte();
-            GradiusPlayer(playerIndex).chargeMultiple.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).chargeMultiple = reader.ReadBoolean();
             GradiusPlayer(playerIndex).chargeMode = reader.ReadInt32();
-            GradiusPlayer(playerIndex).aimOption.Value = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).searchOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).aimOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).searchOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).recurveOption.Value = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).recurveOption = reader.ReadBoolean();
             break;
           }
 

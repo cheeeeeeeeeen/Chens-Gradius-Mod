@@ -31,6 +31,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+      UpdateOptionFlag(player);
       StoreProjectileCounts(player);
       CreateOption(player, OptionPosition, ProjectileType + ProjectileName);
       CreationOrderingBypass(player, OptionPosition);
@@ -118,8 +119,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
       bool result = true;
       for (byte i = 0; i < gmPlayer.optionFlags.Length; i++)
       {
-        if ((byte)OptionType == i) { if (includeSelf) result &= gmPlayer.optionFlags[i].Value; }
-        else result &= !gmPlayer.optionFlags[i].Value;
+        if ((byte)OptionType == i) { if (includeSelf) result &= gmPlayer.optionFlags[i]; }
+        else result &= !gmPlayer.optionFlags[i];
 
         if (!result) break;
       }
@@ -178,6 +179,11 @@ namespace ChensGradiusMod.Items.Accessories.Options
         player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "ThreeObject")];
       cloneProjectileCounts[3] =
         player.ownedProjectileCounts[mod.ProjectileType(ProjectileType + OptionName + "FourObject")];
+    }
+
+    protected void UpdateOptionFlag(Player player)
+    {
+      ModPlayer(player).optionFlags[(byte)OptionType] = true;
     }
 
     private bool IsOptionNotDeployed(Player player, string projectileName)

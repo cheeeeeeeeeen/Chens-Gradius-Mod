@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionThree = true;
-      ModPlayer(player).freezeOption.Value = true;
+      ModPlayer(player).freezeOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
