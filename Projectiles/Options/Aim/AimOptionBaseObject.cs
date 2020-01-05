@@ -16,7 +16,8 @@ namespace ChensGradiusMod.Projectiles.Options.Aim
         float dAng = GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
         float pAng = GetBearing(Vector2.Zero, p.velocity, false);
         float offAng = MathHelper.ToRadians(pAng - dAng);
-        float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward, false));
+        Vector2 offDiff = p.Center - Main.player[p.owner].Center;
+        float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward - offDiff, false));
         retVal = MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
       }
 
