@@ -2,14 +2,11 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Search
 {
   public abstract class SearchOptionBase : OptionBase
   {
-    public override OptionTypes OptionType => OptionTypes.Search;
-
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -32,6 +29,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.HeavyWorkBench);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.searchOption;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.recurveOption
+             && !gmPlayer.rotateOption
+             && !gmPlayer.freezeOption
+             && !gmPlayer.chargeMultiple
+             && !gmPlayer.aimOption;
+
+      return result;
     }
   }
 }

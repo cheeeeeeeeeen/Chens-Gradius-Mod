@@ -2,7 +2,6 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
@@ -12,8 +11,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     public const float FixedAxisDistance = 32f;
     public const float LeastAdjustment = 8f;
     public const float CapAdjustment = 240f;
-
-    public override OptionTypes OptionType => OptionTypes.Recurve;
 
     public override void SetStaticDefaults()
     {
@@ -44,6 +41,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.SkyMill);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.recurveOption;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.aimOption
+             && !gmPlayer.rotateOption
+             && !gmPlayer.freezeOption
+             && !gmPlayer.chargeMultiple
+             && !gmPlayer.searchOption;
+
+      return result;
     }
   }
 }

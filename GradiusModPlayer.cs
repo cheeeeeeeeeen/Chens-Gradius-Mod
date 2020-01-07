@@ -52,7 +52,6 @@ namespace ChensGradiusMod
     public bool recurveActionMode;
     public bool isRecurving;
     public float recurveDistance;
-    public bool[] optionFlags = new bool[Enum.GetNames(typeof(OptionTypes)).Length];
     public Item[] optionRuleAmmoFilter = new Item[2];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
@@ -366,13 +365,13 @@ namespace ChensGradiusMod
 
     private void OptionFlagReset()
     {
-      optionFlags[(byte)OptionTypes.Normal] = normalOption = false;
-      optionFlags[(byte)OptionTypes.Rotate] = rotateOption = false;
-      optionFlags[(byte)OptionTypes.Freeze] = freezeOption = false;
-      optionFlags[(byte)OptionTypes.Aim] = aimOption = false;
-      optionFlags[(byte)OptionTypes.Charge] = chargeMultiple = false;
-      optionFlags[(byte)OptionTypes.Recurve] = recurveOption = false;
-      optionFlags[(byte)OptionTypes.Search] = searchOption = false;
+      normalOption = false;
+      rotateOption = false;
+      freezeOption = false;
+      aimOption = false;
+      chargeMultiple = false;
+      recurveOption = false;
+      searchOption = false;
     }
 
     private bool HasAnyOptions()

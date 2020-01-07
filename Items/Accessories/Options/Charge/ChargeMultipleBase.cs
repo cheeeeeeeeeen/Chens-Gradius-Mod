@@ -2,15 +2,12 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Charge
 {
   public abstract class ChargeMultipleBase : OptionBase
   {
     public enum States : int { Following, Charging, Dying };
-
-    public override OptionTypes OptionType => OptionTypes.Charge;
 
     public override void SetStaticDefaults()
     {
@@ -47,6 +44,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.BewitchingTable);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.chargeMultiple;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.recurveOption
+             && !gmPlayer.rotateOption
+             && !gmPlayer.freezeOption
+             && !gmPlayer.aimOption
+             && !gmPlayer.searchOption;
+
+      return result;
     }
   }
 }

@@ -2,7 +2,6 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Rotate
 {
@@ -13,8 +12,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     public const float Radius = 100f;
     public const float Speed = 10f;
     public const float AcceptedThreshold = .01f;
-
-    public override OptionTypes OptionType => OptionTypes.Rotate;
 
     public override void SetStaticDefaults()
     {
@@ -46,6 +43,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.Loom);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.rotateOption;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.recurveOption
+             && !gmPlayer.aimOption
+             && !gmPlayer.freezeOption
+             && !gmPlayer.chargeMultiple
+             && !gmPlayer.searchOption;
+
+      return result;
     }
   }
 }

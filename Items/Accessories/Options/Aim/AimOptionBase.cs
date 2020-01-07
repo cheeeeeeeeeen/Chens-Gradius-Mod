@@ -2,14 +2,11 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
   public abstract class AimOptionBase : OptionBase
   {
-    public override OptionTypes OptionType => OptionTypes.Aim;
-
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -39,6 +36,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.AmmoBox);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.aimOption;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.recurveOption
+             && !gmPlayer.rotateOption
+             && !gmPlayer.freezeOption
+             && !gmPlayer.chargeMultiple
+             && !gmPlayer.searchOption;
+
+      return result;
     }
   }
 }

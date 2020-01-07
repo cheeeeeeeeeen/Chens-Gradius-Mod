@@ -2,14 +2,11 @@
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
   public abstract class FreezeOptionBase : OptionBase
   {
-    public override OptionTypes OptionType => OptionTypes.Freeze;
-
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
@@ -40,6 +37,21 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     protected override void UpgradeUsualStations(ModRecipe recipe)
     {
       recipe.AddTile(TileID.IceMachine);
+    }
+
+    protected override bool ModeChecks(GradiusModPlayer gmPlayer, bool includeSelf = true)
+    {
+      bool result = true;
+      if (includeSelf) result &= gmPlayer.freezeOption;
+
+      result &= !gmPlayer.normalOption
+             && !gmPlayer.recurveOption
+             && !gmPlayer.rotateOption
+             && !gmPlayer.aimOption
+             && !gmPlayer.chargeMultiple
+             && !gmPlayer.searchOption;
+
+      return result;
     }
   }
 }

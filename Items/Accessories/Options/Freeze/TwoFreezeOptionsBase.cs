@@ -30,7 +30,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       TwoOptionsMethods.UpdateAccessory(player, OptionPosition, ProjectileType, ProjectileName,
-                                        UpdateOptionFlag, StoreProjectileCounts, ResetProjectileCounts,
+                                        StoreProjectileCounts, ResetProjectileCounts,
                                         CreateOption, CreationOrderingBypass);
     }
 
