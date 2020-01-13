@@ -84,7 +84,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < Main.worldSurface) return .05f;
+      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < Main.worldSurface) return .05f;
       else return 0f;
     }
 
@@ -129,6 +129,12 @@ namespace ChensGradiusMod.NPCs
     {
       FrameTick = reader.ReadByte();
       FrameCounter = reader.ReadByte();
+    }
+
+    protected static bool UsualSpawnConditions(NPCSpawnInfo spawnInfo)
+    {
+      return Main.hardMode && !spawnInfo.invasion &&
+             (spawnInfo.playerSafe || spawnInfo.playerInTown);
     }
 
     protected virtual int FrameTick { get; set; } = 0;

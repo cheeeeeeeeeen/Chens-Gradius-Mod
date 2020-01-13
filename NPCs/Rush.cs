@@ -53,6 +53,8 @@ namespace ChensGradiusMod.NPCs
       ScaleStats();
     }
 
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) => 0f;
+
     public override bool PreAI()
     {
       if (!initialized)

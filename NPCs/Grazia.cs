@@ -54,8 +54,8 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
-          spawnInfo.spawnTileY > (SkyTilesYLocation + Main.worldSurface) * .5f)
+      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < UnderworldTilesYLocation
+          && spawnInfo.spawnTileY > (SkyTilesYLocation + Main.worldSurface) * .5f)
       {
         return .05f;
       }

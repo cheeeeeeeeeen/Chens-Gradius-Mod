@@ -36,8 +36,8 @@ namespace ChensGradiusMod.NPCs
 
     public static float SpawnCondition(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.spawnTileY < UnderworldTilesYLocation &&
-          spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
+      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < UnderworldTilesYLocation
+          && spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
       {
         return .075f;
       }

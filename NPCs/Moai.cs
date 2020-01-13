@@ -51,7 +51,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (Main.hardMode && spawnInfo.desertCave) return .1f;
+      if (UsualSpawnConditions(spawnInfo) && spawnInfo.desertCave) return .1f;
       else if (spawnInfo.lihzahrd) return .2f;
       else return 0f;
     }
