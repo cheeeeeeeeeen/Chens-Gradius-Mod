@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Projectiles.Aliens;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
@@ -14,13 +15,24 @@ namespace ChensGradiusMod
       new AlienDamageType("CalamityMod", "CalamityGlobalProjectile", "rogue")
     };
 
+    private static readonly List<AlienProjectile> AllowedTypes = new List<AlienProjectile>()
+    {
+      new AlienProjectile(ItemID.StarCannon, ProjectileID.FallingStar),
+      new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt)
+    };
+
     public static bool StandardFilter(Projectile p)
     {
-      return p.active && !p.hostile && p.friendly && !p.npcProj && CanDamage(p)
-             && IsAbleToCrit(p) && !p.minion && !p.trap && IsNotAYoyo(p);
+      return RequiredFilter(p) && !p.hostile && p.friendly && !p.npcProj && CanDamage(p)
+             && IsAbleToCrit(p) && !p.minion && !p.trap;
     }
 
-    public static bool ImportOptionRule(string modName, string weapName, string projName)
+    public static bool RequiredFilter(Projectile p)
+    {
+      return p.active && IsNotAYoyo(p);
+    }
+
+    public static bool ImportBanOptionRule(string modName, string weapName, string projName)
     {
       if (!BannedTypes.Exists(ap => modName == ap.modName && weapName == ap.weaponName
                                     && projName == ap.projectileName))
@@ -32,12 +44,36 @@ namespace ChensGradiusMod
       return false;
     }
 
-    public static bool ImportOptionRule(int wType, int pType)
+    public static bool ImportBanOptionRule(int wType, int pType)
     {
       if (!BannedTypes.Exists(ap => ap.modName == "Terraria" && wType == ap.weaponType
                                     && pType == ap.projectileType))
       {
         BannedTypes.Add(new AlienProjectile(wType, pType));
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool ImportAllowOptionRule(string modName, string weapName, string projName)
+    {
+      if (!AllowedTypes.Exists(ap => modName == ap.modName && weapName == ap.weaponName
+                                    && projName == ap.projectileName))
+      {
+        AllowedTypes.Add(new AlienProjectile(modName, weapName, projName));
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool ImportAllowOptionRule(int wType, int pType)
+    {
+      if (!AllowedTypes.Exists(ap => ap.modName == "Terraria" && wType == ap.weaponType
+                                    && pType == ap.projectileType))
+      {
+        AllowedTypes.Add(new AlienProjectile(wType, pType));
         return true;
       }
 
@@ -83,9 +119,17 @@ namespace ChensGradiusMod
       return false;
     }
 
-    public static bool IsAllowed(Item w, Projectile p) => !IsBanned(w, p);
+    public static bool IsAllowed(Item w, Projectile p) => IsAllowed(w.type, p.type);
 
-    public static bool IsAllowed(int wType, int pType) => !IsBanned(wType, pType);
+    public static bool IsAllowed(int wType, int pType)
+    {
+      foreach (AlienProjectile ap in AllowedTypes)
+      {
+        if (ap.CheckType(wType, pType)) return true;
+      }
+
+      return false;
+    }
 
     private static bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;
 
