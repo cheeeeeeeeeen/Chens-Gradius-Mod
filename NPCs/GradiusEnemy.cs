@@ -134,7 +134,7 @@ namespace ChensGradiusMod.NPCs
     protected static bool UsualSpawnConditions(NPCSpawnInfo spawnInfo)
     {
       return Main.hardMode && !spawnInfo.invasion &&
-             (spawnInfo.playerSafe || spawnInfo.playerInTown);
+             !(spawnInfo.playerSafe || spawnInfo.playerInTown);
     }
 
     protected virtual int FrameTick { get; set; } = 0;
