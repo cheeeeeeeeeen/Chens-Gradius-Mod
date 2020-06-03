@@ -114,6 +114,21 @@ namespace ChensGradiusMod.NPCs
       ReduceDamage(ref damage, ref knockback, ref crit);
     }
 
+    public override bool? CanHitNPC(NPC target)
+    {
+      if (GradiusConfig.bacterionContactDamageMultiplier <= 0)
+      {
+        return false;
+      }
+
+      return null;
+    }
+
+    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
+    {
+      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplier * damage);
+    }
+
     public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
     {
       base.ScaleExpertStats(numPlayers, bossLifeScale);
@@ -384,6 +399,8 @@ namespace ChensGradiusMod.NPCs
     {
       return kb * KnockbackMultiplier;
     }
+
+    private GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {
