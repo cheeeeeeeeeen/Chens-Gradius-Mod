@@ -8,7 +8,15 @@ namespace ChensGradiusMod
 {
   public static class OptionRules
   {
-    private static readonly List<AlienProjectile> BannedTypes = new List<AlienProjectile>();
+    private static readonly List<AlienProjectile> BannedTypes = new List<AlienProjectile>()
+	{
+	  new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowFront),
+	  new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowBack),
+	  new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornBase),
+	  new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornTip),
+	  new AlienProjectile(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
+	  new AlienProjectile(ItemID.MushroomSpear, ProjectileID.Mushroom)
+	};
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
     {
@@ -18,7 +26,32 @@ namespace ChensGradiusMod
     private static readonly List<AlienProjectile> AllowedTypes = new List<AlienProjectile>()
     {
       new AlienProjectile(ItemID.StarCannon, ProjectileID.FallingStar),
-      new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt)
+      new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
+	    new AlienProjectile(ItemID.FlareGun, ProjectileID.Flare),
+	    new AlienProjectile(ItemID.FlareGun, ProjectileID.BlueFlare),
+	    new AlienProjectile(ItemID.Blowpipe, ProjectileID.Seed),
+	    new AlienProjectile(ItemID.Marrow, ProjectileID.BoneArrow),
+	    new AlienProjectile(ItemID.MoltenFury, ProjectileID.FireArrow),
+	    new AlienProjectile(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
+	    new AlienProjectile(ItemID.Sandgun, ProjectileID.SandBallGun),
+	    new AlienProjectile(ItemID.Sandgun, ProjectileID.EbonsandBallGun),
+	    new AlienProjectile(ItemID.Sandgun, ProjectileID.PearlSandBallGun),
+	    new AlienProjectile(ItemID.Sandgun, ProjectileID.CrimsandBallGun),
+	    new AlienProjectile(ItemID.LaserMachinegun, ProjectileID.LaserMachinegunLaser),
+	    new AlienProjectile(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
+	    new AlienProjectile(ItemID.ChlorophytePartisan, ProjectileID.SporeCloud),
+	    new AlienProjectile(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
+	    new AlienProjectile(ItemID.IceBow, ProjectileID.FrostArrow),
+	    new AlienProjectile(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
+	    new AlienProjectile(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterLaser),
+      new AlienProjectile(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
+	    new AlienProjectile(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
+	    new AlienProjectile(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
+	    new AlienProjectile(ItemID.PulseBow, ProjectileID.PulseBolt),
+	    new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
+	    new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
+	    new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
+	    new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow)
     };
 
     public static bool StandardFilter(Projectile p)
