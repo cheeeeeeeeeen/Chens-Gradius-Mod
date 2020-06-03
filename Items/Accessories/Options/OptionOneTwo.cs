@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -15,7 +16,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     {
       base.SetDefaults();
 
-      item.rare = 6;
+      item.rare = ItemRarityID.LightPurple; // 6
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

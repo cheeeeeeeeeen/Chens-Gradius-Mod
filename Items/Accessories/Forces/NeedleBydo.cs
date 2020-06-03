@@ -21,7 +21,7 @@ namespace ChensGradiusMod.Items.Accessories.Forces
     {
       base.SetDefaults();
 
-      item.rare = 3;
+      item.rare = ItemRarityID.Orange; // 3
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/NeedleForceAccessory";

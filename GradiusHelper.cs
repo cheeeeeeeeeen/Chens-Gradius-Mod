@@ -264,7 +264,7 @@ namespace ChensGradiusMod
       }
       if (IsMultiplayerClient())
       {
-        NetMessage.SendData(21, -1, -1, null, index, 1f, 0f, 0f, 0, 0, 0);
+        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, index, 1f, 0f, 0f, 0, 0, 0);
       }
     }
 

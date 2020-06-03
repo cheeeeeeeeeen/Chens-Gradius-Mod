@@ -17,7 +17,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     {
       base.SetDefaults();
 
-      item.rare = 3;
+      item.rare = ItemRarityID.Orange; // 3
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

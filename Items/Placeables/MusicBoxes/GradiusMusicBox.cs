@@ -7,7 +7,7 @@ namespace ChensGradiusMod.Items.Placeables.MusicBoxes
   {
     public override void SetDefaults()
     {
-      item.useStyle = 1;
+      item.useStyle = ItemUseStyleID.SwingThrow;
       item.useTurn = true;
       item.useAnimation = 15;
       item.useTime = 10;
@@ -15,7 +15,7 @@ namespace ChensGradiusMod.Items.Placeables.MusicBoxes
       item.consumable = true;
       item.width = 32;
       item.height = 20;
-      item.rare = 8;
+      item.rare = ItemRarityID.Yellow; // 8
       item.value = 100000;
       item.accessory = true;
     }

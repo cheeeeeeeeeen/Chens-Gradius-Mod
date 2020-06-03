@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Freeze
 {
@@ -15,7 +16,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     {
       base.SetDefaults();
 
-      item.rare = 9;
+      item.rare = ItemRarityID.Cyan; // 9
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

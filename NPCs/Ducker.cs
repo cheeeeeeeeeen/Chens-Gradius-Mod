@@ -389,8 +389,8 @@ namespace ChensGradiusMod.NPCs
 
         for (int i = 0; i < angles.Length; i++)
         {
-          Projectile.NewProjectile(npc.Center, angles[i].ToRotationVector2() * GradiusEnemyBullet.Spd,
-                                   ModContent.ProjectileType<GradiusEnemyBullet>(),
+          Projectile.NewProjectile(npc.Center, angles[i].ToRotationVector2() * BacterionBullet.Spd,
+                                   ModContent.ProjectileType<BacterionBullet>(),
                                    BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
         }
         npc.netUpdate = true;

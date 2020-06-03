@@ -114,6 +114,21 @@ namespace ChensGradiusMod.NPCs
       ReduceDamage(ref damage, ref knockback, ref crit);
     }
 
+    public override bool? CanHitNPC(NPC target)
+    {
+      if (GradiusConfig.bacterionContactDamageMultiplier <= 0)
+      {
+        return false;
+      }
+
+      return null;
+    }
+
+    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
+    {
+      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplier * damage);
+    }
+
     public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
     {
       base.ScaleExpertStats(numPlayers, bossLifeScale);
@@ -157,7 +172,7 @@ namespace ChensGradiusMod.NPCs
 
     protected virtual float RetaliationExplodeBulletAcceleration => 2f;
 
-    protected virtual float RetaliationBulletSpeed => GradiusEnemyBullet.Spd;
+    protected virtual float RetaliationBulletSpeed => BacterionBullet.Spd;
 
     protected virtual Action<Vector2> RetaliationOverride => null;
 
@@ -257,7 +272,7 @@ namespace ChensGradiusMod.NPCs
 
       if (IsSinglePlayer())
       {
-        Projectile.NewProjectile(spawnPoint, spawnVelocity, ModContent.ProjectileType<GradiusEnemyBullet>(),
+        Projectile.NewProjectile(spawnPoint, spawnVelocity, ModContent.ProjectileType<BacterionBullet>(),
                                  BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
       else if (IsMultiplayerClient())
@@ -294,7 +309,7 @@ namespace ChensGradiusMod.NPCs
         for (int i = 0; i < RetaliationSpreadBulletNumber; i++)
         {
           Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * RetaliationBulletSpeed;
-          Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+          Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<BacterionBullet>(),
                                    BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
           currentAngle += angleLength;
         }
@@ -308,7 +323,7 @@ namespace ChensGradiusMod.NPCs
       if (IsNotMultiplayerClient())
       {
         float angleLength = FullAngle / RetaliationExplodeBulletNumberPerLayer;
-        float currentVelocity = GradiusEnemyBullet.Spd;
+        float currentVelocity = BacterionBullet.Spd;
         int halfCounter = RoundOffToWhole(RetaliationExplodeBulletLayers * .5f);
 
         for (int i = 0; i < RetaliationExplodeBulletLayers; i++)
@@ -317,12 +332,12 @@ namespace ChensGradiusMod.NPCs
           for (int j = 0; j < RetaliationExplodeBulletNumberPerLayer; j++)
           {
             Vector2 vel = MathHelper.ToRadians(currentAngle).ToRotationVector2() * currentVelocity;
-            Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+            Projectile.NewProjectile(spawnPoint, vel, ModContent.ProjectileType<BacterionBullet>(),
                                      BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
             currentAngle += angleLength;
           }
 
-          if (i == halfCounter) currentVelocity = GradiusEnemyBullet.Spd;
+          if (i == halfCounter) currentVelocity = BacterionBullet.Spd;
 
           if (i < halfCounter) currentVelocity += RetaliationExplodeBulletAcceleration;
           else currentVelocity -= RetaliationExplodeBulletAcceleration;
@@ -375,15 +390,17 @@ namespace ChensGradiusMod.NPCs
       npc.life = 0;
     }
 
-    protected int BulletFinalDamage(int dmg = GradiusEnemyBullet.Dmg)
+    protected int BulletFinalDamage(int dmg = BacterionBullet.Dmg)
     {
       return RoundOffToWhole(dmg * DamageMultiplier);
     }
 
-    protected float BulletFinalKnockback(float kb = GradiusEnemyBullet.Kb)
+    protected float BulletFinalKnockback(float kb = BacterionBullet.Kb)
     {
       return kb * KnockbackMultiplier;
     }
+
+    private GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {
