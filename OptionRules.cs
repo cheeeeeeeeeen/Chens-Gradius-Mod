@@ -9,14 +9,14 @@ namespace ChensGradiusMod
   public static class OptionRules
   {
     private static readonly List<AlienProjectile> BannedTypes = new List<AlienProjectile>()
-	{
-          new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowFront),
-          new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowBack),
-          new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornBase),
-          new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornTip),
-          new AlienProjectile(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
-          new AlienProjectile(ItemID.MushroomSpear, ProjectileID.Mushroom)
-	};
+    {
+      new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowFront),
+      new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowBack),
+      new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornBase),
+      new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornTip),
+      new AlienProjectile(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
+      new AlienProjectile(ItemID.MushroomSpear, ProjectileID.Mushroom)
+    };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
     {
