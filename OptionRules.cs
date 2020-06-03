@@ -43,7 +43,6 @@ namespace ChensGradiusMod
       new AlienProjectile(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
       new AlienProjectile(ItemID.IceBow, ProjectileID.FrostArrow),
       new AlienProjectile(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
-      new AlienProjectile(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterLaser),
       new AlienProjectile(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
       new AlienProjectile(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
       new AlienProjectile(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
