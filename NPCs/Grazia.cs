@@ -194,8 +194,8 @@ namespace ChensGradiusMod.NPCs
       if (++fireTick >= FireRate)
       {
         fireTick = 0;
-        Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, GradiusEnemyBullet.Spd);
-        Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<GradiusEnemyBullet>(),
+        Vector2 vel = MoveToward(npc.Center, Main.player[npc.target].Center, BacterionBullet.Spd);
+        Projectile.NewProjectile(npc.Center, vel, ModContent.ProjectileType<BacterionBullet>(),
                                  BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
     }

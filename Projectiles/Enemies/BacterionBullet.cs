@@ -1,10 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
+﻿using Terraria;
 
 namespace ChensGradiusMod.Projectiles.Enemies
 {
-  public class GradiusEnemyBullet : ModProjectile
+  public class BacterionBullet : GradiusBaseBullet
   {
     public const float Spd = 5f;
     public const int Dmg = 60;
@@ -38,7 +36,5 @@ namespace ChensGradiusMod.Projectiles.Enemies
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/EnemyBullet";
-
-    public override Color? GetAlpha(Color lightColor) => Color.White;
   }
 }

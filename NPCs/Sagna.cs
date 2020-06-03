@@ -282,8 +282,8 @@ namespace ChensGradiusMod.NPCs
         float radianAngle = 0f;
         for (int i = 0; i < 24; i++)
         {
-          Projectile.NewProjectile(npc.Center, radianAngle.ToRotationVector2() * GradiusEnemyBullet.Spd,
-                                   ModContent.ProjectileType<GradiusEnemyBullet>(),
+          Projectile.NewProjectile(npc.Center, radianAngle.ToRotationVector2() * BacterionBullet.Spd,
+                                   ModContent.ProjectileType<BacterionBullet>(),
                                    BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
           radianAngle = MathHelper.ToRadians(MathHelper.ToDegrees(radianAngle) + 15f);
         }

@@ -378,7 +378,7 @@ namespace ChensGradiusMod
             float kb = reader.ReadSingle();
 
             Projectile.NewProjectile(spawnPoint, spawnVelocity,
-                                     ModContent.ProjectileType<GradiusEnemyBullet>(),
+                                     ModContent.ProjectileType<BacterionBullet>(),
                                      dmg, kb, Main.myPlayer);
           }
           break;

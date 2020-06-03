@@ -17,7 +17,7 @@ namespace ChensGradiusMod.Items.Accessories.Options
     {
       base.SetDefaults();
 
-      item.rare = 5;
+      item.rare = ItemRarityID.Pink; // 5
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

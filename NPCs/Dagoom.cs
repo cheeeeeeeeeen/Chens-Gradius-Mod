@@ -188,7 +188,7 @@ namespace ChensGradiusMod.NPCs
 
     protected override int RetaliationExplodeBulletNumberPerLayer => 16;
 
-    protected override float RetaliationExplodeBulletAcceleration => -(GradiusEnemyBullet.Spd * .5f);
+    protected override float RetaliationExplodeBulletAcceleration => -(BacterionBullet.Spd * .5f);
 
     private int TotalRushCount
     {

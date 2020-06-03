@@ -1,9 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
-
-namespace ChensGradiusMod.Projectiles.Enemies
+﻿namespace ChensGradiusMod.Projectiles.Enemies
 {
-  public class CoreLaser : ModProjectile
+  public class CoreLaser : GradiusBaseBullet
   {
     public const float Spd = 12f;
     public const int Dmg = 90;
@@ -24,7 +21,5 @@ namespace ChensGradiusMod.Projectiles.Enemies
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/CoreLaser";
-
-    public override Color? GetAlpha(Color lightColor) => Color.White;
   }
 }
