@@ -17,7 +17,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
     {
       base.SetDefaults();
 
-      item.rare = 6;
+      item.rare = ItemRarityID.LightPurple; // 6
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

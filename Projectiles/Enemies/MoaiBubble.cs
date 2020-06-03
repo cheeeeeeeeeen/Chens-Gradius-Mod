@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using System.IO;
+﻿using System.IO;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Enemies
 {
-  public class MoaiBubble : ModProjectile
+  public class MoaiBubble : GradiusBaseBullet
   {
     public const float Spd = 3f;
     public const int Dmg = 100;
@@ -68,8 +66,6 @@ namespace ChensGradiusMod.Projectiles.Enemies
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/MoaiBubble";
-
-    public override Color? GetAlpha(Color lightColor) => Color.White;
 
     public override void SendExtraAI(BinaryWriter writer)
     {

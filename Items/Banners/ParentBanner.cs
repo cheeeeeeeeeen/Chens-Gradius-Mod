@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Banners
 {
@@ -14,9 +15,9 @@ namespace ChensGradiusMod.Items.Banners
       item.autoReuse = true;
       item.useAnimation = 15;
       item.useTime = 10;
-      item.useStyle = 1;
+      item.useStyle = ItemUseStyleID.SwingThrow;
       item.consumable = true;
-      item.rare = 1;
+      item.rare = ItemRarityID.Blue; // 1
       item.value = Item.buyPrice(silver: 10);
       item.createTile = PartnerTile;
       item.placeStyle = PlaceStyle;

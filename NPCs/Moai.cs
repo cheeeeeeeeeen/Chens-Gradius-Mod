@@ -66,7 +66,7 @@ namespace ChensGradiusMod.NPCs
         npc.netUpdate = true;
       }
 
-      return persistDirection == 0 ? false : true;
+      return persistDirection != 0;
     }
 
     public override void AI()
