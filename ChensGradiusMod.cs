@@ -59,7 +59,7 @@ namespace ChensGradiusMod
         string functionName = args[0] as string;
         switch (functionName)
         {
-          case "AddOptionRule":
+          case "BanOptionRule":
             {
               // Vanilla Projectile Rule
               // args[1]: Vanilla Weapon Type. e.g. ItemID.BeesKnees
@@ -78,13 +78,44 @@ namespace ChensGradiusMod
               bool result = false;
               if (args.Length == 3)
               {
-                result = OptionRules.ImportOptionRule(Convert.ToInt32(args[1]),
-                                                      Convert.ToInt32(args[2]));
+                result = OptionRules.ImportBanOptionRule(Convert.ToInt32(args[1]),
+                                                         Convert.ToInt32(args[2]));
               }
               else
               {
-                result = OptionRules.ImportOptionRule(args[1] as string, args[2] as string,
-                                                      args[3] as string);
+                result = OptionRules.ImportBanOptionRule(args[1] as string, args[2] as string,
+                                                         args[3] as string);
+              }
+
+              return result;
+            }
+
+          case "AllowOptionRule":
+            {
+              // Vanilla Projectile Rule
+              // args[1]: Vanilla Weapon Type. e.g. ItemID.OnyxBlaster
+              // args[2]: Vanilla Projectile Type. e.g. ProjectileID.BlackBolt
+              // ... or Mod Projectile Rule
+              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              // args[2]: Your Weapon's Internal name. e.g. "NewBowWeapon"
+              // args[3]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
+
+              if (args.Length > 4 && args.Length < 3)
+              {
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Wrong number of arguments.");
+              }
+
+              bool result = false;
+              if (args.Length == 3)
+              {
+                result = OptionRules.ImportAllowOptionRule(Convert.ToInt32(args[1]),
+                                                           Convert.ToInt32(args[2]));
+              }
+              else
+              {
+                result = OptionRules.ImportAllowOptionRule(args[1] as string, args[2] as string,
+                                                           args[3] as string);
               }
 
               return result;
@@ -149,6 +180,12 @@ namespace ChensGradiusMod
 
               return OptionRules.IsAllowed(Convert.ToInt32(args[1]),
                                            Convert.ToInt32(args[2]));
+            }
+
+          default:
+            {
+              throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                  "The function does not exist. Please visit the Wiki for the updated API.");
             }
         }
       }

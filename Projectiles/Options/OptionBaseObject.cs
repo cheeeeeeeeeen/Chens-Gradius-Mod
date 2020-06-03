@@ -68,8 +68,8 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (IsAllowed(Owner.HeldItem, p) && IsNotProducedYet(i) && IsSameOwner(p)
-                && StandardFilter(p) && WeaponAndAmmoFilter(p))
+            if (IsNotProducedYet(i) && IsSameOwner(p) && (RequiredFilter(p) && IsAllowed(Owner.HeldItem, p)
+                || (!IsBanned(Owner.HeldItem, p) && StandardFilter(p) && WeaponAndAmmoFilter(p))))
             {
               projectilesToProduce.Add(i);
             }
