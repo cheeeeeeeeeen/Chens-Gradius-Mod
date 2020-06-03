@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Accessories
 {
@@ -10,7 +11,7 @@ namespace ChensGradiusMod.Items.Accessories
       item.accessory = true;
       item.width = 64;
       item.height = 64;
-      item.rare = 0;
+      item.rare = ItemRarityID.White; // 0
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/placeholder";

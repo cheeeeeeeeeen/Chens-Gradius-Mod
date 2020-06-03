@@ -1,5 +1,6 @@
 ﻿using ChensGradiusMod.Tiles.Banners;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace ChensGradiusMod.Items.Banners
 {
@@ -9,7 +10,7 @@ namespace ChensGradiusMod.Items.Banners
     {
       base.SetDefaults();
 
-      item.rare = 2;
+      item.rare = ItemRarityID.Green; // 2
     }
 
     protected override int PartnerTile => ModContent.TileType<BigCoreCustomBannerTile>();

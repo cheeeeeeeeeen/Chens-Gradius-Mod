@@ -1,16 +1,16 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Freeze
+namespace ChensGradiusMod.Items.Accessories.Options.Spread
 {
-  public class FreezeOptionOne : FreezeOptionBase
+  public class SpreadOptionOne : SpreadOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Freeze (First)");
+      DisplayName.SetDefault("Option type Spread (First)");
     }
 
     public override void SetDefaults()
@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionOne = true;
-      ModPlayer(player).freezeOption = true;
+      ModPlayer(player).spreadOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
@@ -40,7 +40,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Freeze
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.SnowBlock, 150);
+      recipe.AddIngredient(ItemID.Minishark);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

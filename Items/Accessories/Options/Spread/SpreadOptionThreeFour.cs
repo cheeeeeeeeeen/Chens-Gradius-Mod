@@ -1,15 +1,15 @@
 ﻿using Terraria;
 using Terraria.ID;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Search
+namespace ChensGradiusMod.Items.Accessories.Options.Spread
 {
-  public class SearchOptionThreeFour : TwoSearchOptionsBase
+  public class SpreadOptionThreeFour : TwoSpreadOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Options type Search (3rd & 4th)");
+      DisplayName.SetDefault("Options type Spread (3rd & 4th)");
     }
 
     public override void SetDefaults()
@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Search
     {
       ModPlayer(player).optionThree = true;
       ModPlayer(player).optionFour = true;
-      ModPlayer(player).searchOption = true;
+      ModPlayer(player).spreadOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }

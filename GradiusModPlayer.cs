@@ -52,6 +52,8 @@ namespace ChensGradiusMod
     public bool recurveActionMode;
     public bool isRecurving;
     public float recurveDistance;
+    public bool spreadOption;
+    public bool isSpreading;
     public Item[] optionRuleAmmoFilter = new Item[2];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
@@ -116,6 +118,7 @@ namespace ChensGradiusMod
       packet.Write(searchOption);
       packet.Write(isSearching);
       packet.Write(recurveOption);
+      packet.Write(spreadOption);
       packet.Send(toWho, fromWho);
     }
 
@@ -254,6 +257,11 @@ namespace ChensGradiusMod
           recurveActionMode = !recurveActionMode;
         }
       }
+      else if (spreadOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isSpreading = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isSpreading = false;
+      }
     }
 
     public override void PreUpdate()
@@ -355,6 +363,7 @@ namespace ChensGradiusMod
       isSearching = false;
       recurveActionMode = false;
       recurveDistance = 96f;
+      isSpreading = false;
     }
 
     private void ResetOtherVariables()
@@ -372,6 +381,7 @@ namespace ChensGradiusMod
       chargeMultiple = false;
       recurveOption = false;
       searchOption = false;
+      spreadOption = false;
     }
 
     private bool HasAnyOptions()

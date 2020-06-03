@@ -294,6 +294,7 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).searchOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
             GradiusPlayer(playerIndex).recurveOption = reader.ReadBoolean();
+            GradiusPlayer(playerIndex).spreadOption = reader.ReadBoolean();
             break;
           }
 

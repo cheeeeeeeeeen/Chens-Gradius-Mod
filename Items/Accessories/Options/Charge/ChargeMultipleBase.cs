@@ -56,6 +56,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
              && !gmPlayer.rotateOption
              && !gmPlayer.freezeOption
              && !gmPlayer.aimOption
+             && !gmPlayer.spreadOption
              && !gmPlayer.searchOption;
 
       return result;

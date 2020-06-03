@@ -21,10 +21,10 @@ namespace ChensGradiusMod.Items.Spawners
       item.height = 62;
       item.maxStack = 20;
       item.value = Item.sellPrice(silver: 150);
-      item.rare = 11;
+      item.rare = ItemRarityID.Purple; // 11
       item.useAnimation = 30;
       item.useTime = 30;
-      item.useStyle = 4;
+      item.useStyle = ItemUseStyleID.HoldingUp;
       item.consumable = true;
     }
 

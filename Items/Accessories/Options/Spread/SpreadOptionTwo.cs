@@ -1,16 +1,16 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Charge
+namespace ChensGradiusMod.Items.Accessories.Options.Spread
 {
-  public class ChargeMultipleTwo : ChargeMultipleBase
+  public class SpreadOptionTwo : SpreadOptionBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Charge Multiple (Second)");
+      DisplayName.SetDefault("Option type Spread (Second)");
     }
 
     public override void SetDefaults()
@@ -23,19 +23,19 @@ namespace ChensGradiusMod.Items.Accessories.Options.Charge
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).chargeMultiple = true;
+      ModPlayer(player).spreadOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
 
-    protected override string ProjectileName => "MultipleTwoObject";
+    protected override string ProjectileName => "OptionTwoObject";
 
     protected override int OptionPosition => 2;
 
     public override void AddRecipes()
     {
       ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddIngredient(ItemID.GlowingSnail, 2);
+      recipe.AddIngredient(ItemID.Shotgun);
       UpgradeUsualRecipe(recipe);
       UpgradeUsualStations(recipe);
       recipe.SetResult(this);

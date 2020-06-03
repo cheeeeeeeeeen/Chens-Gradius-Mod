@@ -52,6 +52,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
              && !gmPlayer.aimOption
              && !gmPlayer.rotateOption
              && !gmPlayer.freezeOption
+             && !gmPlayer.spreadOption
              && !gmPlayer.chargeMultiple
              && !gmPlayer.searchOption;
 

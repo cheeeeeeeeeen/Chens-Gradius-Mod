@@ -1,15 +1,15 @@
 ﻿using Terraria;
 using Terraria.ID;
 
-namespace ChensGradiusMod.Items.Accessories.Options.Rotate
+namespace ChensGradiusMod.Items.Accessories.Options.Spread
 {
-  public class RotateOptionOneTwo : TwoRotateOptionsBase
+  public class SpreadOptionOneTwo : TwoSpreadOptionsBase
   {
     public override void SetStaticDefaults()
     {
       base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Options type Rotate (1st & 2nd)");
+      DisplayName.SetDefault("Options type Spread (1st & 2nd)");
     }
 
     public override void SetDefaults()
@@ -23,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Rotate
     {
       ModPlayer(player).optionOne = true;
       ModPlayer(player).optionTwo = true;
-      ModPlayer(player).rotateOption = true;
+      ModPlayer(player).spreadOption = true;
 
       base.UpdateAccessory(player, hideVisual);
     }
