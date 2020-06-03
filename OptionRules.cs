@@ -9,7 +9,7 @@ namespace ChensGradiusMod
   public static class OptionRules
   {
     private static readonly List<AlienProjectile> BannedTypes = new List<AlienProjectile>()
-	{
+    {
       new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowFront),
       new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowBack),
       new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornBase),
