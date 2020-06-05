@@ -10,7 +10,7 @@ namespace ChensGradiusMod
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
     [Label("Bacterion Contact Damage to NPCs")]
-    [Tooltip("Adjust the damage done to town NPCs when Bacterion enemies make contact with them. The adjustment is by percentage. 1 is 100%.")]
+    [Tooltip("Adjust the damage done to town NPCs when Bacterion enemies make contact with them. Adjustment is by percentage. 1 is 100%.")]
     [Range(0f, 1f)]
     [Increment(.01f)]
     [DrawTicks]
@@ -18,12 +18,20 @@ namespace ChensGradiusMod
     public float bacterionContactDamageMultiplier;
 
     [Label("Bacterion Bullet Damage to NPCs")]
-    [Tooltip("Adjust the damage done to town NPCs when Bacterion bullets hit them. The adjustment is by percentage. 1 is 100%.")]
+    [Tooltip("Adjust the damage done to town NPCs when Bacterion bullets hit them. Adjustment is by percentage. 1 is 100%.")]
     [Range(0f, 1f)]
     [Increment(.01f)]
     [DrawTicks]
     [DefaultValue(.3f)]
     public float bacterionBulletDamageMultiplier;
+
+    [Label("Bacterion Spawn Rate")]
+    [Tooltip("Adjust the base spawn rate of the Bacterion enemies. Adjustment is by percentage. 1 is 100%. 100% is the default.")]
+    [Range(.1f, 2f)]
+    [Increment(.01f)]
+    [DrawTicks]
+    [DefaultValue(1f)]
+    public float bacterionSpawnRateMultiplier;
 
     public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
     {

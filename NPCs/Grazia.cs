@@ -57,7 +57,7 @@ namespace ChensGradiusMod.NPCs
       if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < UnderworldTilesYLocation
           && spawnInfo.spawnTileY > (SkyTilesYLocation + Main.worldSurface) * .5f)
       {
-        return .05f;
+        return ActualSpawnRate(.05f);
       }
       else return 0f;
     }

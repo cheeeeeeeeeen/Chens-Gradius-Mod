@@ -84,7 +84,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < Main.worldSurface) return .05f;
+      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < Main.worldSurface) return ActualSpawnRate(.05f);
       else return 0f;
     }
 
@@ -116,7 +116,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig.bacterionContactDamageMultiplier <= 0)
+      if (GradiusConfig().bacterionContactDamageMultiplier <= 0)
       {
         return false;
       }
@@ -126,7 +126,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
     {
-      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplier * damage);
+      damage = RoundOffToWhole(GradiusConfig().bacterionContactDamageMultiplier * damage);
     }
 
     public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
@@ -151,6 +151,13 @@ namespace ChensGradiusMod.NPCs
       return Main.hardMode && !spawnInfo.invasion &&
              !(spawnInfo.playerSafe || spawnInfo.playerInTown);
     }
+
+    protected static float ActualSpawnRate(float baseRate)
+    {
+      return baseRate * GradiusConfig().bacterionSpawnRateMultiplier;
+    }
+
+    protected static GradiusModConfig GradiusConfig() => ModContent.GetInstance<GradiusModConfig>();
 
     protected virtual int FrameTick { get; set; } = 0;
 
@@ -399,8 +406,6 @@ namespace ChensGradiusMod.NPCs
     {
       return kb * KnockbackMultiplier;
     }
-
-    private GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {

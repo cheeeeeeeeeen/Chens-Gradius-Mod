@@ -66,7 +66,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (UsualSpawnConditions(spawnInfo)) return .02f;
+      if (UsualSpawnConditions(spawnInfo)) return ActualSpawnRate(.02f);
       else return 0f;
     }
 
