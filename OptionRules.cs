@@ -25,7 +25,6 @@ namespace ChensGradiusMod
 
     private static readonly List<AlienProjectile> AllowedTypes = new List<AlienProjectile>()
     {
-      new AlienProjectile(ItemID.StarCannon, ProjectileID.FallingStar),
       new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
       new AlienProjectile(ItemID.FlareGun, ProjectileID.Flare),
       new AlienProjectile(ItemID.FlareGun, ProjectileID.BlueFlare),

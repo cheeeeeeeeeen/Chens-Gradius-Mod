@@ -31,10 +31,12 @@ namespace ChensGradiusMod.NPCs
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Hit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Destroy");
           goto case -1;
+
         case (sbyte)Types.Boss:
           npc.HitSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreHit");
           npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BossDeath");
           goto case -1;
+
         case -1:
           ImmuneToBuffs();
           break;
@@ -117,10 +119,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig.bacterionContactDamageMultiplier <= 0)
-      {
-        return false;
-      }
+      if (GradiusConfig.bacterionContactDamageMultiplier <= 0) return false;
 
       return null;
     }

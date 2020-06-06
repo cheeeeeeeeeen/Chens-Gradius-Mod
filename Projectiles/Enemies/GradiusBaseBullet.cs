@@ -11,10 +11,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig.bacterionBulletDamageMultiplier <= 0)
-      {
-        return false;
-      }
+      if (GradiusConfig.bacterionBulletDamageMultiplier <= 0) return false;
 
       return null;
     }
