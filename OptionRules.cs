@@ -26,16 +26,10 @@ namespace ChensGradiusMod
     private static readonly List<AlienProjectile> AllowedTypes = new List<AlienProjectile>()
     {
       new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
-      new AlienProjectile(ItemID.FlareGun, ProjectileID.Flare),
-      new AlienProjectile(ItemID.FlareGun, ProjectileID.BlueFlare),
       new AlienProjectile(ItemID.Blowpipe, ProjectileID.Seed),
       new AlienProjectile(ItemID.Marrow, ProjectileID.BoneArrow),
       new AlienProjectile(ItemID.MoltenFury, ProjectileID.FireArrow),
       new AlienProjectile(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
-      new AlienProjectile(ItemID.Sandgun, ProjectileID.SandBallGun),
-      new AlienProjectile(ItemID.Sandgun, ProjectileID.EbonsandBallGun),
-      new AlienProjectile(ItemID.Sandgun, ProjectileID.PearlSandBallGun),
-      new AlienProjectile(ItemID.Sandgun, ProjectileID.CrimsandBallGun),
       new AlienProjectile(ItemID.LaserMachinegun, ProjectileID.LaserMachinegunLaser),
       new AlienProjectile(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
       new AlienProjectile(ItemID.ChlorophytePartisan, ProjectileID.SporeCloud),
