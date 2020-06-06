@@ -11,7 +11,6 @@ namespace ChensGradiusMod.Projectiles.Options
   public abstract class OptionBaseObject : ModProjectile
   {
     public const int DistanceInterval = 15;
-    public const int MaxBuffer = 150;
 
     protected const int KeepAlive = 2;
 
@@ -100,7 +99,7 @@ namespace ChensGradiusMod.Projectiles.Options
       {
         projectilesToProduce.Clear();
         projectilesToProduce = new List<int>();
-        FreeListData(ref playerAlreadyProducedProjectiles, MaxBuffer);
+        FreeListData(ref playerAlreadyProducedProjectiles);
       }
     }
 

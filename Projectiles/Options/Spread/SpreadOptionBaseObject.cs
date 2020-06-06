@@ -8,7 +8,7 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
 {
   public class SpreadOptionBaseObject : OptionBaseObject
   {
-    private const int FireRate = 5;
+    private const int FireRate = 4;
     private const int SpreadDuplicateLife = 30;
     private const float SpreadDuplicateDamageMultiplier = .25f;
 

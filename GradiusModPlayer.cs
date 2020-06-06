@@ -317,7 +317,7 @@ namespace ChensGradiusMod
 
     public override void PostUpdate()
     {
-      if (HasAnyOptions()) FreeListData(ref optionAlreadyProducedProjectiles, OptionBaseObject.MaxBuffer);
+      if (HasAnyOptions()) FreeListData(ref optionAlreadyProducedProjectiles);
       if (GradiusGlobalItem.meleeHitbox[player.whoAmI].HasValue) GradiusGlobalItem.meleeHitbox[player.whoAmI] = null;
     }
 

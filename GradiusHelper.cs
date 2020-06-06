@@ -25,8 +25,9 @@ namespace ChensGradiusMod
 
     public enum OptionTypes : byte { Normal, Freeze, Rotate, Charge, Aim, Search, Recurve };
 
-    public static void FreeListData(ref List<int> list, int buffer)
+    public static void FreeListData(ref List<int> list)
     {
+      int buffer = ModContent.GetInstance<GradiusModConfig>().projectileDuplicationLimit;
       if (list.Count > buffer)
       {
         int bufferExcess = list.Count - buffer;
