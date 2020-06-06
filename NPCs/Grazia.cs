@@ -54,8 +54,8 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < UnderworldTilesYLocation
-          && spawnInfo.spawnTileY > (SkyTilesYLocation + Main.worldSurface) * .5f)
+      if (UsualSpawnConditions(spawnInfo) && AboveUnderworldCondition(spawnInfo)
+          && spawnInfo.spawnTileY > BelowSkyButAboveSurfaceArea)
       {
         return ActualSpawnRate(.05f);
       }
@@ -199,5 +199,7 @@ namespace ChensGradiusMod.NPCs
                                  BulletFinalDamage(), BulletFinalKnockback(), Main.myPlayer);
       }
     }
+
+    private double BelowSkyButAboveSurfaceArea => (SkyTilesYLocation + Main.worldSurface) * .5f;
   }
 }

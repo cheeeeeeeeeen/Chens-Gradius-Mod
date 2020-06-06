@@ -14,6 +14,8 @@ namespace ChensGradiusMod.NPCs
   {
     public enum Types { Small, Large, Boss };
 
+    protected enum SpawnTypes { Surface, Underground, Everywhere };
+
     public override void SetDefaults()
     {
       npc.friendly = false;
@@ -84,8 +86,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < Main.worldSurface) return ActualSpawnRate(.05f);
-      else return 0f;
+      return GenericSpawnCondition(SpawnTypes.Surface, spawnInfo);
     }
 
     public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
@@ -116,7 +117,7 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig().bacterionContactDamageMultiplier <= 0)
+      if (GradiusConfig.bacterionContactDamageMultiplier <= 0)
       {
         return false;
       }
@@ -126,7 +127,7 @@ namespace ChensGradiusMod.NPCs
 
     public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
     {
-      damage = RoundOffToWhole(GradiusConfig().bacterionContactDamageMultiplier * damage);
+      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplier * damage);
     }
 
     public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
@@ -146,18 +147,7 @@ namespace ChensGradiusMod.NPCs
       FrameCounter = reader.ReadByte();
     }
 
-    protected static bool UsualSpawnConditions(NPCSpawnInfo spawnInfo)
-    {
-      return Main.hardMode && !spawnInfo.invasion &&
-             !(spawnInfo.playerSafe || spawnInfo.playerInTown);
-    }
-
-    protected static float ActualSpawnRate(float baseRate)
-    {
-      return baseRate * GradiusConfig().bacterionSpawnRateMultiplier;
-    }
-
-    protected static GradiusModConfig GradiusConfig() => ModContent.GetInstance<GradiusModConfig>();
+    protected GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
 
     protected virtual int FrameTick { get; set; } = 0;
 
@@ -241,6 +231,17 @@ namespace ChensGradiusMod.NPCs
 
         return multiplier;
       }
+    }
+
+    protected bool UsualSpawnConditions(NPCSpawnInfo spawnInfo)
+    {
+      return Main.hardMode && !spawnInfo.invasion &&
+             !(spawnInfo.playerSafe || spawnInfo.playerInTown);
+    }
+
+    protected float ActualSpawnRate(float baseRate)
+    {
+      return baseRate * GradiusConfig.bacterionSpawnRateMultiplier;
     }
 
     protected void ScaleStats()
@@ -406,6 +407,34 @@ namespace ChensGradiusMod.NPCs
     {
       return kb * KnockbackMultiplier;
     }
+
+    protected float GenericSpawnCondition(SpawnTypes genericSpawnType, NPCSpawnInfo spawnInfo)
+    {
+      float finalRate = 0f;
+
+      switch (genericSpawnType)
+      {
+        case SpawnTypes.Surface:
+          if (UsualSpawnConditions(spawnInfo) && spawnInfo.spawnTileY < Main.worldSurface) finalRate = ActualSpawnRate(.05f);
+          break;
+
+        case SpawnTypes.Underground:
+          if (UsualSpawnConditions(spawnInfo) && AboveUnderworldCondition(spawnInfo)
+              && spawnInfo.spawnTileY > (Main.worldSurface - Main.worldSurface * .1f))
+          {
+            finalRate = ActualSpawnRate(.075f);
+          }
+          break;
+
+        case SpawnTypes.Everywhere:
+          if (UsualSpawnConditions(spawnInfo)) return ActualSpawnRate(.02f);
+          break;
+      }
+
+      return finalRate;
+    }
+
+    protected bool AboveUnderworldCondition(NPCSpawnInfo spawnInfo) => spawnInfo.spawnTileY < UnderworldTilesYLocation;
 
     private void ReduceDamage(ref int damage, ref float knockback, ref bool crit)
     {

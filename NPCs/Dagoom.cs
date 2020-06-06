@@ -66,8 +66,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      if (UsualSpawnConditions(spawnInfo)) return ActualSpawnRate(.02f);
-      else return 0f;
+      return GenericSpawnCondition(SpawnTypes.Everywhere, spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Dagoom";

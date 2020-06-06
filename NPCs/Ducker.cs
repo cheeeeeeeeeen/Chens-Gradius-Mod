@@ -267,7 +267,7 @@ namespace ChensGradiusMod.NPCs
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-      return Sagna.SpawnCondition(spawnInfo);
+      return GenericSpawnCondition(SpawnTypes.Underground, spawnInfo);
     }
 
     public override string Texture => "ChensGradiusMod/Sprites/Ducker";
