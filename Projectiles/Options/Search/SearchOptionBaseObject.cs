@@ -125,7 +125,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
           {
             fireCounter = 0;
             Vector2 pos = ComputeOffset(Main.player[p.owner].Center, p.Center);
-            Vector2 vel = AimOptionBaseObject.ComputeVelocityOffset(p, pos, Target.Center);
+            Vector2 vel = ComputeVelocityOffsetFromCursorAim(p, pos, Target.Center);
             result = Projectile.NewProjectile(pos, vel, p.type, p.damage,
                                               p.knockBack, projectile.owner, 0f, 0f);
           }

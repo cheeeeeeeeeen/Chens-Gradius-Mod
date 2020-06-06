@@ -39,7 +39,7 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
           for (int i = 0; i < CardinalDirections.Length; i++)
           {
             Vector2 toward = pPosition + CardinalDirections[i];
-            Vector2 offsetVelocity = AimOptionBaseObject.ComputeVelocityOffset(p, pPosition, toward);
+            Vector2 offsetVelocity = ComputeVelocityOffsetFromCursorAim(p, pPosition, toward);
             int ind = Projectile.NewProjectile(pPosition, offsetVelocity, p.type,
                                                RoundOffToWhole(p.damage * SpreadDuplicateDamageMultiplier),
                                                p.knockBack, projectile.owner, 0f, 0f);

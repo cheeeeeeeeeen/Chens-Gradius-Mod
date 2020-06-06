@@ -169,6 +169,24 @@ namespace ChensGradiusMod.Projectiles.Options
       return projectileSpawn;
     }
 
+    protected Vector2 ComputeVelocityOffsetFromCursorAim(Projectile p, Vector2 offsetPos, Vector2 toward)
+    {
+      Vector2 retVal = Vector2.Zero;
+
+      if (p.velocity != retVal)
+      {
+        float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
+        float dAng = GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
+        float pAng = GetBearing(Vector2.Zero, p.velocity, false);
+        float offAng = MathHelper.ToRadians(pAng - dAng);
+        Vector2 offDiff = p.Center - Main.player[p.owner].Center;
+        float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward - offDiff, false));
+        retVal = MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
+      }
+
+      return retVal;
+    }
+
     private bool IsSameOwner(Projectile p) => p.owner == projectile.owner;
 
     private bool IsSameAsWeaponShoot(Projectile p) => Owner.HeldItem.shoot == p.type;
