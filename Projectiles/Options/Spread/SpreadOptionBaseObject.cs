@@ -10,17 +10,18 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
     private const int FireRate = 4;
     private const int SpreadDuplicateLife = 30;
     private const float SpreadDuplicateDamageMultiplier = .25f;
+    private const int DirectionPrecisionMultiplier = 100;
 
     private readonly Vector2[] CardinalDirections = new Vector2[]
     {
-      new Vector2(-1, -1),
-      new Vector2(-1, 0),
-      new Vector2(-1, 1),
-      new Vector2(1, -1),
-      new Vector2(1, 1),
-      new Vector2(1, 0),
-      new Vector2(0, -1),
-      new Vector2(0, 1)
+      new Vector2(-1, -1) * DirectionPrecisionMultiplier,
+      new Vector2(-1, 0) * DirectionPrecisionMultiplier,
+      new Vector2(-1, 1) * DirectionPrecisionMultiplier,
+      new Vector2(1, -1) * DirectionPrecisionMultiplier,
+      new Vector2(1, 1) * DirectionPrecisionMultiplier,
+      new Vector2(1, 0) * DirectionPrecisionMultiplier,
+      new Vector2(0, -1) * DirectionPrecisionMultiplier,
+      new Vector2(0, 1) * DirectionPrecisionMultiplier
     };
 
     private int fireCounter = 0;
