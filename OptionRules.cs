@@ -12,19 +12,33 @@ namespace ChensGradiusMod
   {
     private static readonly List<AlienWeapon> BannedWeapons = new List<AlienWeapon>()
     {
-      new AlienWeapon(ItemID.Minishark)
+      new AlienWeapon(ItemID.RainbowGun),
+      new AlienWeapon(ItemID.Vilethorn),
+      new AlienWeapon(ItemID.DD2BetsyBow),
+      new AlienWeapon(ItemID.Minishark),
+      new AlienWeapon(ItemID.MushroomSpear),
+      new AlienWeapon(ItemID.Megashark),
+      new AlienWeapon(ItemID.Gatligator),
+      new AlienWeapon(ItemID.ChainGun),
+      new AlienWeapon(ItemID.SDMG)
     };
 
-    private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>();
+    private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>()
+    {
+      new AlienProjectile(ProjectileID.RocketII),
+      new AlienProjectile(ProjectileID.RocketIV),
+      new AlienProjectile(ProjectileID.Dynamite),
+      new AlienProjectile(ProjectileID.BouncyDynamite),
+      new AlienProjectile(ProjectileID.StickyDynamite),
+      new AlienProjectile(ProjectileID.Bomb),
+      new AlienProjectile(ProjectileID.BombFish),
+      new AlienProjectile(ProjectileID.BouncyBomb),
+      new AlienProjectile(ProjectileID.StickyBomb)
+    };
 
     private static readonly List<AlienWeaponProjectilePair> BannedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
     {
-      new AlienWeaponProjectilePair(ItemID.RainbowGun, ProjectileID.RainbowFront),
-      new AlienWeaponProjectilePair(ItemID.RainbowGun, ProjectileID.RainbowBack),
-      new AlienWeaponProjectilePair(ItemID.Vilethorn, ProjectileID.VilethornBase),
-      new AlienWeaponProjectilePair(ItemID.Vilethorn, ProjectileID.VilethornTip),
-      new AlienWeaponProjectilePair(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
-      new AlienWeaponProjectilePair(ItemID.MushroomSpear, ProjectileID.Mushroom)
+      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeater)
     };
 
     private static readonly List<AlienWeapon> AllowedWeapons = new List<AlienWeapon>();
@@ -33,14 +47,14 @@ namespace ChensGradiusMod
 
     private static readonly List<AlienWeaponProjectilePair> AllowedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
     {
+      new AlienWeaponProjectilePair(ItemID.StarCannon, ProjectileID.FallingStar),
       new AlienWeaponProjectilePair(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
       new AlienWeaponProjectilePair(ItemID.Blowpipe, ProjectileID.Seed),
+      new AlienWeaponProjectilePair(ItemID.Blowgun, ProjectileID.Seed),
       new AlienWeaponProjectilePair(ItemID.Marrow, ProjectileID.BoneArrow),
       new AlienWeaponProjectilePair(ItemID.MoltenFury, ProjectileID.FireArrow),
       new AlienWeaponProjectilePair(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
       new AlienWeaponProjectilePair(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
-      new AlienWeaponProjectilePair(ItemID.ChlorophytePartisan, ProjectileID.SporeCloud),
-      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
       new AlienWeaponProjectilePair(ItemID.IceBow, ProjectileID.FrostArrow),
       new AlienWeaponProjectilePair(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
       new AlienWeaponProjectilePair(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
@@ -50,7 +64,8 @@ namespace ChensGradiusMod
       new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
       new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
       new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
-      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow)
+      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow),
+      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket)
     };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
