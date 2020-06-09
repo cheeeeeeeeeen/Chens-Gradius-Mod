@@ -2,33 +2,28 @@
 {
   public class AlienProjectile : GeneralAlien
   {
-    public readonly string weaponName = null;
     public readonly string projectileName = null;
-    public readonly int? weaponType = null;
     public readonly int? projectileType = null;
 
-    public AlienProjectile(string mod, string weap, string proj) : base(mod)
+    public AlienProjectile(string mod, string proj) : base(mod)
     {
-      weaponName = weap;
       projectileName = proj;
     }
 
-    public AlienProjectile(int weap, int proj) : base("Terraria")
+    public AlienProjectile(int proj) : base("Terraria")
     {
-      weaponType = weap;
       projectileType = proj;
     }
 
-    public bool CheckType(int weapType, int projType)
+    public bool CheckType(int projType)
     {
-      if (modName == "Terraria" && weaponType != null && projectileType != null)
+      if (modName == "Terraria" && projectileType != null)
       {
-        return weapType == weaponType && projType == projectileType;
+        return projType == projectileType;
       }
-      else if (modInstance != null && weaponName != null && projectileName != null)
+      else if (modInstance != null && projectileName != null)
       {
-        return weapType == modInstance.ItemType(weaponName) &&
-               projType == modInstance.ProjectileType(projectileName);
+        return projType == modInstance.ProjectileType(projectileName);
       }
       else return false;
     }

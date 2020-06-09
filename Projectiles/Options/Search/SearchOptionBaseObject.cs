@@ -1,4 +1,3 @@
-using ChensGradiusMod.Projectiles.Options.Aim;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

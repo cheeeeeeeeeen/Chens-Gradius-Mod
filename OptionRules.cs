@@ -6,44 +6,56 @@ using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
 {
+  public enum RuleTypes { WeaponProjectilePair, Weapon, Projectile };
+
   public static class OptionRules
   {
-    private static readonly List<AlienProjectile> BannedTypes = new List<AlienProjectile>()
+    private static readonly List<AlienWeapon> BannedWeapons = new List<AlienWeapon>()
     {
-      new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowFront),
-      new AlienProjectile(ItemID.RainbowGun, ProjectileID.RainbowBack),
-      new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornBase),
-      new AlienProjectile(ItemID.Vilethorn, ProjectileID.VilethornTip),
-      new AlienProjectile(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
-      new AlienProjectile(ItemID.MushroomSpear, ProjectileID.Mushroom)
+      new AlienWeapon(ItemID.Minishark)
+    };
+
+    private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>();
+
+    private static readonly List<AlienWeaponProjectilePair> BannedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
+    {
+      new AlienWeaponProjectilePair(ItemID.RainbowGun, ProjectileID.RainbowFront),
+      new AlienWeaponProjectilePair(ItemID.RainbowGun, ProjectileID.RainbowBack),
+      new AlienWeaponProjectilePair(ItemID.Vilethorn, ProjectileID.VilethornBase),
+      new AlienWeaponProjectilePair(ItemID.Vilethorn, ProjectileID.VilethornTip),
+      new AlienWeaponProjectilePair(ItemID.DD2BetsyBow, ProjectileID.DD2BetsyArrow),
+      new AlienWeaponProjectilePair(ItemID.MushroomSpear, ProjectileID.Mushroom)
+    };
+
+    private static readonly List<AlienWeapon> AllowedWeapons = new List<AlienWeapon>();
+
+    private static readonly List<AlienProjectile> AllowedProjectiles = new List<AlienProjectile>();
+
+    private static readonly List<AlienWeaponProjectilePair> AllowedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
+    {
+      new AlienWeaponProjectilePair(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
+      new AlienWeaponProjectilePair(ItemID.Blowpipe, ProjectileID.Seed),
+      new AlienWeaponProjectilePair(ItemID.Marrow, ProjectileID.BoneArrow),
+      new AlienWeaponProjectilePair(ItemID.MoltenFury, ProjectileID.FireArrow),
+      new AlienWeaponProjectilePair(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
+      new AlienWeaponProjectilePair(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
+      new AlienWeaponProjectilePair(ItemID.ChlorophytePartisan, ProjectileID.SporeCloud),
+      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
+      new AlienWeaponProjectilePair(ItemID.IceBow, ProjectileID.FrostArrow),
+      new AlienWeaponProjectilePair(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
+      new AlienWeaponProjectilePair(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
+      new AlienWeaponProjectilePair(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
+      new AlienWeaponProjectilePair(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
+      new AlienWeaponProjectilePair(ItemID.PulseBow, ProjectileID.PulseBolt),
+      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
+      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
+      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
+      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow)
     };
 
     private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
     {
       new AlienDamageType("CalamityMod", "CalamityGlobalProjectile", "rogue")
-    };
-
-    private static readonly List<AlienProjectile> AllowedTypes = new List<AlienProjectile>()
-    {
-      new AlienProjectile(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
-      new AlienProjectile(ItemID.Blowpipe, ProjectileID.Seed),
-      new AlienProjectile(ItemID.Marrow, ProjectileID.BoneArrow),
-      new AlienProjectile(ItemID.MoltenFury, ProjectileID.FireArrow),
-      new AlienProjectile(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
-      new AlienProjectile(ItemID.LaserMachinegun, ProjectileID.LaserMachinegunLaser),
-      new AlienProjectile(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
-      new AlienProjectile(ItemID.ChlorophytePartisan, ProjectileID.SporeCloud),
-      new AlienProjectile(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
-      new AlienProjectile(ItemID.IceBow, ProjectileID.FrostArrow),
-      new AlienProjectile(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
-      new AlienProjectile(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
-      new AlienProjectile(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
-      new AlienProjectile(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
-      new AlienProjectile(ItemID.PulseBow, ProjectileID.PulseBolt),
-      new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
-      new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
-      new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
-      new AlienProjectile(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow)
     };
 
     public static bool StandardFilter(Projectile p)
@@ -57,48 +69,152 @@ namespace ChensGradiusMod
       return p.active && IsNotAYoyo(p);
     }
 
-    public static bool ImportBanOptionRule(string modName, string weapName, string projName)
+    public static bool AddWeaponRule(string mode, string modName, string weapName)
     {
-      if (!BannedTypes.Exists(ap => modName == ap.modName && weapName == ap.weaponName
-                                    && projName == ap.projectileName))
+      List<AlienWeapon> listToUse;
+
+      switch (mode)
       {
-        BannedTypes.Add(new AlienProjectile(modName, weapName, projName));
+        case "Allow":
+          listToUse = AllowedWeapons;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedWeapons;
+          break;
+      }
+
+      if (!listToUse.Exists(aw => modName == aw.modName && weapName == aw.weaponName))
+      {
+        listToUse.Add(new AlienWeapon(modName, weapName));
         return true;
       }
 
       return false;
     }
 
-    public static bool ImportBanOptionRule(int wType, int pType)
+    public static bool AddWeaponRule(string mode, int wType)
     {
-      if (!BannedTypes.Exists(ap => ap.modName == "Terraria" && wType == ap.weaponType
-                                    && pType == ap.projectileType))
+      List<AlienWeapon> listToUse;
+
+      switch (mode)
       {
-        BannedTypes.Add(new AlienProjectile(wType, pType));
+        case "Allow":
+          listToUse = AllowedWeapons;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedWeapons;
+          break;
+      }
+
+      if (!listToUse.Exists(aw => aw.modName == "Terraria" && wType == aw.weaponType))
+      {
+        listToUse.Add(new AlienWeapon(wType));
         return true;
       }
 
       return false;
     }
 
-    public static bool ImportAllowOptionRule(string modName, string weapName, string projName)
+    public static bool AddProjectileRule(string mode, string modName, string projName)
     {
-      if (!AllowedTypes.Exists(ap => modName == ap.modName && weapName == ap.weaponName
-                                    && projName == ap.projectileName))
+      List<AlienProjectile> listToUse;
+
+      switch (mode)
       {
-        AllowedTypes.Add(new AlienProjectile(modName, weapName, projName));
+        case "Allow":
+          listToUse = AllowedProjectiles;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedProjectiles;
+          break;
+      }
+
+      if (!listToUse.Exists(ap => modName == ap.modName && projName == ap.projectileName))
+      {
+        listToUse.Add(new AlienProjectile(modName, projName));
         return true;
       }
 
       return false;
     }
 
-    public static bool ImportAllowOptionRule(int wType, int pType)
+    public static bool AddProjectileRule(string mode, int pType)
     {
-      if (!AllowedTypes.Exists(ap => ap.modName == "Terraria" && wType == ap.weaponType
-                                    && pType == ap.projectileType))
+      List<AlienProjectile> listToUse;
+
+      switch (mode)
       {
-        AllowedTypes.Add(new AlienProjectile(wType, pType));
+        case "Allow":
+          listToUse = AllowedProjectiles;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedProjectiles;
+          break;
+      }
+
+      if (!listToUse.Exists(ap => ap.modName == "Terraria" && pType == ap.projectileType))
+      {
+        listToUse.Add(new AlienProjectile(pType));
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool AddWeaponProjectilePairRule(string mode, string modName, string weapName, string projName)
+    {
+      List<AlienWeaponProjectilePair> listToUse;
+
+      switch (mode)
+      {
+        case "Allow":
+          listToUse = AllowedWeaponProjectilePairs;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedWeaponProjectilePairs;
+          break;
+      }
+
+      if (!listToUse.Exists(awpp => modName == awpp.modName && weapName == awpp.weaponName
+                                    && projName == awpp.projectileName))
+      {
+        listToUse.Add(new AlienWeaponProjectilePair(modName, weapName, projName));
+        return true;
+      }
+
+      return false;
+    }
+
+    public static bool AddWeaponProjectilePairRule(string mode, int wType, int pType)
+    {
+      List<AlienWeaponProjectilePair> listToUse;
+
+      switch (mode)
+      {
+        case "Allow":
+          listToUse = AllowedWeaponProjectilePairs;
+          break;
+
+        case "Ban":
+        default:
+          listToUse = BannedWeaponProjectilePairs;
+          break;
+      }
+
+      if (!listToUse.Exists(awpp => awpp.modName == "Terraria" && wType == awpp.weaponType
+                                    && pType == awpp.projectileType))
+      {
+        listToUse.Add(new AlienWeaponProjectilePair(wType, pType));
         return true;
       }
 
@@ -136,24 +252,76 @@ namespace ChensGradiusMod
 
     public static bool IsBanned(int wType, int pType)
     {
-      foreach (AlienProjectile ap in BannedTypes)
+      bool result = false;
+      foreach (AlienWeapon aw in BannedWeapons)
       {
-        if (ap.CheckType(wType, pType)) return true;
+        if (aw.CheckType(wType))
+        {
+          result = true;
+          break;
+        }
       }
+      if (result) return true;
 
-      return false;
+      result = false;
+      foreach (AlienProjectile ap in BannedProjectiles)
+      {
+        if (ap.CheckType(pType))
+        {
+          result = true;
+          break;
+        }
+      }
+      if (result) return true;
+
+      result = false;
+      foreach (AlienWeaponProjectilePair awpp in BannedWeaponProjectilePairs)
+      {
+        if (awpp.CheckType(wType, pType))
+        {
+          result = true;
+          break;
+        }
+      }
+      return result;
     }
 
     public static bool IsAllowed(Item w, Projectile p) => IsAllowed(w.type, p.type);
 
     public static bool IsAllowed(int wType, int pType)
     {
-      foreach (AlienProjectile ap in AllowedTypes)
+      bool result = false;
+      foreach (AlienWeapon aw in AllowedWeapons)
       {
-        if (ap.CheckType(wType, pType)) return true;
+        if (aw.CheckType(wType))
+        {
+          result = true;
+          break;
+        }
       }
+      if (result) return true;
 
-      return false;
+      result = false;
+      foreach (AlienProjectile ap in AllowedProjectiles)
+      {
+        if (ap.CheckType(pType))
+        {
+          result = true;
+          break;
+        }
+      }
+      if (result) return true;
+
+      result = false;
+      foreach (AlienWeaponProjectilePair awpp in AllowedWeaponProjectilePairs)
+      {
+        if (awpp.CheckType(wType, pType))
+        {
+          result = true;
+          break;
+        }
+      }
+      return result;
     }
 
     private static bool IsNotAYoyo(Projectile p) => p.aiStyle != 99;

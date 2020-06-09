@@ -67,10 +67,17 @@ namespace ChensGradiusMod.Projectiles.Options
           for (int i = 0; i < Main.maxProjectiles; i++)
           {
             Projectile p = Main.projectile[i];
-            if (IsNotProducedYet(i) && IsSameOwner(p) && (RequiredFilter(p) && IsAllowed(Owner.HeldItem, p)
-                || (!IsBanned(Owner.HeldItem, p) && StandardFilter(p) && WeaponAndAmmoFilter(p))))
+            bool defaultFilter = IsNotProducedYet(i) && IsSameOwner(p);
+            bool usualFilter = StandardFilter(p) && WeaponAndAmmoFilter(p);
+
+            if (defaultFilter && (RequiredFilter(p) && IsAllowed(Owner.HeldItem, p)
+                || (!IsBanned(Owner.HeldItem, p) && usualFilter)))
             {
               projectilesToProduce.Add(i);
+            }
+            else if (defaultFilter && usualFilter)
+            {
+              playerAlreadyProducedProjectiles.Add(i);
             }
           }
 
@@ -79,12 +86,7 @@ namespace ChensGradiusMod.Projectiles.Options
             Projectile p = Main.projectile[prog_ind];
             playerAlreadyProducedProjectiles.Add(prog_ind);
 
-            int new_p_ind = SpawnDuplicateProjectile(p);
-            if (new_p_ind >= 0)
-            {
-              ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
-              SetDuplicateDefaults(Main.projectile[new_p_ind]);
-            }
+            ProcessDuplication(p);
           }
         }
       }
@@ -116,6 +118,16 @@ namespace ChensGradiusMod.Projectiles.Options
     protected virtual float[] LightValues { get; } = { .1f, .2f, .3f, .4f, .5f, .4f, .3f, .2f, .1f };
 
     protected virtual bool AttackLimitation() => Owner.itemAnimation > 0;
+
+    protected virtual void ProcessDuplication(Projectile p)
+    {
+      int new_p_ind = SpawnDuplicateProjectile(p);
+      if (new_p_ind >= 0)
+      {
+        ModOwner.optionAlreadyProducedProjectiles.Add(new_p_ind);
+        SetDuplicateDefaults(Main.projectile[new_p_ind]);
+      }
+    }
 
     protected virtual int SpawnDuplicateProjectile(Projectile p)
     {

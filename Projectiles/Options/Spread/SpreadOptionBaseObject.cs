@@ -1,5 +1,4 @@
-﻿using ChensGradiusMod.Projectiles.Options.Aim;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using static ChensGradiusMod.GradiusHelper;
@@ -28,7 +27,7 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
 
     public override string Texture => "ChensGradiusMod/Sprites/SpreadSheet";
 
-    protected override int SpawnDuplicateProjectile(Projectile p)
+    protected override void ProcessDuplication(Projectile p)
     {
       if (ModOwner.isSpreading)
       {
@@ -43,14 +42,11 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
             int ind = Projectile.NewProjectile(pPosition, offsetVelocity, p.type,
                                                RoundOffToWhole(p.damage * SpreadDuplicateDamageMultiplier),
                                                p.knockBack, projectile.owner, 0f, 0f);
-            if (i >= CardinalDirections.Length - 1) return ind;
-            else ManualAdditionToProducedProjectiles(ind);
+            AddToProducedProjectiles(ind);
           }
         }
-
-        return -1;
       }
-      else return base.SpawnDuplicateProjectile(p);
+      else base.ProcessDuplication(p);
     }
 
     protected override void SetDuplicateDefaults(Projectile p)
@@ -59,7 +55,7 @@ namespace ChensGradiusMod.Projectiles.Options.Spread
       if (ModOwner.isSpreading) p.timeLeft = Math.Min(SpreadDuplicateLife, p.timeLeft);
     }
 
-    private void ManualAdditionToProducedProjectiles(int index)
+    private void AddToProducedProjectiles(int index)
     {
       if (index >= 0)
       {

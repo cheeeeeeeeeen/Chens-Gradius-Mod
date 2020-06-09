@@ -1,6 +1,6 @@
 ﻿using ChensGradiusMod.Tiles.Banners;
-using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Banners
 {

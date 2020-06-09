@@ -59,15 +59,15 @@ namespace ChensGradiusMod
         string functionName = args[0] as string;
         switch (functionName)
         {
-          case "BanOptionRule":
+          case "AddWeaponRule":
             {
-              // Vanilla Projectile Rule
-              // args[1]: Vanilla Weapon Type. e.g. ItemID.BeesKnees
-              // args[2]: Vanilla Projectile Type. e.g. ProjectileID.Bee
-              // ... or Mod Projectile Rule
-              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Your Weapon's Internal name. e.g. "NewBowWeapon"
-              // args[3]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
+              // Vanilla Weapon Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Vanilla Weapon Type. e.g. ItemID.BeesKnees
+              // Modded Weapon Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              //   args[3]: Your Weapon's Internal name. e.g. "NewBowWeapon"
 
               if (args.Length > 4 && args.Length < 3)
               {
@@ -75,30 +75,29 @@ namespace ChensGradiusMod
                                     "Wrong number of arguments.");
               }
 
+              string mode = args[1] as string;
+              if (mode != "Ban" && mode != "Allow")
+              {
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Unsupported mode. \"Ban\" and \"Allow\" are the supported modes.");
+              }
+
               bool result = false;
-              if (args.Length == 3)
-              {
-                result = OptionRules.ImportBanOptionRule(Convert.ToInt32(args[1]),
-                                                         Convert.ToInt32(args[2]));
-              }
-              else
-              {
-                result = OptionRules.ImportBanOptionRule(args[1] as string, args[2] as string,
-                                                         args[3] as string);
-              }
+              if (args.Length == 3) result = OptionRules.AddWeaponRule(mode, Convert.ToInt32(args[2]));
+              else result = OptionRules.AddWeaponRule(mode, args[2] as string, args[3] as string);
 
               return result;
             }
 
-          case "AllowOptionRule":
+          case "AddProjectileRule":
             {
-              // Vanilla Projectile Rule
-              // args[1]: Vanilla Weapon Type. e.g. ItemID.OnyxBlaster
-              // args[2]: Vanilla Projectile Type. e.g. ProjectileID.BlackBolt
-              // ... or Mod Projectile Rule
-              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Your Weapon's Internal name. e.g. "NewBowWeapon"
-              // args[3]: Your Projectile's Internal name. e.g. "NewArrowsProjectile"
+              // Vanilla Weapon Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Vanilla Projectile Type. e.g. ProjectileID.BeeArrow
+              // Mod Projectile Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              //   args[3]: Your Projectile's Internal name. e.g. "NewArrow"
 
               if (args.Length > 4 && args.Length < 3)
               {
@@ -106,17 +105,48 @@ namespace ChensGradiusMod
                                     "Wrong number of arguments.");
               }
 
+              string mode = args[1] as string;
+              if (mode != "Ban" && mode != "Allow")
+              {
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Unsupported mode. \"Ban\" and \"Allow\" are the supported modes.");
+              }
+
               bool result = false;
-              if (args.Length == 3)
+              if (args.Length == 3) result = OptionRules.AddProjectileRule(mode, Convert.ToInt32(args[2]));
+              else result = OptionRules.AddProjectileRule(mode, args[2] as string, args[3] as string);
+
+              return result;
+            }
+
+          case "AddWeaponProjectilePairRule":
+            {
+              // Vanilla Weapon Projectile Pair Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Vanilla Weapon Type. e.g. ItemID.BeesKnees
+              //   args[3]: Vanilla Projectile Type. e.g. ProjectileID.BeeArrow
+              // Mod Projectile Rule
+              //   args[1]: Mode ("Ban" or "Allow")
+              //   args[2]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              //   args[3]: Vanilla Projectile Type. e.g. "NewGradiusGun"
+              //   args[4]: Your Projectile's Internal name. e.g. "GradiusLazor"
+
+              if (args.Length > 5 && args.Length < 4)
               {
-                result = OptionRules.ImportAllowOptionRule(Convert.ToInt32(args[1]),
-                                                           Convert.ToInt32(args[2]));
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Wrong number of arguments.");
               }
-              else
+
+              string mode = args[1] as string;
+              if (mode != "Ban" && mode != "Allow")
               {
-                result = OptionRules.ImportAllowOptionRule(args[1] as string, args[2] as string,
-                                                           args[3] as string);
+                throw new Exception($"ChensGradiusMod {functionName} Error: " +
+                                    "Unsupported mode. \"Ban\" and \"Allow\" are the supported modes.");
               }
+
+              bool result = false;
+              if (args.Length == 3) result = OptionRules.AddWeaponProjectilePairRule(mode, Convert.ToInt32(args[2]), Convert.ToInt32(args[2]));
+              else result = OptionRules.AddWeaponProjectilePairRule(mode, args[2] as string, args[3] as string, args[4] as string);
 
               return result;
             }
@@ -124,14 +154,14 @@ namespace ChensGradiusMod
           case "AddCustomDamage":
             {
               // Global Projectile Way
-              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Internal class name of GlobalProjectile containing
-              //          the custom damage type. e.g. "MyGlobalProjectile"
-              // args[3]: Internal boolean variable name of your custom damage.
-              // ... or Mod Projectile Way
-              // args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
-              // args[2]: Internal boolean variable name of your custom damage
-              //          found in your ModProjectile.
+              //   args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              //   args[2]: Internal class name of GlobalProjectile containing
+              //            the custom damage type. e.g. "MyGlobalProjectile"
+              //   args[3]: Internal boolean variable name of your custom damage.
+              // Mod Projectile Way
+              //   args[1]: Your Mod's Internal Name. e.g. "ChensGradiusMod"
+              //   args[2]: Internal boolean variable name of your custom damage
+              //            found in your ModProjectile.
 
               if (!(args.Length == 4 || args.Length == 3))
               {
@@ -150,36 +180,6 @@ namespace ChensGradiusMod
                 result = OptionRules.ImportDamageType(args[1] as string, args[2] as string);
               }
               return result;
-            }
-
-          case "BanCheck":
-            {
-              // args[1]: integer Type of the weapon to check. (item.type)
-              // args[2]: integer Type of the projectile to check. (projectile.type)
-
-              if (args.Length != 3)
-              {
-                throw new Exception($"ChensGradiusMod {functionName} Error: " +
-                                    "Wrong number of arguments.");
-              }
-
-              return OptionRules.IsBanned(Convert.ToInt32(args[1]),
-                                          Convert.ToInt32(args[2]));
-            }
-
-          case "AllowCheck":
-            {
-              // args[1]: integer Type of the weapon to check. (item.type)
-              // args[2]: integer Type of the projectile to check. (projectile.type)
-
-              if (args.Length != 3)
-              {
-                throw new Exception($"ChensGradiusMod {functionName} Error: " +
-                                    "Wrong number of arguments.");
-              }
-
-              return OptionRules.IsAllowed(Convert.ToInt32(args[1]),
-                                           Convert.ToInt32(args[2]));
             }
 
           default:
