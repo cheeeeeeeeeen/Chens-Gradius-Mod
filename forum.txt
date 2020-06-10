@@ -1,8 +1,8 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.1.0
-tModLoader: 0.11.7.4[/SIZE][/U][/B]
+[B][U][SIZE=6]Mod Version: 1.1.5
+tModLoader: 0.11.7.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
@@ -13,7 +13,7 @@ If the Mod Browser is down, then you can refer to this link to download the late
 
 [B][URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki'][SIZE=5]Chen's Gradius Mod Wiki[/SIZE][/URL][SIZE=5] is a place where you can find detailed information about the added features the mod provides.[/SIZE][/B]
 
-Click the Spoiler below for a summary anyway if you're not eager to look at the wiki.
+Click the Spoiler below for a summary anyway if you're not eager to look at the wiki. The wiki [I]is always updated[/I], though!
 
 [SPOILER="Mod Contents (Summary)"]
 [B]Contents[/B]
@@ -106,10 +106,19 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Recurve Options
 [LIST]
 [*]Derived from Spacing Options along with its functionalities.
-[*]Their flight path behavior is slightly different from standard Options.
+[*]Their flight path behavior is different from standard Options.
 [*]They stay fixed on their positions relative to the cursor direction from the player.
 [*]Hold down the Option Action Key to adjust the Options' distances from one another!
 [*][SPOILER="Recurve Option Showcase"][IMG]https://i.imgur.com/FZjsAAB.gif[/IMG][/SPOILER]
+[/LIST]
+[*]Spread Options
+[LIST]
+[*]Customized Options, inspired from Nemesis Online's 8-Way.
+[*]Functions the same way as the regular Options, but has an added feature.
+[*]Hold down the Option Action Key to duplicate a projectile 8 times, tarvelling towards the cardinal directions!
+[*]Damage of the duplicated projectiles in this mode are lowered.
+[*]Not all projectiles are duplicated: only every 4th projectile produced are duplicated.
+[*][SPOILER="Spread Option Showcase"][IMG]https://i.imgur.com/HrW3egz.gif[/IMG][/SPOILER]
 [/LIST]
 [/LIST]
 
@@ -211,448 +220,31 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [/LIST]
 [/SPOILER]
 
-[SPOILER="Changelogs"]
-1.1.0
-  - Modified the API and added functions.
-  - "AddOptionRule" is now "BanOptionRule", which bans the projectile paired with the weapon that shot it from being duplicated once added to the rule list.
-  - Added "AllowOptionRule", which allows a projectile paired with the weapon that shot it to be duplicated regardless of the usual filters.
-  - Fix a bug where the enemies from this mods doesn't spawn properly.
-
-1.0.5
-  - Modified enemy spawn chances
-  - Rush no longer spawns randomly like regular enemies
-  - Rush will now only spawn through Dagoom hatches
-  - All Gradius enemies will no longer spawn if the player is in an NPC town or inside a home
-
-1.0.4
-  - Fix Options bugs in multiplayer where the equip limitations are shared to all players
-
-1.0.3
-  - Update the mod for use with tModLoader 0.11.6.2
-  - Fix a bug where in the Options in Multiplayer are not properly behaving
-  - Improve Aim Option's aiming calculation to take into account the offset position
-
-1.0.2
-  - Fix Aim Options not spawning when the appropriate accessory is equipped
-
-1.0.1
-  - Update all placeholder sprites into the official ones
-
-1.0.0
-  - Rework Option Rules
-  - Option Rules are now optional
-  - Option Rules are not anymore a required fix
-  - Rework Option Filtering mechanics which lessens performance deterioration
-  - Rework Cross Mod Content API that is related to Option Rules
-  - API now includes weapons instead of being just projectiles
-  - See Documentation about API in the main post or wiki
-  - Duplication of projectiles spawned by another projectile will most likely be fixed now
-
-0.10.1
-  - Fix bugs where in Recurve Option can be mixed and matched rarely
-  - Optimize Search Options seek to pursue mode to majke it easier to lock on
-  - Reworked recipes of Aim Options and Freeze Options
-  - Remove Tinkerer's Workshop as crafting station when upgrading Options to a type
-  - Allow all enemies to scale when Plantera is defeated
-  - Allow all enemies to scale when Moon Lord is defeated
-  - Enemy projectiles will scale accordingly as well
-  - Add more Option rules for Calamity weapons
-
-0.10.0
-  - Implement Recurve Options
-  - Add new Cross Mod Content API for adding a custom damage type that is found on ModProjectile
-  - Change Option Seed crafting station to Work benches instead of Heavy work bench
-  - Add more Option rules for Calamity weapons
-
-0.9.8
-  - Fix Rush desync issues and other enemies that might have a similar problem
-  - Add an item which spawns Big Core
-  - Remove spawn chance of Big Core in space
-  - Adjust hitboxes of all items to the correct dimensions
-  - Remove all AchievementLib related content
-  - Add all banners for all enemies in this mod
-  - Code optimizations regarding tile class structures
-
-0.9.7
-  - Fix an issue where the enemies won't spawn as their vertically inversed versions
-  - Improve spawn checks for Big Core where in he will never spawn when the player is inside a house or near a town
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-  - Add Intermezzo, a Gradius V song, as music box
-
-0.9.6
-  - Implement Dagoom and Rush
-  - Optimize and generalized some codes while implementing new enemies
-  - Optimize sending of packets and minimized their sizes
-  - Improve the Ducker AI: Lower jump height and simplify behavior
-  - Increase Sagna's number of bullets when attacking
-  - Increase Ducker range and narrow down spread attack
-  - Increase Grazia's attack rate and range
-  - Lower spawn rate of Big Core Custom
-  - Add reforge cost and sell values to all Options
-  - Decrease Seek range of Search Options
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.9.4.2
-  - Reduce damage reduction of large enemies, currently Moai and Big Core and future enemies
-  - Reduce defense to 0 of large enemies
-  - Increase Health of large enemies
-  - Fix a bug where a silent exception is being made which causes the Options to disappear and respawn
-  - Fix a bug where the Search Option cannot retarget due to a bad condition
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-  - Decrease the buffer size of Options to settle FPS drops
-
-0.9.4.1
-  - Adjust Search option variables for a faster and crisper movement
-  - Allow Search Options to find a new target after their old target is dead
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.9.4
-  - Implement Aim Options
-  - Implement Search Options
-  - Further optimize Option codes and recipe layout to get rid of bad recipes
-  - Fix 1st Charge Multiple crafting station to the correct one
-  - Increase Freeze Options required snow blocks and ice blocks
-  - Increase Option Seed damage output
-  - Some sprites related to the new option types are still placeholders
-
-0.9.0
-  - Optimize general code
-  - Optimize Option Rule list code execution
-  - Create Cross Mod Content API for adding Option rules
-  - Also create API for supporting custom damage types
-  - By default, support rogue weapons from Calamity Mod
-  - Fix Ducker desync issue
-  - Improve Sagna sync code for it to be smoother in multiplayer
-  - Increase spawn chance of Zalk, Sagna and Ducker
-  - Buff the Forces and give them more damage
-  - Change Needle Force to have all benefits of Standard Force
-  - Allow Needle Force to have more damage than Standard Force
-
-0.8.5
-  - Implement Ducker
-  - Nerf Zalk enemies by reducing their fire rate and reducing their retaliation bullets
-  - Fix a bug where the 3rd Charge Multiple uses Option 4 as ingredient
-  - Remove damage cap of 1 to Moai and Big Core
-  - Moai and Big Core instead has a high % of damage reduction
-  - Add documentation for other modders so that they can enable their projectiles to be supported by the Options
-
-0.8.3
-  - Implement Sagna
-  - Optimize Grazia spawn mechanic to avoid it being buried into the tiles
-  - Fix Garun and Zalk sprites from snapping when spawned
-  - Optimize code and added sync rates for enemies
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.8.2.1
-  - Fix multiplayer bug where there is a silent exception that occurs in Charge Multiples
-  - Add light for Option items in the world
-  - Exclude some note files that was bundled with the mod
-  - Add a lot of Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.8.2
-  - Fix multiplayer bug issue where Charge Multiples are getting replaced when another player picks an item
-  - Add field sprites for the Charge Multiples
-  - Charge multiple special attack missile and trails are still placeholders
-  - Charge multiple inventory sprite is also still a placeholder
-  - Add Tabidachi music and music box from Gradius II
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.8.1.1
-  - Redesign Big Core Custom's sprite sheet to support most GPUs
-  - Add more health to Big Core Custom
-
-0.8.1
-  - Remove Moai custom hitboxes to avoid crashes
-  - Fix Charge Multiple's desync issue where the special attack missile head and trails separate
-  - Fix issue where the Charge Multiples may become lost forever in multiplayer
-  - Improve sync code of all enemies this mod introduces
-  - Fix issue where Big Core and Moai were not retaliating when damaged
-
-0.8.0
-  - Implement Charge Multiple
-  - Sprites and Sound effects are still placeholders
-  - Multiplayer sync codes improved
-  - Another stable release of the mod
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.7.4.1
-  - Add recipes for Option Seed
-  - Add upgrade recipes of Options including the Option Seed
-  - Change recipe of 4th Option to Ectoplasm instead of all Souls
-
-0.7.4
-  - Buff the Needle Force so it is more effective
-  - Implement Option Seed
-  - Add achievements thanks to AchievementLib
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.7.3
-  - Add retaliation mechanics to Gradius enemies and boss
-  - Fix bug of Big Core's target not syncing
-  - Fix bug where options are needed to be ordered again
-  - Fix a bug where Moai projectile interactions are crashing the game
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.7.2
-  - Implement Big Core Custom (incomplete)
-  - Big Core Custom is multiplayer compatible
-  - Optimize option code and fix bug where options are duplicated resulting to 7 options max
-  - Update the Needle Force sprite to reflect correct shadows
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-
-0.7.1
-  - Improve player syncing to other clients when entering worlds
-  - Fix a bug where option colors are updated to all players
-  - Optimize code in checking for mixing and matching options to render them efficiently unavailable
-  - Fix a bug where equipping the 1st rotate option causes a frequent crash
-  - Further add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are still specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium
-  - Decrease Grazia fire rate of Bacterion Bullets
-  - Decrease Grazia detection range
-  - Increase spawn chance of Garun
-  - Fix bug where the 1st equipped Rotate Option spazzes out
-
-0.7.0
-  - Implement Grazia enemy
-  - Add more Option rules to support weapons from other mods (still incomplete)
-  - These mods are specific to Calamity, Thorium, Spirit, Bluemagic and Crystilium for now
-  - Improve sync code of enemies to avoid wonky behavior in multiplayer
-  - Fix bug about rounding errors of floats to integers
-  - Fix all sprites so that the hitboxes and sprite models are correctly set up
-  - Improve the code in freeing projectile data used by the Options
-  - Add Gradius III music Departure For Space and music box
-
-0.6.6
-  - Add Phantasm Arrows in the Option rule list to avoid it being copied due to buggy results
-  - Add Zalk attack distance to not let it attack infinitely even from a long range
-  - Adjust Garun stats to be more deadly
-  - Integrate Two Option inventory sprites to reflect changes done for the options
-  - Reduce life span of Bacterion Bullets to avoid lag
-
-0.6.5
-  - Implement Zalk enemy
-  - Make Bacterion bullets smaller in size
-  - Optimize individual Option inventory sprites for better view
-  - Fix a bug where Option types can be mixed and matched
-  - Implement new coloring scheme for Options in field based on their inventory appearance
-
-0.6.4
-  - Implement the Garun enemy
-  - Update individual Option inventory sprites
-
-0.6.3
-  - Fix a bug where melee interactions with Moais are misbehaving and not functioning properly
-  - Optimize Moai code to improve multiplayer behavior
-  - Add Option balance support of arrows from Calamity and Bluemagic
-
-0.6.2
-  - Vastly improve Moai behavior
-  - Moai now displays HP Bar and damage number indicators
-  - Moai Bubbles can now interact properly with piercing projectiles
-  - Add The Position Light Music Box
-
-0.6.1
-  - Add a state where the Moai pauses for a brief amount of time before closing its mouth again
-  - Change mod homepage to the forum page since it holds more information
-
-0.6.0
-  - Implement Moai enemy with a placeholder sprite and effects
-
-0.5.3
-  - Allow option accessories to be combined
-  - Fix Needle Bydo recipe to include Bydo Embryo
-  - Buff Force shots to be more effective
-
-0.5.2
-  - Integrate new sprite of the Needle Force
-  - Integrate new accessory sprite for the Needle Bydo
-  - Fix bug where two forces can spawn upon world enter and cause weird behavior
-
-0.5.1
-  - Fix a bug where there can only be one force in the field regardless of owner
-  - Improve conditions to allow first equipped force to be retained
-
-0.5.0
-  - Implement the Needle Force from R-Type Delta
-  - Improve a lot of code to enable easier implementation of future Forces
-
-0.4.0
-  - Fix all desync issues in Options and Force
-  - Mod is now multiplayer compatible
-  - Fix a bug where options do not appear even when accessories are equipped
-  - Optimize code related to projectile spawning
-  - Fix bug where Options have their own invisible options
-
-0.3.1
-  - Properly sync Force in multiplayer
-  - Optimize code
-
-0.3.0
-  - Implement Rotate options
-  - Fix bugs related with Freeze options that causes crashes
-  - Fix incomplete and wrong recipes of the Freeze options
-
-0.2.0
-  - Implement the Freeze options from Gradius V
-  - Fix a bug of catching an exception when the Force does not exist
-  - Add Option equip sound effect
-  - Adjust the rarities of the accessories to match Terraria's progression
-
-0.1.1
-  - Add recipes for Options and the Force
-  - Fixed a fatal bug: a crash when hovering over the Bydo Embryo in the crafting menu
-
-0.1.0
-  - Implement the Force from R-Type series
-  - Implement the exact behavior of it shown from the original games
-
-0.0.4
-  - Unequipping options now properly unloads them
-  - Add Mod icon
-
-0.0.3
-  - Bug fixes
-  - Options no longer generate friendly NPC projectiles
-  - Option projectiles no longer generate ammo drops
-  - Options are now limited to not work on some weapons
-  - Allow options to work on some melee projectiles
-
-0.0.2
-  - Initial release
+[SPOILER="Configurables"]
+This mod now has Mod Configurations so you may adjust some aspects of the mod however you see fit! Below is a list of what you can change.
+[LIST]
+[*]Bacterion Contact Damage to NPCs - Adjust the damage done to town NPCs when Bacterion enemies make contact with them.
+[*]Bacterion Bullet Damage to NPCs - Adjust the damage done to town NPCs when Bacterion bullets hit them.
+[*]Bacterion Spawn Rate - Adjust the rate at how much the Bacterion enemies spawn in the world.
+[*]Option Projectiles Duplication Limit - Adjust the buffer limit of how much projectile are being duplicated.
+[/LIST]
 [/SPOILER]
 
-[SPOILER="Cross Mod Content Capabilities (For Other Modders)"]
-[B][U][SIZE=6]Option Compatibility[/SIZE][/U][/B]
-It is highly unlikely that we will support all the mods existing. The more appropriate description for the task is it being impossible to complete.
-If you want [U]your own mod's projectiles to be compatible with the Options[/U], then take these items below in mind when implementing your projectile:
-[LIST]
-[*]Make sure the projectile is [B]active[/B]. ([I]projectile.active[/I] is true)
-[*]Make sure that your projectile is [B]not a Yo-yo[/B].
-[*]Make sure the projectile [B]is not hostile[/B]. ([I]projectile.hostile[/I] is false)
-[*]Make sure the projectile [B]is friendly[/B]. ([I]projectile.friendly[/I] is true)
-[*]Make sure the projectile [B]is not an NPC projectile[/B]. ([I]projectile.npcProj[/I] is false)
-[*]Make sure the projectile [B]has damage[/B].
-[*]Make sure the projectile [B]can deal critical damage[/B]. (Melee, Ranged, Thrown and Magic)
-[*]Make sure the projectile [B]is not a minion[/B]. ([I]projectile.minion[/I] is false)
-[*]Make sure the projectile [B]is not a trap[/B]. ([I]projectile.trap[/I] is false)
-[*]Make sure the projectile [B]is owned by the same player who generated the projectile[/B].
-[/LIST]
+[SPOILER="Changelog"]
+The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
+Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
-This mod [U]offers an API for other mod creators through Mod.Call[/U].
-Mod Creators can bypass the filters to outright allow a projectile to be duplicated no matter the circumstance.
-They can also ban the projectiles from being duplicated by the Options.
-Head on over to [I]API[/I] Section just below for more details.
+1.1.5
+  - Implement Spread Options.
+  - Implement Mod Configs in the mod. Refer to the wiki for complete details.
+  - Heavily modify the API and add more functionalities. Refer to the wiki for complete details.
+  - Add default vanilla rules in the mod while following the new API structure.
+  - Fix a bug where a banned projectile can be duplicated when switching to a new weapon.
 [/SPOILER]
 
-[SPOILER="Mod API for Cross Mod Content"]
-[LIST]
-[*][B]"BanOptionRule"[/B]
-[LIST]
-[*]This function will add an Ban Option Rule in the list that will be checked for Options Projectile Duplication ability. Adding a rule in the list [U]will ban that projectile from being duplicated[/U].
-[*][I]When to use:[/I]Use this function to add projectiles that are:
-[LIST]
-[*]Misbehaving in function (e.g. the Projectile has a limit on how much can exist in the world)
-[*]Duplicating a lot that can cause lag or crash (e.g. Vilethorn causes infinite duplication due to the nature of how it works)
-[*]Already overpowered. For balancing purposes.
-[/LIST]
-[*][I]Invoke #1:[/I]   mod.Call("BanOptionRule", ItemID.BeesKnees, ProjectileID.BeeArrow);
-[LIST]
-[*]Use this for adding a [I]vanilla[/I] weapon and projectile pair in the rule list.
-[*]Use this also for modded projectiles as long as the weapon and projectile integer type is known.
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Weapon type in int
-[*][I]args[2][/I]: Projectile type in int
-[/LIST]
-[*][I]Invoke #2:[/I]   mod.Call("BanOptionRule", "ChensGradiusMod", "BeesKneesPlus", "BeeArrowPlus");
-[LIST]
-[*]Use this for adding a [I]mod[/I] projectile in the rule list.
-[*]Make sure to use internal names and not the display names.
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Your mod's Internal Name in string
-[*][I]args[2][/I]: Weapon Internal Name in string
-[*][I]args[3][/I]: Projectile Internal Name string
-[/LIST]
-[*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and weapon/projectile integer types are known.
-[*][I]Returns:[/I] [B]True[/B] (Rule was added and will ban the weapon and projectile pair) or [B]False[/B] (Rule already existing and already banned)
-[/LIST]
-[*][B]"AllowOptionRule"[/B]
-[LIST]
-[*]This function will add an Allow Option Rule in the list that will bypass any filters provided by the mod. Adding a rule in the list [U]will allow that projectile to be duplicated and ignore the other conditions, even if the said rule exists in the Ban Option Rule list[/U].
-[*][I]When to use:[/I]Use this function to add projectiles that are:
-[LIST]
-[*]Not being duplicated (e.g. the Projectile does not pass the filters)
-[*]Limited to only being duplicated when holding certain equipment (e.g. Fallen Star projectiles can only be duplicated when a player is holding a Star Cannon, and Fallen Star projectiles naturally do not pass the filters)
-[/LIST]
-[*][I]Invoke #1:[/I]   mod.Call("AllowOptionRule", ItemID.OnyxBlaster, ProjectileID.BlackBolt);
-[LIST]
-[*]Use this for adding a [I]vanilla[/I] weapon and projectile pair in the rule list.
-[*]Use this also for modded projectiles as long as the weapon and projectile integer type is known.
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Weapon type in int
-[*][I]args[2][/I]: Projectile type in int
-[/LIST]
-[*][I]Invoke #2:[/I]   mod.Call("AllowOptionRule", "ChensGradiusMod", "OnyxBlasterForce", "BlackBoltForce");
-[LIST]
-[*]Use this for adding a [I]mod[/I] projectile in the rule list.
-[*]Make sure to use internal names and not the display names.
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Your mod's Internal Name in string
-[*][I]args[2][/I]: Weapon Internal Name in string
-[*][I]args[3][/I]: Projectile Internal Name string
-[/LIST]
-[*][I]Where to put:[/I] In your Mod's Load() override, or anywhere if projectile addition is dynamic and weapon/projectile integer types are known.
-[*][I]Returns:[/I] [B]True[/B] (Rule was added and will ban the weapon and projectile pair) or [B]False[/B] (Rule already existing and already banned)
-[/LIST]
-[*][B]"AddCustomDamage"[/B]
-[LIST]
-[*]This function will add [U]your mod's custom damage type[/U] so that the Options may copy those projectiles as well!
-[*][I]When to use:[/I] Use this function if you want to allow the Options to duplicate your projectiles with custom damage type.
-[*][I]Invoke #1:[/I]   mod.Call("AddCustomDamage", "CalamityMod", "CalamityGlobalProjectile", "rogue");
-[LIST]
-[*]Use this if your projectile's custom damage type is in [I]GlobalProjectile[/I].
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Your mod's Internal Name in string
-[*][I]args[2][/I]: Your global projectile's Internal Name in string
-[*][I]args[3][/I]: Your boolean variable name which determines the custom damage type in string
-[/LIST]
-[*][I]Invoke #2:[/I]   mod.Call("AddCustomDamage", "ChensGradiusMod", "laser");
-[LIST]
-[*]Use this if your projectile's custom damage type is in [I]ModProjectile[/I].
-[*][I]args[0][/I]: Method name in string
-[*][I]args[1][/I]: Your mod's Internal Name in string
-[*][I]args[2][/I]: Your boolean variable name which determines the custom damage type in string
-[/LIST]
-[*][I]Where to put:[/I] In your Mod's Load() override.
-[*][I]Returns:[/I] [B]True[/B] (Custom Damage added for support) or [B]False[/B] (Custom Damage is already supported)
-[/LIST]
-[*][B]"BanCheck"[/B]
-[LIST]
-[*]This function is for checking whether a projectile is in the rule list or not.
-[*][I]When to use:[/I] This function is not really necessary, but it might help for debugging something.
-[*][I]Invoke:[/I]   mod.Call("BanCheck", item.type, projectile.type);
-[*][I]Where to put:[/I] Anywhere
-[*][I]Returns:[/I] [B]True[/B] if banned, [B]False[/B] if not.
-[/LIST]
-[*][B]"AllowCheck"[/B]
-[LIST]
-[*]This function is for checking whether a projectile is in the Allow Option Rule list or not.
-[*][I]When to use:[/I] This function is not really necessary, but it might help for debugging something.
-[*][I]Invoke:[/I]   mod.Call("AllowCheck", item.type, projectile.type);
-[*][I]Where to put:[/I] Anywhere
-[*][I]Returns:[/I] [B]True[/B] if allowed to bypass filters, [B]False[/B] if not.
-[/LIST]
-[/LIST]
+[SPOILER="Cross Mod Content Capabilities (For Other Mod Creators)"]
+The content is moved because it's hard to maintain a Wiki and a main post!
+Click on [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Cross-Mod-Content-and-API]this link[/URL] to see the full details on how to make your projectiles work with the Options. You can also control other mod's behavior if you wish. It is all up to you!
 [/SPOILER]
 
 [B]Contact Us[/B]

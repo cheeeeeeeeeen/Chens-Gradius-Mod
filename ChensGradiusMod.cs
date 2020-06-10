@@ -91,7 +91,7 @@ namespace ChensGradiusMod
 
           case "AddProjectileRule":
             {
-              // Vanilla Weapon Rule
+              // Vanilla Projectile Rule
               //   args[1]: Mode ("Ban" or "Allow")
               //   args[2]: Vanilla Projectile Type. e.g. ProjectileID.BeeArrow
               // Mod Projectile Rule
