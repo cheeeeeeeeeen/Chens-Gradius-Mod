@@ -54,6 +54,8 @@ namespace ChensGradiusMod
     public float recurveDistance;
     public bool spreadOption;
     public bool isSpreading;
+    public bool turretOption;
+    public bool isTurreting;
     public Item[] optionRuleAmmoFilter = new Item[2];
 
     public List<Vector2> optionFlightPath = new List<Vector2>();
@@ -90,6 +92,7 @@ namespace ChensGradiusMod
       clone.seedRotateDirection = seedRotateDirection;
       clone.chargeMode = chargeMode;
       clone.isSearching = isSearching;
+      clone.isTurreting = isTurreting;
     }
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -119,6 +122,8 @@ namespace ChensGradiusMod
       packet.Write(isSearching);
       packet.Write(recurveOption);
       packet.Write(spreadOption);
+      packet.Write(turretOption);
+      packet.Write(isTurreting);
       packet.Send(toWho, fromWho);
     }
 
@@ -174,6 +179,16 @@ namespace ChensGradiusMod
           packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesSearchOption);
           packet.Write((byte)player.whoAmI);
           packet.Write(isSearching);
+          packet.Write(wasHolding);
+          packet.Send();
+        }
+
+        if (clone.isTurreting != isTurreting)
+        {
+          packet = mod.GetPacket();
+          packet.Write((byte)ChensGradiusMod.PacketMessageType.ClientChangesTurretOption);
+          packet.Write((byte)player.whoAmI);
+          packet.Write(isTurreting);
           packet.Write(wasHolding);
           packet.Send();
         }
@@ -261,6 +276,11 @@ namespace ChensGradiusMod
       {
         if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isSpreading = true;
         if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isSpreading = false;
+      }
+      else if (turretOption)
+      {
+        if (ChensGradiusMod.optionActionKey.JustPressed) wasHolding = isTurreting = true;
+        if (ChensGradiusMod.optionActionKey.JustReleased && wasHolding) wasHolding = isTurreting = false;
       }
     }
 
@@ -364,6 +384,7 @@ namespace ChensGradiusMod
       recurveActionMode = false;
       recurveDistance = 96f;
       isSpreading = false;
+      isTurreting = false;
     }
 
     private void ResetOtherVariables()
@@ -382,6 +403,7 @@ namespace ChensGradiusMod
       recurveOption = false;
       searchOption = false;
       spreadOption = false;
+      turretOption = false;
     }
 
     private bool HasAnyOptions()
