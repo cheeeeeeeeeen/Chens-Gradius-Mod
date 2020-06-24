@@ -339,5 +339,23 @@ namespace ChensGradiusMod
       return Regex.Replace(Regex.Replace(str, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"),
                            @"(\p{Ll})(\P{Ll})", "$1 $2");
     }
+
+    public static bool IsPlayerLocalServerOwner(int whoAmI)
+    {
+      if (Main.netMode == NetmodeID.MultiplayerClient)
+      {
+        return Netplay.Connection.Socket.GetRemoteAddress().IsLocalHost();
+      }
+
+      for (int i = 0; i < Main.maxPlayers; i++)
+      {
+        RemoteClient client = Netplay.Clients[i];
+        if (client.State == 10 && i == whoAmI && client.Socket.GetRemoteAddress().IsLocalHost())
+        {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 }

@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader.Config;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
 {
@@ -45,26 +46,14 @@ namespace ChensGradiusMod
 
     public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
     {
-      switch (Main.netMode)
+      if (Main.netMode == NetmodeID.SinglePlayer) return true;
+      else if (!IsPlayerLocalServerOwner(whoAmI))
       {
-        case NetmodeID.Server:
-          if (whoAmI == Main.myPlayer)
-          {
-            return true;
-          }
-          else
-          {
-            message = "You are unauthorized to make changes. Only the server may change the configuration.";
-            return false;
-          }
-
-        case NetmodeID.SinglePlayer:
-          return true;
-
-        default:
-          message = "Something went wrong. You should not be seeing this message.";
-          return false;
+        message = "You are unauthorized to make changes. Only the server may change the configuration.";
+        return false;
       }
+
+      return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);
     }
   }
 }
