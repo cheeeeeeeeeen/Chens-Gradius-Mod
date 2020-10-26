@@ -295,8 +295,6 @@ namespace ChensGradiusMod
             GradiusPlayer(playerIndex).isSearching = reader.ReadBoolean();
             GradiusPlayer(playerIndex).recurveOption = reader.ReadBoolean();
             GradiusPlayer(playerIndex).spreadOption = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).turretOption = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).isTurreting = reader.ReadBoolean();
             break;
           }
 
@@ -455,24 +453,6 @@ namespace ChensGradiusMod
             }
             break;
           }
-
-        case PacketMessageType.ClientChangesTurretOption:
-          {
-            byte playerIndex = reader.ReadByte();
-            GradiusPlayer(playerIndex).isTurreting = reader.ReadBoolean();
-            GradiusPlayer(playerIndex).wasHolding = reader.ReadBoolean();
-
-            if (IsServer())
-            {
-              ModPacket packet = GetPacket();
-              packet.Write((byte)PacketMessageType.ClientChangesFreezeOption);
-              packet.Write(playerIndex);
-              packet.Write(GradiusPlayer(playerIndex).isFreezing);
-              packet.Write(GradiusPlayer(playerIndex).wasHolding);
-              packet.Send(-1, playerIndex);
-            }
-            break;
-          }
       }
     }
 
@@ -488,8 +468,7 @@ namespace ChensGradiusMod
       SpawnRetaliationBullet,
       ClientChangesSearchOption,
       BroadcastSound,
-      RecurveUpdatePositions,
-      ClientChangesTurretOption
+      RecurveUpdatePositions
     };
   }
 }
