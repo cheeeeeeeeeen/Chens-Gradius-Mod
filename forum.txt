@@ -1,8 +1,8 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.1.5
-tModLoader: 0.11.7.5[/SIZE][/U][/B]
+[B][U][SIZE=6]Mod Version: 1.1.6
+tModLoader: 0.11.7.7[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
@@ -234,12 +234,9 @@ This mod now has Mod Configurations so you may adjust some aspects of the mod ho
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
-1.1.5
-  - Implement Spread Options.
-  - Implement Mod Configs in the mod. Refer to the wiki for complete details.
-  - Heavily modify the API and add more functionalities. Refer to the wiki for complete details.
-  - Add default vanilla rules in the mod while following the new API structure.
-  - Fix a bug where a banned projectile can be duplicated when switching to a new weapon.
+1.1.6
+  - Implement the delayed fixes that was paused because of the lacking feature: Turret Options.
+  - Move Turret Options feature away for now.
 [/SPOILER]
 
 [SPOILER="Cross Mod Content Capabilities (For Other Mod Creators)"]
