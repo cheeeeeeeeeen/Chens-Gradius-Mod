@@ -37,6 +37,8 @@ Added Music with music box:
 2. Departure For Space (Gradius III From Myth to Legend version)
 3. Tabidachi (Gradius II Gofer no Yabou Version)
 4. Intermezzo (Gradius V)
+5. Starfield (Salamander Arcade version)
+6. Sensation (Salamander 2)
 
 Added Music without music boxes yet:
 1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)

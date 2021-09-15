@@ -1,8 +1,8 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.1.6
-tModLoader: 0.11.7.7[/SIZE][/U][/B]
+[B][U][SIZE=6]Mod Version: 1.2.0
+tModLoader: 0.11.8.5[/SIZE][/U][/B]
 
 I have always been a fan of the classic side-scrollers, so I made a mod related to it. On top of that, I want to learn C# as well.
 This mod's content will focus in implementing features that came from classic side-scrollers such as Gradius, R-Type and more.
@@ -120,6 +120,13 @@ They can unleash a power special attack, but be advised that the accessory will 
 [*]Not all projectiles are duplicated: only every 4th projectile produced are duplicated.
 [*][SPOILER="Spread Option Showcase"][IMG]https://i.imgur.com/HrW3egz.gif[/IMG][/SPOILER]
 [/LIST]
+[*]Turret Options
+[LIST]
+[*]Unique option type to this mod, inspired from Freeze Options and Terraria's Sentries.
+[*]Hold the Option Action hotkey, and these options will stay where they are.
+[*][SPOILER="Turret Showcase"][IMG]https://i.imgur.com/0GVkcNq.gif[/IMG]
+Hold hotkey to make them stay in place!
+[/SPOILER]
 [/LIST]
 
 [B]New Enemies[/B]
@@ -213,6 +220,8 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [*]Departure For Space (Gradius III From Myth to Legend version)
 [*]Tabidachi (Gradius II Gofer no Yabou Version)
 [*]Intermezzo (Gradius V)
+[*]Starfield (Salamander Arcade version)
+[*]Sensation (Salamander 2)
 [/LIST]
 [B]Added Music without music box[/B]
 [LIST=1]
@@ -234,9 +243,11 @@ This mod now has Mod Configurations so you may adjust some aspects of the mod ho
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
-1.1.6
-  - Implement the delayed fixes that was paused because of the lacking feature: Turret Options.
-  - Move Turret Options feature away for now.
+1.2.0
+  - Implement Turret Options. Sprites are not yet updated.
+  - Add Starfield and Sensation music boxes.
+  - Integrate Hero's Mod for proper configuration management roles.
+  - Integrate Boss Checklist for proper entry in the checklist.
 [/SPOILER]
 
 [SPOILER="Cross Mod Content Capabilities (For Other Mod Creators)"]
@@ -247,7 +258,7 @@ Click on [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Cross-Mod-
 [B]Contact Us[/B]
 If you encounter any bugs or you have suggestions, you can reach us in several ways.
 [LIST]
-[*]Discord: [URL='https://discord.gg/z7ZMtYv']Discord Invite Link to #chens-gradius-mod[/URL]
+[*]Discord: [URL='https://discord.gg/z7ZMtYv']Discord Invite Link to #gradius-mod[/URL]
 [*]E-mail: [EMAIL]blancfaye7@gmail.com[/EMAIL]
 [*]Issues: [URL='https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/issues']Gradius Mod Project Issue Board[/URL]
 [/LIST]
