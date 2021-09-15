@@ -134,6 +134,15 @@ namespace ChensGradiusMod.NPCs
       return null;
     }
 
+    public override void NPCLoot()
+    {
+      if (!GradiusModWorld.bigcoreDowned)
+      {
+        GradiusModWorld.bigcoreDowned = true;
+        if (IsServer()) NetMessage.SendData(MessageID.WorldData);
+      }
+    }
+
     public override void BossLoot(ref string name, ref int potionType)
     {
       potionType = ItemID.SuperHealingPotion;

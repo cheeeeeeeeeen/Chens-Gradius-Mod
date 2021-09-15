@@ -1,4 +1,7 @@
+using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
+using ChensGradiusMod.Items.Spawners;
+using ChensGradiusMod.NPCs;
 using ChensGradiusMod.Projectiles.Enemies;
 using ChensGradiusMod.Projectiles.Options;
 using ChensGradiusMod.Tiles.MusicBoxes;
@@ -15,6 +18,8 @@ namespace ChensGradiusMod
 {
   public class ChensGradiusMod : Mod
   {
+    public static Mod bossChecklist;
+    public static Mod herosMod;
     public static ModHotKey forceActionKey;
     public static ModHotKey optionActionKey;
 
@@ -42,6 +47,9 @@ namespace ChensGradiusMod
                     ModContent.ItemType<IntermezzoMusicBox>(),
                     ModContent.TileType<IntermezzoMusicBoxTile>());
       }
+
+      bossChecklist = ModLoader.GetMod("BossChecklist");
+      herosMod = ModLoader.GetMod("HEROsMod");
     }
 
     public override void Unload()
@@ -50,6 +58,8 @@ namespace ChensGradiusMod
 
       forceActionKey = null;
       optionActionKey = null;
+      bossChecklist = null;
+      herosMod = null;
     }
 
     public override object Call(params object[] args)
@@ -262,6 +272,21 @@ namespace ChensGradiusMod
         ItemID.DemonBow
       });
       RecipeGroup.RegisterGroup("ChensGradiusMod:EvilBow", group);
+    }
+
+    public override void PostSetupContent()
+    {
+      if (bossChecklist != null)
+      {
+        bossChecklist.Call("AddBoss", 15f, ModContent.NPCType<BigCoreCustom>(), this, "Big Core Custom",
+                           (Func<bool>)GradiusModWorld.IsBigCoreDowned, ModContent.ItemType<BigBlueBizarreLens>(),
+                           ModContent.ItemType<BigCoreCustomBanner>(), ItemID.SuperHealingPotion, "Use Big Blue Bizarre Lens.",
+                           "The aircraft carrier leaves combat airspace.", "ChensGradiusMod/Sprites/BigCoreCustomBossLog");
+      }
+      if (herosMod != null)
+      {
+        herosMod.Call("AddPermission", "UpdateConfig", "Update Gradius Config", (Action<bool>)(groupUpdated => { }));
+      }
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)

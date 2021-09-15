@@ -47,8 +47,8 @@ namespace ChensGradiusMod.Items.Spawners
     }
 
     protected virtual string ItemTooltip =>
-      "A strange-looking machinery..." +
-      "You do not know anything about it, but you remember something like this." +
+      "A strange-looking machinery...\n" +
+      "You do not know anything about it, but you remember something like this.\n" +
       "Summons Big Core Custom";
 
     protected virtual bool CanSpawnAnother => true;
@@ -66,7 +66,9 @@ namespace ChensGradiusMod.Items.Spawners
       recipe.AddIngredient(ItemID.MechanicalWagonPiece);
       recipe.AddIngredient(ItemID.MechanicalBatteryPiece);
       recipe.AddIngredient(ItemID.MechanicalWheelPiece);
-      recipe.AddTile(TileID.DemonAltar);
+      recipe.AddTile(TileID.LunarCraftingStation);
+      recipe.SetResult(this);
+      recipe.AddRecipe();
     }
   }
 }

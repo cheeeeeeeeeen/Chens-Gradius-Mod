@@ -12,6 +12,7 @@ Current features:
 9. Search Options
 10. Recurve Options
 11. Spread Options
+12. Turret Options
 
 For more information about these features, visit the homepage.
 
@@ -39,6 +40,9 @@ Added Music with music box:
 
 Added Music without music boxes yet:
 1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
+
+Boss Checklist integration so that Big Core Custom will appear properly.
+Hero's Mod integration so that not anybody can edit the mod configuration file.
 
 Cross Mod Content API is available already! Check the homepage for more info.
 
