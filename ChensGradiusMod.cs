@@ -46,6 +46,9 @@ namespace ChensGradiusMod
         AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Intermezzo"),
                     ModContent.ItemType<IntermezzoMusicBox>(),
                     ModContent.TileType<IntermezzoMusicBoxTile>());
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Starfield"),
+                    ModContent.ItemType<StarfieldMusicBox>(),
+                    ModContent.TileType<StarfieldMusicBoxTile>());
       }
 
       bossChecklist = ModLoader.GetMod("BossChecklist");

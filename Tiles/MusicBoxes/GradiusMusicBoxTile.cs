@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ObjectData;
 
@@ -33,5 +34,7 @@ namespace ChensGradiusMod.Tiles.MusicBoxes
     protected override string Texture => "ChensGradiusMod/Sprites/PlaceholderMusicBoxTile";
 
     protected virtual string MusicName => GradiusHelper.SplitCamelCase(Name.Substring(0, Name.Length - 12));
+
+    protected override Color MinimapColor => new Color(100, 100, 100);
   }
 }
