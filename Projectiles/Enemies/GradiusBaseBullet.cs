@@ -11,16 +11,26 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig.bacterionBulletDamageMultiplier <= 0) return false;
+      if (GradiusConfig.bacterionBulletDamageMultiplierToNpc <= 0 || projectile.damage <= 0)
+      {
+        return false;
+      }
 
       return null;
     }
 
     public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
     {
-      damage = RoundOffToWhole(GradiusConfig.bacterionBulletDamageMultiplier * damage);
+      damage = RoundOffToWhole(GradiusConfig.bacterionBulletDamageMultiplierToNpc * damage);
     }
 
-    private GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
+    public override bool CanHitPlayer(Player target)
+    {
+      if (projectile.damage <= 0) return false;
+
+      return base.CanHitPlayer(target);
+    }
+
+    private GradiusModConfig GradiusConfig => GradiusModConfig.Instance;
   }
 }

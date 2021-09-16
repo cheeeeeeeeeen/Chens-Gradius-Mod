@@ -131,8 +131,10 @@ namespace ChensGradiusMod.Projectiles.Options
 
     protected virtual int SpawnDuplicateProjectile(Projectile p)
     {
+      int newDamage = RoundOffToWhole(p.damage * GradiusModConfig.Instance.optionDamageMultiplier);
+      float newKnockback = p.knockBack * GradiusModConfig.Instance.optionDamageMultiplier;
       return Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
-                                      p.velocity, p.type, p.damage, p.knockBack,
+                                      p.velocity, p.type, newDamage, newKnockback,
                                       projectile.owner, 0f, 0f);
     }
 

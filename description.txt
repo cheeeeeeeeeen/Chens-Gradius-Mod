@@ -1,4 +1,4 @@
-My Gradius Mod is really just a fun mod in implementing Gradius features into Terraria (along with other SHMUP games).
+My Gradius Mod is really just a fun mod in implementing Gradius features into Terraria (along with other SHMUP games). More updates will come after tModLoader 1.4 is stable. Stay tuned.
 
 Current features:
 1. Options/Multiples
@@ -30,6 +30,7 @@ New Enemies:
 These enemies will only spawn in Hard mode. They also have their own banners, including boss enemies.
 All enemies in this mod will scale accordingly when Plantera is defeated and when Moon Lord is defeated.
 All enemies in this mod also display a behavior of retaliation as common in the Gradius series if the world is in Expert mode.
+Bacterion stats can be configured though mod config.
 For more information about these enemies and the behaviors, visit the homepage.
 
 Added Music with music box:
@@ -39,9 +40,7 @@ Added Music with music box:
 4. Intermezzo (Gradius V)
 5. Starfield (Salamander Arcade version)
 6. Sensation (Salamander 2)
-
-Added Music without music boxes yet:
-1. Aircraft Carrier (Gradius Slot version, only played during Big Core Custom fight)
+7. Aircraft Carrier (Gradius Slot version)
 
 Boss Checklist integration so that Big Core Custom will appear properly.
 Hero's Mod integration so that not anybody can edit the mod configuration file.

@@ -262,7 +262,6 @@ namespace ChensGradiusMod.NPCs
           projNumber += 1;
           if (NPC.downedPlantBoss) projNumber += 1;
         }
-        if (Main.hardMode) projNumber += 1;
         if (NPC.downedMoonlord) projNumber += 1;
 
         return projNumber;

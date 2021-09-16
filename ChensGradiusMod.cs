@@ -7,6 +7,7 @@ using ChensGradiusMod.Projectiles.Options;
 using ChensGradiusMod.Tiles.MusicBoxes;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -52,6 +53,9 @@ namespace ChensGradiusMod
         AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Sensation"),
                     ModContent.ItemType<SensationMusicBox>(),
                     ModContent.TileType<SensationMusicBoxTile>());
+        AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/AircraftCarrier"),
+                    ModContent.ItemType<AircraftCarrierMusicBox>(),
+                    ModContent.TileType<AircraftCarrierMusicBoxTile>());
       }
 
       bossChecklist = ModLoader.GetMod("BossChecklist");
@@ -284,10 +288,20 @@ namespace ChensGradiusMod
     {
       if (bossChecklist != null)
       {
+        List<int> collectionDrops = new List<int>
+        {
+          ModContent.ItemType<BigCoreCustomBanner>(),
+          ModContent.ItemType<AircraftCarrierMusicBox>()
+        };
+        List<int> lootDrops = new List<int>
+        {
+          ItemID.SuperHealingPotion
+        };
         bossChecklist.Call("AddBoss", 15f, ModContent.NPCType<BigCoreCustom>(), this, "Big Core Custom",
                            (Func<bool>)GradiusModWorld.IsBigCoreDowned, ModContent.ItemType<BigBlueBizarreLens>(),
-                           ModContent.ItemType<BigCoreCustomBanner>(), ItemID.SuperHealingPotion, "Use Big Blue Bizarre Lens.",
-                           "The aircraft carrier leaves combat airspace.", "ChensGradiusMod/Sprites/BigCoreCustomBossLog");
+                           collectionDrops, lootDrops, "Use Big Blue Bizarre Lens.",
+                           "The aircraft carrier leaves combat airspace.",
+                           "ChensGradiusMod/Sprites/BigCoreCustomBossLog");
       }
       if (herosMod != null)
       {

@@ -119,14 +119,23 @@ namespace ChensGradiusMod.NPCs
 
     public override bool? CanHitNPC(NPC target)
     {
-      if (GradiusConfig.bacterionContactDamageMultiplier <= 0) return false;
-
+      if (GradiusConfig.bacterionContactDamageMultiplierToNpc <= 0 || npc.damage <= 0)
+      {
+        return false;
+      }
       return null;
     }
 
     public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
     {
-      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplier * damage);
+      damage = RoundOffToWhole(GradiusConfig.bacterionContactDamageMultiplierToNpc * damage);
+    }
+
+    public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+    {
+      if (npc.damage <= 0) return false;
+
+      return base.CanHitPlayer(target, ref cooldownSlot);
     }
 
     public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
@@ -146,7 +155,7 @@ namespace ChensGradiusMod.NPCs
       FrameCounter = reader.ReadByte();
     }
 
-    protected GradiusModConfig GradiusConfig => ModContent.GetInstance<GradiusModConfig>();
+    protected GradiusModConfig GradiusConfig => GradiusModConfig.Instance;
 
     protected virtual int FrameTick { get; set; } = 0;
 
@@ -177,8 +186,8 @@ namespace ChensGradiusMod.NPCs
       get
       {
         float multiplier = 1f;
-        if (NPC.downedPlantBoss) multiplier = 1.4f;
-        if (NPC.downedMoonlord) multiplier = 2f;
+        if (NPC.downedPlantBoss) multiplier = 1.4f * GradiusConfig.postPlanteraBuffMultiplier;
+        if (NPC.downedMoonlord) multiplier = 2f * GradiusConfig.postMoonLordBuffMultiplier;
 
         return multiplier;
       }
@@ -189,8 +198,8 @@ namespace ChensGradiusMod.NPCs
       get
       {
         float multiplier = 1f;
-        if (NPC.downedPlantBoss) multiplier = 1.3f;
-        if (NPC.downedMoonlord) multiplier = 1.7f;
+        if (NPC.downedPlantBoss) multiplier = 1.3f * GradiusConfig.postPlanteraBuffMultiplier;
+        if (NPC.downedMoonlord) multiplier = 1.7f * GradiusConfig.postMoonLordBuffMultiplier;
 
         return multiplier;
       }
@@ -201,8 +210,8 @@ namespace ChensGradiusMod.NPCs
       get
       {
         float multiplier = 1f;
-        if (NPC.downedPlantBoss) multiplier = 1.2f;
-        if (NPC.downedMoonlord) multiplier = 1.5f;
+        if (NPC.downedPlantBoss) multiplier = 1.2f * GradiusConfig.postPlanteraBuffMultiplier;
+        if (NPC.downedMoonlord) multiplier = 1.5f * GradiusConfig.postMoonLordBuffMultiplier;
 
         return multiplier;
       }
@@ -212,9 +221,9 @@ namespace ChensGradiusMod.NPCs
     {
       get
       {
-        float multiplier = .08f;
-        if (NPC.downedPlantBoss) multiplier = .05f;
-        if (NPC.downedMoonlord) multiplier = .01f;
+        float multiplier = .1f;
+        if (NPC.downedPlantBoss) multiplier = .08f;
+        if (NPC.downedMoonlord) multiplier = .05f;
 
         return multiplier;
       }
@@ -225,8 +234,8 @@ namespace ChensGradiusMod.NPCs
       get
       {
         float multiplier = 1f;
-        if (NPC.downedPlantBoss) multiplier = 2f;
-        if (NPC.downedMoonlord) multiplier = 4f;
+        if (NPC.downedPlantBoss) multiplier = 2f * GradiusConfig.postPlanteraBuffMultiplier;
+        if (NPC.downedMoonlord) multiplier = 4f * GradiusConfig.postMoonLordBuffMultiplier;
 
         return multiplier;
       }
@@ -245,9 +254,9 @@ namespace ChensGradiusMod.NPCs
 
     protected void ScaleStats()
     {
-      npc.lifeMax = RoundOffToWhole(npc.lifeMax * LifeMultiplier);
-      npc.damage = RoundOffToWhole(npc.damage * DamageMultiplier);
-      npc.defense = RoundOffToWhole(npc.defense * DefenseMultiplier);
+      npc.lifeMax = RoundOffToWhole(npc.lifeMax * LifeMultiplier * GradiusConfig.bacterionHealthMultiplier);
+      npc.damage = RoundOffToWhole(npc.damage * DamageMultiplier * GradiusConfig.bacterionContactDamageMultiplier);
+      npc.defense = RoundOffToWhole(npc.defense * DefenseMultiplier * GradiusConfig.bacterionArmorMultiplier);
     }
 
     protected void ImmuneToBuffs()
@@ -399,12 +408,12 @@ namespace ChensGradiusMod.NPCs
 
     protected int BulletFinalDamage(int dmg = BacterionBullet.Dmg)
     {
-      return RoundOffToWhole(dmg * DamageMultiplier);
+      return RoundOffToWhole(dmg * DamageMultiplier * GradiusConfig.bacterionBulletDamageMultiplier);
     }
 
     protected float BulletFinalKnockback(float kb = BacterionBullet.Kb)
     {
-      return kb * KnockbackMultiplier;
+      return kb * KnockbackMultiplier * GradiusConfig.bacterionBulletDamageMultiplier;
     }
 
     protected float GenericSpawnCondition(SpawnTypes genericSpawnType, NPCSpawnInfo spawnInfo)
@@ -441,7 +450,7 @@ namespace ChensGradiusMod.NPCs
       {
         case Types.Boss:
         case Types.Large:
-          damage = RoundOffToWhole(damage * IncomingDamageMultiplier);
+          damage = RoundOffToWhole(damage * IncomingDamageMultiplier * GradiusConfig.bacterionDamageReductionMultiplier);
           crit = false;
           knockback = 0f;
           break;

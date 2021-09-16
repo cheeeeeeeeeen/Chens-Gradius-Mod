@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.Items.Banners;
+using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -136,6 +137,10 @@ namespace ChensGradiusMod.NPCs
 
     public override void NPCLoot()
     {
+      if (Main.rand.NextBool(50))
+      {
+        Item.NewItem(npc.getRect(), ModContent.ItemType<AircraftCarrierMusicBox>());
+      }
       if (!GradiusModWorld.bigcoreDowned)
       {
         GradiusModWorld.bigcoreDowned = true;
