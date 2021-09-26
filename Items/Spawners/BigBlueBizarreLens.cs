@@ -37,13 +37,8 @@ namespace ChensGradiusMod.Items.Spawners
 
     public override bool UseItem(Player player)
     {
-      if (IsSameClientOwner(player))
-      {
-        SummonBoss(mod, player.Center, BossType, 100);
-        return true;
-      }
-
-      return base.UseItem(player);
+      SummonBoss(mod, player, BossType, 100);
+      return true;
     }
 
     protected virtual string ItemTooltip =>

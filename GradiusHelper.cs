@@ -310,28 +310,33 @@ namespace ChensGradiusMod
       return npc.damage <= 0 && npc.lifeMax <= 5;
     }
 
-    public static bool SummonBoss(Mod mod, Vector2 initialPosition, int npcType, float tileDistance = 0)
+    public static bool SummonBoss(Mod mod, Player player, int npcType, float tileDistance = 0)
     {
-      float randomAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
-      Vector2 offset = randomAngle.ToRotationVector2() * tileDistance * 16f;
-      Vector2 target = new Vector2(initialPosition.X + offset.X, initialPosition.Y + offset.Y);
-      int npcIndex = NewNPC(target.X, target.Y, npcType, center: true);
-      NPC npc = Main.npc[npcIndex];
-
-      Main.NewText(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName), 175, 75, 255);
-
-      Main.PlaySound(SoundID.Roar, initialPosition, 0);
-      if (!IsSinglePlayer())
+      if (IsSinglePlayer() || (IsMultiplayerClient() && IsSameClientOwner(player.whoAmI)))
       {
-        ModPacket packet = mod.GetPacket();
-        packet.Write((byte)PacketMessageType.BroadcastSound);
-        packet.Write((ushort)SoundID.Roar);
-        packet.WriteVector2(initialPosition);
-        packet.Write((byte)0);
-        packet.Send();
+        Vector2 initialPosition = player.Center;
+        float randomAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
+        Vector2 offset = randomAngle.ToRotationVector2() * tileDistance * 16f;
+        Vector2 target = new Vector2(initialPosition.X + offset.X, initialPosition.Y + offset.Y);
+        if (IsSinglePlayer())
+        {
+          int npcIndex = NewNPC(target.X, target.Y, npcType, center: true);
+          NPC npc = Main.npc[npcIndex];
+          Main.NewText(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName), 175, 75, 255);
+        }
+        else
+        {
+          ModPacket packet = mod.GetPacket();
+          packet.Write((byte)PacketMessageType.SpawnBoss);
+          packet.WriteVector2(initialPosition);
+          packet.WriteVector2(target);
+          packet.Write(npcType);
+          packet.Write(true);
+          packet.Send();
+        }
       }
 
-      return npc.active;
+      return true;
     }
 
     public static string SplitCamelCase(this string str)
@@ -356,6 +361,18 @@ namespace ChensGradiusMod
         }
       }
       return false;
+    }
+
+    public static void AnnounceMessage(string key, Color color)
+    {
+      if (Main.netMode == NetmodeID.Server)
+      {
+        NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(""), color);
+      }
+      else if (Main.netMode == NetmodeID.SinglePlayer)
+      {
+        Main.NewText(Language.GetTextValue(key), color);
+      }
     }
   }
 }

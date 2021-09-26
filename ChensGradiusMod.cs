@@ -449,21 +449,22 @@ namespace ChensGradiusMod
             break;
           }
 
-        case PacketMessageType.BroadcastSound:
-          ushort soundType = reader.ReadUInt16();
-          Vector2 soundPosition = reader.ReadVector2();
-          byte soundStyle = reader.ReadByte();
-
+        case PacketMessageType.SpawnBoss:
+          Vector2 initialPosition = reader.ReadVector2();
           if (IsServer())
           {
+            Vector2 target = reader.ReadVector2();
+            int npcType = reader.ReadInt32();
+            bool center = reader.ReadBoolean();
+            int npcIndex = NewNPC(target.X, target.Y, npcType, center: center);
+            NPC npc = Main.npc[npcIndex];
+            NetMessage.BroadcastChatMessage(NetworkText.FromKey(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName)), new Color(175, 75, 255));
             ModPacket packet = GetPacket();
-            packet.Write((byte)PacketMessageType.BroadcastSound);
-            packet.Write(soundType);
-            packet.WriteVector2(soundPosition);
-            packet.Write(soundStyle);
-            packet.Send(-1, whoAmI);
+            packet.Write((byte)PacketMessageType.SpawnBoss);
+            packet.WriteVector2(initialPosition);
+            packet.Send();
           }
-          else Main.PlaySound(soundType, soundPosition, soundStyle);
+          else Main.PlaySound(SoundID.Roar, initialPosition, 0);
           break;
 
         case PacketMessageType.RecurveUpdatePositions:
@@ -532,7 +533,7 @@ namespace ChensGradiusMod
       ClientChangesChargeMultiple,
       SpawnRetaliationBullet,
       ClientChangesSearchOption,
-      BroadcastSound,
+      SpawnBoss,
       RecurveUpdatePositions,
       ClientChangesTurretOption
     };
