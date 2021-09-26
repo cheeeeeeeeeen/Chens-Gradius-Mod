@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.1
+[B][U][SIZE=6]Mod Version: 1.2.2
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -251,10 +251,8 @@ For more information, visit this [URL=https://github.com/cheeeeeeeeeen/Chens-Gra
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
-1.2.1
-  - Implement a variety of config options which includes adjustments of Bacterion stats, Option damage and more.
-  - Implement Aircraft Carrier Music Box, and add it as a collection loot from Big Core Custom.
-  - Decreased Moai Bubble count of the Moai enemy by 1.
+1.2.2
+  - Fix Big Core Custom spawning on dedicated servers as it does not work when clients use the spawner.
 [/SPOILER]
 
 [SPOILER="Cross Mod Content Capabilities (For Other Mod Creators)"]
