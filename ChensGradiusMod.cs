@@ -449,6 +449,50 @@ namespace ChensGradiusMod
             break;
           }
 
+        case PacketMessageType.BroadcastSound:
+          SoundPacketType soundPacketType = (SoundPacketType)reader.ReadByte();
+          switch (soundPacketType)
+          {
+            case SoundPacketType.Vanilla:
+              {
+                ushort soundType = reader.ReadUInt16();
+                Vector2 soundPosition = reader.ReadVector2();
+                byte soundStyle = reader.ReadByte();
+
+                if (IsServer())
+                {
+                  ModPacket packet = GetPacket();
+                  packet.Write((byte)PacketMessageType.BroadcastSound);
+                  packet.Write((byte)SoundPacketType.Vanilla);
+                  packet.Write(soundType);
+                  packet.WriteVector2(soundPosition);
+                  packet.Write(soundStyle);
+                  packet.Send();
+                }
+                else Main.PlaySound(soundType, soundPosition, soundStyle);
+                break;
+              }
+
+            case SoundPacketType.Legacy:
+              {
+                string customSound = reader.ReadString();
+                Vector2 soundPosition = reader.ReadVector2();
+
+                if (IsServer())
+                {
+                  ModPacket packet = GetPacket();
+                  packet.Write((byte)PacketMessageType.BroadcastSound);
+                  packet.Write((byte)SoundPacketType.Legacy);
+                  packet.Write(customSound);
+                  packet.WriteVector2(soundPosition);
+                  packet.Send();
+                }
+                else Main.PlaySound(GetLegacySoundSlot(SoundType.Custom, customSound), soundPosition);
+                break;
+              }
+          }
+          break;
+
         case PacketMessageType.SpawnBoss:
           Vector2 initialPosition = reader.ReadVector2();
           if (IsServer())
@@ -460,11 +504,13 @@ namespace ChensGradiusMod
             NPC npc = Main.npc[npcIndex];
             NetMessage.BroadcastChatMessage(NetworkText.FromKey(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName)), new Color(175, 75, 255));
             ModPacket packet = GetPacket();
-            packet.Write((byte)PacketMessageType.SpawnBoss);
+            packet.Write((byte)PacketMessageType.BroadcastSound);
+            packet.Write((byte)SoundPacketType.Vanilla);
+            packet.Write((ushort)SoundID.Roar);
             packet.WriteVector2(initialPosition);
+            packet.Write((byte)0);
             packet.Send();
           }
-          else Main.PlaySound(SoundID.Roar, initialPosition, 0);
           break;
 
         case PacketMessageType.RecurveUpdatePositions:
@@ -533,9 +579,16 @@ namespace ChensGradiusMod
       ClientChangesChargeMultiple,
       SpawnRetaliationBullet,
       ClientChangesSearchOption,
+      BroadcastSound,
       SpawnBoss,
       RecurveUpdatePositions,
       ClientChangesTurretOption
     };
+
+    internal enum SoundPacketType : byte
+    {
+      Vanilla,
+      Legacy
+    }
   }
 }

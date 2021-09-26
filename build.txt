@@ -1,6 +1,6 @@
 displayName = Chen's Gradius Mod
 author = blancfaye7
-version = 1.2.2
+version = 1.2.3
 homepage = https://forums.terraria.org/index.php?threads/chens-gradius-mod.83289/
 hideCode = true
 hideResources = true

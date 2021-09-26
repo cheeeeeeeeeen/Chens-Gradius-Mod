@@ -8,6 +8,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.ChensGradiusMod;
 using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs
@@ -255,8 +256,20 @@ namespace ChensGradiusMod.NPCs
                                      Main.myPlayer);
           }
 
-          Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreShoot"),
-                         npc.Center);
+          if (IsServer())
+          {
+            ModPacket packet = mod.GetPacket();
+            packet.Write((byte)PacketMessageType.BroadcastSound);
+            packet.Write((byte)SoundPacketType.Legacy);
+            packet.Write("Sounds/Enemies/BigCoreShoot");
+            packet.WriteVector2(npc.Center);
+            packet.Send();
+          }
+          else
+          {
+            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreShoot"),
+                           npc.Center);
+          }
         }
       }
     }
