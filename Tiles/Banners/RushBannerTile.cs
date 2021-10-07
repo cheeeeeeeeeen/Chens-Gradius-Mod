@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.Banners
 {
-  public class RushBannerTile : ParentBannerTile
-  {
-    protected override int NPCType => ModContent.NPCType<Rush>();
+    public class RushBannerTile : ParentBannerTile
+    {
+        protected override int NPCType => ModContent.NPCType<Rush>();
 
-    protected override int ItemType => ModContent.ItemType<RushBanner>();
+        protected override int ItemType => ModContent.ItemType<RushBanner>();
 
-    protected override Color MinimapColor => new Color(136, 64, 176);
-  }
+        protected override Color MinimapColor => new Color(136, 64, 176);
+    }
 }

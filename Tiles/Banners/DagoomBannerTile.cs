@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.Banners
 {
-  public class DagoomBannerTile : ParentBannerTile
-  {
-    protected override int NPCType => ModContent.NPCType<Dagoom>();
+    public class DagoomBannerTile : ParentBannerTile
+    {
+        protected override int NPCType => ModContent.NPCType<Dagoom>();
 
-    protected override int ItemType => ModContent.ItemType<DagoomBanner>();
+        protected override int ItemType => ModContent.ItemType<DagoomBanner>();
 
-    protected override Color MinimapColor => new Color(64, 176, 176);
-  }
+        protected override Color MinimapColor => new Color(64, 176, 176);
+    }
 }

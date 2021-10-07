@@ -3,18 +3,18 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 {
-  public class StarfieldMusicBox : GradiusMusicBox
-  {
-    public override void SetStaticDefaults()
+    public class StarfieldMusicBox : GradiusMusicBox
     {
-      DisplayName.SetDefault("Music Box (Starfield)");
-    }
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Music Box (Starfield)");
+        }
 
-    public override void SetDefaults()
-    {
-      base.SetDefaults();
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
 
-      item.createTile = ModContent.TileType<StarfieldMusicBoxTile>();
+            item.createTile = ModContent.TileType<StarfieldMusicBoxTile>();
+        }
     }
-  }
 }

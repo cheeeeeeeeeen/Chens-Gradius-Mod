@@ -4,12 +4,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.MusicBoxes
 {
-  public class IntermezzoMusicBoxTile : GradiusMusicBoxTile
-  {
-    protected override Color MinimapColor => new Color(150, 150, 150);
+    public class IntermezzoMusicBoxTile : GradiusMusicBoxTile
+    {
+        protected override Color MinimapColor => new Color(150, 150, 150);
 
-    protected override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBoxTile";
+        protected override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBoxTile";
 
-    protected override int ItemType => ModContent.ItemType<IntermezzoMusicBox>();
-  }
+        protected override int ItemType => ModContent.ItemType<IntermezzoMusicBox>();
+    }
 }

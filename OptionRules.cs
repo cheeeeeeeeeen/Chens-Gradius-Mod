@@ -11,68 +11,68 @@ namespace ChensGradiusMod
     public static class OptionRules
     {
         private static readonly List<AlienWeapon> BannedWeapons = new List<AlienWeapon>()
-    {
-      new AlienWeapon(ItemID.RainbowGun),
-      new AlienWeapon(ItemID.Vilethorn),
-      new AlienWeapon(ItemID.DD2BetsyBow),
-      new AlienWeapon(ItemID.Minishark),
-      new AlienWeapon(ItemID.MushroomSpear),
-      new AlienWeapon(ItemID.Megashark),
-      new AlienWeapon(ItemID.Gatligator),
-      new AlienWeapon(ItemID.ChainGun),
-      new AlienWeapon(ItemID.SDMG)
-    };
+        {
+            new AlienWeapon(ItemID.RainbowGun),
+            new AlienWeapon(ItemID.Vilethorn),
+            new AlienWeapon(ItemID.DD2BetsyBow),
+            new AlienWeapon(ItemID.Minishark),
+            new AlienWeapon(ItemID.MushroomSpear),
+            new AlienWeapon(ItemID.Megashark),
+            new AlienWeapon(ItemID.Gatligator),
+            new AlienWeapon(ItemID.ChainGun),
+            new AlienWeapon(ItemID.SDMG)
+        };
 
         private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>()
-    {
-      new AlienProjectile(ProjectileID.RocketII),
-      new AlienProjectile(ProjectileID.RocketIV),
-      new AlienProjectile(ProjectileID.Dynamite),
-      new AlienProjectile(ProjectileID.BouncyDynamite),
-      new AlienProjectile(ProjectileID.StickyDynamite),
-      new AlienProjectile(ProjectileID.Bomb),
-      new AlienProjectile(ProjectileID.BombFish),
-      new AlienProjectile(ProjectileID.BouncyBomb),
-      new AlienProjectile(ProjectileID.StickyBomb)
-    };
+        {
+            new AlienProjectile(ProjectileID.RocketII),
+            new AlienProjectile(ProjectileID.RocketIV),
+            new AlienProjectile(ProjectileID.Dynamite),
+            new AlienProjectile(ProjectileID.BouncyDynamite),
+            new AlienProjectile(ProjectileID.StickyDynamite),
+            new AlienProjectile(ProjectileID.Bomb),
+            new AlienProjectile(ProjectileID.BombFish),
+            new AlienProjectile(ProjectileID.BouncyBomb),
+            new AlienProjectile(ProjectileID.StickyBomb)
+        };
 
         private static readonly List<AlienWeaponProjectilePair> BannedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
-    {
-      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeater)
-    };
+        {
+            new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeater)
+        };
 
         private static readonly List<AlienWeapon> AllowedWeapons = new List<AlienWeapon>();
 
         private static readonly List<AlienProjectile> AllowedProjectiles = new List<AlienProjectile>();
 
         private static readonly List<AlienWeaponProjectilePair> AllowedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
-    {
-      new AlienWeaponProjectilePair(ItemID.StarCannon, ProjectileID.FallingStar),
-      new AlienWeaponProjectilePair(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
-      new AlienWeaponProjectilePair(ItemID.Blowpipe, ProjectileID.Seed),
-      new AlienWeaponProjectilePair(ItemID.Blowgun, ProjectileID.Seed),
-      new AlienWeaponProjectilePair(ItemID.Marrow, ProjectileID.BoneArrow),
-      new AlienWeaponProjectilePair(ItemID.MoltenFury, ProjectileID.FireArrow),
-      new AlienWeaponProjectilePair(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
-      new AlienWeaponProjectilePair(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
-      new AlienWeaponProjectilePair(ItemID.IceBow, ProjectileID.FrostArrow),
-      new AlienWeaponProjectilePair(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
-      new AlienWeaponProjectilePair(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
-      new AlienWeaponProjectilePair(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
-      new AlienWeaponProjectilePair(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
-      new AlienWeaponProjectilePair(ItemID.PulseBow, ProjectileID.PulseBolt),
-      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
-      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
-      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
-      new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow),
-      new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
-      new AlienWeaponProjectilePair(ItemID.SniperRifle, ProjectileID.BulletHighVelocity)
-    };
+        {
+            new AlienWeaponProjectilePair(ItemID.StarCannon, ProjectileID.FallingStar),
+            new AlienWeaponProjectilePair(ItemID.OnyxBlaster, ProjectileID.BlackBolt),
+            new AlienWeaponProjectilePair(ItemID.Blowpipe, ProjectileID.Seed),
+            new AlienWeaponProjectilePair(ItemID.Blowgun, ProjectileID.Seed),
+            new AlienWeaponProjectilePair(ItemID.Marrow, ProjectileID.BoneArrow),
+            new AlienWeaponProjectilePair(ItemID.MoltenFury, ProjectileID.FireArrow),
+            new AlienWeaponProjectilePair(ItemID.BoneGlove, ProjectileID.BoneGloveProj),
+            new AlienWeaponProjectilePair(ItemID.ChlorophyteSaber, ProjectileID.SporeCloud),
+            new AlienWeaponProjectilePair(ItemID.IceBow, ProjectileID.FrostArrow),
+            new AlienWeaponProjectilePair(ItemID.ChargedBlasterCannon, ProjectileID.ChargedBlasterOrb),
+            new AlienWeaponProjectilePair(ItemID.MonkStaffT2, ProjectileID.MonkStaffT2Ghast),
+            new AlienWeaponProjectilePair(ItemID.MonkStaffT3, ProjectileID.MonkStaffT3_AltShot),
+            new AlienWeaponProjectilePair(ItemID.ChlorophyteClaymore, ProjectileID.ChlorophyteOrb),
+            new AlienWeaponProjectilePair(ItemID.PulseBow, ProjectileID.PulseBolt),
+            new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkRed),
+            new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkGreen),
+            new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkBlue),
+            new AlienWeaponProjectilePair(ItemID.FireworksLauncher, ProjectileID.RocketFireworkYellow),
+            new AlienWeaponProjectilePair(ItemID.VortexBeater, ProjectileID.VortexBeaterRocket),
+            new AlienWeaponProjectilePair(ItemID.SniperRifle, ProjectileID.BulletHighVelocity)
+        };
 
         private static readonly List<AlienDamageType> SupportedDamageTypes = new List<AlienDamageType>()
-    {
-      new AlienDamageType("CalamityMod", "CalamityGlobalProjectile", "rogue")
-    };
+        {
+            new AlienDamageType("CalamityMod", "CalamityGlobalProjectile", "rogue")
+        };
 
         public static bool StandardFilter(Projectile p)
         {

@@ -4,49 +4,49 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
-  public class RecurveOptionOne : RecurveOptionBase
-  {
-    public override void SetStaticDefaults()
+    public class RecurveOptionOne : RecurveOptionBase
     {
-      base.SetStaticDefaults();
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
 
-      DisplayName.SetDefault("Option type Recurve (First)");
+            DisplayName.SetDefault("Option type Recurve (First)");
+        }
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            item.rare = ItemRarityID.Orange; // 3
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ModPlayer(player).optionOne = true;
+            ModPlayer(player).recurveOption = true;
+            ModPlayer(player).recurveSide = hideVisual;
+
+            base.UpdateAccessory(player, hideVisual);
+        }
+
+        public override bool CanEquipAccessory(Player player, int slot)
+        {
+            return ModeChecks(ModPlayer(player), false);
+        }
+
+        protected override string ProjectileName => "OptionOneObject";
+
+        protected override int OptionPosition => 1;
+
+        public override void AddRecipes()
+        {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddRecipeGroup("ChensGradiusMod:EvilBow");
+            recipe.AddIngredient(ItemID.WoodenBoomerang);
+            UpgradeUsualRecipe(recipe);
+            UpgradeUsualStations(recipe);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
     }
-
-    public override void SetDefaults()
-    {
-      base.SetDefaults();
-
-      item.rare = ItemRarityID.Orange; // 3
-    }
-
-    public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-      ModPlayer(player).optionOne = true;
-      ModPlayer(player).recurveOption = true;
-      ModPlayer(player).recurveSide = hideVisual;
-
-      base.UpdateAccessory(player, hideVisual);
-    }
-
-    public override bool CanEquipAccessory(Player player, int slot)
-    {
-      return ModeChecks(ModPlayer(player), false);
-    }
-
-    protected override string ProjectileName => "OptionOneObject";
-
-    protected override int OptionPosition => 1;
-
-    public override void AddRecipes()
-    {
-      ModRecipe recipe = new ModRecipe(mod);
-      recipe.AddRecipeGroup("ChensGradiusMod:EvilBow");
-      recipe.AddIngredient(ItemID.WoodenBoomerang);
-      UpgradeUsualRecipe(recipe);
-      UpgradeUsualStations(recipe);
-      recipe.SetResult(this);
-      recipe.AddRecipe();
-    }
-  }
 }

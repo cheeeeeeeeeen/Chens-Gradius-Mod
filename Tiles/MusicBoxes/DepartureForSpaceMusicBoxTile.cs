@@ -4,12 +4,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.MusicBoxes
 {
-  public class DepartureForSpaceMusicBoxTile : GradiusMusicBoxTile
-  {
-    protected override Color MinimapColor => new Color(100, 100, 100);
+    public class DepartureForSpaceMusicBoxTile : GradiusMusicBoxTile
+    {
+        protected override Color MinimapColor => new Color(100, 100, 100);
 
-    protected override string Texture => "ChensGradiusMod/Sprites/DepartureForSpaceMusicBoxTile";
+        protected override string Texture => "ChensGradiusMod/Sprites/DepartureForSpaceMusicBoxTile";
 
-    protected override int ItemType => ModContent.ItemType<DepartureForSpaceMusicBox>();
-  }
+        protected override int ItemType => ModContent.ItemType<DepartureForSpaceMusicBox>();
+    }
 }

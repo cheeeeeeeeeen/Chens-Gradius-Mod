@@ -3,12 +3,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Projectiles.Options.Charge
 {
-  public class ChargeMultipleOneObject : ChargeMultipleBaseObject
-  {
-    public override int Position => 1;
+    public class ChargeMultipleOneObject : ChargeMultipleBaseObject
+    {
+        public override int Position => 1;
 
-    public override bool PlayerHasAccessory() => ModOwner.optionOne;
+        public override bool PlayerHasAccessory() => ModOwner.optionOne;
 
-    protected override int OptionAccessoryType => ModContent.ItemType<ChargeMultipleOne>();
-  }
+        protected override int OptionAccessoryType => ModContent.ItemType<ChargeMultipleOne>();
+    }
 }

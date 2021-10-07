@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.Banners
 {
-  public class DuckerBannerTile : ParentBannerTile
-  {
-    protected override int NPCType => ModContent.NPCType<Ducker>();
+    public class DuckerBannerTile : ParentBannerTile
+    {
+        protected override int NPCType => ModContent.NPCType<Ducker>();
 
-    protected override int ItemType => ModContent.ItemType<DuckerBanner>();
+        protected override int ItemType => ModContent.ItemType<DuckerBanner>();
 
-    protected override Color MinimapColor => new Color(224, 104, 72);
-  }
+        protected override Color MinimapColor => new Color(224, 104, 72);
+    }
 }

@@ -4,15 +4,15 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Banners
 {
-  public class BigCoreCustomBanner : ParentBanner
-  {
-    public override void SetDefaults()
+    public class BigCoreCustomBanner : ParentBanner
     {
-      base.SetDefaults();
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
 
-      item.rare = ItemRarityID.Green; // 2
+            item.rare = ItemRarityID.Green; // 2
+        }
+
+        protected override int PartnerTile => ModContent.TileType<BigCoreCustomBannerTile>();
     }
-
-    protected override int PartnerTile => ModContent.TileType<BigCoreCustomBannerTile>();
-  }
 }

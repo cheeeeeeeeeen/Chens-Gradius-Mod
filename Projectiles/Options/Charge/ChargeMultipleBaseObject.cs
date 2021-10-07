@@ -7,111 +7,111 @@ using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Projectiles.Options.Charge
 {
-  public abstract class ChargeMultipleBaseObject : OptionBaseObject
-  {
-    private const int MaxCharge = 180;
-    private const int MinCharge = 30;
-    private const int ChargeDustId = 71;
-    private const int MaxChargeDustId = 124;
-    private const int ChargeSoundRate = 60;
-    private const int DustRate = 3;
-
-    private int chargeTime = 0;
-    private int chargeSoundTick = 0;
-    private int dustTick = 0;
-
-    public override string Texture => "ChensGradiusMod/Sprites/ChargeSheet";
-
-    public override bool PreAI()
+    public abstract class ChargeMultipleBaseObject : OptionBaseObject
     {
-      bool baseResult = base.PreAI();
+        private const int MaxCharge = 180;
+        private const int MinCharge = 30;
+        private const int ChargeDustId = 71;
+        private const int MaxChargeDustId = 124;
+        private const int ChargeSoundRate = 60;
+        private const int DustRate = 3;
 
-      if (baseResult && ModOwner.chargeMode == (int)ChargeMultipleBase.States.Dying)
-      {
-        if (chargeTime > MinCharge)
+        private int chargeTime = 0;
+        private int chargeSoundTick = 0;
+        private int dustTick = 0;
+
+        public override string Texture => "ChensGradiusMod/Sprites/ChargeSheet";
+
+        public override bool PreAI()
         {
-          if (IsSameClientOwner(projectile))
-          {
-            float direction = GetBearing(projectile.Center, Main.MouseWorld);
-            Vector2 vel = ChargeMultipleMissile.Spd * new Vector2
-            {
-              X = (float)Math.Cos(MathHelper.ToRadians(direction)),
-              Y = -(float)Math.Sin(MathHelper.ToRadians(direction))
-            };
-            int dmg = Owner.HeldItem.damage;
+            bool baseResult = base.PreAI();
 
-            int pInd = Projectile.NewProjectile(projectile.Center, vel, ModContent.ProjectileType<ChargeMultipleMissile>(),
-                                                dmg, 0f, projectile.owner, direction, chargeTime);
-
-            if (Position % 2 != 0)
+            if (baseResult && ModOwner.chargeMode == (int)ChargeMultipleBase.States.Dying)
             {
-              Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionMissile"),
-                             projectile.Center);
+                if (chargeTime > MinCharge)
+                {
+                    if (IsSameClientOwner(projectile))
+                    {
+                        float direction = GetBearing(projectile.Center, Main.MouseWorld);
+                        Vector2 vel = ChargeMultipleMissile.Spd * new Vector2
+                        {
+                            X = (float)Math.Cos(MathHelper.ToRadians(direction)),
+                            Y = -(float)Math.Sin(MathHelper.ToRadians(direction))
+                        };
+                        int dmg = Owner.HeldItem.damage;
+
+                        int pInd = Projectile.NewProjectile(projectile.Center, vel, ModContent.ProjectileType<ChargeMultipleMissile>(),
+                                                            dmg, 0f, projectile.owner, direction, chargeTime);
+
+                        if (Position % 2 != 0)
+                        {
+                            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionMissile"),
+                                           projectile.Center);
+                        }
+
+                        if (Main.projectile[pInd].modProjectile is ChargeMultipleMissile cMM)
+                        {
+                            Item accessory = Owner.armor[(int)FindEquippedAccessory(Owner, OptionAccessoryType)];
+                            cMM.clonedAccessory = accessory.Clone();
+
+                            accessory.TurnToAir();
+                            accessory.accessory = false;
+                        }
+                    }
+
+                    projectile.active = false;
+                    return false;
+                }
+                else
+                {
+                    if (Position <= 1) ModOwner.chargeMode = (int)ChargeMultipleBase.States.Following;
+                    chargeSoundTick = chargeTime = 0;
+                    return true;
+                }
             }
 
-            if (Main.projectile[pInd].modProjectile is ChargeMultipleMissile cMM)
+            return baseResult;
+        }
+
+        public override void AI()
+        {
+            base.AI();
+
+            if (ModOwner.chargeMode == (int)ChargeMultipleBase.States.Charging)
             {
-              Item accessory = Owner.armor[(int)FindEquippedAccessory(Owner, OptionAccessoryType)];
-              cMM.clonedAccessory = accessory.Clone();
+                chargeTime = Math.Min(MaxCharge, ++chargeTime);
 
-              accessory.TurnToAir();
-              accessory.accessory = false;
+                if (++dustTick >= DustRate && chargeTime <= MaxCharge)
+                {
+                    dustTick = 0;
+
+                    Dust.NewDust(projectile.position, projectile.width, projectile.height, ChargeDustId);
+
+                    if (chargeTime == MaxCharge)
+                    {
+                        Dust.NewDust(projectile.position, projectile.width, projectile.height, MaxChargeDustId);
+                    }
+                }
+
+                if (Position <= 1)
+                {
+                    if (++chargeSoundTick >= ChargeSoundRate) chargeSoundTick = 0;
+                    else if (chargeSoundTick <= 1)
+                    {
+                        Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionCharging"),
+                                       projectile.Center);
+                    }
+                }
             }
-          }
-
-          projectile.active = false;
-          return false;
         }
-        else
+
+        protected override bool AttackLimitation()
         {
-          if (Position <= 1) ModOwner.chargeMode = (int)ChargeMultipleBase.States.Following;
-          chargeSoundTick = chargeTime = 0;
-          return true;
-        }
-      }
+            bool result = ModOwner.chargeMode == (int)ChargeMultipleBase.States.Following;
 
-      return baseResult;
-    }
-
-    public override void AI()
-    {
-      base.AI();
-
-      if (ModOwner.chargeMode == (int)ChargeMultipleBase.States.Charging)
-      {
-        chargeTime = Math.Min(MaxCharge, ++chargeTime);
-
-        if (++dustTick >= DustRate && chargeTime <= MaxCharge)
-        {
-          dustTick = 0;
-
-          Dust.NewDust(projectile.position, projectile.width, projectile.height, ChargeDustId);
-
-          if (chargeTime == MaxCharge)
-          {
-            Dust.NewDust(projectile.position, projectile.width, projectile.height, MaxChargeDustId);
-          }
+            return base.AttackLimitation() && result;
         }
 
-        if (Position <= 1)
-        {
-          if (++chargeSoundTick >= ChargeSoundRate) chargeSoundTick = 0;
-          else if (chargeSoundTick <= 1)
-          {
-            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Options/OptionCharging"),
-                           projectile.Center);
-          }
-        }
-      }
+        protected virtual int OptionAccessoryType => 0;
     }
-
-    protected override bool AttackLimitation()
-    {
-      bool result = ModOwner.chargeMode == (int)ChargeMultipleBase.States.Following;
-
-      return base.AttackLimitation() && result;
-    }
-
-    protected virtual int OptionAccessoryType => 0;
-  }
 }

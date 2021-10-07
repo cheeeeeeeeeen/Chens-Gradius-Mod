@@ -3,20 +3,20 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 {
-  public class IntermezzoMusicBox : GradiusMusicBox
-  {
-    public override void SetStaticDefaults()
+    public class IntermezzoMusicBox : GradiusMusicBox
     {
-      DisplayName.SetDefault("Music Box (Intermezzo)");
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Music Box (Intermezzo)");
+        }
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            item.createTile = ModContent.TileType<IntermezzoMusicBoxTile>();
+        }
+
+        public override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBox";
     }
-
-    public override void SetDefaults()
-    {
-      base.SetDefaults();
-
-      item.createTile = ModContent.TileType<IntermezzoMusicBoxTile>();
-    }
-
-    public override string Texture => "ChensGradiusMod/Sprites/IntermezzoMusicBox";
-  }
 }

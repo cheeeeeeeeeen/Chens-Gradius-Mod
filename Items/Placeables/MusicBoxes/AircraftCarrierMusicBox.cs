@@ -3,22 +3,22 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 {
-  public class AircraftCarrierMusicBox : GradiusMusicBox
-  {
-    public override void SetStaticDefaults()
+    public class AircraftCarrierMusicBox : GradiusMusicBox
     {
-      DisplayName.SetDefault("Music Box (Aircraft Carrier)");
-    }
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Music Box (Aircraft Carrier)");
+        }
 
-    public override void SetDefaults()
-    {
-      base.SetDefaults();
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
 
-      item.createTile = ModContent.TileType<AircraftCarrierMusicBoxTile>();
-    }
+            item.createTile = ModContent.TileType<AircraftCarrierMusicBoxTile>();
+        }
 
-    public override void AddRecipes()
-    {
+        public override void AddRecipes()
+        {
+        }
     }
-  }
 }

@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.Banners
 {
-  public class GraziaBannerTile : ParentBannerTile
-  {
-    protected override int NPCType => ModContent.NPCType<Grazia>();
+    public class GraziaBannerTile : ParentBannerTile
+    {
+        protected override int NPCType => ModContent.NPCType<Grazia>();
 
-    protected override int ItemType => ModContent.ItemType<GraziaBanner>();
+        protected override int ItemType => ModContent.ItemType<GraziaBanner>();
 
-    protected override Color MinimapColor => new Color(216, 176, 0);
-  }
+        protected override Color MinimapColor => new Color(216, 176, 0);
+    }
 }

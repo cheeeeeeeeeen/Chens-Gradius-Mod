@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace ChensGradiusMod.Tiles.Banners
 {
-  public class SagnaBannerTile : ParentBannerTile
-  {
-    protected override int NPCType => ModContent.NPCType<Sagna>();
+    public class SagnaBannerTile : ParentBannerTile
+    {
+        protected override int NPCType => ModContent.NPCType<Sagna>();
 
-    protected override int ItemType => ModContent.ItemType<SagnaBanner>();
+        protected override int ItemType => ModContent.ItemType<SagnaBanner>();
 
-    protected override Color MinimapColor => new Color(128, 176, 160);
-  }
+        protected override Color MinimapColor => new Color(128, 176, 160);
+    }
 }
