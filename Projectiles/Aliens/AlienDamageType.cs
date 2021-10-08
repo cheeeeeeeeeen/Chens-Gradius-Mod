@@ -51,18 +51,26 @@ namespace ChensGradiusMod.Projectiles.Aliens
 
         private bool GlobalProjectileAction(int pWhoAmI)
         {
-            GlobalProjectile gProj = ProjectileObject(pWhoAmI).GetGlobalProjectile(modInstance, internalName);
             try
             {
-                FieldInfo field = gProj.GetType().GetField(damageType, BindingFlags.Public | BindingFlags.Instance);
-                return (bool)field.GetValue(gProj);
+                GlobalProjectile gProj = ProjectileObject(pWhoAmI).GetGlobalProjectile(modInstance, internalName);
+                try
+                {
+                    FieldInfo field = gProj.GetType().GetField(damageType, BindingFlags.Public | BindingFlags.Instance);
+                    return (bool)field.GetValue(gProj);
+                }
+                catch
+                {
+                    string msg = $"{modInstance.Name}'s {internalName} does not " +
+                                 $"have {damageType} custom damage type variable.";
+                    modInstance.Logger.Warn($"Failed integration with ChensGradiusMod. {msg}");
+
+                    return false;
+                }
             }
             catch
             {
-                string msg = $"{modInstance.Name}'s {internalName} does not " +
-                             $"have {damageType} custom damage type variable.";
-                modInstance.Logger.Warn($"Failed integration with ChensGradiusMod. {msg}");
-
+                modInstance.Logger.Warn($"Failed integration with ChensGradiusMod. The mod seems to exist, but it is unloaded. Skipping check.");
                 return false;
             }
         }
