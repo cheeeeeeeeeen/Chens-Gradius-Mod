@@ -102,8 +102,7 @@ namespace ChensGradiusMod.NPCs
             {
                 case States.Standby:
                     npc.TargetClosest();
-                    if (++redeployTick >= RedeployRate &&
-                        Vector2.Distance(Target.Center, npc.Center) <= DetectionRange)
+                    if (++redeployTick >= RedeployRate && Vector2.Distance(Target.Center, npc.Center) <= DetectionRange)
                     {
                         redeployTick = 0;
                         mode = States.Open;

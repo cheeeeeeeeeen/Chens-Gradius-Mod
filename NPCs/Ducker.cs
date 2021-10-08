@@ -340,9 +340,8 @@ namespace ChensGradiusMod.NPCs
         {
             npc.TargetClosest(false);
             targetLastSeen = Target.Center;
-            return Vector2.Distance(Target.Center, npc.Center) <= TargetDistance
-                   && ((yDirection > 0 && npc.Center.Y >= Target.Center.Y)
-                       || (yDirection < 0 && npc.Center.Y <= Target.Center.Y));
+            return Vector2.Distance(Target.Center, npc.Center) <= TargetDistance &&
+                   ((yDirection > 0 && npc.Center.Y >= Target.Center.Y) || (yDirection < 0 && npc.Center.Y <= Target.Center.Y));
         }
 
         private void HaltMovement()
@@ -383,8 +382,8 @@ namespace ChensGradiusMod.NPCs
 
                 float[] angles = new float[2]
                 {
-          MathHelper.ToRadians(direction + AttackAngleDifference),
-          MathHelper.ToRadians(direction - AttackAngleDifference)
+                    MathHelper.ToRadians(direction + AttackAngleDifference),
+                    MathHelper.ToRadians(direction - AttackAngleDifference)
                 };
 
                 for (int i = 0; i < angles.Length; i++)

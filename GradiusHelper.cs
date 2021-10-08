@@ -23,8 +23,6 @@ namespace ChensGradiusMod
         public const int LowerAccessorySlot = 3;
         public const int HigherAccessorySlot = 9;
 
-        public enum OptionTypes : byte { Normal, Freeze, Rotate, Charge, Aim, Search, Recurve };
-
         public static void FreeListData(ref List<int> list)
         {
             int buffer = ModContent.GetInstance<GradiusModConfig>().projectileDuplicationLimit;
@@ -361,18 +359,6 @@ namespace ChensGradiusMod
                 }
             }
             return false;
-        }
-
-        public static void AnnounceMessage(string key, Color color)
-        {
-            if (Main.netMode == NetmodeID.Server)
-            {
-                NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(""), color);
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                Main.NewText(Language.GetTextValue(key), color);
-            }
         }
     }
 }
