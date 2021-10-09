@@ -42,6 +42,9 @@ Added Music with music box:
 6. Sensation (Salamander 2)
 7. Aircraft Carrier (Gradius Slot version)
 
+New Weapons:
+1. Uncanny Core Remote Rod
+
 Boss Checklist integration so that Big Core Custom will appear properly.
 Hero's Mod integration so that not anybody can edit the mod configuration file.
 

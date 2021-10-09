@@ -204,9 +204,8 @@ namespace ChensGradiusMod.NPCs
 
         private bool InterceptToRetreat()
         {
-            return IsEqualWithThreshold(npc.Center.Y,
-                                                      TargetPlayer.Center.Y,
-                                                      TravelSpeed + YThresholdToRetreat);
+            return IsEqualWithThreshold(npc.Center.Y, TargetPlayer.Center.Y,
+                                        TravelSpeed + YThresholdToRetreat);
         }
 
         private bool RetreatBehavior()

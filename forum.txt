@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.4
+[B][U][SIZE=6]Mod Version: 1.2.5
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -250,6 +250,11 @@ For more information, visit this [URL=https://github.com/cheeeeeeeeeen/Chens-Gra
 [SPOILER="Changelog"]
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
+
+1.2.5
+  - Improve Enemy AI in multiplayer. It does cost more data though, in exchange.
+  - Implement Uncanny Core Remote Rod which summons a Mini Covered Core sentry.
+  - Refactor some of the heavy-implementation in computing directions and distances.
 
 1.2.4
   - Fix a bug in Mod.Call that renders one API useless.
