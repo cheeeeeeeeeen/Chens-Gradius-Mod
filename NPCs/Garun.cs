@@ -98,7 +98,11 @@ namespace ChensGradiusMod.NPCs
             npc.velocity.Y += -yTo * TravelSpeed + xTo * wobble;
 
             PerformAttack(npc, ref fireTick, BulletFinalDamage(), BulletFinalKnockback());
+        }
 
+        public override void PostAI()
+        {
+            base.PostAI();
             ConstantSync(ref syncTick, SyncRate);
         }
 

@@ -101,7 +101,11 @@ namespace ChensGradiusMod.NPCs
                 if (npc.target >= 0) PerformAttack();
                 else fireTick = 0;
             }
+        }
 
+        public override void PostAI()
+        {
+            base.PostAI();
             ConstantSync(ref syncTick, SyncRate);
         }
 

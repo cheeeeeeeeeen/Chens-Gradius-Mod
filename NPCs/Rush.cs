@@ -15,17 +15,19 @@ namespace ChensGradiusMod.NPCs
         private const int FireRate = 30;
         private const float AttackDistance = 700f;
         private const int CanGoHorizontalTime = 60;
+        private const int SyncRate = 30;
 
         private readonly bool[] frameSwitcher = new bool[2] { true, true };
 
-        private int persistDirection = 0;
-        private int xDirection = 0;
-        private int yDirection = 0;
+        private sbyte persistDirection = 0;
+        private sbyte xDirection = 0;
+        private sbyte yDirection = 0;
         private bool initialized = false;
         private States mode = States.Vertical;
         private States oldMode = States.Vertical;
         private int fireTick = 0;
         private int canGoHorizontalTick = 0;
+        private int syncTick = 0;
 
         public enum States { Vertical, Horizontal };
 
@@ -59,8 +61,8 @@ namespace ChensGradiusMod.NPCs
         {
             if (!initialized)
             {
-                persistDirection = (int)npc.ai[0];
-                yDirection = (int)npc.ai[1];
+                persistDirection = (sbyte)npc.ai[0];
+                yDirection = (sbyte)npc.ai[1];
                 npc.target = (int)npc.ai[2];
 
                 if (persistDirection == 0)
@@ -90,11 +92,15 @@ namespace ChensGradiusMod.NPCs
             }
 
             PerformAttack();
+        }
 
-            if (IsServer() && oldMode != mode)
+        public override void PostAI()
+        {
+            base.PostAI();
+            if (!ConstantSync(ref syncTick, SyncRate) && IsServer() && oldMode != mode)
             {
-                oldMode = mode;
                 npc.netUpdate = true;
+                oldMode = mode;
             }
         }
 
@@ -145,12 +151,20 @@ namespace ChensGradiusMod.NPCs
         {
             writer.Write((byte)mode);
             writer.Write((byte)oldMode);
+            writer.Write(persistDirection);
+            writer.Write(xDirection);
+            writer.Write(yDirection);
+            writer.Write(initialized);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             mode = (States)reader.ReadByte();
             oldMode = (States)reader.ReadByte();
+            persistDirection = reader.ReadSByte();
+            xDirection = reader.ReadSByte();
+            yDirection = reader.ReadSByte();
+            initialized = reader.ReadBoolean();
         }
 
         protected override int FrameSpeed => 3;
@@ -179,7 +193,7 @@ namespace ChensGradiusMod.NPCs
                 if ((yDirection > 0 && npc.Center.Y >= Target.Center.Y) ||
                     (yDirection < 0 && npc.Center.Y <= Target.Center.Y))
                 {
-                    xDirection = Math.Sign(Target.Center.X - npc.Center.X);
+                    xDirection = (sbyte)Math.Sign(Target.Center.X - npc.Center.X);
                     if (xDirection == 0) xDirection = yDirection;
                     mode = States.Horizontal;
                 }

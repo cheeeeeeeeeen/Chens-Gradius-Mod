@@ -258,7 +258,7 @@ namespace ChensGradiusMod.NPCs
         public override void PostAI()
         {
             base.PostAI();
-            if (!ConstantSync(ref syncTick, SyncRate) && oldMode != mode)
+            if (!ConstantSync(ref syncTick, SyncRate) && IsServer() && oldMode != mode)
             {
                 npc.netUpdate = true;
                 oldMode = mode;

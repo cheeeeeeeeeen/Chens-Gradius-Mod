@@ -18,14 +18,16 @@ namespace ChensGradiusMod.NPCs
         private const int FireRate = 57;
         private const float AttackDistance = 1200;
         private const int RandomFireInterval = 15;
+        private const int SyncRate = 60;
 
         private bool targetDetermined = false;
-        private int persistDirection = 0;
+        private sbyte persistDirection = 0;
         private States oldMode = States.Attack;
         private States mode = States.Attack;
         private bool initializedAction = false;
         private int fireTick = 0;
         private int setFireInterval = 0;
+        private int syncTick = 0;
 
         public enum States { Attack, Intercept, Retreat, Fire };
 
@@ -111,8 +113,12 @@ namespace ChensGradiusMod.NPCs
                     }
                     break;
             }
+        }
 
-            if (IsServer() && oldMode != mode)
+        public override void PostAI()
+        {
+            base.PostAI();
+            if (!ConstantSync(ref syncTick, SyncRate) && IsServer() && oldMode != mode)
             {
                 npc.netUpdate = true;
                 oldMode = mode;
@@ -130,12 +136,18 @@ namespace ChensGradiusMod.NPCs
         {
             writer.Write((byte)mode);
             writer.Write((byte)oldMode);
+            writer.Write(persistDirection);
+            writer.Write(targetDetermined);
+            writer.Write(initializedAction);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             mode = (States)reader.ReadByte();
             oldMode = (States)reader.ReadByte();
+            persistDirection = reader.ReadSByte();
+            targetDetermined = reader.ReadBoolean();
+            initializedAction = reader.ReadBoolean();
         }
 
         protected override int FrameSpeed => 3;
