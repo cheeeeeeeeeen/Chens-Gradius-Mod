@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
@@ -15,6 +17,29 @@ namespace ChensGradiusMod.Items
             {
                 meleeHitbox[player.whoAmI] = hitbox;
             }
+        }
+
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (item?.modItem?.mod == ChensGradiusMod.gradiusMod)
+            {
+                TooltipLine line = tooltips.FirstOrDefault(tl => tl.Name == "ItemName" && tl.mod == "Terraria");
+                if (line != null)
+                {
+                    switch (item.rare)
+                    {
+                        case (int)GradiusRarity.BigCore:
+                            if (Main.GlobalTime % 1f < 0.5f) line.overrideColor = new Color?(Color.Lerp(bigCoreStripesColor, bigCoreColor, (Main.GlobalTime % 1f) / 0.5f));
+                            else line.overrideColor = new Color?(Color.Lerp(bigCoreColor, bigCoreStripesColor, (Main.GlobalTime % 1f - 0.5f) / 0.5f));
+                            break;
+                    }
+                }
+            }
+        }
+
+        public enum GradiusRarity : int
+        {
+            BigCore = 12
         }
     }
 }

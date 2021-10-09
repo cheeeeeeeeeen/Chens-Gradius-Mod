@@ -9,6 +9,8 @@ namespace ChensGradiusMod.Tiles.Banners
     {
         protected override int NPCType => ModContent.NPCType<BigCoreCustom>();
 
+        protected override bool BannerGivesBuff => false;
+
         protected override int ItemType => ModContent.ItemType<BigCoreCustomBanner>();
 
         protected override Color MinimapColor => new Color(8, 96, 192);

@@ -1,5 +1,7 @@
-﻿using ChensGradiusMod.Items.Banners;
+﻿using ChensGradiusMod.Items.Bags;
+using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
+using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +10,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 using static ChensGradiusMod.ChensGradiusMod;
 using static ChensGradiusMod.GradiusHelper;
 
@@ -54,7 +57,7 @@ namespace ChensGradiusMod.NPCs
             npc.height = 124;
             npc.damage = 200;
             npc.lifeMax = 2900;
-            npc.value = 20000f;
+            npc.value = Item.buyPrice(gold: 50);
             npc.knockBackResist = 0f;
             npc.defense = 0;
             npc.noGravity = true;
@@ -63,6 +66,7 @@ namespace ChensGradiusMod.NPCs
             npc.boss = true;
             music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/AircraftCarrier");
             bannerItem = ModContent.ItemType<BigCoreCustomBanner>();
+            bossBag = ModContent.ItemType<BigCoreCustomBag>();
 
             ScaleStats();
         }
@@ -138,10 +142,19 @@ namespace ChensGradiusMod.NPCs
 
         public override void NPCLoot()
         {
-            if (Main.rand.NextBool(50))
+            AddDropTable(npc, new WeightedRandom<int>(Main.rand.Next(),
+                Tuple.Create(ModContent.ItemType<AircraftCarrierMusicBox>(), 10d),
+                Tuple.Create(0, 90d)
+            ));
+            if (Main.expertMode) npc.DropBossBags();
+            else
             {
-                Item.NewItem(npc.getRect(), ModContent.ItemType<AircraftCarrierMusicBox>());
+                AddDropTable(npc, new WeightedRandom<int>(Main.rand.Next(),
+                    Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 5d),
+                    Tuple.Create(0, 95d)
+                ));
             }
+
             if (!GradiusModWorld.bigcoreDowned)
             {
                 GradiusModWorld.bigcoreDowned = true;

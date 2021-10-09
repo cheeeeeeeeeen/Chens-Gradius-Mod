@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 using static ChensGradiusMod.ChensGradiusMod;
 
 namespace ChensGradiusMod
@@ -22,6 +23,9 @@ namespace ChensGradiusMod
         public const int HigherAmmoSlot = 57;
         public const int LowerAccessorySlot = 3;
         public const int HigherAccessorySlot = 9;
+
+        public static Color bigCoreColor = new Color(16, 136, 224);
+        public static Color bigCoreStripesColor = new Color(224, 192, 96);
 
         public static void FreeListData(ref List<int> list)
         {
@@ -369,6 +373,33 @@ namespace ChensGradiusMod
                 }
             }
             return false;
+        }
+
+        public static void AddDropTable(NPC npc, WeightedRandom<int> table, Dictionary<int, int> stacks = null)
+        {
+            if (table > 0)
+            {
+                Item.NewItem(npc.getRect(), table);
+                if (stacks == null) Item.NewItem(npc.getRect(), table);
+                else if (stacks.TryGetValue(table, out int stack))
+                {
+                    Item.NewItem(npc.getRect(), table, stack);
+                }
+                else Item.NewItem(npc.getRect(), table);
+            }
+        }
+
+        public static void AddDropTable(Player player, WeightedRandom<int> table, Dictionary<int, int> stacks = null)
+        {
+            if (table > 0)
+            {
+                if (stacks == null) player.QuickSpawnItem(table);
+                else if (stacks.TryGetValue(table, out int stack))
+                {
+                    player.QuickSpawnItem(table, stack);
+                }
+                else player.QuickSpawnItem(table);
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace ChensGradiusMod.Tiles.Banners
     {
         protected virtual int NPCType => 0;
 
+        protected virtual bool BannerGivesBuff => true;
+
         protected override string MapName => GradiusHelper.SplitCamelCase(Name.Substring(0, Name.Length - 4));
 
         public override void SetDefaults()
@@ -36,7 +38,7 @@ namespace ChensGradiusMod.Tiles.Banners
             if (closer)
             {
                 Player player = Main.LocalPlayer;
-                player.NPCBannerBuff[NPCType] = true;
+                player.NPCBannerBuff[NPCType] = BannerGivesBuff;
                 player.hasBanner = true;
             }
         }

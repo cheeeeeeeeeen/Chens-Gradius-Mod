@@ -19,6 +19,7 @@ namespace ChensGradiusMod
 {
     public class ChensGradiusMod : Mod
     {
+        public static Mod gradiusMod;
         public static Mod bossChecklist;
         public static Mod herosMod;
         public static ModHotKey forceActionKey;
@@ -58,18 +59,18 @@ namespace ChensGradiusMod
                             ModContent.TileType<AircraftCarrierMusicBoxTile>());
             }
 
+            gradiusMod = this;
             bossChecklist = ModLoader.GetMod("BossChecklist");
             herosMod = ModLoader.GetMod("HEROsMod");
         }
 
         public override void Unload()
         {
-            base.Unload();
-
             forceActionKey = null;
             optionActionKey = null;
             bossChecklist = null;
             herosMod = null;
+            gradiusMod = null;
         }
 
         public override object Call(params object[] args)
@@ -221,65 +222,65 @@ namespace ChensGradiusMod
         {
             RecipeGroup group = new RecipeGroup(() => Language.GetTextValue("Ebonstone Block or Crimstone Block"), new int[]
             {
-        ItemID.CrimstoneBlock,
-        ItemID.EbonstoneBlock
+                ItemID.CrimstoneBlock,
+                ItemID.EbonstoneBlock
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:EvilStones", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Tissue Sample or Shadow Scale"), new int[]
             {
-        ItemID.ShadowScale,
-        ItemID.TissueSample
+                ItemID.ShadowScale,
+                ItemID.TissueSample
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:EvilDrops", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Gold Bar or Platinum Bar"), new int[]
             {
-        ItemID.PlatinumBar,
-        ItemID.GoldBar
+                ItemID.PlatinumBar,
+                ItemID.GoldBar
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:GoldTierBar", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Cobalt Bar or Palladium Bar"), new int[]
             {
-        ItemID.PalladiumBar,
-        ItemID.CobaltBar
+                ItemID.PalladiumBar,
+                ItemID.CobaltBar
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:CobaltTierBar", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Copper Bar or Tin Bar"), new int[]
             {
-        ItemID.TinBar,
-        ItemID.CopperBar
+                ItemID.TinBar,
+                ItemID.CopperBar
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:TinTierBar", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Any Mechanical Boss Soul"), new int[]
             {
-        ItemID.SoulofMight,
-        ItemID.SoulofSight,
-        ItemID.SoulofFright,
+                ItemID.SoulofMight,
+                ItemID.SoulofSight,
+                ItemID.SoulofFright,
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:MechSoul", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Silver Bar or Tungsten Bar"), new int[]
             {
-        ItemID.TungstenBar,
-        ItemID.SilverBar
+                ItemID.TungstenBar,
+                ItemID.SilverBar
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:SilverTierBar", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Any Evil Mushroom"), new int[]
             {
-        ItemID.VileMushroom,
-        ItemID.ViciousMushroom
+                ItemID.VileMushroom,
+                ItemID.ViciousMushroom
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:EvilMushroom", group);
 
             group = new RecipeGroup(() => Language.GetTextValue("Any Evil Bow"), new int[]
             {
-        ItemID.TendonBow,
-        ItemID.DemonBow
+                ItemID.TendonBow,
+                ItemID.DemonBow
             });
             RecipeGroup.RegisterGroup("ChensGradiusMod:EvilBow", group);
         }
