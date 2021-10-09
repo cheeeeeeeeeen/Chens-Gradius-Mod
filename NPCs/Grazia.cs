@@ -109,7 +109,7 @@ namespace ChensGradiusMod.NPCs
         {
             if (TargetPlayer() != null)
             {
-                int direction = RoundOffToWhole(GetBearing(npc.Center, TargetPlayer().Center));
+                int direction = RoundOffToWhole(GetBearingUpwards(npc.Center, TargetPlayer().Center));
 
                 if (yDirection > 0)
                 {

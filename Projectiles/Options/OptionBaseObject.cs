@@ -190,11 +190,11 @@ namespace ChensGradiusMod.Projectiles.Options
             if (p.velocity != retVal)
             {
                 float pSpd = Vector2.Distance(Vector2.Zero, p.velocity);
-                float dAng = GetBearing(Main.player[p.owner].Center, Main.MouseWorld, false);
-                float pAng = GetBearing(Vector2.Zero, p.velocity, false);
+                float dAng = GetBearing(Main.player[p.owner].Center, Main.MouseWorld, true);
+                float pAng = GetBearing(Vector2.Zero, p.velocity, true);
                 float offAng = MathHelper.ToRadians(pAng - dAng);
                 Vector2 offDiff = p.Center - Main.player[p.owner].Center;
-                float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward - offDiff, false));
+                float aimDAng = MathHelper.ToRadians(GetBearing(offsetPos, toward - offDiff, true));
                 retVal = MoveToward(offsetPos, offsetPos + (aimDAng + offAng).ToRotationVector2(), pSpd);
             }
 

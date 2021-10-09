@@ -63,32 +63,26 @@ namespace ChensGradiusMod
 
         public static Vector2 MoveToward(Vector2 origin, Vector2 destination, float speed = 1)
         {
-            float hypotenuse = Vector2.Distance(origin, destination);
-            float opposite = destination.Y - origin.Y;
-            float adjacent = destination.X - origin.X;
+            //float hypotenuse = Vector2.Distance(origin, destination);
+            //float opposite = destination.Y - origin.Y;
+            //float adjacent = destination.X - origin.X;
 
-            float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
+            //float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
 
-            float newX = (float)Math.Cos(direction) * Math.Sign(adjacent) * speed;
-            float newY = -(float)Math.Sin(direction) * -Math.Sign(opposite) * speed;
+            //float newX = (float)Math.Cos(direction) * Math.Sign(adjacent) * speed;
+            //float newY = -(float)Math.Sin(direction) * -Math.Sign(opposite) * speed;
 
-            return new Vector2(newX, newY);
+            //return new Vector2(newX, newY);
+
+            Vector2 velocity = destination - origin;
+            velocity.Normalize();
+            return velocity * speed;
         }
 
-        public static float GetAngleRelativeXDirection(Vector2 origin, Vector2 destination, bool degrees = true)
+        public static float GetBearingUpwards(Vector2 origin, Vector2 destination)
         {
             float hypotenuse = Vector2.Distance(origin, destination);
-            float adjacent = destination.X - origin.X;
-            float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
-
-            if (degrees) direction = MathHelper.ToDegrees(direction);
-            return direction;
-        }
-
-        public static float GetBearing(Vector2 origin, Vector2 destination, bool upward = true)
-        {
-            float hypotenuse = Vector2.Distance(origin, destination);
-            float opposite = (destination.Y - origin.Y) * (upward ? -1 : 1);
+            float opposite = (destination.Y - origin.Y) * -1;
             float adjacent = destination.X - origin.X;
 
             float direction = (float)Math.Asin(Math.Abs(opposite) / hypotenuse);
@@ -108,6 +102,13 @@ namespace ChensGradiusMod
             }
 
             return direction;
+        }
+
+        public static float GetBearing(Vector2 origin, Vector2 destination, bool degrees = false)
+        {
+            float angle = MoveToward(origin, destination).ToRotation();
+            if (degrees) angle = MathHelper.ToDegrees(angle);
+            return angle;
         }
 
         public static bool CanDamage(Projectile proj) => proj.damage > 0;
@@ -214,6 +215,15 @@ namespace ChensGradiusMod
             if (diff < -speed) return currentAngle - speed;
             else if (diff > speed) return currentAngle + speed;
             else return targetAngle;
+        }
+
+        public static float AngularRotateRadians(float currentAngle, float targetAngle,
+                                                 float min, float max, float speed)
+        {
+            currentAngle = MathHelper.ToDegrees(currentAngle);
+            targetAngle = MathHelper.ToDegrees(targetAngle);
+            float angleDegrees = AngularRotate(currentAngle, targetAngle, min, max, speed);
+            return MathHelper.ToRadians(angleDegrees);
         }
 
         public static float ApproachValue(float currentValue, float targetValue, float speed)

@@ -105,21 +105,18 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
         protected override int SpawnDuplicateProjectile(Projectile p)
         {
-            int result = -1;
+            int result;
 
             switch (mode)
             {
+                case States.Seek:
                 case States.Follow:
+                case States.Return:
                     result = base.SpawnDuplicateProjectile(p);
                     break;
 
-                case States.Seek:
-                case States.Return:
-                    result = -1;
-                    break;
-
                 case States.Pursue:
-                    if (++fireCounter < FireRate) goto case States.Seek;
+                    if (++fireCounter < FireRate) goto default;
                     else
                     {
                         fireCounter = 0;
@@ -128,6 +125,12 @@ namespace ChensGradiusMod.Projectiles.Options.Search
                         result = Projectile.NewProjectile(pos, vel, p.type, p.damage,
                                                           p.knockBack, projectile.owner, 0f, 0f);
                     }
+                    break;
+
+                //case States.Seek:
+                //case States.Return:
+                default:
+                    result = -1;
                     break;
             }
 
@@ -138,7 +141,8 @@ namespace ChensGradiusMod.Projectiles.Options.Search
 
         private Vector2 ComputeTargetOffset(Vector2 origin, Vector2 destination, float offDistance)
         {
-            currentAngle = GetBearing(origin, destination, false);
+            //currentAngle = GetBearing(origin, destination, false);
+            currentAngle = GetBearing(origin, destination, true);
             currentAngle = MathHelper.ToRadians(currentAngle);
 
             return origin + currentAngle.ToRotationVector2() * offDistance;

@@ -53,11 +53,8 @@ namespace ChensGradiusMod.Projectiles.Summon
             }
             if (currentTarget >= 0 && EntityTarget.active)
             {
-                Vector2 targetDirection = EntityTarget.Center - projectile.Center;
-                targetDirection.Normalize();
-                projectile.rotation = MathHelper.ToRadians(AngularRotate(MathHelper.ToDegrees(projectile.rotation),
-                                                                         MathHelper.ToDegrees(targetDirection.ToRotation()),
-                                                                         MinRotate, MaxRotate, currentRotationSpeed));
+                float targetDirection = GetBearing(projectile.Center, EntityTarget.Center);
+                projectile.rotation = AngularRotateRadians(projectile.rotation, targetDirection, MinRotate, MaxRotate, currentRotationSpeed);
                 currentRotationSpeed += RotationRate;
                 projectile.velocity = projectile.rotation.ToRotationVector2() * SpeedMultiplier;
             }

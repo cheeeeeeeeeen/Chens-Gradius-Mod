@@ -312,6 +312,15 @@ namespace ChensGradiusMod.NPCs
 
         private Player Target => Main.player[npc.target];
 
+        private float GetAngleRelativeXDirection(Vector2 origin, Vector2 destination)
+        {
+            float hypotenuse = Vector2.Distance(origin, destination);
+            float adjacent = destination.X - origin.X;
+            float direction = (float)Math.Acos(Math.Abs(adjacent) / hypotenuse);
+
+            return MathHelper.ToDegrees(direction);
+        }
+
         private bool IsSteppingOnTiles()
         {
             Vector2 newV = Collision.TileCollision(npc.position, npc.velocity, npc.width,

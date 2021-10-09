@@ -153,7 +153,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
                     targetVector = playerTarget.Center;
                 }
 
-                targetAngle = GetBearing(projectile.Center, targetVector);
+                targetAngle = GetBearingUpwards(projectile.Center, targetVector);
                 if (IsSameClientOwner(projectile))
                 {
                     float chosenVariant = Main.rand.NextFloat(AngleVariation);

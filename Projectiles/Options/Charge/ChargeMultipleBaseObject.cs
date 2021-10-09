@@ -32,7 +32,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
                 {
                     if (IsSameClientOwner(projectile))
                     {
-                        float direction = GetBearing(projectile.Center, Main.MouseWorld);
+                        float direction = GetBearingUpwards(projectile.Center, Main.MouseWorld);
                         Vector2 vel = ChargeMultipleMissile.Spd * new Vector2
                         {
                             X = (float)Math.Cos(MathHelper.ToRadians(direction)),
