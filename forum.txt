@@ -226,6 +226,17 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [*]Sensation (Salamander 2)
 [*]Aircraft Carrier (Gradius Slot version)
 [/LIST]
+
+[B]New Weapons[/B]
+[LIST=1]
+[*]Uncanny Core Remote Rod
+[LIST]
+[*]Summons a mini Covered Core as a sentry to fight for you!
+[*]They do contact damage, as well as release missiles.
+[*]It will drop from Big Core Custom.
+[*][SPOILER="Showcase"][IMG]https://i.imgur.com/cFnoaxj.gif[/IMG][/SPOILER]
+[/LIST]
+[/LIST]
 [/SPOILER]
 
 [SPOILER="Configurables"]
