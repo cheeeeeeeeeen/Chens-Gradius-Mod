@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
@@ -9,7 +10,7 @@ namespace ChensGradiusMod.Projectiles.Melee
     {
         private const float AngleSpeed = 10f;
 
-        public Projectile[] alliedZalkSlots = new Projectile[4];
+        public List<Projectile> alliedZalks = new List<Projectile>();
         public float currentAngle = 0f;
 
         public override void SetStaticDefaults()
@@ -43,36 +44,30 @@ namespace ChensGradiusMod.Projectiles.Melee
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            int slot = GetAvailableSlot();
-            if (slot >= 0)
+            float xSpawn;
+            if (Owner.direction == 1) xSpawn = Main.screenPosition.X - 28;
+            else xSpawn = Main.screenPosition.X + Main.screenWidth + 28;
+            int newAllyInd = Projectile.NewProjectile(xSpawn, projectile.Center.Y, 0, 0, ModContent.ProjectileType<AlliedZalk>(),
+                                                      projectile.damage, projectile.knockBack,
+                                                      projectile.owner, projectile.whoAmI);
+            if (newAllyInd >= 0)
             {
-                float xSpawn;
-                if (Owner.direction == 1) xSpawn = Main.screenPosition.X - 28;
-                else xSpawn = Main.screenPosition.X + Main.screenWidth + 28;
-                int newAllyInd = Projectile.NewProjectile(xSpawn, projectile.Center.Y, 0, 0, ModContent.ProjectileType<AlliedZalk>(),
-                                                          projectile.damage, projectile.knockBack,
-                                                          projectile.owner, projectile.whoAmI, slot);
-                if (newAllyInd >= 0)
-                {
-                    Projectile newProj = Main.projectile[newAllyInd];
-                    newProj.spriteDirection = Owner.direction;
-                    alliedZalkSlots[slot] = newProj;
-                }
+                Projectile newProj = Main.projectile[newAllyInd];
+                newProj.spriteDirection = Owner.direction;
+                alliedZalks.Add(newProj);
+            }
+        }
+
+        public float AngleDifference
+        {
+            get
+            {
+                if (alliedZalks.Count <= 0) return -1f;
+                else return FullAngle / alliedZalks.Count;
             }
         }
 
         private Player Owner => Main.player[projectile.owner];
-
-        private int GetAvailableSlot()
-        {
-            for (int i = 0; i < alliedZalkSlots.Length; i++)
-            {
-                Projectile selectedProj = alliedZalkSlots[i];
-                if (selectedProj == null || !selectedProj.active) return i;
-            }
-
-            return -1;
-        }
 
         private void UpdateReferenceAngle()
         {
@@ -84,11 +79,11 @@ namespace ChensGradiusMod.Projectiles.Melee
         {
             if (projectile.ai[0] < 0)
             {
-                for (int i = 0; i < alliedZalkSlots.Length; i++)
+                foreach (var zalk in alliedZalks.ToArray())
                 {
-                    Projectile selectedProj = alliedZalkSlots[i];
-                    if (selectedProj != null && selectedProj.active) selectedProj.Kill();
+                    if (zalk != null && zalk.active) zalk.Kill();
                 }
+                alliedZalks.Clear();
             }
         }
     }

@@ -13,6 +13,7 @@ namespace ChensGradiusMod.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Zelos Influence");
+            Tooltip.SetDefault("Hitting enemies will spawn temporary friendly Zalks to offer offensive power\n\"While men exist, so will I.\"");
             ItemID.Sets.Yoyo[item.type] = true;
             ItemID.Sets.GamepadExtraRange[item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[item.type] = true;

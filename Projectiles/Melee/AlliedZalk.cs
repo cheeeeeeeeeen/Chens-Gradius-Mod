@@ -9,7 +9,6 @@ namespace ChensGradiusMod.Projectiles.Melee
 {
     public class AlliedZalk : ModProjectile
     {
-        private const float AngleDifference = 90f;
         private const float DistanceFromMother = 40f;
         private const float Speed = 20f;
 
@@ -31,6 +30,7 @@ namespace ChensGradiusMod.Projectiles.Melee
             projectile.usesLocalNPCImmunity = true;
             projectile.localNPCHitCooldown = 12;
             projectile.aiStyle = 0;
+            projectile.timeLeft = 480;
             aiType = 0;
         }
 
@@ -48,6 +48,7 @@ namespace ChensGradiusMod.Projectiles.Melee
                                 mod.GetGoreSlot("Gores/GradiusExplode"), .5f);
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death"),
                            projectile.Center);
+            ActualMotherProjectile.alliedZalks.Remove(projectile);
         }
 
         private void AnimateSprite()
@@ -66,7 +67,7 @@ namespace ChensGradiusMod.Projectiles.Melee
 
         private void Movement()
         {
-            float angleInRadians = MathHelper.ToRadians(ActualMotherProjectile.currentAngle + AngleDifference * Numbering);
+            float angleInRadians = MathHelper.ToRadians(ActualMotherProjectile.currentAngle + ActualMotherProjectile.AngleDifference * Numbering);
             Vector2 destination = MotherProjectile.Center + (angleInRadians.ToRotationVector2() * DistanceFromMother);
             Vector2 speedValues = MoveToward(projectile.Center, destination, Speed);
             float newX = ApproachValue(projectile.Center.X, destination.X, Math.Abs(speedValues.X));
@@ -78,6 +79,6 @@ namespace ChensGradiusMod.Projectiles.Melee
 
         private ZalkYoyoProjectile ActualMotherProjectile => MotherProjectile.modProjectile as ZalkYoyoProjectile;
 
-        private int Numbering => (int)projectile.ai[1];
+        private int Numbering => ActualMotherProjectile.alliedZalks.IndexOf(projectile);
     }
 }
