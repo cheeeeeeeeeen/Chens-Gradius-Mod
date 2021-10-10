@@ -20,8 +20,8 @@ namespace ChensGradiusMod.Items.Bags
                 Tuple.Create(0, 80d)
             ));
             AddDropTable(player, new WeightedRandom<int>(Main.rand.Next(),
-                Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 20d),
-                Tuple.Create(0, 82d)
+                Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 25d),
+                Tuple.Create(0, 75d)
             ));
         }
 

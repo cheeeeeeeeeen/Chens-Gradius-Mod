@@ -24,8 +24,15 @@ namespace ChensGradiusMod
         public const int LowerAccessorySlot = 3;
         public const int HigherAccessorySlot = 9;
 
-        public static Color bigCoreColor = new Color(16, 136, 224);
-        public static Color bigCoreStripesColor = new Color(224, 192, 96);
+        public static readonly Color bigCoreColor = new Color(16, 136, 224);
+        public static readonly Color bigCoreStripesColor = new Color(224, 192, 96);
+
+        public static readonly List<int> universalPrefixes = new List<int>()
+        {
+            PrefixID.Keen, PrefixID.Superior, PrefixID.Forceful, PrefixID.Broken, PrefixID.Damaged, PrefixID.Shoddy,
+            PrefixID.Hurtful, PrefixID.Strong, PrefixID.Unpleasant, PrefixID.Weak, PrefixID.Ruthless, PrefixID.Godly,
+            PrefixID.Demonic, PrefixID.Zealous
+        };
 
         public static void FreeListData(ref List<int> list)
         {

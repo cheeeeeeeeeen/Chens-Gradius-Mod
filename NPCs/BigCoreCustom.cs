@@ -57,7 +57,7 @@ namespace ChensGradiusMod.NPCs
             npc.height = 124;
             npc.damage = 200;
             npc.lifeMax = 2900;
-            npc.value = Item.buyPrice(gold: 20);
+            npc.value = Item.sellPrice(gold: 30);
             npc.knockBackResist = 0f;
             npc.defense = 0;
             npc.noGravity = true;
