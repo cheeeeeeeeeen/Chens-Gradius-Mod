@@ -1,6 +1,9 @@
+using ChensGradiusMod.Items.Bags;
 using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Items.Spawners;
+using ChensGradiusMod.Items.Weapons.Melee;
+using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.NPCs;
 using ChensGradiusMod.Projectiles.Enemies;
 using ChensGradiusMod.Projectiles.Options;
@@ -296,6 +299,9 @@ namespace ChensGradiusMod
                 };
                 List<int> lootDrops = new List<int>
                 {
+                    ModContent.ItemType<ZalkYoyo>(),
+                    ModContent.ItemType<MiniCoveredCoreWeapon>(),
+                    ModContent.ItemType<BigCoreCustomBag>(),
                     ItemID.SuperHealingPotion
                 };
                 bossChecklist.Call("AddBoss", 15f, ModContent.NPCType<BigCoreCustom>(), this, "Big Core Custom",
@@ -304,6 +310,7 @@ namespace ChensGradiusMod
                                    "The aircraft carrier leaves combat airspace.",
                                    "ChensGradiusMod/Sprites/BigCoreCustomBossLog");
             }
+
             if (herosMod != null)
             {
                 herosMod.Call("AddPermission", "UpdateConfig", "Update Gradius Config", (Action<bool>)(groupUpdated => { }));
