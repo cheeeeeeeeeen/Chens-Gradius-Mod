@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,10 @@ namespace ChensGradiusMod.Projectiles.Melee
 {
     public class ZalkYoyoProjectile : ModProjectile
     {
+        private const int Cooldown = 30;
         private const float AngleSpeed = 10f;
+
+        private int cooldownTick = Cooldown;
 
         public List<Projectile> alliedZalks = new List<Projectile>();
         public float currentAngle = 0f;
@@ -38,23 +42,28 @@ namespace ChensGradiusMod.Projectiles.Melee
 
         public override void AI()
         {
+            ProcessCooldown();
             UpdateReferenceAngle();
             DestroyAlliesWhenReturning();
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            float xSpawn;
-            if (Owner.direction == 1) xSpawn = Main.screenPosition.X - 28;
-            else xSpawn = Main.screenPosition.X + Main.screenWidth + 28;
-            int newAllyInd = Projectile.NewProjectile(xSpawn, projectile.Center.Y, 0, 0, ModContent.ProjectileType<AlliedZalk>(),
-                                                      projectile.damage, projectile.knockBack,
-                                                      projectile.owner, projectile.whoAmI);
-            if (newAllyInd >= 0)
+            if (cooldownTick >= Cooldown)
             {
-                Projectile newProj = Main.projectile[newAllyInd];
-                newProj.spriteDirection = Owner.direction;
-                alliedZalks.Add(newProj);
+                float xSpawn;
+                if (Owner.direction == 1) xSpawn = Main.screenPosition.X - 28;
+                else xSpawn = Main.screenPosition.X + Main.screenWidth + 28;
+                int newAllyInd = Projectile.NewProjectile(xSpawn, projectile.Center.Y, 0, 0, ModContent.ProjectileType<AlliedZalk>(),
+                                                          projectile.damage, projectile.knockBack,
+                                                          projectile.owner, projectile.whoAmI);
+                if (newAllyInd >= 0)
+                {
+                    Projectile newProj = Main.projectile[newAllyInd];
+                    newProj.spriteDirection = Owner.direction;
+                    alliedZalks.Add(newProj);
+                    cooldownTick = 0;
+                }
             }
         }
 
@@ -68,6 +77,14 @@ namespace ChensGradiusMod.Projectiles.Melee
         }
 
         private Player Owner => Main.player[projectile.owner];
+
+        private void ProcessCooldown()
+        {
+            if (IsSameClientOwner(projectile))
+            {
+                cooldownTick = Math.Min(cooldownTick + 1, Cooldown);
+            }
+        }
 
         private void UpdateReferenceAngle()
         {

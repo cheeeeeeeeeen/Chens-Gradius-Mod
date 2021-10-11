@@ -1,5 +1,4 @@
 ﻿using ChensGradiusMod.Projectiles.Melee;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -24,7 +23,7 @@ namespace ChensGradiusMod.Items.Weapons.Melee
             item.width = 30;
             item.height = 26;
             item.melee = true;
-            item.damage = 180;
+            item.damage = 250;
             item.knockBack = 8f;
             item.useTime = 25;
             item.useAnimation = 20;
