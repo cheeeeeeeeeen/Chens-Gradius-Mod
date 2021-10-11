@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.5
+[B][U][SIZE=6]Mod Version: 1.2.6
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -236,6 +236,14 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [*]It will drop from Big Core Custom.
 [*][SPOILER="Showcase"][IMG]https://i.imgur.com/cFnoaxj.gif[/IMG][/SPOILER]
 [/LIST]
+[*]Zelos Influence
+[LIST]
+[*]A yoyo that spawns friendly Zalks on hit!
+[*]Friendly Zalks revolve around the yoyo temporarily.
+[*]They also deal contact damage and has a limit on how much they can deal before being destroyed.
+[*]It will drop from Big Core Custom.
+[*][SPOILER="Showcase"][IMG]https://i.imgur.com/c53IZRb.gif[/IMG][IMG]https://i.imgur.com/z9liOZH.gif[/IMG][/SPOILER]
+[/LIST]
 [/LIST]
 [/SPOILER]
 
@@ -262,20 +270,14 @@ For more information, visit this [URL=https://github.com/cheeeeeeeeeen/Chens-Gra
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
+1.2.6
+  - Implement Zelos Influence, a yoyo that spawns friendly Zalks.
+  - Decreased Big Core Custom money rewards.
+
 1.2.5
   - Improve Enemy AI in multiplayer. It does cost more data though, in exchange.
   - Implement Uncanny Core Remote Rod which summons a Mini Covered Core sentry.
   - Refactor some of the heavy-implementation in computing directions and distances.
-
-1.2.4
-  - Fix a bug in Mod.Call that renders one API useless.
-  - Add Sniper and High Velocity Bullet as a default allow check.
-
-1.2.3
-  - Fix Big Core's Laser sounds not being heard by clients on a dedicated server setup.
-
-1.2.2
-  - Fix Big Core Custom spawning on dedicated servers as it does not work when clients use the spawner.
 [/SPOILER]
 
 [SPOILER="Cross Mod Content Capabilities (For Other Mod Creators)"]
