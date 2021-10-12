@@ -1,7 +1,9 @@
-﻿using ChensGradiusMod.Projectiles.Aliens;
+﻿using ChensGradiusMod.Items.Weapons.Magic;
+using ChensGradiusMod.Projectiles.Aliens;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod
@@ -20,7 +22,8 @@ namespace ChensGradiusMod
             new AlienWeapon(ItemID.Megashark),
             new AlienWeapon(ItemID.Gatligator),
             new AlienWeapon(ItemID.ChainGun),
-            new AlienWeapon(ItemID.SDMG)
+            new AlienWeapon(ItemID.SDMG),
+            new AlienWeapon(ModContent.ItemType<Death2Weapon>())
         };
 
         private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>()

@@ -47,6 +47,14 @@ namespace ChensGradiusMod.Projectiles.Summon
             AttackVector();
         }
 
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.ApprenticeStorm, 0f, 0f, 0, default, 1.4f);
+            }
+        }
+
         private void MovementBehavior()
         {
             projectile.velocity = new Vector2((float)Math.Cos(currentAngle), (float)Math.Sin(currentAngle));

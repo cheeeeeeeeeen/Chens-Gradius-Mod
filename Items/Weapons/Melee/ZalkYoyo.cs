@@ -42,10 +42,10 @@ namespace ChensGradiusMod.Items.Weapons.Melee
 
         public override string Texture => "ChensGradiusMod/Sprites/ZalkYoyoItem";
 
-        public override bool AllowPrefix(int pre)
-        {
-            if (universalPrefixes.Contains(pre)) return true;
-            else return false;
-        }
+        //public override bool AllowPrefix(int pre)
+        //{
+        //    if (universalPrefixes.Contains(pre)) return true;
+        //    else return false;
+        //}
     }
 }
