@@ -270,6 +270,10 @@ For more information, visit this [URL=https://github.com/cheeeeeeeeeen/Chens-Gra
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
+1.2.9
+  - Implement DES Laser Cannon, a magic weapon inspired by Death MKII.
+  - Add the new weapon to Big Core Custom Loot Table.
+
 1.2.8
   - Integrate properly with Boss Checklist so that Big Core Custom data is properly displayed.
   - Actually add Zelos Influence into the loot table of Big Core Custom.

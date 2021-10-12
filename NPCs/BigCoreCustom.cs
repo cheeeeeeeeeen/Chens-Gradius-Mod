@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Items.Bags;
 using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
+using ChensGradiusMod.Items.Weapons.Magic;
 using ChensGradiusMod.Items.Weapons.Melee;
 using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.Projectiles.Enemies;
@@ -153,6 +154,7 @@ namespace ChensGradiusMod.NPCs
                 AddDropTable(npc, new WeightedRandom<int>(Main.rand.Next(),
                     Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 10d),
                     Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 10d),
+                    Tuple.Create(ModContent.ItemType<Death2Weapon>(), 10d),
                     Tuple.Create(0, 80d)
                 ));
             }
