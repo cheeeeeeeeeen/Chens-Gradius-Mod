@@ -155,7 +155,7 @@ namespace ChensGradiusMod.NPCs
                     Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 10d),
                     Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 10d),
                     Tuple.Create(ModContent.ItemType<Death2Weapon>(), 10d),
-                    Tuple.Create(0, 80d)
+                    Tuple.Create(0, 70d)
                 ));
             }
 
