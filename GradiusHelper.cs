@@ -237,6 +237,14 @@ namespace ChensGradiusMod
             return MathHelper.ToRadians(angleDegrees);
         }
 
+        public static float AngularLerp(Vector2 currentDirection, Vector2 origin, Vector2 destination, float interpolateValue)
+        {
+            Vector2 desiredDirection = destination - origin;
+            desiredDirection.Normalize();
+            currentDirection += (desiredDirection - currentDirection) * interpolateValue;
+            return (float)Math.Atan2(currentDirection.Y, currentDirection.X);
+        }
+
         public static float ApproachValue(float currentValue, float targetValue, float speed)
         {
             if (currentValue < targetValue)

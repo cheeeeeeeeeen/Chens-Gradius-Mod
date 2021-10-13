@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading;
 using Terraria;
 using Terraria.Enums;
 using Terraria.ModLoader;

@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.8
+[B][U][SIZE=6]Mod Version: 1.2.9
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -271,7 +271,7 @@ The content is moved because it's hard to maintain a Wiki and a main post! Howev
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
 1.2.9
-  - Implement DES Laser Cannon, a magic weapon inspired by Death MKII.
+  - Implement DES Advanced Cannon, a magic weapon inspired by Death MKII.
   - Add the new weapon to Big Core Custom Loot Table.
 
 1.2.8
