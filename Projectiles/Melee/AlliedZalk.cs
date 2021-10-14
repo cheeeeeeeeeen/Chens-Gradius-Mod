@@ -59,7 +59,7 @@ namespace ChensGradiusMod.Projectiles.Melee
                 projectile.frame++;
                 projectile.frameCounter = 0;
             }
-            if (projectile.frame >= 5)
+            if (projectile.frame >= Main.projFrames[projectile.type])
             {
                 projectile.frame = 0;
             }

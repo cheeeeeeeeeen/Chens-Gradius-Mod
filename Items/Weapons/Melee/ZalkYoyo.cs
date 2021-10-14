@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 using static ChensGradiusMod.GradiusHelper;
 using static ChensGradiusMod.Items.GradiusGlobalItem;
 
@@ -42,10 +43,10 @@ namespace ChensGradiusMod.Items.Weapons.Melee
 
         public override string Texture => "ChensGradiusMod/Sprites/ZalkYoyoItem";
 
-        //public override bool AllowPrefix(int pre)
-        //{
-        //    if (universalPrefixes.Contains(pre)) return true;
-        //    else return false;
-        //}
+        public override int ChoosePrefix(UnifiedRandom rand)
+        {
+            int newPrefixIndex = rand.Next(0, universalPrefixes.Count);
+            return universalPrefixes[newPrefixIndex];
+        }
     }
 }

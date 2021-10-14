@@ -7,6 +7,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
         public const float Spd = 5f;
         public const int Dmg = 60;
         public const float Kb = 0f;
+        public const int FrameSpeed = 4;
 
         public override void SetStaticDefaults()
         {
@@ -28,7 +29,7 @@ namespace ChensGradiusMod.Projectiles.Enemies
 
         public override void AI()
         {
-            if (++projectile.frameCounter >= 4)
+            if (++projectile.frameCounter >= FrameSpeed)
             {
                 projectile.frameCounter = 0;
                 if (++projectile.frame >= Main.projFrames[projectile.type]) projectile.frame = 0;
