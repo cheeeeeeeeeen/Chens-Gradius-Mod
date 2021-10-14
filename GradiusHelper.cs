@@ -1,5 +1,6 @@
 ﻿using ChensGradiusMod.Items.Accessories.Forces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -427,6 +428,13 @@ namespace ChensGradiusMod
                     projectile.frame = 0;
                 }
             }
+        }
+
+        public static void ComputeCenterFromHitbox(Projectile projectile, ref int offsetX, ref int offsetY, int frameWidth, int frameHeight, int frames)
+        {
+            frameHeight /= frames;
+            offsetX = -(frameWidth - projectile.width) / 2;
+            offsetY = -(frameHeight - projectile.height) / 2;
         }
     }
 }

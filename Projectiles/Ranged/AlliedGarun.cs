@@ -21,8 +21,8 @@ namespace ChensGradiusMod.Projectiles.Ranged
 
         public override void SetDefaults()
         {
-            projectile.width = 32;
-            projectile.height = 26;
+            projectile.width = 20;
+            projectile.height = 20;
             projectile.friendly = true;
             projectile.ranged = true;
             projectile.ignoreWater = true;
@@ -31,8 +31,9 @@ namespace ChensGradiusMod.Projectiles.Ranged
             projectile.usesIDStaticNPCImmunity = true;
             projectile.idStaticNPCHitCooldown = 30;
             projectile.aiStyle = 0;
-            projectile.timeLeft = 480;
+            projectile.timeLeft = 9480;
             aiType = 0;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 32, 252, 9);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/GarunAlly";
@@ -54,11 +55,6 @@ namespace ChensGradiusMod.Projectiles.Ranged
                 }
             }
             reloadTick = Math.Min(reloadTick, ReloadTime);
-        }
-
-        public override void ModifyDamageHitbox(ref Rectangle hitbox)
-        {
-            hitbox = new Rectangle((int)projectile.Center.X - 14, (int)projectile.Center.Y - 14, 28, 28);
         }
 
         public override void Kill(int timeLeft)

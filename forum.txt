@@ -271,6 +271,7 @@ The content is moved because it's hard to maintain a Wiki and a main post! Howev
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
 
 1.2.10
+  - Implement Bacterian Frigate, a ranged weapon that deploys allied Garun units to destroy enemies by shooting at them.
   - Have Zelos Influence only use universal modifiers as a Yoyo.
 
 1.2.9

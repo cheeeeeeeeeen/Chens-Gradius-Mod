@@ -19,8 +19,8 @@ namespace ChensGradiusMod.Items.Weapons.Ranged
         {
             item.damage = 120;
             item.ranged = true;
-            item.width = 40;
-            item.height = 20;
+            item.width = 76;
+            item.height = 50;
             item.useAnimation = item.useTime = 30;
             item.useStyle = ItemUseStyleID.HoldingOut;
             item.noMelee = true;
