@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 using static ChensGradiusMod.Items.GradiusGlobalItem;
 
 namespace ChensGradiusMod.Items.Weapons.Magic
@@ -24,8 +25,6 @@ namespace ChensGradiusMod.Items.Weapons.Magic
             item.magic = true;
             item.mana = 30;
             item.rare = (int)GradiusRarity.BigCore;
-            item.width = 96;
-            item.height = 64;
             item.useAnimation = item.useTime = 20;
             item.UseSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/BigCoreShoot");
             item.useStyle = ItemUseStyleID.HoldingOut;
@@ -34,6 +33,7 @@ namespace ChensGradiusMod.Items.Weapons.Magic
             item.knockBack = 0f;
             item.shootSpeed = MissileSpeed;
             item.autoReuse = false;
+            AssignItemDimensions(item, 96, 64);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/DeathWeapon";

@@ -25,14 +25,15 @@ namespace ChensGradiusMod.Projectiles.Magic
 
         public override void SetDefaults()
         {
-            projectile.width = 32;
-            projectile.height = 14;
+            projectile.width = 20;
+            projectile.height = 20;
             projectile.friendly = true;
             projectile.penetrate = 1;
             projectile.tileCollide = true;
             projectile.magic = true;
             projectile.timeLeft = 300 + HomeInTime;
             projectile.light = .4f;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 32, 14, 1);
         }
 
         public override void AI()

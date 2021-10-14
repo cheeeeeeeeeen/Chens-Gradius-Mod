@@ -21,8 +21,8 @@ namespace ChensGradiusMod.Projectiles.Magic
 
         public override void SetDefaults()
         {
-            projectile.width = 52;
-            projectile.height = 32;
+            projectile.width = 50;
+            projectile.height = 50;
             projectile.friendly = true;
             projectile.penetrate = -1;
             projectile.tileCollide = false;
