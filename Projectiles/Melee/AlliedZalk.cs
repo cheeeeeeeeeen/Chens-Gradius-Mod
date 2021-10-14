@@ -32,6 +32,7 @@ namespace ChensGradiusMod.Projectiles.Melee
             projectile.aiStyle = 0;
             projectile.timeLeft = 480;
             aiType = 0;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 32, 170, 5);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/ZalkAlly";

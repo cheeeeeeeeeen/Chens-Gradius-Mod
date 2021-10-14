@@ -430,9 +430,10 @@ namespace ChensGradiusMod
             }
         }
 
-        public static void ComputeCenterFromHitbox(Projectile projectile, ref int offsetX, ref int offsetY, int frameWidth, int frameHeight, int frames)
+        public static void ComputeCenterFromHitbox(Projectile projectile, ref int offsetX, ref int offsetY, int textureWidth, int textureHeight, int frames)
         {
-            frameHeight /= frames;
+            int frameWidth = textureWidth;
+            int frameHeight = textureHeight / frames;
             offsetX = -(frameWidth - projectile.width) / 2;
             offsetY = -(frameHeight - projectile.height) / 2;
         }

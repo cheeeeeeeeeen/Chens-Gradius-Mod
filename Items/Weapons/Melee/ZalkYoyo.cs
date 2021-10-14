@@ -21,8 +21,6 @@ namespace ChensGradiusMod.Items.Weapons.Melee
 
         public override void SetDefaults()
         {
-            item.width = 30;
-            item.height = 26;
             item.melee = true;
             item.damage = 250;
             item.knockBack = 8f;
@@ -39,6 +37,7 @@ namespace ChensGradiusMod.Items.Weapons.Melee
             item.rare = (int)GradiusRarity.BigCore;
             item.autoReuse = true;
             item.value = Item.sellPrice(0, 30, 0, 0);
+            AssignItemDimensions(item, 30, 26);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/ZalkYoyoItem";
