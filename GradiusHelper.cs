@@ -436,5 +436,13 @@ namespace ChensGradiusMod
             offsetX = -(frameWidth - projectile.width) / 2;
             offsetY = -(frameHeight - projectile.height) / 2;
         }
+
+        public static void AssignItemDimensions(Item item, int originalWidth, int originalHeight)
+        {
+            item.width = originalWidth;
+            if (originalWidth > 12) item.width -= 8;
+            item.height = originalHeight;
+            if (originalHeight > 12) item.height -= 8;
+        }
     }
 }

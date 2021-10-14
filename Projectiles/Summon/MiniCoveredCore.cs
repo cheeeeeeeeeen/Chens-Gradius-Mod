@@ -22,8 +22,8 @@ namespace ChensGradiusMod.Projectiles.Summon
 
         public override void SetDefaults()
         {
-            projectile.width = 64;
-            projectile.height = 66;
+            projectile.width = 56;
+            projectile.height = 56;
             projectile.ignoreWater = true;
             projectile.tileCollide = false;
             projectile.sentry = true;
@@ -33,6 +33,7 @@ namespace ChensGradiusMod.Projectiles.Summon
             projectile.localNPCHitCooldown = 10;
             projectile.friendly = true;
             projectile.light = .5f;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 64, 660, 10);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/MiniCoveredCoreSentry";

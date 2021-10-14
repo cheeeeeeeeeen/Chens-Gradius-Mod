@@ -23,8 +23,8 @@ namespace ChensGradiusMod.Projectiles.Summon
 
         public override void SetDefaults()
         {
-            projectile.width = 28;
-            projectile.height = 14;
+            projectile.width = 20;
+            projectile.height = 20;
             projectile.friendly = true;
             projectile.minion = true;
             projectile.minionSlots = 0f;
@@ -32,6 +32,7 @@ namespace ChensGradiusMod.Projectiles.Summon
             projectile.penetrate = 1;
             projectile.timeLeft = 600;
             projectile.tileCollide = false;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 28, 14, 1);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/Missile";

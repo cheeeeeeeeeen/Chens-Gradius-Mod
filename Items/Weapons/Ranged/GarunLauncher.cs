@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 using static ChensGradiusMod.Items.GradiusGlobalItem;
 
 namespace ChensGradiusMod.Items.Weapons.Ranged
@@ -19,8 +20,6 @@ namespace ChensGradiusMod.Items.Weapons.Ranged
         {
             item.damage = 120;
             item.ranged = true;
-            item.width = 76;
-            item.height = 50;
             item.useAnimation = item.useTime = 30;
             item.useStyle = ItemUseStyleID.HoldingOut;
             item.noMelee = true;
@@ -32,6 +31,7 @@ namespace ChensGradiusMod.Items.Weapons.Ranged
             item.shoot = ModContent.ProjectileType<AlliedGarun>();
             item.shootSpeed = 10f;
             item.useAmmo = AmmoID.Rocket;
+            AssignItemDimensions(item, 76, 50);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/GarunLauncher";
@@ -39,6 +39,11 @@ namespace ChensGradiusMod.Items.Weapons.Ranged
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-40, 0);
+        }
+
+        public override void PostUpdate()
+        {
+            Lighting.AddLight(item.Center, .2f, .2f, .5f);
         }
     }
 }

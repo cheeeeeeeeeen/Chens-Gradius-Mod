@@ -4,6 +4,7 @@ using Terraria;
 using ChensGradiusMod.Projectiles.Summon;
 using Microsoft.Xna.Framework;
 using static ChensGradiusMod.Items.GradiusGlobalItem;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Weapons.Summon
 {
@@ -21,7 +22,7 @@ namespace ChensGradiusMod.Items.Weapons.Summon
             item.mana = 20;
             item.width = 50;
             item.height = 50;
-            item.useTime = (item.useAnimation = 25);
+            item.useTime = item.useAnimation = 25;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.noMelee = true;
             item.knockBack = 4.5f;
@@ -33,6 +34,7 @@ namespace ChensGradiusMod.Items.Weapons.Summon
             item.shootSpeed = 10f;
             item.summon = true;
             item.sentry = true;
+            AssignItemDimensions(item, 50, 50);
         }
 
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
