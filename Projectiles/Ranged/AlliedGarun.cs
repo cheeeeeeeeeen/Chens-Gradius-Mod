@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
 
@@ -31,7 +32,7 @@ namespace ChensGradiusMod.Projectiles.Ranged
             projectile.usesIDStaticNPCImmunity = true;
             projectile.idStaticNPCHitCooldown = 30;
             projectile.aiStyle = 0;
-            projectile.timeLeft = 9480;
+            projectile.timeLeft = 480;
             aiType = 0;
             ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 32, 252, 9);
         }
@@ -63,6 +64,14 @@ namespace ChensGradiusMod.Projectiles.Ranged
                                 mod.GetGoreSlot("Gores/GradiusExplode"), .5f);
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death"),
                            projectile.Center);
+            Vector2 oldCenter = projectile.Center;
+            projectile.width = projectile.height = 200;
+            projectile.Center = oldCenter;
+            projectile.Damage();
+            for (int i = 0; i < 100; i++)
+            {
+                Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ApprenticeStorm, 0f, 0f, 0, default, 1f);
+            }
         }
 
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
