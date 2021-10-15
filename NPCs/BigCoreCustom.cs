@@ -1,4 +1,6 @@
-﻿using ChensGradiusMod.Items.Bags;
+﻿#define LITE
+
+using ChensGradiusMod.Items.Bags;
 using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Items.Weapons.Magic;
@@ -35,7 +37,10 @@ namespace ChensGradiusMod.NPCs
         private States mode = States.RegularAssault;
         private int fireTick = 0;
         private int existenceTick = 0;
+
+#if !LITE
         private byte frameCounterX = 7;
+#endif
         private int syncTick = 0;
 
         private float regularAssaultXCurrentSpeed = 0f;
@@ -49,6 +54,7 @@ namespace ChensGradiusMod.NPCs
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Big Core Custom");
+            Main.npcFrameCount[npc.type] = 5;
         }
 
         public override void SetDefaults()
@@ -75,14 +81,26 @@ namespace ChensGradiusMod.NPCs
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo) => 0f;
 
-        public override string Texture => "ChensGradiusMod/Sprites/BigCoreCustom";
+        public override string Texture
+        {
+            get
+            {
+#if LITE
+                return "ChensGradiusMod/Sprites/BigCoreCustomLite";
+#else
+                return "ChensGradiusMod/Sprites/BigCoreCustom";
+#endif
+            }
+        }
 
         public override string BossHeadTexture => "ChensGradiusMod/Sprites/BigCoreCustomHead";
 
         public override void AI()
         {
             CoreManagement();
+#if !LITE
             BarrierStatus();
+#endif
 
             switch (mode)
             {
@@ -110,8 +128,13 @@ namespace ChensGradiusMod.NPCs
             SpriteEffects spriteEffects = SpriteEffects.None;
             if (npc.spriteDirection > 0) spriteEffects = SpriteEffects.FlipHorizontally;
             Vector2 drawPos = npc.TopLeft - Main.screenPosition;
+#if LITE
+            Rectangle frame = new Rectangle(0, FrameCounter * FrameHeight,
+                                            FrameWidth, FrameHeight);
+#else
             Rectangle frame = new Rectangle(frameCounterX * FrameWidth, FrameCounter * FrameHeight,
                                             FrameWidth, FrameHeight);
+#endif
             Vector2 drawCenter = new Vector2(2f, 2f);
 
             spriteBatch.Draw(Main.npcTexture[npc.type], drawPos, frame, drawColor,
@@ -178,7 +201,9 @@ namespace ChensGradiusMod.NPCs
             writer.Write(npc.target);
             writer.Write(regularAssaultDirection);
             writer.Write(regularAssaultYCurrentSpeed);
+#if !LITE
             writer.Write(frameCounterX);
+#endif
             writer.Write(openCore);
         }
 
@@ -189,7 +214,9 @@ namespace ChensGradiusMod.NPCs
             npc.target = reader.ReadInt32();
             regularAssaultDirection = reader.ReadSByte();
             regularAssaultYCurrentSpeed = reader.ReadSingle();
+#if !LITE
             frameCounterX = reader.ReadByte();
+#endif
             openCore = reader.ReadBoolean();
         }
 
@@ -299,20 +326,20 @@ namespace ChensGradiusMod.NPCs
                 {
                     return new Vector2[]
                     {
-            npc.position + new Vector2(141, 16),
-            npc.position + new Vector2(189, 44),
-            npc.position + new Vector2(189, 80),
-            npc.position + new Vector2(141, 108)
+                        npc.position + new Vector2(141, 16),
+                        npc.position + new Vector2(189, 44),
+                        npc.position + new Vector2(189, 80),
+                        npc.position + new Vector2(141, 108)
                     };
                 }
                 else
                 {
                     return new Vector2[]
                     {
-            npc.position + new Vector2(45, 16),
-            npc.position + new Vector2(-3, 44),
-            npc.position + new Vector2(-3, 80),
-            npc.position + new Vector2(45, 108)
+                        npc.position + new Vector2(45, 16),
+                        npc.position + new Vector2(-3, 44),
+                        npc.position + new Vector2(-3, 80),
+                        npc.position + new Vector2(45, 108)
                     };
                 }
             }
@@ -343,6 +370,7 @@ namespace ChensGradiusMod.NPCs
             }
         }
 
+#if !LITE
         private void BarrierStatus()
         {
             if (npc.life >= RoundOffToWhole(npc.lifeMax * .875f)) frameCounterX = 7;
@@ -354,5 +382,6 @@ namespace ChensGradiusMod.NPCs
             else if (npc.life >= RoundOffToWhole(npc.lifeMax * .125f)) frameCounterX = 1;
             else frameCounterX = 0;
         }
+#endif
     }
 }
