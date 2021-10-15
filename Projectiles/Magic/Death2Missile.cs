@@ -48,10 +48,6 @@ namespace ChensGradiusMod.Projectiles.Magic
                     projectile.rotation = AngularLerp(projectile.rotation.ToRotationVector2(), projectile.Center, target.Center, .12f);
                 }
             }
-            else
-            {
-                projectile.rotation = (new Vector2(projectile.ai[0], projectile.ai[1]) - projectile.Center).ToRotation();
-            }
             projectile.velocity = projectile.rotation.ToRotationVector2() * currentSpeed;
             currentSpeed = Math.Min(MaxSpeed, currentSpeed + Acceleration);
         }

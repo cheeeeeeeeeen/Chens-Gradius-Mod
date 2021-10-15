@@ -72,18 +72,22 @@ namespace ChensGradiusMod.Items.Weapons.Magic
 
                 Vector2 firstAnchor = position + (velocity * 1000);
                 float angle = velocity.ToRotation() + MathHelper.PiOver2;
-                Vector2 targetPosition = firstAnchor + (angle.ToRotationVector2() * 100);
-                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 2), velocity, type, damage, knockBack, player.whoAmI, targetPosition.X, targetPosition.Y);
+                Vector2 targetVelocity = firstAnchor + (angle.ToRotationVector2() * 100) - position;
+                targetVelocity.Normalize();
+                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 2), targetVelocity, type, damage, knockBack, player.whoAmI);
 
-                targetPosition = firstAnchor + (angle.ToRotationVector2() * 300);
-                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 6), velocity, type, damage, knockBack, player.whoAmI, targetPosition.X, targetPosition.Y);
+                targetVelocity = firstAnchor + (angle.ToRotationVector2() * 300) - position;
+                targetVelocity.Normalize();
+                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 6), targetVelocity, type, damage, knockBack, player.whoAmI);
 
                 angle = velocity.ToRotation() + (3f * MathHelper.PiOver2);
-                targetPosition = firstAnchor + (angle.ToRotationVector2() * 100);
-                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 2), velocity, type, damage, knockBack, player.whoAmI, targetPosition.X, targetPosition.Y);
+                targetVelocity = firstAnchor + (angle.ToRotationVector2() * 100) - position;
+                targetVelocity.Normalize();
+                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 2), targetVelocity, type, damage, knockBack, player.whoAmI);
 
-                targetPosition = firstAnchor + (angle.ToRotationVector2() * 300);
-                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 6), velocity, type, damage, knockBack, player.whoAmI, targetPosition.X, targetPosition.Y);
+                targetVelocity = firstAnchor + (angle.ToRotationVector2() * 300) - position;
+                targetVelocity.Normalize();
+                Projectile.NewProjectile(position + (angle.ToRotationVector2() * 6), targetVelocity, type, damage, knockBack, player.whoAmI);
 
                 return false;
             }
