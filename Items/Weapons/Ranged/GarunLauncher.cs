@@ -31,7 +31,7 @@ namespace ChensGradiusMod.Items.Weapons.Ranged
             item.shoot = ModContent.ProjectileType<AlliedGarun>();
             item.shootSpeed = 10f;
             item.useAmmo = AmmoID.Rocket;
-            AssignItemDimensions(item, 76, 50);
+            AssignItemDimensions(item, 76, 50, false);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/GarunLauncher";

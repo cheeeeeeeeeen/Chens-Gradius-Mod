@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Aim
 {
@@ -17,7 +18,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Aim
         {
             base.SetDefaults();
 
-            item.width = 34;
+            AssignItemDimensions(item, 38, 52, true);
         }
 
         public override void PostUpdate()

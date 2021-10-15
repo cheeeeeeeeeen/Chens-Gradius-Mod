@@ -31,8 +31,8 @@ namespace ChensGradiusMod.Projectiles.Forces
         public override void SetDefaults()
         {
             projectile.netImportant = true;
-            projectile.width = 36;
-            projectile.height = 36;
+            projectile.width = 32;
+            projectile.height = 32;
             projectile.light = .75f;
             projectile.friendly = true;
             projectile.hostile = false;
@@ -40,6 +40,7 @@ namespace ChensGradiusMod.Projectiles.Forces
             projectile.penetrate = -1;
             projectile.usesLocalNPCImmunity = true;
             projectile.localNPCHitCooldown = 3;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 36, 216, 6);
         }
 
         public override bool PreAI()

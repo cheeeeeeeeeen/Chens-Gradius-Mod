@@ -33,7 +33,7 @@ namespace ChensGradiusMod.Items.Weapons.Magic
             item.knockBack = 0f;
             item.shootSpeed = MissileSpeed;
             item.autoReuse = false;
-            AssignItemDimensions(item, 96, 64);
+            AssignItemDimensions(item, 96, 64, false);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/DeathWeapon";

@@ -351,6 +351,7 @@ namespace ChensGradiusMod
                     int npcIndex = NewNPC(target.X, target.Y, npcType, center: true);
                     NPC npc = Main.npc[npcIndex];
                     Main.NewText(Language.GetTextValue("Announcement.HasAwoken", npc.GivenOrTypeName), 175, 75, 255);
+                    Main.PlaySound(SoundID.Roar, initialPosition, 0);
                 }
                 else
                 {
@@ -438,12 +439,14 @@ namespace ChensGradiusMod
             offsetY = -(frameHeight - projectile.height) / 2;
         }
 
-        public static void AssignItemDimensions(Item item, int originalWidth, int originalHeight)
+        public static void AssignItemDimensions(Item item, int originalWidth, int originalHeight, bool floating)
         {
             item.width = originalWidth;
-            if (originalWidth > 12) item.width -= 8;
+            if (!floating && originalWidth > 10) item.width -= 8;
+            else if (floating && originalWidth > 6) item.width -= 4;
             item.height = originalHeight;
-            if (originalHeight > 12) item.height -= 8;
+            if (!floating && originalHeight > 10) item.height -= 8;
+            else if (floating && originalWidth > 2) item.width -= 2;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace ChensGradiusMod.Items.Weapons.Melee
             item.rare = (int)GradiusRarity.BigCore;
             item.autoReuse = true;
             item.value = Item.sellPrice(0, 30, 0, 0);
-            AssignItemDimensions(item, 30, 26);
+            AssignItemDimensions(item, 30, 26, false);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/ZalkYoyoItem";

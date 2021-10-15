@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options.Recurve
 {
@@ -22,7 +23,7 @@ namespace ChensGradiusMod.Items.Accessories.Options.Recurve
         {
             base.SetDefaults();
 
-            item.width = 32;
+            AssignItemDimensions(item, 36, 52, true);
         }
 
         public override void PostUpdate()

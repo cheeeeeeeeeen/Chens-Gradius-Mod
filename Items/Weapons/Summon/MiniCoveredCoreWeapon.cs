@@ -20,8 +20,6 @@ namespace ChensGradiusMod.Items.Weapons.Summon
         {
             item.damage = 100;
             item.mana = 20;
-            item.width = 50;
-            item.height = 50;
             item.useTime = item.useAnimation = 25;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.noMelee = true;
@@ -34,7 +32,7 @@ namespace ChensGradiusMod.Items.Weapons.Summon
             item.shootSpeed = 10f;
             item.summon = true;
             item.sentry = true;
-            AssignItemDimensions(item, 50, 50);
+            AssignItemDimensions(item, 50, 50, false);
         }
 
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)

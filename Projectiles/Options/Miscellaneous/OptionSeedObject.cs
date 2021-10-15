@@ -32,8 +32,9 @@ namespace ChensGradiusMod.Projectiles.Options.Miscellaneous
         {
             base.SetDefaults();
 
-            projectile.width = 16;
+            projectile.width = 10;
             projectile.height = 10;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 16, 60, 6);
         }
 
         public override bool PreAI()

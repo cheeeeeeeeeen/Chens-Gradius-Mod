@@ -1,5 +1,6 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Placeables.MusicBoxes
 {
@@ -13,11 +14,9 @@ namespace ChensGradiusMod.Items.Placeables.MusicBoxes
             item.useTime = 10;
             item.autoReuse = true;
             item.consumable = true;
-            item.width = 32;
-            item.height = 20;
             item.rare = ItemRarityID.Yellow; // 8
-            item.value = 100000;
             item.accessory = true;
+            AssignItemDimensions(item, 32, 20, false);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/PlaceholderMusicBox";

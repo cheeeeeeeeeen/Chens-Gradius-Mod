@@ -27,12 +27,13 @@ namespace ChensGradiusMod.Projectiles.Options
         public override void SetDefaults()
         {
             projectile.netImportant = true;
-            projectile.width = 28;
+            projectile.width = 20;
             projectile.height = 20;
             projectile.light = .1f;
             projectile.tileCollide = false;
             projectile.penetrate = -1;
             projectile.minion = true;
+            ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 28, 180, 9);
         }
 
         public override bool PreAI()

@@ -6,20 +6,6 @@ namespace ChensGradiusMod.Items.Accessories.Options.Turret
 {
     public abstract class TurretOptionBase : OptionBase
     {
-        //public override void SetStaticDefaults()
-        //{
-        //  base.SetStaticDefaults();
-        //  Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(6, 6));
-        //}
-
-        //public override void SetDefaults()
-        //{
-        //  base.SetDefaults();
-
-        //  item.width = 44;
-        //  item.height = 58;
-        //}
-
         public override void PostUpdate()
         {
             Lighting.AddLight(item.Center, .1f, .1f, .1f);

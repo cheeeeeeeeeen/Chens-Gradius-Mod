@@ -20,9 +20,8 @@ namespace ChensGradiusMod.Items.Accessories.Options
         public override void SetDefaults()
         {
             base.SetDefaults();
-            item.width = 40;
-            item.height = 50;
             item.value = ComputeItemValue(OptionPosition);
+            AssignItemDimensions(item, 44, 52, true);
         }
 
         public override string Texture => $"ChensGradiusMod/Sprites/{ProjectileType}Inv{OptionPosition}";

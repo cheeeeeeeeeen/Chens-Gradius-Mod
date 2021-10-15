@@ -25,9 +25,8 @@ namespace ChensGradiusMod.Items.Accessories.Options.Miscellaneous
         {
             base.SetDefaults();
 
-            item.width = 20;
-            item.height = 26;
             item.rare = ItemRarityID.Blue; // 1
+            AssignItemDimensions(item, 24, 30, true);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Banners
 {
@@ -8,8 +9,6 @@ namespace ChensGradiusMod.Items.Banners
     {
         public override void SetDefaults()
         {
-            item.width = 10;
-            item.height = 24;
             item.maxStack = 99;
             item.useTurn = true;
             item.autoReuse = true;
@@ -21,6 +20,7 @@ namespace ChensGradiusMod.Items.Banners
             item.value = Item.buyPrice(silver: 10);
             item.createTile = PartnerTile;
             item.placeStyle = PlaceStyle;
+            AssignItemDimensions(item, 12, 28, false);
         }
 
         public override string Texture => $"ChensGradiusMod/Sprites/{Name}";

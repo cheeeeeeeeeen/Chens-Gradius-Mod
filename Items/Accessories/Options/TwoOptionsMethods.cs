@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Accessories.Options
 {
@@ -64,10 +65,6 @@ namespace ChensGradiusMod.Items.Accessories.Options
             ResetProjectileCounts(player);
         }
 
-        public static void SetDefaults(Item item)
-        {
-            item.width = 44;
-            item.height = 36;
-        }
+        public static void SetDefaults(Item item) => AssignItemDimensions(item, 44, 38, true);
     }
 }

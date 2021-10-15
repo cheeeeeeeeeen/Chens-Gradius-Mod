@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.Items.Bags
 {
@@ -16,10 +17,9 @@ namespace ChensGradiusMod.Items.Bags
         {
             item.maxStack = 999;
             item.consumable = true;
-            item.width = 32;
-            item.height = 32;
             item.rare = ItemRarityID.Expert;
             item.expert = true;
+            AssignItemDimensions(item, 32, 32, false);
         }
 
         public override bool CanRightClick()

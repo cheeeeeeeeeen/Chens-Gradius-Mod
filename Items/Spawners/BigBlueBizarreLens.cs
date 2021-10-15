@@ -1,4 +1,5 @@
 ﻿using ChensGradiusMod.NPCs;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,8 +18,6 @@ namespace ChensGradiusMod.Items.Spawners
 
         public override void SetDefaults()
         {
-            item.width = 52;
-            item.height = 62;
             item.maxStack = 20;
             item.value = Item.sellPrice(silver: 150);
             item.rare = ItemRarityID.Purple; // 11
@@ -26,6 +25,7 @@ namespace ChensGradiusMod.Items.Spawners
             item.useTime = 30;
             item.useStyle = ItemUseStyleID.HoldingUp;
             item.consumable = true;
+            AssignItemDimensions(item, 56, 66, false);
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/BlueCore";
@@ -39,6 +39,11 @@ namespace ChensGradiusMod.Items.Spawners
         {
             SummonBoss(mod, player, BossType, 100);
             return true;
+        }
+
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(-10, 0);
         }
 
         protected virtual string ItemTooltip =>
