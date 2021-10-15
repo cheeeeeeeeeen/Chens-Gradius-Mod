@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.9
+[B][U][SIZE=6]Mod Version: 1.2.10
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -244,6 +244,22 @@ Explode pattern is a group of bullets fired in all directions in a single shot. 
 [*]It will drop from Big Core Custom.
 [*][SPOILER="Showcase"][IMG]https://i.imgur.com/c53IZRb.gif[/IMG][IMG]https://i.imgur.com/z9liOZH.gif[/IMG][/SPOILER]
 [/LIST]
+[*]DES Advanced Cannon
+[LIST]
+[*]A cute Death Mini becomes a weapon!
+[*]Left click to fire laser.
+[*]Right click to fire missiles.
+[*]It will drop from Big Core Custom.
+[*][SPOILER="Showcase"][IMG]https://puu.sh/Iiqgh.gif[/IMG][/SPOILER]
+[/LIST]
+[*]Bacterian Frigate
+[LIST]
+[*]Weaponize a spacecraft carrier!
+[*]Consume rockets to deploy allied Garuns to shoot down enemies!
+[*]They also deal a huge chunk of contact damage.
+[*]It will drop from Big Core Custom.
+[*][SPOILER="Showcase"][IMG]https://puu.sh/Iiqex.gif[/IMG][/SPOILER]
+[/LIST]
 [/LIST]
 [/SPOILER]
 
@@ -272,7 +288,12 @@ Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]her
 
 1.2.10
   - Implement Bacterian Frigate, a ranged weapon that deploys allied Garun units to destroy enemies by shooting at them.
+  - Add Bacterion Frigate to Big Core Custom's loot table.
   - Have Zelos Influence only use universal modifiers as a Yoyo.
+  - Improve the homing behavior capabilities of projectiles from Chen's Gradius Mod.
+  - Adjust all the hitboxes of projectiles, NPCs and items so that they are visually better and more accurate to what the graphics display on screen.
+  - Decrease the number of sprites Big Core Custom has as there were issues presented by this
+  - Big Core Custom will now only have the core opening animation.
 
 1.2.9
   - Implement DES Advanced Cannon, a magic weapon inspired by Death MKII.

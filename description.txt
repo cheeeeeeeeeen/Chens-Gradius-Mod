@@ -46,6 +46,7 @@ New Weapons:
 1. Uncanny Core Remote Rod
 2. Zelos Influence
 3. DES Advanced Cannon
+4. Bacterian Frigate
 
 Boss Checklist integration so that Big Core Custom will appear properly.
 Hero's Mod integration so that not anybody can edit the mod configuration file.
