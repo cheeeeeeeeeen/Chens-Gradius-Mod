@@ -44,7 +44,7 @@ namespace ChensGradiusMod.Projectiles.Ranged
             AnimateProjectile(projectile, 2);
             if (++reloadTick >= ReloadTime)
             {
-                int npcInd = FindTarget(projectile.Center, projectile.Center, 500);
+                int npcInd = FindTarget(projectile, projectile.Center, 500, true);
                 if (npcInd >= 0)
                 {
                     Vector2 velocity = Main.npc[npcInd].Center - projectile.Center;

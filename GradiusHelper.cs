@@ -311,7 +311,7 @@ namespace ChensGradiusMod
             };
         }
 
-        public static int FindTarget(Vector2 projPosition, Vector2 ownPosition, float range)
+        public static int FindTarget(Projectile projectile, Vector2 ownPosition, float range, bool needLineOfSight)
         {
             float shortestDistance = range;
             int target = -1;
@@ -319,11 +319,12 @@ namespace ChensGradiusMod
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC selectNpc = Main.npc[i];
-                float distance = Vector2.Distance(projPosition, selectNpc.Center);
+                float distance = Vector2.Distance(projectile.Center, selectNpc.Center);
                 float enemyDistance = Vector2.Distance(ownPosition, selectNpc.Center);
 
-                if (enemyDistance <= range && distance < shortestDistance && !selectNpc.friendly &&
-                    (selectNpc.active || selectNpc.life > 0) && !IsCritter(selectNpc))
+                if (enemyDistance <= range && distance < shortestDistance && selectNpc.CanBeChasedBy() &&
+                    (selectNpc.modNPC.CanBeHitByProjectile(projectile) ?? true) &&
+                    (!needLineOfSight || Collision.CanHit(projectile.Center, 1, 1, selectNpc.Center, 1, 1)))
                 {
                     shortestDistance = distance;
                     target = i;

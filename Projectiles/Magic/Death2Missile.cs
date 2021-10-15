@@ -32,7 +32,7 @@ namespace ChensGradiusMod.Projectiles.Magic
             projectile.tileCollide = true;
             projectile.magic = true;
             projectile.timeLeft = 300 + HomeInTime;
-            projectile.light = .4f;
+            projectile.light = .3f;
             ComputeCenterFromHitbox(projectile, ref drawOffsetX, ref drawOriginOffsetY, 32, 14, 1);
         }
 
@@ -41,11 +41,11 @@ namespace ChensGradiusMod.Projectiles.Magic
             projectile.rotation = projectile.velocity.ToRotation();
             if (homeTick++ >= HomeInTime)
             {
-                int npcInd = FindTarget(projectile.Center, projectile.Center, DetectRange);
+                int npcInd = FindTarget(projectile, projectile.Center, DetectRange, true);
                 if (npcInd >= 0)
                 {
                     NPC target = Main.npc[npcInd];
-                    projectile.rotation = AngularLerp(projectile.rotation.ToRotationVector2(), projectile.Center, target.Center, .1f);
+                    projectile.rotation = AngularLerp(projectile.rotation.ToRotationVector2(), projectile.Center, target.Center, .12f);
                 }
             }
             else

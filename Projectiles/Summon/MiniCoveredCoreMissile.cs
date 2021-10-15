@@ -23,8 +23,8 @@ namespace ChensGradiusMod.Projectiles.Summon
 
         public override void SetDefaults()
         {
-            projectile.width = 20;
-            projectile.height = 20;
+            projectile.width = 22;
+            projectile.height = 22;
             projectile.friendly = true;
             projectile.minion = true;
             projectile.minionSlots = 0f;
@@ -47,7 +47,7 @@ namespace ChensGradiusMod.Projectiles.Summon
             projectile.rotation = projectile.velocity.ToRotation();
             if (currentTarget < 0 || (currentTarget >= 0 && !EntityTarget.active))
             {
-                currentTarget = FindTarget(projectile.Center, MasterProjectile.Center, DetectionRange);
+                currentTarget = FindTarget(projectile, MasterProjectile.Center, DetectionRange, false);
             }
             if (currentTarget >= 0 && EntityTarget.active)
             {

@@ -154,7 +154,7 @@ namespace ChensGradiusMod.Projectiles.Options.Search
         {
             if (target < 0 || !Target.active || Target.life <= 0)
             {
-                target = FindTarget(projectile.Center, Owner.position, SeekDistance);
+                target = FindTarget(projectile, Owner.position, SeekDistance, false);
             }
 
             return target >= 0;

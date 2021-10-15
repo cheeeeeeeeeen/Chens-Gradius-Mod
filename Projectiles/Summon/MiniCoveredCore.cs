@@ -79,7 +79,7 @@ namespace ChensGradiusMod.Projectiles.Summon
             {
                 for (int i = 1; i <= 3; i++)
                 {
-                    float computedSpeed = Speed * i;
+                    float computedSpeed = Speed + Speed * i;
                     Projectile.NewProjectile(projectile.Center + new Vector2(0, 36), new Vector2(0, 1) * computedSpeed, ModContent.ProjectileType<MiniCoveredCoreMissile>(),
                                              projectile.damage, projectile.knockBack, projectile.owner, projectile.whoAmI, computedSpeed);
                 }
@@ -88,7 +88,7 @@ namespace ChensGradiusMod.Projectiles.Summon
             {
                 for (int i = 1; i <= 3; i++)
                 {
-                    float computedSpeed = Speed * i;
+                    float computedSpeed = Speed + Speed * i;
                     Projectile.NewProjectile(projectile.Center - new Vector2(0, 36), new Vector2(0, -1) * computedSpeed, ModContent.ProjectileType<MiniCoveredCoreMissile>(),
                                              projectile.damage, projectile.knockBack, projectile.owner, projectile.whoAmI, computedSpeed);
                 }

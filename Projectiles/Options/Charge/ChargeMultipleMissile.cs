@@ -127,7 +127,7 @@ namespace ChensGradiusMod.Projectiles.Options.Charge
         private void SeekEnemy()
         {
             Vector2 ownerPosition = Main.player[projectile.owner].Center;
-            enemyTarget = FindTarget(projectile.Center, ownerPosition, DetectionRange);
+            enemyTarget = FindTarget(projectile, ownerPosition, DetectionRange, false);
 
             if (oldEnemyTarget != enemyTarget)
             {
