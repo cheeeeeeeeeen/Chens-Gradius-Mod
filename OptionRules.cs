@@ -1,5 +1,6 @@
-﻿using ChensGradiusMod.Items.Weapons.Magic;
-using ChensGradiusMod.Projectiles.Aliens;
+﻿using ChensGradiusMod.Projectiles.Aliens;
+using ChensGradiusMod.Projectiles.Magic;
+using ChensGradiusMod.Projectiles.Ranged;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -22,8 +23,7 @@ namespace ChensGradiusMod
             new AlienWeapon(ItemID.Megashark),
             new AlienWeapon(ItemID.Gatligator),
             new AlienWeapon(ItemID.ChainGun),
-            new AlienWeapon(ItemID.SDMG),
-            new AlienWeapon(ModContent.ItemType<Death2Weapon>())
+            new AlienWeapon(ItemID.SDMG)
         };
 
         private static readonly List<AlienProjectile> BannedProjectiles = new List<AlienProjectile>()
@@ -36,7 +36,9 @@ namespace ChensGradiusMod
             new AlienProjectile(ProjectileID.Bomb),
             new AlienProjectile(ProjectileID.BombFish),
             new AlienProjectile(ProjectileID.BouncyBomb),
-            new AlienProjectile(ProjectileID.StickyBomb)
+            new AlienProjectile(ProjectileID.StickyBomb),
+            new AlienProjectile(ModContent.ProjectileType<Death2Laser>()),
+            new AlienProjectile(ModContent.ProjectileType<AlliedBacterionBullet>())
         };
 
         private static readonly List<AlienWeaponProjectilePair> BannedWeaponProjectilePairs = new List<AlienWeaponProjectilePair>()
