@@ -323,7 +323,7 @@ namespace ChensGradiusMod
                 float enemyDistance = Vector2.Distance(ownPosition, selectNpc.Center);
 
                 if (enemyDistance <= range && distance < shortestDistance && selectNpc.CanBeChasedBy() &&
-                    (selectNpc.modNPC.CanBeHitByProjectile(projectile) ?? true) &&
+                    (NPCLoader.CanBeHitByProjectile(selectNpc, projectile) ?? true) &&
                     (!needLineOfSight || Collision.CanHit(projectile.Center, 1, 1, selectNpc.Center, 1, 1)))
                 {
                     shortestDistance = distance;

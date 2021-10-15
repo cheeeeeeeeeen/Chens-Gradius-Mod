@@ -39,8 +39,12 @@ namespace ChensGradiusMod.Projectiles.Melee
 
         public override void AI()
         {
-            AnimateSprite();
-            Movement();
+            if (IsMotherValid)
+            {
+                AnimateSprite();
+                Movement();
+            }
+            else projectile.Kill();
         }
 
         public override void Kill(int timeLeft)
@@ -49,7 +53,7 @@ namespace ChensGradiusMod.Projectiles.Melee
                                 mod.GetGoreSlot("Gores/GradiusExplode"), .5f);
             Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Enemies/Gradius2Death"),
                            projectile.Center);
-            ActualMotherProjectile.alliedZalks.Remove(projectile);
+            if (IsMotherValid) ActualMotherProjectile.alliedZalks.Remove(projectile);
         }
 
         private void AnimateSprite()
@@ -81,5 +85,7 @@ namespace ChensGradiusMod.Projectiles.Melee
         private ZalkYoyoProjectile ActualMotherProjectile => MotherProjectile.modProjectile as ZalkYoyoProjectile;
 
         private int Numbering => ActualMotherProjectile.alliedZalks.IndexOf(projectile);
+
+        private bool IsMotherValid => MotherProjectile.active && ActualMotherProjectile != null;
     }
 }
