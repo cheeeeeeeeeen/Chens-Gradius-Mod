@@ -1,6 +1,7 @@
 ﻿using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Items.Weapons.Magic;
 using ChensGradiusMod.Items.Weapons.Melee;
+using ChensGradiusMod.Items.Weapons.Ranged;
 using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.NPCs;
 using System;
@@ -18,14 +19,14 @@ namespace ChensGradiusMod.Items.Bags
         public override void OpenBossBag(Player player)
         {
             AddDropTable(player, new WeightedRandom<int>(Main.rand.Next(),
-                Tuple.Create(ModContent.ItemType<AircraftCarrierMusicBox>(), 20d),
-                Tuple.Create(0, 80d)
+                Tuple.Create(ModContent.ItemType<AircraftCarrierMusicBox>(), 1d),
+                Tuple.Create(0, 4d)
             ));
             AddDropTable(player, new WeightedRandom<int>(Main.rand.Next(),
-                Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 25d),
-                Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 25d),
-                Tuple.Create(ModContent.ItemType<Death2Weapon>(), 25d),
-                Tuple.Create(0, 25d)
+                Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 1d),
+                Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 1d),
+                Tuple.Create(ModContent.ItemType<Death2Weapon>(), 1d),
+                Tuple.Create(ModContent.ItemType<GarunLauncher>(), 1d)
             ));
         }
 

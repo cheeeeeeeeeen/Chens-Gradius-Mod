@@ -4,6 +4,7 @@ using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Items.Spawners;
 using ChensGradiusMod.Items.Weapons.Magic;
 using ChensGradiusMod.Items.Weapons.Melee;
+using ChensGradiusMod.Items.Weapons.Ranged;
 using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.NPCs;
 using ChensGradiusMod.Projectiles.Enemies;
@@ -301,6 +302,7 @@ namespace ChensGradiusMod
                 List<int> lootDrops = new List<int>
                 {
                     ModContent.ItemType<ZalkYoyo>(),
+                    ModContent.ItemType<GarunLauncher>(),
                     ModContent.ItemType<Death2Weapon>(),
                     ModContent.ItemType<MiniCoveredCoreWeapon>(),
                     ModContent.ItemType<BigCoreCustomBag>(),

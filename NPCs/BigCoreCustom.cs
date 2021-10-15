@@ -5,6 +5,7 @@ using ChensGradiusMod.Items.Banners;
 using ChensGradiusMod.Items.Placeables.MusicBoxes;
 using ChensGradiusMod.Items.Weapons.Magic;
 using ChensGradiusMod.Items.Weapons.Melee;
+using ChensGradiusMod.Items.Weapons.Ranged;
 using ChensGradiusMod.Items.Weapons.Summon;
 using ChensGradiusMod.Projectiles.Enemies;
 using Microsoft.Xna.Framework;
@@ -168,17 +169,18 @@ namespace ChensGradiusMod.NPCs
         public override void NPCLoot()
         {
             AddDropTable(npc, new WeightedRandom<int>(Main.rand.Next(),
-                Tuple.Create(ModContent.ItemType<AircraftCarrierMusicBox>(), 10d),
-                Tuple.Create(0, 90d)
+                Tuple.Create(ModContent.ItemType<AircraftCarrierMusicBox>(), 1d),
+                Tuple.Create(0, 9d)
             ));
             if (Main.expertMode) npc.DropBossBags();
             else
             {
                 AddDropTable(npc, new WeightedRandom<int>(Main.rand.Next(),
-                    Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 10d),
-                    Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 10d),
-                    Tuple.Create(ModContent.ItemType<Death2Weapon>(), 10d),
-                    Tuple.Create(0, 70d)
+                    Tuple.Create(ModContent.ItemType<MiniCoveredCoreWeapon>(), 1d),
+                    Tuple.Create(ModContent.ItemType<ZalkYoyo>(), 1d),
+                    Tuple.Create(ModContent.ItemType<Death2Weapon>(), 1d),
+                    Tuple.Create(ModContent.ItemType<GarunLauncher>(), 1d),
+                    Tuple.Create(0, 6d)
                 ));
             }
 
