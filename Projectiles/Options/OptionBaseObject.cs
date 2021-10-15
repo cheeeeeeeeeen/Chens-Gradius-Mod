@@ -136,7 +136,7 @@ namespace ChensGradiusMod.Projectiles.Options
             float newKnockback = p.knockBack * GradiusModConfig.Instance.optionDamageMultiplier;
             return Projectile.NewProjectile(ComputeOffset(Main.player[p.owner].Center, p.Center),
                                             p.velocity, p.type, newDamage, newKnockback,
-                                            projectile.owner, 0f, 0f);
+                                            projectile.owner, p.ai[0], p.ai[1]);
         }
 
         protected virtual void SetDuplicateDefaults(Projectile p) => p.noDropItem = true;
