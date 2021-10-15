@@ -1,7 +1,7 @@
 Hello. I decided to share my mod here in the forums. I'm not very good at documenting, but it will improve as time passes. Without further ado...
 
 [IMG]https://i.imgur.com/FKqzjlB.png[/IMG]
-[B][U][SIZE=6]Mod Version: 1.2.10
+[B][U][SIZE=6]Mod Version: 1.2.11
 tModLoader: 0.11.8.5
 The mod will be ported to tModLoader 1.4! Stay tuned![/SIZE][/U][/B]
 
@@ -285,6 +285,10 @@ For more information, visit this [URL=https://github.com/cheeeeeeeeeen/Chens-Gra
 [SPOILER="Changelog"]
 The content is moved because it's hard to maintain a Wiki and a main post! However, the latest version change will still be here.
 Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]here[/URL] for the full changelog.
+
+1.2.11
+  - Fix an exception where the smart targeting did not have safe checks.
+  - Fix an exception where orphaned Allied Zalks would still look for a null mother.
 
 1.2.10
   - Implement Bacterian Frigate, a ranged weapon that deploys allied Garun units to destroy enemies by shooting at them.
