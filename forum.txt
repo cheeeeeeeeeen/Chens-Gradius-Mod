@@ -294,6 +294,9 @@ Click [URL=https://github.com/cheeeeeeeeeen/Chens-Gradius-Mod/wiki/Changelog]her
   - Adjust all the hitboxes of projectiles, NPCs and items so that they are visually better and more accurate to what the graphics display on screen.
   - Decrease the number of sprites Big Core Custom has as there were issues presented by this
   - Big Core Custom will now only have the core opening animation.
+  - Add Ban Option Rule to the laser of DES Advanced Cannon as it does not benefit from multiple lasers.
+  - Improve implementation of DES Advanced Cannon missiles so that Options are able to duplicate them properly.
+  - Improve Options implementation so that the AI array is also carried over to the duplicates.
 
 1.2.9
   - Implement DES Advanced Cannon, a magic weapon inspired by Death MKII.
