@@ -205,6 +205,14 @@ namespace ChensGradiusMod
             return npcIndex;
         }
 
+        public static NPC NewNPCDirect(float X, float Y, int Type, int Start = 0, int ai0 = 0,
+                                       int ai1 = 0, int ai2 = 0, int ai3 = 0, int Target = 255,
+                                       bool center = false)
+        {
+            int npcIndex = NewNPC(X, Y, Type, Start, ai0, ai1, ai2, ai3, Target, center);
+            return Main.npc[npcIndex];
+        }
+
         public static int UnderworldTilesYLocation => Main.maxTilesY - 200;
 
         public static int SkyTilesYLocation => RoundOffToWhole((float)Main.worldSurface * .35f);
@@ -438,6 +446,12 @@ namespace ChensGradiusMod
             int frameHeight = textureHeight / frames;
             offsetX = -(frameWidth - projectile.width) / 2;
             offsetY = -(frameHeight - projectile.height) / 2;
+        }
+
+        public static void ComputeCenterFromHitbox(NPC npc, ref float offsetY, int textureHeight, int frames)
+        {
+            int frameHeight = textureHeight / frames;
+            offsetY = (frameHeight - npc.height) / 2 - 3;
         }
 
         public static void AssignItemDimensions(Item item, int originalWidth, int originalHeight, bool floating)

@@ -50,7 +50,7 @@ namespace ChensGradiusMod.NPCs
 
         private readonly Vector2 exitVelocity = new Vector2(.1f, 0);
 
-        public enum States { RegularAssault, Exit };
+        private enum States { RegularAssault, Exit };
 
         public override void SetStaticDefaults()
         {
