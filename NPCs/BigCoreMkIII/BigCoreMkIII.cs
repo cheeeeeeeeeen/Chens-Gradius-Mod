@@ -13,7 +13,8 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         private bool initialized = false;
         private readonly Dictionary<NPC, Vector2> anchors = new Dictionary<NPC, Vector2>();
         private readonly List<NPC> parts = new List<NPC>();
-        private readonly Dictionary<NPC, Rectangle> sourceRectangles = new Dictionary<NPC, Rectangle>();
+        private readonly Dictionary<NPC, Rectangle?> sourceRectangles = new Dictionary<NPC, Rectangle?>();
+        private readonly List<NPC> lids = new List<NPC>();
 
         // Parts
 
@@ -38,6 +39,9 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         private NPC middleBarrier7;
         private NPC middleBarrier8;
         private NPC backRods;
+        private NPC partTendons;
+        private NPC upperLid;
+        private NPC lowerLid;
 
         public override void SetStaticDefaults()
         {
@@ -97,8 +101,20 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             {
                 if (part.active)
                 {
-                    SpriteEffects effects = part.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-                    spriteBatch.Draw(Main.npcTexture[part.type], part.TopLeft - Main.screenPosition, sourceRectangles[part],
+                    SpriteEffects effects = SpriteEffects.None;
+                    Vector2 drawPosition = part.TopLeft - Main.screenPosition;
+                    if (part.spriteDirection > 0)
+                    {
+                        effects |= SpriteEffects.FlipHorizontally;
+                        if (lids.Contains(part))
+                        {
+                            effects |= SpriteEffects.FlipVertically;
+                            drawPosition += new Vector2(0, -2);
+                        }
+
+                        //effects = SpriteEffects.FlipHorizontally;
+                    }
+                    spriteBatch.Draw(Main.npcTexture[part.type], drawPosition, sourceRectangles[part],
                                      Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
                 }
             }
@@ -142,6 +158,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         private void AssignParts()
         {
             backRods = CreatePart<BackRods>();
+            partTendons = CreatePart<Tendons>();
             middleBarrier1 = CreatePart<Barrier>();
             middleBarrier2 = CreatePart<Barrier>();
             middleBarrier3 = CreatePart<Barrier>();
@@ -162,6 +179,11 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             partCore1 = CreatePart<Core>();
             partCore2 = CreatePart<Core>();
             partCore3 = CreatePart<Core>();
+            upperLid = CreatePart<UpperLid>();
+            lowerLid = CreatePart<LowerLid>();
+
+            lids.Add(upperLid);
+            lids.Add(lowerLid);
         }
 
         private void AssignAnchors()
@@ -187,6 +209,9 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             anchors[middleBarrier7] = new Vector2(132, 74);
             anchors[middleBarrier8] = new Vector2(142, 74);
             anchors[backRods] = new Vector2(196, 98);
+            anchors[partTendons] = new Vector2(72, 196);
+            anchors[upperLid] = new Vector2(103, 68);
+            anchors[lowerLid] = new Vector2(103, 142);
         }
 
         private void AlignParts()
@@ -221,6 +246,9 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             sourceRectangles[middleBarrier7] = new Rectangle(0, 0, 4, 14);
             sourceRectangles[middleBarrier8] = new Rectangle(0, 0, 4, 14);
             sourceRectangles[backRods] = new Rectangle(0, 0, 24, 62);
+            sourceRectangles[partTendons] = new Rectangle(0, 0, 48, 258);
+            sourceRectangles[upperLid] = null;
+            sourceRectangles[lowerLid] = null;
         }
     }
 }
