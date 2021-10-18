@@ -3,11 +3,11 @@ using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs.BigCoreMkIII
 {
-    public class Barrier : Part
+    public class Torso : Part
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Barrier");
+            DisplayName.SetDefault("Core");
             Main.npcFrameCount[npc.type] = 1;
         }
 
@@ -15,13 +15,13 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         {
             base.SetDefaults();
 
-            npc.width = 4;
-            npc.height = 12;
+            npc.width = 124;
+            npc.height = 32;
             npc.lifeMax = 1;
-            ComputeCenterFromHitbox(npc, ref drawOffsetY, 14, 1);
+            ComputeCenterFromHitbox(npc, ref drawOffsetY, 34, 1);
             ScaleStats();
         }
 
-        public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Barrier";
+        public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Torso";
     }
 }

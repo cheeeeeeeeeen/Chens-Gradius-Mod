@@ -17,11 +17,16 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
             npc.width = 24;
             npc.height = 24;
-            npc.lifeMax = 4000;
+            npc.lifeMax = 1;
             ComputeCenterFromHitbox(npc, ref drawOffsetY, 156, 6);
             ScaleStats();
         }
 
         public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Core";
+
+        public override void FindFrame(int frameHeight)
+        {
+            base.FindFrame(frameHeight);
+        }
     }
 }
