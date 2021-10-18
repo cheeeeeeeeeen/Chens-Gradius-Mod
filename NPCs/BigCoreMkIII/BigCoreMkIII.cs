@@ -37,6 +37,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         private NPC middleBarrier6;
         private NPC middleBarrier7;
         private NPC middleBarrier8;
+        private NPC backRods;
 
         public override void SetStaticDefaults()
         {
@@ -140,6 +141,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
         private void AssignParts()
         {
+            backRods = CreatePart<BackRods>();
             middleBarrier1 = CreatePart<Barrier>();
             middleBarrier2 = CreatePart<Barrier>();
             middleBarrier3 = CreatePart<Barrier>();
@@ -184,6 +186,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             anchors[middleBarrier6] = new Vector2(122, 74);
             anchors[middleBarrier7] = new Vector2(132, 74);
             anchors[middleBarrier8] = new Vector2(142, 74);
+            anchors[backRods] = new Vector2(196, 98);
         }
 
         private void AlignParts()
@@ -217,6 +220,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             sourceRectangles[middleBarrier6] = new Rectangle(0, 0, 4, 14);
             sourceRectangles[middleBarrier7] = new Rectangle(0, 0, 4, 14);
             sourceRectangles[middleBarrier8] = new Rectangle(0, 0, 4, 14);
+            sourceRectangles[backRods] = new Rectangle(0, 0, 24, 62);
         }
     }
 }

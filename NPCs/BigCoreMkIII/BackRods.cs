@@ -3,7 +3,7 @@ using static ChensGradiusMod.GradiusHelper;
 
 namespace ChensGradiusMod.NPCs.BigCoreMkIII
 {
-    public class Torso : Part
+    public class BackRods : Part
     {
         public override void SetStaticDefaults()
         {
@@ -15,13 +15,13 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         {
             base.SetDefaults();
 
-            npc.width = 124;
-            npc.height = 32;
+            npc.width = 24;
+            npc.height = 60;
             npc.lifeMax = 1000000;
-            ComputeCenterFromHitbox(npc, ref drawOffsetY, 34, 1);
+            ComputeCenterFromHitbox(npc, ref drawOffsetY, 62, 1);
         }
 
-        public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Torso";
+        public override string Texture => "ChensGradiusMod/Sprites/BigCore3/BackRods";
 
         public override bool? CanBeHitByItem(Player player, Item item) => false;
 
