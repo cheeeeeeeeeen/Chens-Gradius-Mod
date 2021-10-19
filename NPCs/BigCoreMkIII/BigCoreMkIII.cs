@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,10 +12,14 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
     public class BigCoreMkIII : GradiusEnemy
     {
         private bool initialized = false;
+        private BodyStates currentBodyState = BodyStates.Closed;
         private readonly Dictionary<NPC, Vector2> anchors = new Dictionary<NPC, Vector2>();
         private readonly List<NPC> parts = new List<NPC>();
         private readonly Dictionary<NPC, Rectangle?> sourceRectangles = new Dictionary<NPC, Rectangle?>();
         private readonly List<NPC> lids = new List<NPC>();
+        private readonly Dictionary<NPC, Vector2> openLidAnchors = new Dictionary<NPC, Vector2>();
+        private readonly Dictionary<NPC, Vector2> closeLidAnchors = new Dictionary<NPC, Vector2>();
+        private readonly Dictionary<NPC, Func<Vector2>> drawPositions = new Dictionary<NPC, Func<Vector2>>();
 
         // Parts
 
@@ -117,8 +122,17 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
         public override void AI()
         {
-            // Update positions before this
+            switch (currentBodyState)
+            {
+                case BodyStates.Opening:
+                    OpenLids();
+                    break;
+            }
             npc.spriteDirection = -1;
+            if (modPartCore1.currentState == Core.States.Open) currentBodyState = BodyStates.Opening;
+            //npc.position += new Vector2(0, -1);
+
+            // Update positions before this
             AlignParts();
             UpdateSourceRectangles();
         }
@@ -130,7 +144,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
                 if (!part.active || part.hide) continue;
 
                 SpriteEffects effects = SpriteEffects.None;
-                Vector2 drawPosition = part.TopLeft - Main.screenPosition;
+                Vector2 drawPosition = drawPositions[part] == null ? part.TopLeft - Main.screenPosition : drawPositions[part]();
                 if (part.spriteDirection > 0)
                 {
                     effects |= SpriteEffects.FlipHorizontally;
@@ -139,8 +153,6 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
                         effects |= SpriteEffects.FlipVertically;
                         drawPosition += new Vector2(0, -2);
                     }
-
-                    //effects = SpriteEffects.FlipHorizontally;
                 }
                 spriteBatch.Draw(Main.npcTexture[part.type], drawPosition, sourceRectangles[part],
                                  Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
@@ -180,6 +192,8 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             NPC newPart = NewNPCDirect(npc.position.X, npc.position.Y, ModContent.NPCType<T>(), ai0: npc.whoAmI);
             parts.Add(newPart);
             modNPC = newPart.modNPC as T;
+            drawPositions[newPart] = null;
+            sourceRectangles[newPart] = null;
             return newPart;
         }
 
@@ -240,6 +254,11 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             anchors[partTendons] = new Vector2(72, 196);
             anchors[upperLid] = new Vector2(103, 68);
             anchors[lowerLid] = new Vector2(103, 142);
+
+            closeLidAnchors[upperLid] = new Vector2(103, 68);
+            closeLidAnchors[lowerLid] = new Vector2(103, 142);
+            openLidAnchors[upperLid] = new Vector2(103, -12);
+            openLidAnchors[lowerLid] = new Vector2(103, 222);
         }
 
         private void AssignSourceRectangles()
@@ -247,27 +266,39 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             sourceRectangles[partCore1] = new Rectangle(0, 0, 24, 26);
             sourceRectangles[partCore2] = new Rectangle(0, 0, 24, 26);
             sourceRectangles[partCore3] = new Rectangle(0, 0, 24, 26);
-            sourceRectangles[upperBarrier1] = null;
-            sourceRectangles[upperBarrier2] = null;
-            sourceRectangles[upperBarrier3] = null;
-            sourceRectangles[upperBarrier4] = null;
-            sourceRectangles[lowerBarrier1] = null;
-            sourceRectangles[lowerBarrier2] = null;
-            sourceRectangles[lowerBarrier3] = null;
-            sourceRectangles[lowerBarrier4] = null;
-            sourceRectangles[middleBarrier1] = null;
-            sourceRectangles[middleBarrier2] = null;
-            sourceRectangles[middleBarrier3] = null;
-            sourceRectangles[middleBarrier4] = null;
-            sourceRectangles[partTorso] = null;
-            sourceRectangles[middleBarrier5] = null;
-            sourceRectangles[middleBarrier6] = null;
-            sourceRectangles[middleBarrier7] = null;
-            sourceRectangles[middleBarrier8] = null;
-            sourceRectangles[backRods] = null;
-            sourceRectangles[partTendons] = null;
-            sourceRectangles[upperLid] = null;
-            sourceRectangles[lowerLid] = null;
+        }
+
+        private void OpenLids()
+        {
+            if (IsEqualWithThreshold(anchors[upperLid], openLidAnchors[upperLid], .5f))
+            {
+                anchors[upperLid] = openLidAnchors[upperLid];
+                anchors[lowerLid] = openLidAnchors[lowerLid];
+                currentBodyState = BodyStates.Open;
+            }
+            else
+            {
+                Vector2 direction = openLidAnchors[upperLid] - closeLidAnchors[upperLid];
+                direction.Normalize();
+                anchors[upperLid] += direction;
+
+                direction = openLidAnchors[lowerLid] - closeLidAnchors[lowerLid];
+                direction.Normalize();
+                anchors[lowerLid] += direction;
+
+                if (backRods.hide && anchors[upperLid].Y <= closeLidAnchors[upperLid].Y - 8) backRods.hide = false;
+                if (partTendons.hide && anchors[upperLid].Y <= closeLidAnchors[upperLid].Y - 30)
+                {
+                    partTendons.hide = false;
+                    drawPositions[partTendons] = () => partTendons.TopLeft + new Vector2(0, 34) - Main.screenPosition;
+                    sourceRectangles[partTendons] = new Rectangle(0, 34, 48, 188);
+                }
+                else if (!partTendons.hide && anchors[upperLid].Y <= closeLidAnchors[upperLid].Y - 60)
+                {
+                    drawPositions[partTendons] = null;
+                    sourceRectangles[partTendons] = null;
+                }
+            }
         }
 
         private void AlignParts()
@@ -284,6 +315,15 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             sourceRectangles[partCore1] = new Rectangle(0, modPartCore1.CurrentFrame * 26, 24, 26);
             sourceRectangles[partCore2] = new Rectangle(0, modPartCore2.CurrentFrame * 26, 24, 26);
             sourceRectangles[partCore3] = new Rectangle(0, modPartCore3.CurrentFrame * 26, 24, 26);
+        }
+
+        public enum BodyStates : byte
+        {
+            Entrance,
+            Closing,
+            Closed,
+            Opening,
+            Open
         }
     }
 }

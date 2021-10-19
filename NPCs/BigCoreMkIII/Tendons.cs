@@ -24,8 +24,8 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
         public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Tendons";
 
-        public override bool? CanBeHitByItem(Player player, Item item) => !npc.hide;
+        public override bool? CanBeHitByItem(Player player, Item item) => false;
 
-        public override bool? CanBeHitByProjectile(Projectile projectile) => !npc.hide;
+        public override bool? CanBeHitByProjectile(Projectile projectile) => false;
     }
 }
