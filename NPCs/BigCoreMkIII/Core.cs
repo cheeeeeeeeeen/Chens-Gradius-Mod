@@ -5,6 +5,12 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 {
     public class Core : Part
     {
+        public States currentState = States.Closed;
+
+        private const int TimeToOpen = 600;
+
+        private int openTimeTick = 0;
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Core");
@@ -22,11 +28,36 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             ScaleStats();
         }
 
+        public override void AI()
+        {
+            switch (currentState)
+            {
+                case States.Closed:
+                    if (++openTimeTick >= TimeToOpen) currentState = States.Opening;
+                    break;
+
+                case States.Opening:
+                    if (++FrameTick >= FrameSpeed)
+                    {
+                        FrameTick = 0;
+                        if (++FrameCounter >= 4) currentState = States.Open;
+                    }
+                    break;
+
+                case States.Open:
+                    break;
+            }
+        }
+
         public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Core";
 
-        public override void FindFrame(int frameHeight)
+        protected override int FrameSpeed => 10;
+
+        public enum States : byte
         {
-            base.FindFrame(frameHeight);
+            Closed,
+            Opening,
+            Open
         }
     }
 }

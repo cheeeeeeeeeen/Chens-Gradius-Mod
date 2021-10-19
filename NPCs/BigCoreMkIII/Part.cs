@@ -19,6 +19,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             npc.noGravity = true;
             npc.noTileCollide = true;
             npc.npcSlots = 0;
+            banner = 0;
         }
 
         public override string Texture => throw new NotImplementedException("Please add texture to this part of Big Core Mk. III");
@@ -38,6 +39,8 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position) => false;
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo) => 0f;
+
+        public int CurrentFrame => FrameCounter;
 
         protected override Types EnemyType => Types.Large;
 
