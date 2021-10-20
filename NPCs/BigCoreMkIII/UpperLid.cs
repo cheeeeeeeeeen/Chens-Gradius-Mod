@@ -23,8 +23,6 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
         public override string Texture => "ChensGradiusMod/Sprites/BigCore3/UpperLid";
 
-        public override bool? CanBeHitByItem(Player player, Item item) => false;
-
-        public override bool? CanBeHitByProjectile(Projectile projectile) => false;
+        protected override PartTypes CurrentType => PartTypes.Invulnerable;
     }
 }

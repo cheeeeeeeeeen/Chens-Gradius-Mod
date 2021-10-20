@@ -577,6 +577,14 @@ namespace ChensGradiusMod
                         }
                         break;
                     }
+
+                case PacketMessageType.KillNPC:
+                    {
+                        int npcIndex = reader.ReadInt32();
+                        NPC targetNpc = Main.npc[npcIndex];
+                        targetNpc.StrikeNPCNoInteraction(targetNpc.lifeMax, 0f, -targetNpc.direction);
+                        break;
+                    }
             }
         }
 
@@ -594,7 +602,8 @@ namespace ChensGradiusMod
             BroadcastSound,
             SpawnBoss,
             RecurveUpdatePositions,
-            ClientChangesTurretOption
+            ClientChangesTurretOption,
+            KillNPC
         };
 
         internal enum SoundPacketType : byte

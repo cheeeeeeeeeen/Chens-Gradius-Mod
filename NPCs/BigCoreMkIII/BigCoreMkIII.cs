@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 using static ChensGradiusMod.GradiusHelper;
@@ -23,9 +25,9 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
         // Parts
 
-        private NPC partCore1;
-        private NPC partCore2;
-        private NPC partCore3;
+        public NPC partCore1;
+        public NPC partCore2;
+        public NPC partCore3;
         private NPC upperBarrier1;
         private NPC upperBarrier2;
         private NPC upperBarrier3;
@@ -113,6 +115,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             if (!initialized)
             {
                 AssignParts();
+                AssignConnections();
                 AssignAnchors();
                 AssignSourceRectangles();
                 initialized = true;
@@ -135,6 +138,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             // Update positions before this
             AlignParts();
             UpdateSourceRectangles();
+            SelfDestruct();
         }
 
         public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
@@ -228,6 +232,23 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             lids.Add(lowerLid);
         }
 
+        private void AssignConnections()
+        {
+            modPartCore1.Prerequisite = upperBarrier4;
+            modUpperBarrier4.Prerequisite = upperBarrier3;
+            modUpperBarrier3.Prerequisite = upperBarrier2;
+            modUpperBarrier2.Prerequisite = upperBarrier1;
+            modPartCore2.Prerequisite = lowerBarrier4;
+            modLowerBarrier4.Prerequisite = lowerBarrier3;
+            modLowerBarrier3.Prerequisite = lowerBarrier2;
+            modLowerBarrier2.Prerequisite = lowerBarrier1;
+            modPartCore3.Prerequisite = middleBarrier4;
+            modMiddleBarrier4.Prerequisite = middleBarrier3;
+            modMiddleBarrier3.Prerequisite = middleBarrier2;
+            modMiddleBarrier2.Prerequisite = middleBarrier1;
+            modMiddleBarrier1.Prerequisite = partTorso;
+        }
+
         private void AssignAnchors()
         {
             anchors[partCore1] = new Vector2(64, 64);
@@ -315,6 +336,18 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             sourceRectangles[partCore1] = new Rectangle(0, modPartCore1.CurrentFrame * 26, 24, 26);
             sourceRectangles[partCore2] = new Rectangle(0, modPartCore2.CurrentFrame * 26, 24, 26);
             sourceRectangles[partCore3] = new Rectangle(0, modPartCore3.CurrentFrame * 26, 24, 26);
+        }
+
+        private void SelfDestruct()
+        {
+            if (!partCore3.active && partCore3.life <= 0)
+            {
+                foreach (var part in parts)
+                {
+                    KillNPC(part);
+                }
+                KillNPC(npc);
+            }
         }
 
         public enum BodyStates : byte

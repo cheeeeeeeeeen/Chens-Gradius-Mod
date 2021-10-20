@@ -21,10 +21,17 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
             ComputeCenterFromHitbox(npc, ref drawOffsetY, 34, 1);
         }
 
+        public override void AI()
+        {
+            base.AI();
+
+            if (!ModParent.partCore1.active && !ModParent.partCore2.active) SelfDestruct();
+        }
+
         public override string Texture => "ChensGradiusMod/Sprites/BigCore3/Torso";
 
-        public override bool? CanBeHitByItem(Player player, Item item) => false;
+        protected override PartTypes CurrentType => PartTypes.Invisible;
 
-        public override bool? CanBeHitByProjectile(Projectile projectile) => false;
+        protected override int SelfDestructTime => 60;
     }
 }

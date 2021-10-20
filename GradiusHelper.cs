@@ -463,5 +463,18 @@ namespace ChensGradiusMod
             if (!floating && originalHeight > 10) item.height -= 8;
             else if (floating && originalWidth > 2) item.width -= 2;
         }
+
+        public static void KillNPC(NPC npc)
+        {
+            if (IsSinglePlayer()) npc.StrikeNPCNoInteraction(npc.lifeMax, 0f, -npc.direction);
+            else
+            {
+                Mod mod = ModContent.GetInstance<ChensGradiusMod>();
+                ModPacket packet = mod.GetPacket();
+                packet.Write((byte)PacketMessageType.KillNPC);
+                packet.Write(npc.whoAmI);
+                packet.Send();
+            }
+        }
     }
 }

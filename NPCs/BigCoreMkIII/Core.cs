@@ -23,7 +23,7 @@ namespace ChensGradiusMod.NPCs.BigCoreMkIII
 
             npc.width = 24;
             npc.height = 24;
-            npc.lifeMax = 1;
+            npc.lifeMax = 20;
             ComputeCenterFromHitbox(npc, ref drawOffsetY, 156, 6);
             ScaleStats();
         }
